@@ -1,11 +1,21 @@
 package fr.lunastia.skyblock.core.listeners;
 
+import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+
+import java.sql.SQLException;
 
 public class PlayerListeners implements Listener {
     // TODO: Ajouter un évèment quand le joueur se connecte pour charger sa session
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) throws SQLException {
+        Player player = event.getPlayer();
+        Manager.getSessionManager().loadSession(player);
+    }
+
     // TODO: Ajouter un évèment quand le joueur se déconnecte pour sauvegarder sa session
 
     @EventHandler
