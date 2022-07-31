@@ -14,15 +14,21 @@ public class RankManager {
     private HashMap<Integer, Rank> ranks;
 
     public RankManager() {
+        ranks = new HashMap<>();
+
         final YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(Core.getInstance().getDataFolder(), "ranks.yml"));
         file = config.getConfigurationSection("ranks");
 
         // Load all ranks
         assert file != null;
-        for (String rankName : file.getKeys(false)) {
-            ConfigurationSection rank = file.getConfigurationSection(rankName);
-            System.out.println(rankName);
-            System.out.println(rank.getString("name"));
+        for (String rankId : file.getKeys(false)) {
+            ConfigurationSection rank = file.getConfigurationSection(rankId);
+            assert rank != null;
+            ranks.put(Integer.parseInt(rankId), new Rank(Integer.parseInt(rankId), file.getString("name"), rank.getString("coloredName"), rank.getString("arrow")));
         }
+    }
+
+    public Rank getDefaultRank() {
+        return ranks.get(0);
     }
 }
