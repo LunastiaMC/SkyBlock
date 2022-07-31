@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class SessionManager {
-    private HashMap<UUID, Session> sessions;
+    private HashMap<String, Session> sessions;
 
     public SessionManager() {
         this.sessions = new HashMap<>();
@@ -25,7 +25,8 @@ public class SessionManager {
         final ResultSet resultSet = statementFinder.executeQuery();
 
         if (resultSet.next()) {
-            System.out.println("Session for " + player.getName() + " found, the rank is " + resultSet.getInt("rank"));
+            final Session session = new Session(player, resultSet);
+            this.sessions.put(player.getUniqueId().toString(), session);
         } else {
             final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank) VALUES (?,?)");
             statementCreation.setString(1, player.getUniqueId().toString());
@@ -38,6 +39,9 @@ public class SessionManager {
     }
 
     public Session getSession(UUID uuid) {
+        return this.sessions.get(uuid.toString());
+    }
+    public Session getSession(String uuid) {
         return this.sessions.get(uuid);
     }
 }
