@@ -10,7 +10,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import java.sql.SQLException;
 
 public class PlayerListeners implements Listener {
-    // TODO: Ajouter un évèment quand le joueur se connecte pour charger sa session
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) throws SQLException {
         Player player = event.getPlayer();
