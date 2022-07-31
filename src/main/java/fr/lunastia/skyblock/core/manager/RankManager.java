@@ -6,6 +6,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RankManager {
@@ -24,8 +25,14 @@ public class RankManager {
         for (String rankId : file.getKeys(false)) {
             ConfigurationSection rank = file.getConfigurationSection(rankId);
             assert rank != null;
-            ranks.put(Integer.parseInt(rankId), new Rank(Integer.parseInt(rankId), file.getString("name"), rank.getString("coloredName"), rank.getString("arrow")));
+
+            ArrayList<String> permissions = new ArrayList<>(rank.getStringList("permissions"));
+            ranks.put(Integer.parseInt(rankId), new Rank(Integer.parseInt(rankId), file.getString("name"), rank.getString("coloredName"), rank.getString("arrow"),permissions));
         }
+    }
+
+    public Rank getRank(int id) {
+        return ranks.getOrDefault(id, getDefaultRank());
     }
 
     public Rank getDefaultRank() {
