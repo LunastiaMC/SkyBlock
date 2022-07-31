@@ -1,41 +1,41 @@
 ranks:
   0:
     name: "Joueur"
-    format: "&#d0d0d0[&#cbcbcbJ&#c7c7c7o&#c2c2c2u&#bdbdbde&#b8b8b8u&#b4b4b4r&#afafaf]"
+    coloredName: "&#d0d0d0[&#cbcbcbJ&#c7c7c7o&#c2c2c2u&#bdbdbde&#b8b8b8u&#b4b4b4r&#afafaf]"
     arrow: "&#d0d0d0»"
     permissions: [ ]
   1:
     name: "Premium"
-    format: "&#dab105[&#d3ac05P&#cca605r&#c5a105e&#be9b05m&#b0950ci&#a18f13u&#938819m&#848220]"
+    coloredName: "&#dab105[&#d3ac05P&#cca605r&#c5a105e&#be9b05m&#b0950ci&#a18f13u&#938819m&#848220]"
     arrow: "&#dab105»"
     permissions: [ ]
   2:
     name: "Vidéaste"
-    format: "&#b95656[&#c95656V&#d85656i&#e85555d&#f75555é&#f55353a&#e14f4fs&#cd4b4bt&#b94747e&#a54343]"
+    coloredName: "&#b95656[&#c95656V&#d85656i&#e85555d&#f75555é&#f55353a&#e14f4fs&#cd4b4bt&#b94747e&#a54343]"
     arrow: "&#b95656»"
     permissions: [ ]
   3:
     name: "Streamer"
-    format: "&#5c38b7[&#623bc2T&#673fcew&#6d42d9i&#7245e4t&#7748edc&#7b4bf6h&#804eff]"
+    coloredName: "&#5c38b7[&#623bc2T&#673fcew&#6d42d9i&#7245e4t&#7748edc&#7b4bf6h&#804eff]"
     arrow: "&#5c38b7»"
     permissions: [ ]
   4:
     name: "Modérateur"
-    format: "&#35b98d[&#30b997M&#2cb9a2o&#27b8acd&#23b8b6é&#1eb8c1r&#1cb9c3a&#1bbabdt&#1abcb7e&#19beb2u&#19bfacr&#18c1a6]"
+    coloredName: "&#35b98d[&#30b997M&#2cb9a2o&#27b8acd&#23b8b6é&#1eb8c1r&#1cb9c3a&#1bbabdt&#1abcb7e&#19beb2u&#19bfacr&#18c1a6]"
     arrow: "&#35b98d»"
     permissions: [ ]
   5:
     name: "Responsable"
-    format: "&#4d47d5[&#5045d0R&#5242cbe&#5540c6s&#573dc1p&#5a3bbco&#5c38b7n&#6537bds&#6f36c3a&#7835c9b&#8133cel&#8b32d4e&#9431da]"
+    coloredName: "&#4d47d5[&#5045d0R&#5242cbe&#5540c6s&#573dc1p&#5a3bbco&#5c38b7n&#6537bds&#6f36c3a&#7835c9b&#8133cel&#8b32d4e&#9431da]"
     arrow: "&#4d47d5»"
     permissions: [ ]
   6:
     name: "Développeur"
-    format: "&#35a5b9[&#35a3baD&#35a1baé&#369fbbv&#369cbce&#369abcl&#3698bdo&#3696bep&#3694bep&#3792bfe&#378fc0u&#378dc0r&#378bc1]"
+    coloredName: "&#35a5b9[&#35a3baD&#35a1baé&#369fbbv&#369cbce&#369abcl&#3698bdo&#3696bep&#3694bep&#3792bfe&#378fc0u&#378dc0r&#378bc1]"
     arrow: "&#35a5b9»"
     permissions: [ ]
   7:
     name: "Administrateur"
-    format: "&#e43535[&#e93a3aA&#ed3e3ed&#f24343m&#f64747i&#fb4c4cn&#ff5050]"
+    coloredName: "&#e43535[&#e93a3aA&#ed3e3ed&#f24343m&#f64747i&#fb4c4cn&#ff5050]"
     arrow: "&#FF5050»"
     permissions: [ ]
