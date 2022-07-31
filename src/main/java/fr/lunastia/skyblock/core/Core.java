@@ -12,7 +12,9 @@ public class Core extends JavaPlugin {
         instance = this;
         getLogger().info("Skyblock is now enabled !");
 
+        this.saveResource("ranks.yml", true);
         this.saveResource("config.yml", false);
+
         Manager.init();
         this.getServer().getPluginManager().registerEvents(new PlayerListeners(), this);
     }
