@@ -6,8 +6,8 @@ public class Rank {
     private final String formatedName;
     private final String arrow;
 
-    public Rank(int i, String name, String formatedName, String arrow) {
-        this.id = i;
+    public Rank(int id, String name, String formatedName, String arrow) {
+        this.id = id;
         this.name = name;
         this.formatedName = formatedName;
         this.arrow = arrow;
