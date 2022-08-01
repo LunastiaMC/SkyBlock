@@ -2,6 +2,7 @@ package fr.lunastia.skyblock.core;
 
 import dev.jorel.commandapi.CommandAPI;
 import fr.lunastia.skyblock.core.commands.utils.AnnounceCommand;
+import fr.lunastia.skyblock.core.commands.utils.DiscordCommand;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,6 +24,7 @@ public class Core extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerListeners(), this);
 
         CommandAPI.registerCommand(AnnounceCommand.class);
+        CommandAPI.registerCommand(DiscordCommand.class);
         CommandAPI.unregister("clear");
     }
 
