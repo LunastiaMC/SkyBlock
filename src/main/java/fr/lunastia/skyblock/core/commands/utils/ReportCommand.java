@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 public class ReportCommand {
     @Default
     public static void erreur(Player player) {
-        ColorUtil.sendMessage(player, "Tu dois indiquer si tu veux report un §nbug §r§7 ou un $nplayer", ColorUtil.ERREUR);
+        ColorUtil.sendMessage(player, "Tu dois indiquer si tu veux report un §nbug §r§7 ou un §nplayer", ColorUtil.ERREUR);
     }
 
     @Subcommand("bug")
