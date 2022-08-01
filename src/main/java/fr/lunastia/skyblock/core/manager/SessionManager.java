@@ -52,4 +52,8 @@ public class SessionManager {
     public Session getSession(String uuid) {
         return this.sessions.get(uuid);
     }
+
+    public HashMap<String, Session> getSessions() {
+        return this.sessions;
+    }
 }
