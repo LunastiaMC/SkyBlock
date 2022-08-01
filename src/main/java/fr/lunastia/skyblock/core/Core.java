@@ -1,5 +1,7 @@
 package fr.lunastia.skyblock.core;
 
+import dev.jorel.commandapi.CommandAPI;
+import fr.lunastia.skyblock.core.commands.utils.AnnounceCommand;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +21,8 @@ public class Core extends JavaPlugin {
 
         Manager.init();
         this.getServer().getPluginManager().registerEvents(new PlayerListeners(), this);
+
+        CommandAPI.registerCommand(AnnounceCommand.class);
     }
 
     @Override
