@@ -1,6 +1,7 @@
 package fr.lunastia.skyblock.core;
 
 import dev.jorel.commandapi.CommandAPI;
+import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.utils.AnnounceCommand;
 import fr.lunastia.skyblock.core.commands.utils.DiscordCommand;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
@@ -27,6 +28,8 @@ public class Core extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerListeners(), this);
 
         // Commandes
+        // TODO: Mettre le chargement de commandes ainsi que des évènements dans un gestionnaire
+        CommandAPI.registerCommand(MoneyCommand.class);
         CommandAPI.registerCommand(AnnounceCommand.class);
         CommandAPI.registerCommand(DiscordCommand.class);
         CommandAPI.unregister("clear");
