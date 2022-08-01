@@ -1,7 +1,9 @@
 package fr.lunastia.skyblock.core.session;
 
+import com.nametagedit.plugin.NametagEdit;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.manager.RankManager;
+import fr.lunastia.skyblock.core.utils.ColorUtil;
 import org.bukkit.entity.Player;
 
 import java.sql.ResultSet;
@@ -16,6 +18,9 @@ public class Session {
         this.player = player;
         this.rank = Manager.getRankManager().getRank(rs.getInt("rank"));
         this.rank.applyPermissions(player);
+
+        NametagEdit.getApi().setPrefix(player, ColorUtil.colorize(this.getRank().nametagName()) + "§7 ");
+        player.setPlayerListName(ColorUtil.colorize(this.getRank().coloredName()) + player.getName());
     }
 
     public Session(Player player, Integer rank) {
