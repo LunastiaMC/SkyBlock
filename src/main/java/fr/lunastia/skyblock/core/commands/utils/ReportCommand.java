@@ -9,6 +9,8 @@ import fr.lunastia.skyblock.core.utils.ColorUtil;
 import fr.lunastia.skyblock.core.utils.DiscordWebhook;
 import org.bukkit.entity.Player;
 
+import java.io.IOException;
+
 @Command("report")
 
 public class ReportCommand {
@@ -22,5 +24,10 @@ public class ReportCommand {
     {
         DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/1003757892878471259/YrwPWzdmrKvZrIMJNpafKKq0nYkipjvP_2rMyLcbXELqWUBLuc_i8AeYSRe90OJfy0rm");
         webhook.addEmbed(new DiscordWebhook.EmbedObject().setDescription(description).setTitle(categorie));
+        try {
+            webhook.execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
