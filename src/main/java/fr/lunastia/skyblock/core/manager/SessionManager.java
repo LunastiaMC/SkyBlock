@@ -52,6 +52,11 @@ public class SessionManager {
     public Session getSession(UUID uuid) {
         return this.sessions.get(uuid.toString());
     }
+
+    public Session getSession(Player player) {
+        return this.sessions.get(player.getUniqueId().toString());
+    }
+
     public Session getSession(String uuid) {
         return this.sessions.get(uuid);
     }
