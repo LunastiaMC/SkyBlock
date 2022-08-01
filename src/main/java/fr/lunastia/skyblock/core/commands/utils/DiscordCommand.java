@@ -6,15 +6,14 @@ import fr.lunastia.skyblock.core.utils.ColorUtil;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
-import org.bukkit.entity.Player;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.entity.Player;
 
 @Command("discord")
 
 public class DiscordCommand {
     @Default
-    public static void discord(Player player)
-    {
+    public static void discord(Player player) {
         TextComponent message = new TextComponent("Cliquez ici pour rejoindre notre discord !");
         message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/TRAkAV6PC4"));
         message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
