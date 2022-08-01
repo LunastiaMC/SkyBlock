@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 public class DiscordCommand {
     @Default
     public static void discord(Player player) {
-        String message = "https://discord.gg/TRAkAV6PC4";
-        ColorUtil.sendMessage(player, message, ColorUtil.DISCORD);
+        ColorUtil.sendMessage(player, "Voici le lien du discord : https://discord.gg/TRAkAV6PC4", ColorUtil.DISCORD);
     }
 }
