@@ -30,7 +30,7 @@ public class PlayerListeners implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         Session session = Manager.getSessionManager().getSession(player);
-        event.setFormat(session.getRank().name());
+        event.setFormat(session.getRank().coloredName() + " §7" + player.getName() + " " + session.getRank().arrow() + " §7" + event.getMessage());
     }
 
     @EventHandler
