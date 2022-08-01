@@ -6,7 +6,7 @@ import dev.jorel.commandapi.annotations.Subcommand;
 import dev.jorel.commandapi.annotations.arguments.AGreedyStringArgument;
 import dev.jorel.commandapi.annotations.arguments.AMultiLiteralArgument;
 import fr.lunastia.skyblock.core.utils.ColorUtil;
-import fr.lunastia.skyblock.core.utils.Discord.DiscordWebhook;
+import fr.lunastia.skyblock.core.utils.discord.DiscordWebhook;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
