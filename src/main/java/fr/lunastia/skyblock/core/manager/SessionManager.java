@@ -35,7 +35,15 @@ public class SessionManager {
 
             System.out.println("[Skyblock] Session created for " + player.getName() + " with rank " + Manager.getRankManager().getDefaultRank().id());
         }
+    }
 
+    public void saveSession(Player player) throws SQLException {
+        Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
+
+        final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ? WHERE uuid = ?");
+        statement.setInt(1, this.sessions.get(player.getUniqueId().toString()).getRank().id());
+        statement.setString(2, player.getUniqueId().toString());
+        statement.execute();
     }
 
     public Session getSession(UUID uuid) {
