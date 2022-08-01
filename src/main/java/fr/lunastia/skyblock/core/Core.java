@@ -16,14 +16,27 @@ public class Core extends JavaPlugin {
         instance = this;
         getLogger().info("Skyblock is now enabled !");
 
+        // Fichiers de configuration
         this.saveResource("ranks.yml", true);
         this.saveResource("config.yml", false);
 
         Manager.init();
+
+        // Évènements
         this.getServer().getPluginManager().registerEvents(new PlayerListeners(), this);
 
+        // Commandes
         CommandAPI.registerCommand(AnnounceCommand.class);
         CommandAPI.unregister("clear");
+
+        // On charge les sessions des joueurs, si le plugin à été reload
+        this.getServer().getOnlinePlayers().forEach(player -> {
+            try {
+                Manager.getSessionManager().loadSession(player);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Override
