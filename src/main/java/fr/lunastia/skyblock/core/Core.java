@@ -36,7 +36,7 @@ public class Core extends JavaPlugin {
             try {
                 Manager.getSessionManager().loadSession(player);
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         });
     }
