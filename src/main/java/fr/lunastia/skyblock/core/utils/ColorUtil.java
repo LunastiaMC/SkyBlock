@@ -1,6 +1,7 @@
 package fr.lunastia.skyblock.core.utils;
 
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -43,5 +44,9 @@ public class ColorUtil {
 
     public static void sendMessage(Player player, String message, String prefix, Boolean isError) {
         player.sendMessage(colorize(prefix + (isError ? "§c " : "§7 ") + message));
+    }
+
+    public static void sendMessageComponent(Player player, TextComponent message, String prefix) {
+        player.sendMessage(colorize(prefix + "§7" + message));
     }
 }

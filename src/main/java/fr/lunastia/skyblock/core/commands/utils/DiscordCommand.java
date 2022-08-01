@@ -18,6 +18,6 @@ public class DiscordCommand {
         message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/TRAkAV6PC4"));
         message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                 new ComponentBuilder("https://discord.gg/TRAkAV6PC4").bold(true).create()));
-        ColorUtil.sendMessage(player, String.valueOf(message), ColorUtil.DISCORD);
+        ColorUtil.sendMessageComponent(player, message, ColorUtil.DISCORD);
     }
 }
