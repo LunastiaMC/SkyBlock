@@ -18,6 +18,12 @@ public class Session {
         this.rank.applyPermissions(player);
     }
 
+    public Session(Player player, Integer rank) {
+        this.player = player;
+        this.rank = Manager.getRankManager().getRank(rank);
+        this.rank.applyPermissions(player);
+    }
+
     public Player getPlayer() {
         return player;
     }
