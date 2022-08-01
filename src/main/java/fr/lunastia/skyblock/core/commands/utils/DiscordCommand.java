@@ -14,10 +14,7 @@ import org.bukkit.entity.Player;
 public class DiscordCommand {
     @Default
     public static void discord(Player player) {
-        TextComponent message = new TextComponent("Cliquez ici pour rejoindre notre discord !");
-        message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/TRAkAV6PC4"));
-        message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                new ComponentBuilder("https://discord.gg/TRAkAV6PC4").bold(true).create()));
-        ColorUtil.sendMessageComponent(player, message, ColorUtil.DISCORD);
+        String message = "https://discord.gg/TRAkAV6PC4";
+        ColorUtil.sendMessage(player, message, ColorUtil.DISCORD);
     }
 }

@@ -45,8 +45,4 @@ public class ColorUtil {
     public static void sendMessage(Player player, String message, String prefix, Boolean isError) {
         player.sendMessage(colorize(prefix + (isError ? "§c " : "§7 ") + message));
     }
-
-    public static void sendMessageComponent(Player player, TextComponent message, String prefix) {
-        player.sendMessage(colorize(prefix + "§7" + message));
-    }
 }
