@@ -1,4 +1,4 @@
-package fr.lunastia.skyblock.core.utils;
+package fr.lunastia.skyblock.core.utils.Discord;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.awt.Color;
