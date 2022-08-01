@@ -8,6 +8,25 @@
     <artifactId>SkyBlock</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>dev.jorel</groupId>
+                            <artifactId>commandapi-annotations</artifactId>
+                            <version>8.4.1</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
@@ -18,6 +37,11 @@
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+
+        <repository>
+            <id>upstream</id>
+            <url>https://ci.nametagedit.com/plugin/repository/everything/</url>
         </repository>
     </repositories>
 
@@ -42,6 +66,12 @@
             <artifactId>commandapi-core</artifactId>
             <version>8.4.1</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nametagedit</groupId>
+            <artifactId>nametagedit</artifactId>
+            <version>4.5.8</version>
         </dependency>
     </dependencies>
 </project>
