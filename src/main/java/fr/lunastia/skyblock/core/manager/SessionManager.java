@@ -33,6 +33,9 @@ public class SessionManager {
             statementCreation.setInt(2, Manager.getRankManager().getDefaultRank().id());
             statementCreation.execute();
 
+            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id());
+            this.sessions.put(player.getUniqueId().toString(), session);
+
             System.out.println("[Skyblock] Session created for " + player.getName() + " with rank " + Manager.getRankManager().getDefaultRank().id());
         }
     }
