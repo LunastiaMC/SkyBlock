@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.sql.SQLException;
 
@@ -16,7 +17,10 @@ public class PlayerListeners implements Listener {
         Manager.getSessionManager().loadSession(player);
     }
 
-    // TODO: Ajouter un évèment quand le joueur se déconnecte pour sauvegarder sa session
+    public void onPlayerQuit(PlayerQuitEvent event) throws SQLException {
+        Player player = event.getPlayer();
+        Manager.getSessionManager().saveSession(player);
+    }
 
     @EventHandler
     public void onCommand(PlayerCommandPreprocessEvent event) {
