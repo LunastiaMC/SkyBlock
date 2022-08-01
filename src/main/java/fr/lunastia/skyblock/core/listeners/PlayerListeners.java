@@ -17,6 +17,7 @@ public class PlayerListeners implements Listener {
         Manager.getSessionManager().loadSession(player);
     }
 
+    @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) throws SQLException {
         Player player = event.getPlayer();
         Manager.getSessionManager().saveSession(player);

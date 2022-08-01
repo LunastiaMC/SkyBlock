@@ -20,14 +20,13 @@ public class RankManager {
         final YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(Core.getInstance().getDataFolder(), "ranks.yml"));
         file = config.getConfigurationSection("ranks");
 
-        // Load all ranks
         assert file != null;
         for (String rankId : file.getKeys(false)) {
             ConfigurationSection rank = file.getConfigurationSection(rankId);
             assert rank != null;
 
             ArrayList<String> permissions = new ArrayList<>(rank.getStringList("permissions"));
-            ranks.put(Integer.parseInt(rankId), new Rank(Integer.parseInt(rankId), file.getString("name"), rank.getString("coloredName"), rank.getString("arrow"),permissions));
+            ranks.put(Integer.parseInt(rankId), new Rank(Integer.parseInt(rankId), file.getString("name"), rank.getString("coloredName"), rank.getString("nametagName"), rank.getString("arrow"), permissions));
         }
     }
 

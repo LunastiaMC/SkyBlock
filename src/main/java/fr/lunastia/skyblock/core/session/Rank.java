@@ -6,7 +6,7 @@ import org.bukkit.permissions.PermissionAttachment;
 
 import java.util.ArrayList;
 
-public record Rank(int id, String name, String coloredName, String arrow, ArrayList<String> permissions) {
+public record Rank(int id, String name, String coloredName, String nametagName, String arrow, ArrayList<String> permissions) {
 
     public void applyPermissions(Player player) {
         PermissionAttachment attachment = player.addAttachment(Core.getInstance());
