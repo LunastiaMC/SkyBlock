@@ -15,8 +15,7 @@ public class AnnounceCommand {
     @Default
     public static void announce(Player player, @AMultiLiteralArgument({"good", "bad", "help"}) String type, @AGreedyStringArgument String message) {
         String prefix = ColorUtil.colorize(switch (type) {
-            case "good" -> ColorUtil.ANNOUNCE_TYPE_GOOD;
-            case "bad" -> ColorUtil.ANNOUNCE_TYPE_BAD;
+            case "green" -> "&#2db725&l[&#30b62c&lA&#32b633&lN&#35b53a&lN&#37b441&lO&#3ab348&lN&#3cb34f&lC&#3fb256&lE&#41b15d&l]";
             default -> ColorUtil.PREFIX;
         });
 
