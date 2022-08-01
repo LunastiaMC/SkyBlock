@@ -12,7 +12,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 
 public class DiscordCommand {
     @Default
-    public void discord(Player player)
+    public static void discord(Player player)
     {
         TextComponent message = new TextComponent("Cliquez ici pour rejoindre notre discord !");
         message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/TRAkAV6PC4"));
