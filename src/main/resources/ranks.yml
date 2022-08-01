@@ -39,4 +39,4 @@ ranks:
     coloredName: "&#e43535[&#e93a3aA&#ed3e3ed&#f24343m&#f64747i&#fb4c4cn&#ff5050]"
     arrow: "&#FF5050»"
     permissions:
-      - "money.admin.commands"
+      - "skyblock.announce.command"
