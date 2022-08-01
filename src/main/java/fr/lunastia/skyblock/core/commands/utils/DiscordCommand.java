@@ -19,4 +19,5 @@ public class DiscordCommand {
         message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                 new ComponentBuilder("https://discord.gg/TRAkAV6PC4").bold(true).create()));
     }
+    //test
 }
