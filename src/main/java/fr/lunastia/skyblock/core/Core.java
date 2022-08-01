@@ -4,6 +4,8 @@ import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.sql.SQLException;
+
 public class Core extends JavaPlugin {
     public static Core instance;
 
@@ -21,7 +23,13 @@ public class Core extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getLogger().info("Skyblock is now disabled !");
+        Manager.getSessionManager().getSessions().forEach((string, session) -> {
+            try {
+                Manager.getSessionManager().saveSession(session.getPlayer());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public static Core getInstance() {
