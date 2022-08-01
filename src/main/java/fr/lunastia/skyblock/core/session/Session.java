@@ -19,8 +19,8 @@ public class Session {
         this.rank = Manager.getRankManager().getRank(rs.getInt("rank"));
         this.rank.applyPermissions(player);
 
-        NametagEdit.getApi().setPrefix(player, ColorUtil.colorize(this.getRank().nametagName()) + "§7 ");
-        player.setPlayerListName(ColorUtil.colorize(this.getRank().coloredName()) + player.getName());
+        NametagEdit.getApi().setPrefix(player, ColorUtil.colorize(this.getRank().nametagName()) + "§7");
+        player.setPlayerListName(ColorUtil.colorize(this.getRank().nametagName()) + player.getName());
     }
 
     public Session(Player player, Integer rank) {
