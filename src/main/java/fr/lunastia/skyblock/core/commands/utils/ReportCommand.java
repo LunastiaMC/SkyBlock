@@ -9,6 +9,7 @@ import dev.jorel.commandapi.annotations.arguments.AOfflinePlayerArgument;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
 import fr.lunastia.skyblock.core.utils.ColorUtil;
 import fr.lunastia.skyblock.core.utils.discord.DiscordWebhook;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.awt.*;
@@ -50,6 +51,11 @@ public class ReportCommand {
 
     @Subcommand("player")
     public static void player(Player player, @APlayerArgument Player player_reported, @AGreedyStringArgument String description) {
+        if (!Bukkit.getOnlinePlayers().contains(player_reported)) {
+            ColorUtil.sendMessage(player, "Ce joueur n'est pas connecté sur le serveur", ColorUtil.PREFIX);
+            return;
+        }
+
         if (player.getName().equals(player_reported.getName())) {
             ColorUtil.sendMessage(player, "Vous ne pouvez pas vous signaler vous-même !", ColorUtil.PREFIX,true);
             return;
