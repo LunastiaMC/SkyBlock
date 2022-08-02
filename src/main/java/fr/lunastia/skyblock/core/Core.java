@@ -39,7 +39,6 @@ public class Core extends JavaPlugin {
         CommandAPI.registerCommand(AnnounceCommand.class);
         CommandAPI.registerCommand(DiscordCommand.class);
         CommandAPI.registerCommand(ClearCommand.class);
-        CommandAPI.registerCommand(EnderchestCommand.class);
         CommandAPI.registerCommand(HealCommand.class);
         CommandAPI.registerCommand(FeedCommand.class);
 
