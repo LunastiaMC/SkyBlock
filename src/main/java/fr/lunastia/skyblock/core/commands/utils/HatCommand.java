@@ -16,6 +16,8 @@ public class HatCommand {
     @Default
     public static void hat(Player player) {
         Manager.getGUIManager().open(player, HatListGUI.class);
+
+        // TODO: Faire une commande avec autre permission pour utiliser un bloc
         //if (player.getItemInHand().getType() != Material.AIR)
         //{
         //if (player.getInventory().getHelmet() != null)
@@ -44,7 +46,7 @@ public class HatCommand {
             if (player.getInventory().getHelmet().getItemMeta().getDisplayName().contains("Chapeau")) {
                 player.getInventory().setHelmet(null);
                 ColorUtils.sendMessage(player, "Vous venez de retirer votre chapeau !", ColorUtils.HAT);
-            }else{
+            } else {
                 ColorUtils.sendMessage(player, "Vous devez avoir un chapeau pour executer cette commande !", ColorUtils.HAT);
             }
         }

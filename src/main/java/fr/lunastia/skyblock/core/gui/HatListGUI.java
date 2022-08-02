@@ -11,9 +11,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class HatListGUI implements GUIBuilder {
     @Override
