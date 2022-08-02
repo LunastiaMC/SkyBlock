@@ -2,6 +2,7 @@ package fr.lunastia.skyblock.core.listeners;
 
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Session;
+import fr.lunastia.skyblock.core.utils.ColorUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,7 +30,7 @@ public class PlayerListeners implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         Session session = Manager.getSessionManager().getSession(player);
-        event.setFormat("§7[§6" + session.getRank().nametagName() + "§7] §f" + player.getName() + "§7: " + event.getMessage());
+        event.setFormat(session.getRank().coloredName() + " §7" + player.getName() + " " + session.getRank().arrow() + " §7" + event.getMessage());
     }
 
     @EventHandler

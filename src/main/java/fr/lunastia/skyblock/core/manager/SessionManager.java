@@ -28,24 +28,26 @@ public class SessionManager {
             final Session session = new Session(player, resultSet);
             this.sessions.put(player.getUniqueId().toString(), session);
         } else {
-            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank) VALUES (?,?)");
+            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money) VALUES (?,?,?)");
             statementCreation.setString(1, player.getUniqueId().toString());
             statementCreation.setInt(2, Manager.getRankManager().getDefaultRank().id());
+            statementCreation.setLong(3, 0);
             statementCreation.execute();
 
-            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id());
+            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L);
             this.sessions.put(player.getUniqueId().toString(), session);
-
-            System.out.println("[Skyblock] Session created for " + player.getName() + " with rank " + Manager.getRankManager().getDefaultRank().id());
         }
     }
 
     public void saveSession(Player player) throws SQLException {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
 
-        final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ? WHERE uuid = ?");
-        statement.setInt(1, this.sessions.get(player.getUniqueId().toString()).getRank().id());
-        statement.setString(2, player.getUniqueId().toString());
+        Session session = this.sessions.get(player.getUniqueId().toString());
+
+        final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ?, money = ? WHERE uuid = ?");
+        statement.setInt(1, session.getRank().id());
+        statement.setLong(2, session.getMoney());
+        statement.setString(3, player.getUniqueId().toString());
         statement.execute();
     }
 
