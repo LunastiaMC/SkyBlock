@@ -50,6 +50,11 @@ public class ReportCommand {
 
     @Subcommand("player")
     public static void player(Player player, @APlayerArgument Player player_reported, @AGreedyStringArgument String description) {
+        if (player.getName().equals(player_reported.getName())) {
+            ColorUtil.sendMessage(player, "Vous ne pouvez pas vous signaler vous-même !", ColorUtil.PREFIX,true);
+            return;
+        }
+
         // TODO: https://todoist.com/showTask?id=6052819635&sync_id=6052819635
         String timeStamp = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy", Locale.FRANCE).format(new Date());
 
