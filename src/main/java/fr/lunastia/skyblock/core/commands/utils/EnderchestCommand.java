@@ -11,8 +11,7 @@ import org.bukkit.entity.Player;
 @Permission("skyblock.ec.use")
 public class EnderchestCommand {
     @Default
-    public static void enderchest(Player player)
-    {
+    public static void enderchest(Player player) {
         player.openInventory(player.getEnderChest());
     }
 }
