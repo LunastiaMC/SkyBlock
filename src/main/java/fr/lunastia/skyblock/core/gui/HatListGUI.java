@@ -21,7 +21,7 @@ public class HatListGUI implements GUIBuilder {
 
     @Override
     public int getSize() {
-        return 16;
+        return 18;
     }
 
     @Override

@@ -4,7 +4,7 @@ import dev.jorel.commandapi.annotations.Command;
 import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
-import fr.lunastia.skyblock.core.utils.ColorUtil;
+import fr.lunastia.skyblock.core.utils.ColorUtils;
 import org.bukkit.entity.Player;
 
 @Command("heal")
@@ -15,14 +15,14 @@ public class HealCommand {
     public static void heal(Player player)
     {
         player.setHealth(20);
-        ColorUtil.sendMessage(player, "Vous avez été soigné(e)", ColorUtil.PREFIX);
+        ColorUtils.sendMessage(player, "Vous avez été soigné(e)", ColorUtils.PREFIX);
     }
 
     @Default
     public static void heal(Player player ,@APlayerArgument Player target)
     {
         target.setHealth(20);
-        ColorUtil.sendMessage(target, "§aVous avez été soigné(e) par §2" + player.getName() + "§a !", ColorUtil.PREFIX);
-        ColorUtil.sendMessage(player, "§aVous avez soigné(e) §2" + target.getName() + "§a !", ColorUtil.PREFIX);
+        ColorUtils.sendMessage(target, "§aVous avez été soigné(e) par §2" + player.getName() + "§a !", ColorUtils.PREFIX);
+        ColorUtils.sendMessage(player, "§aVous avez soigné(e) §2" + target.getName() + "§a !", ColorUtils.PREFIX);
     }
 }

@@ -5,12 +5,8 @@ import dev.jorel.commandapi.annotations.Command;
 import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
 import fr.lunastia.skyblock.core.gui.HatListGUI;
-import fr.lunastia.skyblock.core.manager.GUIManager;
 import fr.lunastia.skyblock.core.manager.Manager;
-import fr.lunastia.skyblock.core.utils.ColorUtil;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 @Command("hat")
 @Permission("skyblock.hat.use")

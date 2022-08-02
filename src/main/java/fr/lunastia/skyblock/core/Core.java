@@ -8,19 +8,23 @@ import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.sql.SQLException;
 
 public class Core extends JavaPlugin {
     public static Core instance;
+    private File hat;
 
     @Override
     public void onEnable() {
         instance = this;
         getLogger().info("Skyblock is now enabled !");
+        this.hat = new File(this.getDataFolder(), "ranks.yml");
 
         // Fichiers de configuration
         this.saveResource("ranks.yml", true);
         this.saveResource("config.yml", false);
+        this.saveResource("hat.yml", false);
 
         Manager.init();
 
@@ -62,5 +66,9 @@ public class Core extends JavaPlugin {
 
     public static Core getInstance() {
         return instance;
+    }
+
+    public File getHatConfig() {
+        return hat;
     }
 }

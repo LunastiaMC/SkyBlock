@@ -2,7 +2,7 @@ package fr.lunastia.skyblock.core.manager;
 
 import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.session.Rank;
-import fr.lunastia.skyblock.core.utils.ColorUtil;
+import fr.lunastia.skyblock.core.utils.ColorUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -27,7 +27,7 @@ public class RankManager {
             assert rank != null;
 
             ArrayList<String> permissions = new ArrayList<>(rank.getStringList("permissions"));
-            ranks.put(Integer.parseInt(rankId), new Rank(Integer.parseInt(rankId), rank.getString("name"), ColorUtil.colorize(rank.getString("coloredName")), ColorUtil.colorize(rank.getString("nametagName")), ColorUtil.colorize(rank.getString("arrow")), permissions));
+            ranks.put(Integer.parseInt(rankId), new Rank(Integer.parseInt(rankId), rank.getString("name"), ColorUtils.colorize(rank.getString("coloredName")), ColorUtils.colorize(rank.getString("nametagName")), ColorUtils.colorize(rank.getString("arrow")), permissions));
         }
     }
 
