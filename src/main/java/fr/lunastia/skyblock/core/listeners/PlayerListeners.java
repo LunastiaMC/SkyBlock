@@ -3,6 +3,8 @@ package fr.lunastia.skyblock.core.listeners;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.utils.ColorUtils;
+import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +16,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class PlayerListeners implements Listener {
     @EventHandler
@@ -49,12 +52,21 @@ public class PlayerListeners implements Listener {
     public void onHatRemove(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         ItemStack item = event.getCurrentItem();
+
+        if (event.getCurrentItem() == null || event.getCurrentItem().getType() == Material.AIR) {
+            return;
+        }
+
+        if (player.getInventory().getHelmet() == null || player.getInventory().getHelmet().getType() == Material.AIR) {
+            return;
+        }
+
         assert item != null;
         String inventoryName = event.getView().getTitle();
         // TODO: Mettre dans un array puis .contains() pour ne pas avoir à tester toutes les valeurs.
         if (inventoryName.equals("Liste des chapeaux disponibles")) return;
 
-        if (player.getInventory().getHelmet().getItemMeta().getDisplayName().contains("Chapeau")) {
+        if (Objects.requireNonNull(player.getInventory().getHelmet().getItemMeta()).getDisplayName().contains("Chapeau")) {
             event.setCancelled(true);
             ColorUtils.sendMessage(player, "Vous devez retirer le chapeau en faisant §d/hat remove §7!", ColorUtils.HAT);
         }
