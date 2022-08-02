@@ -38,11 +38,12 @@ public class Core extends JavaPlugin {
         CommandAPI.registerCommand(PayCommand.class);
         CommandAPI.registerCommand(AnnounceCommand.class);
         CommandAPI.registerCommand(DiscordCommand.class);
+        CommandAPI.registerCommand(ReportCommand.class);
         CommandAPI.registerCommand(ClearCommand.class);
         CommandAPI.registerCommand(EnderchestCommand.class);
         CommandAPI.registerCommand(HealCommand.class);
         CommandAPI.registerCommand(FeedCommand.class);
-
+        
         // On charge les sessions des joueurs, si le plugin à été reload
         this.getServer().getOnlinePlayers().forEach(player -> {
             try {
