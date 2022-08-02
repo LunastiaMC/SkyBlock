@@ -37,6 +37,7 @@ public class Core extends JavaPlugin {
         CommandAPI.registerCommand(ClearCommand.class);
         CommandAPI.registerCommand(HealCommand.class);
         CommandAPI.registerCommand(FeedCommand.class);
+        CommandAPI.registerCommand(HatCommand.class);
 
         // On charge les sessions des joueurs, si le plugin à été reload
         this.getServer().getOnlinePlayers().forEach(player -> {
