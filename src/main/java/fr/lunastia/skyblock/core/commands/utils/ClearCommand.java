@@ -25,6 +25,6 @@ public class ClearCommand {
     {
         final int inventairesize = player.getInventory().getContents().length;
         player.getInventory().clear();
-        ColorUtil.sendMessage(player, "Vous venez de vider l'inventaire de " + player.getName() + " qui contenait un total de " + inventairesize + " d'items", ColorUtil.PREFIX);
+        ColorUtil.sendMessage(player, "Vous venez de vider votre l'inventaire qui contenait un total de " + inventairesize + " d'items", ColorUtil.PREFIX);
     }
 }
