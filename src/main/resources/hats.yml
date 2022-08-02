@@ -1,8 +1,13 @@
 hats:
-  0:
+  "0":
     id: "minecraft:glass"
     displayName: "Chapeau en verre"
-    permission: "vip.hat"
-  1:
+    permission: "skyblock.hat.use"
+  "1":
     id: "minecraft:black_stained_glass"
     displayName: "Chapeau en verre teinté"
+    permission: "skyblock.hat.use"
+  "2":
+    id: "minecraft:glowstone"
+    displayName: "Chapeau en glowstone"
+    permission: "skyblock.hatcustom.use"

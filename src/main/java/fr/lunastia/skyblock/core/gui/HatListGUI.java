@@ -30,12 +30,19 @@ public class HatListGUI implements GUIBuilder {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(Core.getInstance().getHatConfig());
         ConfigurationSection section = config.getConfigurationSection("hats");
         for (String string : section.getKeys(false)) {
-            inventory.setItem(Integer.parseInt(string), ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(string + ".id"))), section.getString(string + ".displayName"), new ArrayList<>()));
+            ArrayList<String> lore = new ArrayList<>();
+            if (player.hasPermission(section.getString(string + ".permission"))) {
+                lore.add("§a§l✔ §r§aVous avez débloqué ce chapeau");
+            }else{
+                lore.add("§c§l✘ §r§cVous n'avez pas débloqué ce chapeau");
+                // TODO: lore.add("§cDébloquer ce chapeau avec le grade ...");
+            }
+            inventory.setItem(Integer.parseInt(string), ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(string + ".id"))), section.getString(string + ".displayName"), lore));
         }
     }
 
     @Override
     public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) throws SQLException {
-
+        
     }
 }
