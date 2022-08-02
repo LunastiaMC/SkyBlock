@@ -28,7 +28,7 @@ public class SessionManager {
             final Session session = new Session(player, resultSet);
             this.sessions.put(player.getUniqueId().toString(), session);
         } else {
-            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money, permissions) VALUES (?,?,?)");
+            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money, permissions) VALUES (?,?,?,?)");
             statementCreation.setString(1, player.getUniqueId().toString());
             statementCreation.setInt(2, Manager.getRankManager().getDefaultRank().id());
             statementCreation.setLong(3, 0);
@@ -50,7 +50,7 @@ public class SessionManager {
         statement.setLong(2, session.getMoney());
         statement.setString(3, player.getUniqueId().toString());
         statement.setString(4, session.getPermissions());
-        statement.execute();
+        statement.executeUpdate();
     }
 
     public Session getSession(UUID uuid) {
