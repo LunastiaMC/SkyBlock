@@ -30,11 +30,11 @@ public class Core extends JavaPlugin {
 
         // Commandes
         // TODO: Mettre le chargement de commandes ainsi que des évènements dans un gestionnaire
+        CommandAPI.unregister("clear", true);
         CommandAPI.registerCommand(MoneyCommand.class);
         CommandAPI.registerCommand(AnnounceCommand.class);
         CommandAPI.registerCommand(DiscordCommand.class);
         CommandAPI.registerCommand(ClearCommand.class);
-        CommandAPI.unregister("clear");
 
         // On charge les sessions des joueurs, si le plugin à été reload
         this.getServer().getOnlinePlayers().forEach(player -> {
