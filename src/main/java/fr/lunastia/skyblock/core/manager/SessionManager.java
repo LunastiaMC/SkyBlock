@@ -48,11 +48,9 @@ public class SessionManager {
         try {
             final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ?, money = ?, permissions = ? WHERE uuid = ?");
             statement.setInt(1, session.getRank().id());
-            System.out.println(session.getRank().id());
             statement.setLong(2, session.getMoney());
-            System.out.println(session.getMoney());
-            statement.setString(3, player.getUniqueId().toString());
-            statement.setString(4, session.getPermissions());
+            statement.setString(3, session.getPermissions());
+            statement.setString(4, player.getUniqueId().toString());
             statement.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();

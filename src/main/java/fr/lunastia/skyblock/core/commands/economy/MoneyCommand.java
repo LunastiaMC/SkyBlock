@@ -21,6 +21,17 @@ public class MoneyCommand {
         ColorUtil.sendMessage(player, "Il y à un total de §e" + TextUtils.formatValue(session.getMoney()) + " pièce(s) §7sur votre compte", ColorUtil.BANK);
     }
 
+    @Subcommand("balance")
+    @Permission("skyblock.economy.balance")
+    public static void balance(Player player, @APlayerArgument Player target) {
+        Session targetSession = Manager.getSessionManager().getSession(target);
+        if (targetSession == null) {
+            return;
+        }
+
+        ColorUtil.sendMessage(player, "Le joueur §e" + target.getName() + " §7a un total de §e" + TextUtils.formatValue(targetSession.getMoney()) + " §7de §epièce(s)", ColorUtil.BANK);
+    }
+
     @Subcommand("add")
     @Permission("skyblock.economy.add")
     public static void add(Player player, @APlayerArgument Player target, @ALongArgument(min = 1, max = 1000000000) Long amount) {
