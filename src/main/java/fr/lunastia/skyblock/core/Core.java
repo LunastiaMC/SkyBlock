@@ -3,7 +3,7 @@ package fr.lunastia.skyblock.core;
 import dev.jorel.commandapi.CommandAPI;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
-import fr.lunastia.skyblock.core.commands.grades.EnderchestCommand;
+import fr.lunastia.skyblock.core.commands.utils.EnderchestCommand;
 import fr.lunastia.skyblock.core.commands.utils.AnnounceCommand;
 import fr.lunastia.skyblock.core.commands.utils.ClearCommand;
 import fr.lunastia.skyblock.core.commands.utils.DiscordCommand;

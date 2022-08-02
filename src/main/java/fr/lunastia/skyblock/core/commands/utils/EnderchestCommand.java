@@ -1,4 +1,4 @@
-package fr.lunastia.skyblock.core.commands.grades;
+package fr.lunastia.skyblock.core.commands.utils;
 
 import dev.jorel.commandapi.annotations.Alias;
 import dev.jorel.commandapi.annotations.Command;
