@@ -27,7 +27,7 @@ public class ReportCommand {
     }
 
     @Subcommand("bug")
-    public static void bug(Player player, @AMultiLiteralArgument({"Duplication", "Ile", "Autre"}) String category, @AGreedyStringArgument String description) {
+    public static void bug(Player player, @AMultiLiteralArgument({"duplication", "ile", "autre"}) String category, @AGreedyStringArgument String description) {
         // TODO: https://todoist.com/showTask?id=6052819635&sync_id=6052819635
         String timeStamp = new SimpleDateFormat("EEE MMM dd HH:mm:ss yyyy", Locale.FRANCE).format(new Date());
 
