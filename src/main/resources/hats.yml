@@ -11,3 +11,7 @@ hats:
     id: "minecraft:glowstone"
     displayName: "Chapeau en glowstone"
     permission: "skyblock.hatcustom.use"
+  "3":
+    id: "minecraft:diamond_ore"
+    displayName: "Chapeau en minerais de diamant"
+    permission: "skyblock.hatcustom.use"

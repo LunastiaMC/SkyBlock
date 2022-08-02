@@ -51,14 +51,27 @@ public class HatListGUI implements GUIBuilder {
         if (section.contains(String.valueOf(slot))) {
             if (player.hasPermission(section.getString(String.valueOf(slot) + ".permission"))) {
                 if (player.getInventory().getHelmet() != null) {
-                    ColorUtils.sendMessage(player, "Veuillez enlevez votre casque actuel avant d'en mettre un autre !", ColorUtils.HAT);
+                    if (player.getInventory().getHelmet().getItemMeta().getDisplayName().contains("Chapeau"))
+                    {
+                        String displayName = section.getString(slot + ".displayName");
+                        if (player.getInventory().getHelmet().getItemMeta().getDisplayName() == section.getString(slot + ".displayName"))
+                        {
+                            ColorUtils.sendMessage(player, "Vous avez deja le chapeau §d" + displayName, ColorUtils.HAT);
+                            return;
+                        }
+                        ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName, ColorUtils.HAT);
+                        ItemStack item = ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(String.valueOf(slot) + ".id"))), section.getString(String.valueOf(slot) + ".displayName"), new ArrayList<>());
+                        player.getInventory().setHelmet(item);
+                        return;
+                    }
+                    ColorUtils.sendMessage(player, "Veuillez enlevez votre casque avant de mettre un chapeau !", ColorUtils.HAT);
                     return;
                 }
 
-                String displayName = section.getString(String.valueOf(slot) + ".displayName");
+                String displayName = section.getString(slot + ".displayName");
                 ItemStack item = ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(String.valueOf(slot) + ".id"))), section.getString(String.valueOf(slot) + ".displayName"), new ArrayList<>());
 
-                ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName + " §7faites §d/hat remove §7pour le retirer", ColorUtils.HAT);
+                ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName, ColorUtils.HAT);
                 player.getInventory().setHelmet(item);
             } else {
                 ColorUtils.sendMessage(player, "Vous n'avez pas encore débloqué ce chapeau !", ColorUtils.HAT, true);

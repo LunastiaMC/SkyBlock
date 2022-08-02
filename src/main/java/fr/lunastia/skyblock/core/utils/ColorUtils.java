@@ -15,7 +15,8 @@ public class ColorUtils {
     public static final String PREFIX = "&#229dc3&l[&#2796c6&lS&#2b8ec9&lk&#3087cc&ly&#357fcf&lB&#3978d1&ll&#3e70d4&lo&#4369d7&lc&#4761da&lk&#4c5add&l]§r§7";
     public static final String DISCORD = "&#5865f2&l[&#586af2&lD&#5770f2&li&#5775f2&ls&#567af2&lc&#567ff2&lo&#5585f2&lr&#558af2&ld&#548ff2&l]§r§7";
     public static final String BANK = "&#fbf800&l[&#f6f004&lB&#f1e808&la&#ece00c&ln&#e7d70f&lq&#e2cf13&lu&#ddc717&le&#d8bf1b&l]";
-    public static final String HAT = "&#fb5cf1&l[&#fc59e2&lH&#fc57d3&la&#fd54c3&lt&#fd51b4&l]§r§7";
+    // public static final String HAT = "&#fb5cf1&l[&#fc59e2&lH&#fc57d3&la&#fd54c3&lt&#fd51b4&l]§r§7";
+    public static final String HAT = "&#fb5cf1&l[&#f058e6&lC&#e654da&lh&#db50cf&la&#d04cc3&lp&#db4dbf&le&#e74fbc&la&#f250b8&lu&#fd51b4&l]";
 
     public static String colorize(String message) {
         message = matchHexaReplace("&#", message);
