@@ -34,7 +34,7 @@ public class PayCommand {
             session.reduceMoney(amount);
             ColorUtil.sendMessage(player, "Vous venez d'envoyer §e" + TextUtils.formatValue(amount) + " §7de §e*pièces §7à §e" + target.getName() + " §7, il vous reste, §e" + TextUtils.formatValue(session.getMoney()) + " pièces §7dans votre compte", ColorUtil.BANK);
             ColorUtil.sendMessage(target, "Vous venez de recevoir §e" + TextUtils.formatValue(amount) + " §7de §epièces §7de la part de §e" + player.getName(), ColorUtil.BANK);
-        }else{
+        } else {
             ColorUtil.sendMessage(player, "Vous n'avez pas assez d'argent sur votre compte pour effectuer ce paiement.", ColorUtil.BANK);
         }
     }

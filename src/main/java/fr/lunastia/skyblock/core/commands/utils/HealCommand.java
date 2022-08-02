@@ -12,15 +12,13 @@ import org.bukkit.entity.Player;
 
 public class HealCommand {
     @Default
-    public static void heal(Player player)
-    {
+    public static void heal(Player player) {
         player.setHealth(20);
         ColorUtil.sendMessage(player, "Vous avez été soigné(e)", ColorUtil.PREFIX);
     }
 
     @Default
-    public static void heal(Player player ,@APlayerArgument Player target)
-    {
+    public static void heal(Player player, @APlayerArgument Player target) {
         target.setHealth(20);
         ColorUtil.sendMessage(target, "§aVous avez été soigné(e) par §2" + player.getName() + "§a !", ColorUtil.PREFIX);
         ColorUtil.sendMessage(player, "§aVous avez soigné(e) §2" + target.getName() + "§a !", ColorUtil.PREFIX);

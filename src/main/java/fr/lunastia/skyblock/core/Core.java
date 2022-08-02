@@ -2,8 +2,8 @@ package fr.lunastia.skyblock.core;
 
 import dev.jorel.commandapi.CommandAPI;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
-import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
+import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,6 +12,10 @@ import java.sql.SQLException;
 
 public class Core extends JavaPlugin {
     public static Core instance;
+
+    public static Core getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
@@ -57,9 +61,5 @@ public class Core extends JavaPlugin {
                 e.printStackTrace();
             }
         });
-    }
-
-    public static Core getInstance() {
-        return instance;
     }
 }
