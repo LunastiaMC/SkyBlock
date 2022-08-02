@@ -12,7 +12,7 @@ public class Session {
 
     private final Player player;
     private final Rank rank;
-    private final Long money;
+    private Long money;
     private final String[] permissions;
 
     public Session(Player player, ResultSet rs) throws SQLException {
@@ -44,11 +44,36 @@ public class Session {
         return rank;
     }
 
+    // /$$$$$$$$  /$$$$$$   /$$$$$$  /$$   /$$  /$$$$$$  /$$      /$$ /$$     /$$
+    // | $$_____/ /$$__  $$ /$$__  $$| $$$ | $$ /$$__  $$| $$$    /$$$|  $$   /$$/
+    // | $$      | $$  \__/| $$  \ $$| $$$$| $$| $$  \ $$| $$$$  /$$$$ \  $$ /$$/
+    // | $$$$$   | $$      | $$  | $$| $$ $$ $$| $$  | $$| $$ $$/$$ $$  \  $$$$/
+    // | $$__/   | $$      | $$  | $$| $$  $$$$| $$  | $$| $$  $$$| $$   \  $$/
+    // | $$      | $$    $$| $$  | $$| $$\  $$$| $$  | $$| $$\  $ | $$    | $$
+    // | $$$$$$$$|  $$$$$$/|  $$$$$$/| $$ \  $$|  $$$$$$/| $$ \/  | $$    | $$
+    // |________/ \______/  \______/ |__/  \__/ \______/ |__/     |__/    |__/
+
     public Long getMoney() {
         return money;
     }
 
-    public String getPermissions() {
-        return String.join(";", permissions);
+    public void setMoney(Long money) {
+        this.money = money;
+    }
+
+    public void addMoney() {
+        this.money++;
+    }
+
+    public void addMoney(Long money) {
+        this.money += money;
+    }
+
+    public void reduceMoney() {
+        this.money--;
+    }
+
+    public void reduceMoney(Long money) {
+        this.money -= money;
     }
 }
