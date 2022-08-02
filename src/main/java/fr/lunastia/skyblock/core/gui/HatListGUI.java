@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class HatListGUI implements GUIBuilder {
     @Override
@@ -29,7 +30,7 @@ public class HatListGUI implements GUIBuilder {
         YamlConfiguration config = YamlConfiguration.loadConfiguration(Core.getInstance().getHatConfig());
         ConfigurationSection section = config.getConfigurationSection("hats");
         for (String string : section.getKeys(false)) {
-            inventory.setItem(Integer.parseInt(string), ItemUtils.customizedItem(new ItemStack(Material.valueOf(section.getString(string + ".id"))), section.getString(string + ".displayName"), new ArrayList<>()));
+            inventory.setItem(Integer.parseInt(string), ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(string + ".id"))), section.getString(string + ".displayName"), new ArrayList<>()));
         }
     }
 

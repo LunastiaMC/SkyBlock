@@ -1,6 +1,0 @@
-hats:
-  0: # Slot
-    id: 20
-    meta: 0
-    displayName: "Chapeau en verre"
-    permission: "vip.hat"

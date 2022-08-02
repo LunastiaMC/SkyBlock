@@ -19,12 +19,12 @@ public class Core extends JavaPlugin {
     public void onEnable() {
         instance = this;
         getLogger().info("Skyblock is now enabled !");
-        this.hat = new File(this.getDataFolder(), "ranks.yml");
+        this.hat = new File(this.getDataFolder(), "hats.yml");
 
         // Fichiers de configuration
         this.saveResource("ranks.yml", true);
         this.saveResource("config.yml", false);
-        this.saveResource("hat.yml", false);
+        this.saveResource("hats.yml", false);
 
         Manager.init();
 

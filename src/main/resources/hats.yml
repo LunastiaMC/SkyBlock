@@ -1,0 +1,8 @@
+hats:
+  0:
+    id: "minecraft:glass"
+    displayName: "Chapeau en verre"
+    permission: "vip.hat"
+  1:
+    id: "minecraft:black_stained_glass"
+    displayName: "Chapeau en verre teinté"
