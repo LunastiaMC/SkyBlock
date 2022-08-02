@@ -11,7 +11,13 @@ public record Rank(int id, String name, String coloredName, String nametagName, 
     public void applyPermissions(Player player) {
         PermissionAttachment attachment = player.addAttachment(Core.getInstance());
         for (String permission : permissions) {
-            System.out.println("[Skyblock] " + player.getName() + " has permission " + permission);
+            attachment.setPermission(permission, true);
+        }
+    }
+
+    public static void applyPermissions(Player player, String[] permissions) {
+        PermissionAttachment attachment = player.addAttachment(Core.getInstance());
+        for (String permission : permissions) {
             attachment.setPermission(permission, true);
         }
     }
