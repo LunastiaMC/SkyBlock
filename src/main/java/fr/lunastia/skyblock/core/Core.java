@@ -3,6 +3,7 @@ package fr.lunastia.skyblock.core;
 import dev.jorel.commandapi.CommandAPI;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
+import fr.lunastia.skyblock.core.commands.grades.EnderchestCommand;
 import fr.lunastia.skyblock.core.commands.utils.AnnounceCommand;
 import fr.lunastia.skyblock.core.commands.utils.ClearCommand;
 import fr.lunastia.skyblock.core.commands.utils.DiscordCommand;
@@ -37,6 +38,7 @@ public class Core extends JavaPlugin {
         CommandAPI.registerCommand(AnnounceCommand.class);
         CommandAPI.registerCommand(DiscordCommand.class);
         CommandAPI.registerCommand(ClearCommand.class);
+        CommandAPI.registerCommand(EnderchestCommand.class);
 
         // On charge les sessions des joueurs, si le plugin à été reload
         this.getServer().getOnlinePlayers().forEach(player -> {
