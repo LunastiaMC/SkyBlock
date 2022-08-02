@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 @Command("enderchest")
 @Alias("ec")
-@Permission("skyblock.ec.use")
+@Permission("skyblock.ec.command")
 public class EnderchestCommand {
     @Default
     public static void enderchest(Player player) {
