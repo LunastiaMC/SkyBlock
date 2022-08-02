@@ -45,12 +45,18 @@ public class SessionManager {
 
         Session session = this.sessions.get(player.getUniqueId().toString());
 
-        final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ?, money = ?, permissions = ? WHERE uuid = ?");
-        statement.setInt(1, session.getRank().id());
-        statement.setLong(2, session.getMoney());
-        statement.setString(3, player.getUniqueId().toString());
-        statement.setString(4, session.getPermissions());
-        statement.executeUpdate();
+        try {
+            final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ?, money = ?, permissions = ? WHERE uuid = ?");
+            statement.setInt(1, session.getRank().id());
+            System.out.println(session.getRank().id());
+            statement.setLong(2, session.getMoney());
+            System.out.println(session.getMoney());
+            statement.setString(3, player.getUniqueId().toString());
+            statement.setString(4, session.getPermissions());
+            statement.executeUpdate();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public Session getSession(UUID uuid) {
