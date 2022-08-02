@@ -2,9 +2,8 @@ package fr.lunastia.skyblock.core;
 
 import dev.jorel.commandapi.CommandAPI;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
-import fr.lunastia.skyblock.core.commands.utils.AnnounceCommand;
-import fr.lunastia.skyblock.core.commands.utils.DiscordCommand;
-import fr.lunastia.skyblock.core.commands.utils.ReportCommand;
+import fr.lunastia.skyblock.core.commands.economy.PayCommand;
+import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,6 +12,10 @@ import java.sql.SQLException;
 
 public class Core extends JavaPlugin {
     public static Core instance;
+
+    public static Core getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
@@ -30,12 +33,16 @@ public class Core extends JavaPlugin {
 
         // Commandes
         // TODO: Mettre le chargement de commandes ainsi que des évènements dans un gestionnaire
+        CommandAPI.unregister("clear", true);
         CommandAPI.registerCommand(MoneyCommand.class);
+        CommandAPI.registerCommand(PayCommand.class);
         CommandAPI.registerCommand(AnnounceCommand.class);
         CommandAPI.registerCommand(DiscordCommand.class);
         CommandAPI.registerCommand(ReportCommand.class);
-        CommandAPI.unregister("clear");
-
+        CommandAPI.registerCommand(ClearCommand.class);
+        CommandAPI.registerCommand(HealCommand.class);
+        CommandAPI.registerCommand(FeedCommand.class);
+        
         // On charge les sessions des joueurs, si le plugin à été reload
         this.getServer().getOnlinePlayers().forEach(player -> {
             try {
@@ -55,9 +62,5 @@ public class Core extends JavaPlugin {
                 e.printStackTrace();
             }
         });
-    }
-
-    public static Core getInstance() {
-        return instance;
     }
 }

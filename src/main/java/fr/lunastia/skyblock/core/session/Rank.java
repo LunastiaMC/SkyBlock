@@ -6,12 +6,19 @@ import org.bukkit.permissions.PermissionAttachment;
 
 import java.util.ArrayList;
 
-public record Rank(int id, String name, String coloredName, String nametagName, String arrow, ArrayList<String> permissions) {
+public record Rank(int id, String name, String coloredName, String nametagName, String arrow,
+                   ArrayList<String> permissions) {
+
+    public static void applyPermissions(Player player, String[] permissions) {
+        PermissionAttachment attachment = player.addAttachment(Core.getInstance());
+        for (String permission : permissions) {
+            attachment.setPermission(permission, true);
+        }
+    }
 
     public void applyPermissions(Player player) {
         PermissionAttachment attachment = player.addAttachment(Core.getInstance());
         for (String permission : permissions) {
-            System.out.println("[Skyblock] " + player.getName() + " has permission " + permission);
             attachment.setPermission(permission, true);
         }
     }
