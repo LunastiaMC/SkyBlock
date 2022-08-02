@@ -1,6 +1,7 @@
 package fr.lunastia.skyblock.core.gui;
 
 import fr.lunastia.skyblock.core.Core;
+import fr.lunastia.skyblock.core.utils.ColorUtils;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -33,7 +34,7 @@ public class HatListGUI implements GUIBuilder {
             ArrayList<String> lore = new ArrayList<>();
             if (player.hasPermission(section.getString(string + ".permission"))) {
                 lore.add("§a§l✔ §r§aVous avez débloqué ce chapeau");
-            }else{
+            } else {
                 lore.add("§c§l✘ §r§cVous n'avez pas débloqué ce chapeau");
                 // TODO: lore.add("§cDébloquer ce chapeau avec le grade ...");
             }
@@ -42,7 +43,26 @@ public class HatListGUI implements GUIBuilder {
     }
 
     @Override
-    public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) throws SQLException {
-        
+    public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) {
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(Core.getInstance().getHatConfig());
+        ConfigurationSection section = config.getConfigurationSection("hats");
+
+        assert section != null;
+        if (section.contains(String.valueOf(slot))) {
+            if (player.hasPermission(section.getString(String.valueOf(slot) + ".permission"))) {
+                if (player.getInventory().getHelmet() != null) {
+                    ColorUtils.sendMessage(player, "Veuillez enlevez votre casque actuel avant d'en mettre un autre !", ColorUtils.HAT);
+                    return;
+                }
+
+                String displayName = section.getString(String.valueOf(slot) + ".displayName");
+                ItemStack item = ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(String.valueOf(slot) + ".id"))), section.getString(String.valueOf(slot) + ".displayName"), new ArrayList<>());
+
+                ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName + " §7faites §d/hat remove §7pour le retirer", ColorUtils.HAT);
+                player.getInventory().setHelmet(item);
+            } else {
+                ColorUtils.sendMessage(player, "Vous n'avez pas encore débloqué ce chapeau !", ColorUtils.HAT, true);
+            }
+        }
     }
 }

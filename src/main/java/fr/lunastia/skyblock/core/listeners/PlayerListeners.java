@@ -2,13 +2,16 @@ package fr.lunastia.skyblock.core.listeners;
 
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Session;
+import fr.lunastia.skyblock.core.utils.ColorUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
 
@@ -40,5 +43,18 @@ public class PlayerListeners implements Listener {
         }
 
         // TODO: Ajouter un message qui envoi vers le wiki du serveur, ou un GUI qui permet de naviguer dans le wiki.
+    }
+
+    @EventHandler
+    public void onHatRemove(InventoryClickEvent event)
+    {
+        Player player = (Player) event.getWhoClicked();
+        ItemStack item = event.getCurrentItem();
+        assert item != null;
+        if (item.getItemMeta().getDisplayName().contains("Chapeau"))
+        {
+            event.setCancelled(true);
+            ColorUtils.sendMessage(player, "Vous devez retirer le chapeau en faisant /hat remove !", ColorUtils.HAT);
+        }
     }
 }
