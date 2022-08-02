@@ -5,9 +5,8 @@ import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Subcommand;
 import dev.jorel.commandapi.annotations.arguments.AGreedyStringArgument;
 import dev.jorel.commandapi.annotations.arguments.AMultiLiteralArgument;
-import dev.jorel.commandapi.annotations.arguments.AOfflinePlayerArgument;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
-import fr.lunastia.skyblock.core.utils.ColorUtil;
+import fr.lunastia.skyblock.core.utils.ColorUtils;
 import fr.lunastia.skyblock.core.utils.discord.DiscordWebhook;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -15,7 +14,6 @@ import org.bukkit.entity.Player;
 import java.awt.*;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
@@ -23,7 +21,7 @@ import java.util.Locale;
 public class ReportCommand {
     @Default
     public static void report(Player player) {
-        ColorUtil.sendMessage(player, "Si vous shouaitez signaler un joueur executez §f/report player§c, si vous avez besoins de signaler une faille, un bug executez §f/report bug", ColorUtil.PREFIX, true);
+        ColorUtils.sendMessage(player, "Si vous shouaitez signaler un joueur executez §f/report player§c, si vous avez besoins de signaler une faille, un bug executez §f/report bug", ColorUtils.PREFIX, true);
     }
 
     @Subcommand("bug")
@@ -43,7 +41,7 @@ public class ReportCommand {
 
         try {
             webhook.execute();
-            ColorUtil.sendMessage(player, "Votre report a bien été prit en compte !", ColorUtil.PREFIX);
+            ColorUtils.sendMessage(player, "Votre report a bien été prit en compte !", ColorUtils.PREFIX);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -52,12 +50,12 @@ public class ReportCommand {
     @Subcommand("player")
     public static void player(Player player, @APlayerArgument Player player_reported, @AGreedyStringArgument String description) {
         if (!Bukkit.getOnlinePlayers().contains(player_reported)) {
-            ColorUtil.sendMessage(player, "Ce joueur n'est pas connecté sur le serveur", ColorUtil.PREFIX);
+            ColorUtils.sendMessage(player, "Ce joueur n'est pas connecté sur le serveur", ColorUtils.PREFIX);
             return;
         }
 
         if (player.getName().equals(player_reported.getName())) {
-            ColorUtil.sendMessage(player, "Vous ne pouvez pas vous signaler vous-même !", ColorUtil.PREFIX,true);
+            ColorUtils.sendMessage(player, "Vous ne pouvez pas vous signaler vous-même !", ColorUtils.PREFIX,true);
             return;
         }
 
@@ -77,7 +75,7 @@ public class ReportCommand {
 
         try {
             webhook.execute();
-            ColorUtil.sendMessage(player, "Votre report a bien été prit en compte !", ColorUtil.PREFIX);
+            ColorUtils.sendMessage(player, "Votre report a bien été prit en compte !", ColorUtils.PREFIX);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

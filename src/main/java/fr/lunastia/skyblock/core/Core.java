@@ -8,23 +8,23 @@ import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.sql.SQLException;
 
 public class Core extends JavaPlugin {
     public static Core instance;
-
-    public static Core getInstance() {
-        return instance;
-    }
+    private File hat;
 
     @Override
     public void onEnable() {
         instance = this;
         getLogger().info("Skyblock is now enabled !");
+        this.hat = new File(this.getDataFolder(), "hats.yml");
 
         // Fichiers de configuration
-        this.saveResource("ranks.yml", true);
         this.saveResource("config.yml", false);
+        this.saveResource("ranks.yml", true);
+        this.saveResource("hats.yml", true);
 
         Manager.init();
 
@@ -37,13 +37,12 @@ public class Core extends JavaPlugin {
         CommandAPI.registerCommand(MoneyCommand.class);
         CommandAPI.registerCommand(PayCommand.class);
         CommandAPI.registerCommand(AnnounceCommand.class);
-        CommandAPI.registerCommand(DiscordCommand.class);
         CommandAPI.registerCommand(ReportCommand.class);
         CommandAPI.registerCommand(ClearCommand.class);
         CommandAPI.registerCommand(EnderchestCommand.class);
         CommandAPI.registerCommand(HealCommand.class);
         CommandAPI.registerCommand(FeedCommand.class);
-        
+        CommandAPI.registerCommand(HatCommand.class);
         // On charge les sessions des joueurs, si le plugin à été reload
         this.getServer().getOnlinePlayers().forEach(player -> {
             try {
@@ -63,5 +62,13 @@ public class Core extends JavaPlugin {
                 e.printStackTrace();
             }
         });
+    }
+
+    public static Core getInstance() {
+        return instance;
+    }
+
+    public File getHatConfig() {
+        return hat;
     }
 }

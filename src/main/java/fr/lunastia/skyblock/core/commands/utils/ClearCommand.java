@@ -4,7 +4,7 @@ import dev.jorel.commandapi.annotations.Command;
 import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
-import fr.lunastia.skyblock.core.utils.ColorUtil;
+import fr.lunastia.skyblock.core.utils.ColorUtils;
 import org.bukkit.entity.Player;
 
 import java.util.Objects;
@@ -14,13 +14,13 @@ import java.util.Objects;
 public class ClearCommand {
     @Default
     public static void clear(Player player, @APlayerArgument Player target) {
-        ColorUtil.sendMessage(player, "Vous venez de vider l'inventaire de §f" + target.getName() + " §7qui contenait un total de §f" + getCount(target) + " items", ColorUtil.PREFIX);
+        ColorUtils.sendMessage(player, "Vous venez de vider l'inventaire de §f" + target.getName() + " §7qui contenait un total de §f" + getCount(target) + " items", ColorUtils.PREFIX);
         target.getInventory().clear();
     }
 
     @Default
     public static void clear(Player player) {
-        ColorUtil.sendMessage(player, "Vous venez de vider votre inventaire qui contenait un total de §f" + getCount(player) + " §7items", ColorUtil.PREFIX);
+        ColorUtils.sendMessage(player, "Vous venez de vider votre inventaire qui contenait un total de §f" + getCount(player) + " §7items", ColorUtils.PREFIX);
         player.getInventory().clear();
     }
 

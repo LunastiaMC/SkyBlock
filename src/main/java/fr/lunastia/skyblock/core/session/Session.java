@@ -2,7 +2,7 @@ package fr.lunastia.skyblock.core.session;
 
 import com.nametagedit.plugin.NametagEdit;
 import fr.lunastia.skyblock.core.manager.Manager;
-import fr.lunastia.skyblock.core.utils.ColorUtil;
+import fr.lunastia.skyblock.core.utils.ColorUtils;
 import org.bukkit.entity.Player;
 
 import java.sql.ResultSet;
@@ -23,8 +23,8 @@ public class Session {
         this.permissions = rs.getString("permissions").split(";");
         Rank.applyPermissions(player, rs.getString("permissions").split(";"));
 
-        NametagEdit.getApi().setPrefix(player, ColorUtil.colorize(this.getRank().nametagName()) + "§7");
-        player.setPlayerListName(ColorUtil.colorize(this.getRank().nametagName()) + player.getName());
+        NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
+        player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
     }
 
     public Session(Player player, Integer rank, Long money, String[] permissions) {
