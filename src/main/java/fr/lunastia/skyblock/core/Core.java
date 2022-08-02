@@ -34,6 +34,7 @@ public class Core extends JavaPlugin {
         // Commandes
         // TODO: Mettre le chargement de commandes ainsi que des évènements dans un gestionnaire
         CommandAPI.unregister("clear", true);
+        CommandAPI.unregister("gamemode", true);
         CommandAPI.registerCommand(MoneyCommand.class);
         CommandAPI.registerCommand(PayCommand.class);
         CommandAPI.registerCommand(AnnounceCommand.class);
