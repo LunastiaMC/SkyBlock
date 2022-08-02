@@ -10,10 +10,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class Core extends JavaPlugin {
     public static Core instance;
     private File hat;
+    public static final HashMap<String, String> GAMEMODES = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -44,6 +46,17 @@ public class Core extends JavaPlugin {
         CommandAPI.registerCommand(HealCommand.class);
         CommandAPI.registerCommand(FeedCommand.class);
         CommandAPI.registerCommand(HatCommand.class);
+        CommandAPI.registerCommand(GameModeCommand.class);
+
+        GAMEMODES.put("0", "Survie");
+        GAMEMODES.put("1", "Créatif");
+        GAMEMODES.put("2", "Aventure");
+        GAMEMODES.put("3", "Spectateur");
+        GAMEMODES.put("survival", "Survie");
+        GAMEMODES.put("creative", "Créatif");
+        GAMEMODES.put("adventure", "Aventure");
+        GAMEMODES.put("spectator", "Spectateur");
+
         // On charge les sessions des joueurs, si le plugin à été reload
         this.getServer().getOnlinePlayers().forEach(player -> {
             try {
