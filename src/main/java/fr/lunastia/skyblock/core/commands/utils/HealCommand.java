@@ -22,6 +22,7 @@ public class HealCommand {
     public static void heal(Player player ,@APlayerArgument Player target)
     {
         target.setHealth(20);
-        ColorUtil.sendMessage(target, "§aVous avez soigné §2" + target.getName() + "§a !", ColorUtil.PREFIX);
+        ColorUtil.sendMessage(target, "§aVous avez été soigné(e) par §2" + player.getName() + "§a !", ColorUtil.PREFIX);
+        ColorUtil.sendMessage(player, "§aVous avez soigné(e) §2" + target.getName() + "§a !", ColorUtil.PREFIX);
     }
 }
