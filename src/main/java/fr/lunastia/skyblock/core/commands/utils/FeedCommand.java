@@ -11,16 +11,15 @@ import org.bukkit.entity.Player;
 @Permission("skyblock.feed.command")
 public class FeedCommand {
     @Default
-    public static void feed(Player player)
-    {
+    public static void feed(Player player) {
         player.setFoodLevel(20);
         ColorUtils.sendMessage(player, "§aVous avez été nourri !", ColorUtils.PREFIX);
     }
+
     @Default
-    public static void feed(Player player ,@APlayerArgument Player target)
-    {
+    public static void feed(Player player, @APlayerArgument Player target) {
         target.setFoodLevel(20);
-        ColorUtils.sendMessage(target, "§aVous avez été nourri par §2" + player.getName() + "§a !", ColorUtils.PREFIX);
-        ColorUtils.sendMessage(player, "§aVous avez nourri §2" + target.getName() + "§a !", ColorUtils.PREFIX);
+        ColorUtils.sendMessage(target, "Vous avez été nourri par §f" + player.getName() + "§7 !", ColorUtils.PREFIX);
+        ColorUtils.sendMessage(player, "Vous avez nourri §f" + target.getName() + "§7 !", ColorUtils.PREFIX);
     }
 }

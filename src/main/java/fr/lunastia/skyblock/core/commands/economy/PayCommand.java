@@ -32,9 +32,9 @@ public class PayCommand {
         if (session.getMoney() > amount) {
             targetSession.addMoney(amount);
             session.reduceMoney(amount);
-            ColorUtils.sendMessage(player, "Vous venez d'envoyer §e" + TextUtils.formatValue(amount) + " §7de §e*pièces §7à §e" + target.getName() + " §7, il vous reste, §e" + TextUtils.formatValue(session.getMoney()) + " pièces §7dans votre compte", ColorUtils.BANK);
+            ColorUtils.sendMessage(player, "Vous venez d'envoyer §e" + TextUtils.formatValue(amount) + " §7de §epièces §7à §e" + target.getName() + " §7, il vous reste, §e" + TextUtils.formatValue(session.getMoney()) + " §7de §epièces §7dans votre compte", ColorUtils.BANK);
             ColorUtils.sendMessage(target, "Vous venez de recevoir §e" + TextUtils.formatValue(amount) + " §7de §epièces §7de la part de §e" + player.getName(), ColorUtils.BANK);
-        }else{
+        } else {
             ColorUtils.sendMessage(player, "Vous n'avez pas assez d'argent sur votre compte pour effectuer ce paiement.", ColorUtils.BANK);
         }
     }

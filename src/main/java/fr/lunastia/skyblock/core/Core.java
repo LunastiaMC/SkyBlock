@@ -2,8 +2,8 @@ package fr.lunastia.skyblock.core;
 
 import dev.jorel.commandapi.CommandAPI;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
-import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
+import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -37,12 +37,12 @@ public class Core extends JavaPlugin {
         CommandAPI.registerCommand(MoneyCommand.class);
         CommandAPI.registerCommand(PayCommand.class);
         CommandAPI.registerCommand(AnnounceCommand.class);
-        CommandAPI.registerCommand(DiscordCommand.class);
+        CommandAPI.registerCommand(ReportCommand.class);
         CommandAPI.registerCommand(ClearCommand.class);
+        CommandAPI.registerCommand(EnderchestCommand.class);
         CommandAPI.registerCommand(HealCommand.class);
         CommandAPI.registerCommand(FeedCommand.class);
         CommandAPI.registerCommand(HatCommand.class);
-
         // On charge les sessions des joueurs, si le plugin à été reload
         this.getServer().getOnlinePlayers().forEach(player -> {
             try {
