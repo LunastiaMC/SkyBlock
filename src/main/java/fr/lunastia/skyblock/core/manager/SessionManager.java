@@ -32,7 +32,7 @@ public class SessionManager {
             statementCreation.setString(1, player.getUniqueId().toString());
             statementCreation.setInt(2, Manager.getRankManager().getDefaultRank().id());
             statementCreation.setLong(3, 0);
-            statementCreation.setString(4,"");
+            statementCreation.setString(4, "");
             statementCreation.execute();
 
             final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{});
@@ -52,7 +52,7 @@ public class SessionManager {
             statement.setString(3, session.getPermissions());
             statement.setString(4, player.getUniqueId().toString());
             statement.executeUpdate();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

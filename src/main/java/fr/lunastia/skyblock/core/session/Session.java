@@ -12,8 +12,8 @@ public class Session {
 
     private final Player player;
     private final Rank rank;
-    private Long money;
     private final String[] permissions;
+    private Long money;
 
     public Session(Player player, ResultSet rs) throws SQLException {
         this.player = player;
