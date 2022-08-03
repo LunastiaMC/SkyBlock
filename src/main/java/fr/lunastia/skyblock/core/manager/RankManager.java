@@ -47,4 +47,8 @@ public class RankManager {
     public Rank getDefaultRank() {
         return ranks.get(0);
     }
+
+    public ArrayList<Rank> getRanks() {
+        return new ArrayList<>(ranks.values());
+    }
 }
