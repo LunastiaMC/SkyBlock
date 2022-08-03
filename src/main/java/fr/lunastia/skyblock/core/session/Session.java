@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class Session {
 
     private final Player player;
-    private final Rank rank;
+    private Rank rank;
     private final String[] permissions;
     private Long money;
 
@@ -40,8 +40,22 @@ public class Session {
         return player;
     }
 
+    //  /$$$$$$$   /$$$$$$  /$$   /$$ /$$   /$$
+    // | $$__  $$ /$$__  $$| $$$ | $$| $$  /$$/
+    // | $$  \ $$| $$  \ $$| $$$$| $$| $$ /$$/
+    // | $$$$$$$/| $$$$$$$$| $$ $$ $$| $$$$$/
+    // | $$__  $$| $$__  $$| $$  $$$$| $$  $$
+    // | $$  \ $$| $$  | $$| $$\  $$$| $$\  $$
+    // | $$  | $$| $$  | $$| $$ \  $$| $$ \  $$
+    // |__/  |__/|__/  |__/|__/  \__/|__/  \__/
+
     public Rank getRank() {
         return rank;
+    }
+
+    public void setRank(Rank rank) {
+        this.rank = rank;
+        rank.applyPermissions(player);
     }
 
     public String getPermissions() {
