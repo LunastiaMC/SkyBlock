@@ -2,6 +2,7 @@ package fr.lunastia.skyblock.core.manager;
 
 import dev.jorel.commandapi.CommandAPI;
 import fr.lunastia.skyblock.core.Core;
+import fr.lunastia.skyblock.core.commands.admin.RankCommand;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
 import fr.lunastia.skyblock.core.commands.utils.*;
@@ -26,7 +27,6 @@ public class Manager {
         GAMEMODES.put("creative", "Créatif");
         GAMEMODES.put("adventure", "Aventure");
         GAMEMODES.put("spectator", "Spectateur");
-        System.out.println(GAMEMODES);
     }
 
     public void init() {
@@ -40,6 +40,7 @@ public class Manager {
         CommandAPI.unregister("gamemode", true);
 
         // Chargement des commandes
+        CommandAPI.registerCommand(RankCommand.class);
         CommandAPI.registerCommand(MoneyCommand.class);
         CommandAPI.registerCommand(PayCommand.class);
         CommandAPI.registerCommand(AnnounceCommand.class);
@@ -62,6 +63,7 @@ public class Manager {
     public static HashMap<String, String> getStringGamemodes() {
         return GAMEMODES;
     }
+
     public static SessionManager getSessionManager() {
         return sessionManager;
     }
