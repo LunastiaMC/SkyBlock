@@ -49,6 +49,7 @@ public class Core extends JavaPlugin {
         CommandAPI.registerCommand(EnderchestCommand.class);
         CommandAPI.registerCommand(HealCommand.class);
         CommandAPI.registerCommand(FeedCommand.class);
+        CommandAPI.registerCommand(FlyCommand.class);
         CommandAPI.registerCommand(HatCommand.class);
         CommandAPI.registerCommand(GameModeCommand.class);
 
