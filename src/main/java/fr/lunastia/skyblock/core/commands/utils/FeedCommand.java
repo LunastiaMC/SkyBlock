@@ -13,7 +13,7 @@ public class FeedCommand {
     @Default
     public static void feed(Player player) {
         player.setFoodLevel(20);
-        ColorUtils.sendMessage(player, "§aVous avez été nourri !", ColorUtils.PREFIX);
+        ColorUtils.sendMessage(player, "Vous avez été nourri !", ColorUtils.PREFIX);
     }
 
     @Default
