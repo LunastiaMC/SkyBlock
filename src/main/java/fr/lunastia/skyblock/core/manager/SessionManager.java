@@ -7,11 +7,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 public class SessionManager {
     private HashMap<String, Session> sessions;
+    public static ArrayList<Session> vanished;
 
     public SessionManager() {
         this.sessions = new HashMap<>();
@@ -71,5 +73,18 @@ public class SessionManager {
 
     public HashMap<String, Session> getSessions() {
         return this.sessions;
+    }
+
+    public void setVanish(Session session, boolean effect) {
+        if (effect) vanished.add(session);
+        else vanished.remove(session);
+    }
+
+    public ArrayList<Session> getVanished() {
+        return vanished;
+    }
+
+    public boolean isVanished(Session session) {
+        return vanished.contains(session);
     }
 }
