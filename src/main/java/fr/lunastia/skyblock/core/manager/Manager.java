@@ -27,5 +27,7 @@ public class Manager {
         return databaseManager;
     }
 
-    public static GUIManager getGUIManager() { return guiManager; }
+    public static GUIManager getGUIManager() {
+        return guiManager;
+    }
 }

@@ -13,9 +13,13 @@ import java.sql.SQLException;
 import java.util.HashMap;
 
 public class Core extends JavaPlugin {
+    public static final HashMap<String, String> GAMEMODES = new HashMap<>();
     public static Core instance;
     private File hat;
-    public static final HashMap<String, String> GAMEMODES = new HashMap<>();
+
+    public static Core getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
@@ -76,10 +80,6 @@ public class Core extends JavaPlugin {
                 e.printStackTrace();
             }
         });
-    }
-
-    public static Core getInstance() {
-        return instance;
     }
 
     public File getHatConfig() {

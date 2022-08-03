@@ -31,8 +31,8 @@ public class ReportCommand {
 
         DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/1003757892878471259/YrwPWzdmrKvZrIMJNpafKKq0nYkipjvP_2rMyLcbXELqWUBLuc_i8AeYSRe90OJfy0rm");
         webhook.addEmbed(new DiscordWebhook.EmbedObject()
-                .addField("Catégorie:", category,false)
-                .addField("Description du signalement:", description,true)
+                .addField("Catégorie:", category, false)
+                .addField("Description du signalement:", description, true)
                 .setFooter(timeStamp, null)
                 .setAuthor("Auteur du signalement: " + player.getName(), null, null)
                 .setColor(new Color(0, 255, 0))
@@ -55,7 +55,7 @@ public class ReportCommand {
         }
 
         if (player.getName().equals(player_reported.getName())) {
-            ColorUtils.sendMessage(player, "Vous ne pouvez pas vous signaler vous-même !", ColorUtils.PREFIX,true);
+            ColorUtils.sendMessage(player, "Vous ne pouvez pas vous signaler vous-même !", ColorUtils.PREFIX, true);
             return;
         }
 
@@ -65,8 +65,8 @@ public class ReportCommand {
         DiscordWebhook webhook = new DiscordWebhook("https://discord.com/api/webhooks/1003778487389262005/Tv8dDl5n-s-7lfKSzNRR6aLXwy2p3p46iAVF4yk4GgdeXimmnChPwOFltE5bjE-7vIiJ");
         webhook.addEmbed(
                 new DiscordWebhook.EmbedObject()
-                        .addField("Joueur signalé:", player_reported.getName(),false)
-                        .addField("Description du signalement:", description,true)
+                        .addField("Joueur signalé:", player_reported.getName(), false)
+                        .addField("Description du signalement:", description, true)
                         .setFooter(timeStamp, null)
                         .setAuthor("Auteur du signalement: " + player.getName(), null, null)
                         .setColor(new Color(255, 0, 0))

@@ -1,7 +1,7 @@
 package fr.lunastia.skyblock.core.manager;
 
-import fr.lunastia.skyblock.core.gui.GUIBuilder;
 import fr.lunastia.skyblock.core.Core;
+import fr.lunastia.skyblock.core.gui.GUIBuilder;
 import fr.lunastia.skyblock.core.gui.HatListGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

@@ -1,7 +1,6 @@
 package fr.lunastia.skyblock.core.utils;
 
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
