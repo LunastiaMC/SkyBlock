@@ -46,7 +46,7 @@ public class Manager {
         CommandAPI.registerCommand(AnnounceCommand.class);
         CommandAPI.registerCommand(ReportCommand.class);
         CommandAPI.registerCommand(ClearCommand.class);
-        CommandAPI.registerCommand(EnderchestCommand.class);
+        CommandAPI.registerCommand(EnderChestCommand.class);
         CommandAPI.registerCommand(HealCommand.class);
         CommandAPI.registerCommand(FeedCommand.class);
         CommandAPI.registerCommand(FlyCommand.class);
