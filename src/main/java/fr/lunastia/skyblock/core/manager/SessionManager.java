@@ -2,6 +2,8 @@ package fr.lunastia.skyblock.core.manager;
 
 import fr.lunastia.skyblock.core.session.Session;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,10 +15,11 @@ import java.util.UUID;
 
 public class SessionManager {
     private HashMap<String, Session> sessions;
-    public static ArrayList<Session> vanished;
+    public ArrayList<Session> vanished;
 
     public SessionManager() {
         this.sessions = new HashMap<>();
+        this.vanished = new ArrayList<>();
     }
 
     public void loadSession(Player player) throws SQLException {
@@ -76,8 +79,13 @@ public class SessionManager {
     }
 
     public void setVanish(Session session, boolean effect) {
-        if (effect) vanished.add(session);
-        else vanished.remove(session);
+        if (effect){
+            vanished.add(session);
+            session.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999999, 1,false,false,false));
+        }else{
+            vanished.remove(session);
+            session.getPlayer().getActivePotionEffects().forEach(potionEffect -> session.getPlayer().removePotionEffect(potionEffect.getType()));
+        }
     }
 
     public ArrayList<Session> getVanished() {

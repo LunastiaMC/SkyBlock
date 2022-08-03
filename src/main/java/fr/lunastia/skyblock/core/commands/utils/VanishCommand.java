@@ -31,10 +31,10 @@ public class VanishCommand {
     @Permission("skyblock.vanish.list.command")
     public static void list(Player player) {
         StringBuilder list = new StringBuilder();
-        list.append("§fListe des joueurs cachés :\n");
+        list.append("Liste des joueurs cachés :\n");
         for (Session session : Manager.getSessionManager().getVanished()) {
             if (Manager.getSessionManager().isVanished(session)) {
-                list.append("-" + session.getPlayer().getName()).append("\n");
+                list.append("§7- " + session.getPlayer().getName()).append("\n");
             }
         }
         ColorUtils.sendMessage(player, list.toString(), ColorUtils.PREFIX);
