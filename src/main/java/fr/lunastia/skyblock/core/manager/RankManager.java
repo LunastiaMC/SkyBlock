@@ -35,6 +35,15 @@ public class RankManager {
         return ranks.getOrDefault(id, getDefaultRank());
     }
 
+    public Rank getRank(String name) {
+        for (Rank rank : ranks.values()) {
+            if (rank.name().equalsIgnoreCase(name)) {
+                return rank;
+            }
+        }
+        return getDefaultRank();
+    }
+
     public Rank getDefaultRank() {
         return ranks.get(0);
     }
