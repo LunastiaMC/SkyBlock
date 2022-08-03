@@ -11,7 +11,7 @@ import fr.lunastia.skyblock.core.utils.ColorUtils;
 import org.bukkit.entity.Player;
 
 @Command("hat")
-@Permission("skyblock.hat.use")
+@Permission("skyblock.hat.command")
 public class HatCommand {
     @Default
     public static void hat(Player player) {

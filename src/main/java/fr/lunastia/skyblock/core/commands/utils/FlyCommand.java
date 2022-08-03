@@ -12,7 +12,7 @@ import java.util.HashMap;
 @Command("fly")
 public class FlyCommand {
     @Default
-    @Permission("skyblock.fly.use")
+    @Permission("skyblock.fly.command")
     public static void fly(Player player) {
         if (player.getGameMode().equals(GameMode.CREATIVE)) {
             ColorUtils.sendMessage(player, "Vous ne pouvez pas effectuer cette commande en créatif !", ColorUtils.PREFIX);
