@@ -1,50 +1,49 @@
 ranks:
   0:
-    name: "Joueur"
+    name: "player"
     coloredName: "&#d0d0d0[&#cbcbcbJ&#c7c7c7o&#c2c2c2u&#bdbdbde&#b8b8b8u&#b4b4b4r&#afafaf]"
     nametagName: "&#d0d0d0&lJ&#c9c9c9&lO&#c3c3c3&lU&#bcbcbc&lE&#b6b6b6&lU&#afafaf&lR §r&#afafaf"
     arrow: "&#d0d0d0»"
     permissions: [ ]
   1:
-    name: "Premium"
+    name: "premium"
     coloredName: "&#dab105[&#d3ac05P&#cca605r&#c5a105e&#be9b05m&#b0950ci&#a18f13u&#938819m&#848220]"
     nametagName: "&#dab105&lP&#cca90a&lR&#bda10e&lE&#af9a13&lM&#a19217&lI&#928a1c&lU&#848220&lM §r&#848220"
     arrow: "&#dab105»"
     permissions: [ ]
   2:
-    name: "Vidéaste"
+    name: "youtuber"
     coloredName: "&#b95656[&#c95656V&#d85656i&#e85555d&#f75555é&#f55353a&#e14f4fs&#cd4b4bt&#b94747e&#a54343]"
     nametagName: "&#b95656&lV&#b65353&lI&#b35151&lD&#b04e4e&lÉ&#ae4b4b&lA&#ab4848&lS&#a84646&lT&#a54343&lE §r&#a54343"
     arrow: "&#b95656»"
     permissions: [ ]
   3:
-    name: "Streamer"
+    name: "streamer"
     coloredName: "&#5c38b7[&#623bc2T&#673fcew&#6d42d9i&#7245e4t&#7748edc&#7b4bf6h&#804eff]"
     nametagName: "&#804eff&lS&#7b4bf5&lT&#7648ea&lR&#7145e0&lE&#6b41d6&lA&#663ecc&lM&#613bc1&lE&#5c38b7&lR §r&#5c38b7"
     arrow: "&#5c38b7»"
     permissions: [ ]
   4:
-    name: "Modérateur"
+    name: "moderator"
     coloredName: "&#35b98d[&#30b997M&#2cb9a2o&#27b8acd&#23b8b6é&#1eb8c1r&#1cb9c3a&#1bbabdt&#1abcb7e&#19beb2u&#19bfacr&#18c1a6]"
     nametagName: "&#35b98d&lM&#2bbc95&lO&#22be9e&lD&#18c1a6&lO §r&#18c1a6"
     arrow: "&#35b98d»"
     permissions: [ ]
   5:
-    name: "Responsable"
+    name: "manager"
     coloredName: "&#4d47d5[&#5045d0R&#5242cbe&#5540c6s&#573dc1p&#5a3bbco&#5c38b7n&#6537bds&#6f36c3a&#7835c9b&#8133cel&#8b32d4e&#9431da]"
     nametagName: "&#214ed5&lR&#1f4acb&lE&#1e47c1&lS&#1c43b7&lP §r&#1c43b7"
     arrow: "&#4d47d5»"
     permissions: [ ]
   6:
-    name: "Développeur"
+    name: "developper"
     coloredName: "&#35a5b9[&#35a3baD&#35a1baé&#369fbbv&#369cbce&#369abcl&#3698bdo&#3696bep&#3694bep&#3792bfe&#378fc0u&#378dc0r&#378bc1]"
     nametagName: "&#35a5b9&lD&#38acc6&lE&#3ab3d3&lV §r&#3ab3d3"
     arrow: "&#35a5b9»"
     permissions: [ ]
   7:
-    name: "Administrateur"
+    name: "administrator"
     coloredName: "&#e43535[&#e93a3aA&#ed3e3ed&#f24343m&#f64747i&#fb4c4cn&#ff5050]"
     nametagName: "&#fb2c2c&lA&#fc3535&lD&#fc3e3e&lM&#fd4646&lI&#fd4f4f&lN §r&#fd4f4f"
     arrow: "&#FF5050»"
-    permissions:
-      - "skyblock.announce.command"
+    permissions: [ ]
