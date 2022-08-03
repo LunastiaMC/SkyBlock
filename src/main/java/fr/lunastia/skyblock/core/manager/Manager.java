@@ -51,6 +51,7 @@ public class Manager {
         CommandAPI.registerCommand(FlyCommand.class);
         CommandAPI.registerCommand(HatCommand.class);
         CommandAPI.registerCommand(GameModeCommand.class);
+        CommandAPI.registerCommand(CraftCommand.class);
 
         // Chargement des évènements
         Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());
