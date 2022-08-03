@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -68,6 +69,17 @@ public class PlayerListeners implements Listener {
         if (Objects.requireNonNull(player.getInventory().getHelmet().getItemMeta()).getDisplayName().contains("Chapeau")) {
             event.setCancelled(true);
             ColorUtils.sendMessage(player, "Vous devez retirer le chapeau en faisant §d/hat remove §7!", ColorUtils.HAT);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        if (event.getEntity().getInventory().getHelmet() == null || event.getEntity().getInventory().getHelmet().getType() == Material.AIR) {
+            return;
+        }
+
+        if (event.getEntity().getInventory().getHelmet().getItemMeta().getDisplayName().contains("Chapeau")) {
+            event.getDrops().remove(event.getEntity().getInventory().getHelmet());
         }
     }
 }
