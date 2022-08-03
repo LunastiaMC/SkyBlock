@@ -10,8 +10,6 @@ import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.utils.ColorUtils;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-
 @Command("gamemode")
 @Alias("gm")
 @Permission("skyblock.gamemode.command")
