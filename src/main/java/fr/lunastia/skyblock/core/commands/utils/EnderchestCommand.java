@@ -15,7 +15,7 @@ public class EnderChestCommand {
     }
 
     @Default
-    @Permission("skyblock.ec.see.command")
+    @Permission("skyblock.ec.other.command")
     public static void see(Player player, @APlayerArgument Player target) {
         if (target.getName().equals(player.getName())) {
             ColorUtils.sendMessage(player, "Vous ne pouvez ouvrir votre propre inventaire !", ColorUtils.PREFIX,true);
