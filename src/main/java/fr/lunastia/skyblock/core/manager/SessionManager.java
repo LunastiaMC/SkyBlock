@@ -78,6 +78,14 @@ public class SessionManager {
         return this.sessions;
     }
 
+    public boolean isVanished(Session session) {
+        return vanished.contains(session);
+    }
+
+    public ArrayList<Session> getVanished() {
+        return vanished;
+    }
+
     public void setVanish(Session session, boolean effect) {
         if (effect) {
             vanished.add(session);
