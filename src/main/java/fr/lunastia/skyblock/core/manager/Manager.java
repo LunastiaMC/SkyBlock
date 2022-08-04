@@ -73,6 +73,7 @@ public class Manager {
         CommandAPI.registerCommand(CraftCommand.class);
         CommandAPI.registerCommand(VanishCommand.class);
         CommandAPI.registerCommand(InventoryOpenCommand.class);
+        CommandAPI.registerCommand(RepairCommand.class);
         CommandAPI.registerCommand(FreezeCommand.class);
         CommandAPI.registerCommand(TrashCommand.class);
         CommandAPI.registerCommand(GUICommand.class);
