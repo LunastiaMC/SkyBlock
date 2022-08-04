@@ -20,8 +20,6 @@ public class SessionManager {
 
     public SessionManager() {
         this.sessions = new HashMap<>();
-        this.vanished = new ArrayList<>();
-        this.freezed = new ArrayList<>();
     }
 
     public void loadSession(Player player) throws SQLException {
