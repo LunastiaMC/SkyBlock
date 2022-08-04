@@ -123,12 +123,12 @@ public class Session {
         if (freezed) {
             isFreezed = true;
             this.getPlayer().setFreezeTicks((800 * 999999999));
-            ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", ColorUtils.PREFIX);
+            if (messages) ColorUtils.sendMessage(this.getPlayer(), "Vous venez d'être immobilisé", ColorUtils.PREFIX);
             return;
         }
 
         isFreezed = false;
-        ColorUtils.sendMessage(this.getPlayer(), "Vous venez d'être immobilisé", ColorUtils.PREFIX);
+        if (messages) ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", ColorUtils.PREFIX);
         this.getPlayer().setFreezeTicks(1);
     }
 
@@ -139,13 +139,13 @@ public class Session {
     public void setVanished(boolean vanished, boolean messages) {
         if (vanished) {
             isVanished = true;
-            ColorUtils.sendMessage(player, "Vous venez de vous révéler !", ColorUtils.PREFIX);
+            if (messages) ColorUtils.sendMessage(player, "Vous venez de vous cacher !", ColorUtils.PREFIX);
             this.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999999, 1, false, false, false));
             return;
         }
 
         isVanished = false;
-        ColorUtils.sendMessage(player, "Vous venez de vous cacher !", ColorUtils.PREFIX);
+        if (messages) ColorUtils.sendMessage(player, "Vous venez de vous révéler !", ColorUtils.PREFIX);
         this.getPlayer().getActivePotionEffects().forEach(potionEffect -> this.getPlayer().removePotionEffect(potionEffect.getType()));
     }
 }
