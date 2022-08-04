@@ -30,7 +30,10 @@ public class TrashGUI implements GUIBuilder {
 
     @Override
     public void onClose(Player player, Inventory inventory) {
-        ColorUtils.sendMessage(player, "Vous venez de jeter un total de §f" + ItemUtils.countInventory(inventory) + " items §7à la poubelle", ColorUtils.TRASH);
+        Integer count = ItemUtils.countInventory(inventory);
+        if (count > 0) {
+            ColorUtils.sendMessage(player, "Vous venez de jeter un total de §f" + count + " items §7à la poubelle", ColorUtils.TRASH);
+        }
         return;
     }
 
