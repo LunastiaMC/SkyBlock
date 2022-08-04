@@ -26,8 +26,7 @@ public class FreezeCommand {
             return;
         }
 
-        if (session.isFreezed()) session.setFreezed(false);
-        else session.setFreezed(true);
+        session.setFreezed(!session.isFreezed());
     }
 
     @Subcommand("list")
