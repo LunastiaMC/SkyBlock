@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.Repairable;
 
 @Command("repair")
 public class RepairCommand {
@@ -23,7 +24,7 @@ public class RepairCommand {
         }
 
         ItemStack itemStack = player.getInventory().getItemInMainHand();
-        if (!(itemStack.getItemMeta() instanceof Damageable) || itemStack.getType().isBlock()) {
+        if (!(itemStack.getItemMeta() instanceof Damageable) || !(itemStack.getItemMeta() instanceof Repairable) || itemStack.getType().isBlock()) {
             ColorUtils.sendMessage(player, "Cet item ne peut pas être réparé", ColorUtils.PREFIX, true);
             return;
         }
