@@ -26,18 +26,25 @@ public class Session {
         this.rank.applyPermissions(player);
         this.permissions = rs.getString("permissions").split(";");
         Rank.applyPermissions(player, rs.getString("permissions").split(";"));
+        setFreezed(rs.getBoolean("freezed"), rs.getBoolean("freezed"));
+        setVanished(rs.getBoolean("vanished"), rs.getBoolean("vanished"));
 
         NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
         player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
     }
 
-    public Session(Player player, Integer rank, Long money, String[] permissions) {
+    public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished) {
         this.player = player;
         this.rank = Manager.getRankManager().getRank(rank);
         this.money = money;
         this.rank.applyPermissions(player);
         this.permissions = permissions;
         Rank.applyPermissions(player, permissions);
+        setFreezed(isFreezed, isFreezed);
+        setVanished(isVanished, isVanished);
+
+        NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
+        player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
     }
 
     public Player getPlayer() {
@@ -112,7 +119,7 @@ public class Session {
         return isFreezed;
     }
 
-    public void setFreezed(boolean freezed) {
+    public void setFreezed(boolean freezed, boolean messages) {
         if (freezed) {
             isFreezed = true;
             this.getPlayer().setFreezeTicks((800 * 999999999));
@@ -129,7 +136,7 @@ public class Session {
         return isVanished;
     }
 
-    public void setVanished(boolean vanished) {
+    public void setVanished(boolean vanished, boolean messages) {
         if (vanished) {
             isVanished = true;
             ColorUtils.sendMessage(player, "Vous venez de vous révéler !", ColorUtils.PREFIX);

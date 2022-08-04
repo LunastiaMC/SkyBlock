@@ -15,7 +15,7 @@ public class VanishCommand {
     @Default
     public static void vanish(Player player) {
         Session session = Manager.getSessionManager().getSession(player);
-        session.setVanished(!session.isVanished());
+        session.setVanished(!session.isVanished(), true);
     }
 
     @Subcommand("list")
