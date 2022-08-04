@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 @Permission("skyblock.gui.test.command")
 public class GUICommand {
     @Default
-    public static void gui(Player player, @AMultiLiteralArgument({"9","18","27","36","45","54"}) int size, @AStringArgument String title) {
-        player.openInventory(Bukkit.createInventory(player, size, title));
+    public static void gui(Player player, @AMultiLiteralArgument({"9","18","27","36","45","54"}) String size, @AStringArgument String title) {
+        player.openInventory(Bukkit.createInventory(player, Integer.parseInt(size), title));
     }
 }
