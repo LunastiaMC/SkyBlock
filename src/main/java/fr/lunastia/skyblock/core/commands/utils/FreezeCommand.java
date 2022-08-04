@@ -40,11 +40,12 @@ public class FreezeCommand {
     public static void list(Player player) {
         StringBuilder list = new StringBuilder();
         list.append("Liste des joueurs immobilisée :\n");
-        for (Session session : Manager.getSessionManager().getFreezed()) {
-            if (Manager.getSessionManager().isFreezed(session)) {
+
+        Manager.getSessionManager().getSessions().forEach((uuid, session) -> {
+            if (session.isFreezed()) {
                 list.append("§7- ").append(session.getPlayer().getName()).append("\n");
             }
-        }
+        });
         ColorUtils.sendMessage(player, list.toString(), ColorUtils.PREFIX);
     }
 }

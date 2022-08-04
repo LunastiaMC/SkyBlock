@@ -32,11 +32,12 @@ public class VanishCommand {
     public static void list(Player player) {
         StringBuilder list = new StringBuilder();
         list.append("Liste des joueurs cachés :\n");
-        for (Session session : Manager.getSessionManager().getVanished()) {
-            if (Manager.getSessionManager().isVanished(session)) {
-                list.append("§7- " + session.getPlayer().getName()).append("\n");
+
+        Manager.getSessionManager().getSessions().forEach((uuid, session) -> {
+            if (session.isVanished()) {
+                list.append("§7- ").append(session.getPlayer().getName()).append("\n");
             }
-        }
+        });
         ColorUtils.sendMessage(player, list.toString(), ColorUtils.PREFIX);
     }
 }
