@@ -47,7 +47,7 @@ public class HatListGUI implements GUIBuilder {
 
         assert section != null;
         if (section.contains(String.valueOf(slot))) {
-            if (player.hasPermission(section.getString(String.valueOf(slot) + ".permission"))) {
+            if (player.hasPermission(section.getString(slot + ".permission"))) {
                 if (player.getInventory().getHelmet() != null) {
                     if (player.getInventory().getHelmet().getItemMeta().getDisplayName().contains("Chapeau")) {
                         String displayName = section.getString(slot + ".displayName");
@@ -73,5 +73,20 @@ public class HatListGUI implements GUIBuilder {
                 ColorUtils.sendMessage(player, "Vous n'avez pas encore débloqué ce chapeau !", ColorUtils.HAT, true);
             }
         }
+    }
+
+    @Override
+    public void onClose(Player player, Inventory inventory) {
+        return;
+    }
+
+    @Override
+    public void onOpen(Player player, Inventory inventory) {
+        return;
+    }
+
+    @Override
+    public boolean clickCancelled() {
+        return true;
     }
 }

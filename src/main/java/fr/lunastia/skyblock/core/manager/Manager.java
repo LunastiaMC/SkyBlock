@@ -7,6 +7,7 @@ import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
 import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.database.DatabaseManager;
+import fr.lunastia.skyblock.core.listeners.FreezeListeners;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 
 import java.util.HashMap;
@@ -27,6 +28,22 @@ public class Manager {
         GAMEMODES.put("creative", "Créatif");
         GAMEMODES.put("adventure", "Aventure");
         GAMEMODES.put("spectator", "Spectateur");
+    }
+
+    public static SessionManager getSessionManager() {
+        return sessionManager;
+    }
+
+    public static RankManager getRankManager() {
+        return rankManager;
+    }
+
+    public static DatabaseManager getDatabaseManager() {
+        return databaseManager;
+    }
+
+    public static GUIManager getGUIManager() {
+        return guiManager;
     }
 
     public void init() {
@@ -56,28 +73,11 @@ public class Manager {
         CommandAPI.registerCommand(VanishCommand.class);
         CommandAPI.registerCommand(InventoryOpenCommand.class);
         CommandAPI.registerCommand(RepairCommand.class);
+        CommandAPI.registerCommand(FreezeCommand.class);
+        CommandAPI.registerCommand(TrashCommand.class);
 
         // Chargement des évènements
         Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());
-    }
-
-    public static HashMap<String, String> getStringGamemodes() {
-        return GAMEMODES;
-    }
-
-    public static SessionManager getSessionManager() {
-        return sessionManager;
-    }
-
-    public static RankManager getRankManager() {
-        return rankManager;
-    }
-
-    public static DatabaseManager getDatabaseManager() {
-        return databaseManager;
-    }
-
-    public static GUIManager getGUIManager() {
-        return guiManager;
+        Core.getInstance().getServer().getPluginManager().registerEvents(new FreezeListeners(), Core.getInstance());
     }
 }

@@ -2,8 +2,6 @@ package fr.lunastia.skyblock.core.manager;
 
 import fr.lunastia.skyblock.core.session.Session;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,12 +12,11 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class SessionManager {
-    private HashMap<String, Session> sessions;
     public ArrayList<Session> vanished;
+    private HashMap<String, Session> sessions;
 
     public SessionManager() {
         this.sessions = new HashMap<>();
-        this.vanished = new ArrayList<>();
     }
 
     public void loadSession(Player player) throws SQLException {
@@ -33,14 +30,16 @@ public class SessionManager {
             final Session session = new Session(player, resultSet);
             this.sessions.put(player.getUniqueId().toString(), session);
         } else {
-            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money, permissions) VALUES (?,?,?,?)");
+            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money, permissions, freezed, vanished) VALUES (?,?,?,?,?,?)");
             statementCreation.setString(1, player.getUniqueId().toString());
             statementCreation.setInt(2, Manager.getRankManager().getDefaultRank().id());
             statementCreation.setLong(3, 0);
             statementCreation.setString(4, "");
+            statementCreation.setBoolean(5, false);
+            statementCreation.setBoolean(6, false);
             statementCreation.execute();
 
-            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{});
+            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{}, false, false);
             this.sessions.put(player.getUniqueId().toString(), session);
         }
     }
@@ -51,11 +50,13 @@ public class SessionManager {
         Session session = this.sessions.get(player.getUniqueId().toString());
 
         try {
-            final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ?, money = ?, permissions = ? WHERE uuid = ?");
+            final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ?, money = ?, permissions = ?, freezed = ?, vanished = ? WHERE uuid = ?");
             statement.setInt(1, session.getRank().id());
             statement.setLong(2, session.getMoney());
             statement.setString(3, session.getPermissions());
-            statement.setString(4, player.getUniqueId().toString());
+            statement.setBoolean(4, session.isFreezed());
+            statement.setBoolean(5, session.isVanished());
+            statement.setString(6, player.getUniqueId().toString());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,23 +77,5 @@ public class SessionManager {
 
     public HashMap<String, Session> getSessions() {
         return this.sessions;
-    }
-
-    public void setVanish(Session session, boolean effect) {
-        if (effect){
-            vanished.add(session);
-            session.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999999, 1,false,false,false));
-        }else{
-            vanished.remove(session);
-            session.getPlayer().getActivePotionEffects().forEach(potionEffect -> session.getPlayer().removePotionEffect(potionEffect.getType()));
-        }
-    }
-
-    public ArrayList<Session> getVanished() {
-        return vanished;
-    }
-
-    public boolean isVanished(Session session) {
-        return vanished.contains(session);
     }
 }
