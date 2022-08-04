@@ -14,6 +14,8 @@ public class Session {
     private Rank rank;
     private final String[] permissions;
     private Long money;
+    private boolean isVanished;
+    private boolean isFreezed;
 
     public Session(Player player, ResultSet rs) throws SQLException {
         this.player = player;
@@ -93,5 +95,31 @@ public class Session {
 
     public void reduceMoney(Long money) {
         this.money -= money;
+    }
+
+    // /$$   /$$ /$$$$$$$$ /$$$$$$ /$$        /$$$$$$
+    // | $$  | $$|__  $$__/|_  $$_/| $$       /$$__  $$
+    // | $$  | $$   | $$     | $$  | $$      | $$  \__/
+    // | $$  | $$   | $$     | $$  | $$      |  $$$$$$
+    // | $$  | $$   | $$     | $$  | $$       \____  $$
+    // | $$  | $$   | $$     | $$  | $$       /$$  \ $$
+    // |  $$$$$$/   | $$    /$$$$$$| $$$$$$$$|  $$$$$$/
+    // \______/    |__/   |______/|________/ \______/
+
+
+    public void setFreezed(boolean freezed) {
+        isFreezed = freezed;
+    }
+
+    public boolean isFreezed() {
+        return isFreezed;
+    }
+
+    public void setVanished(boolean vanished) {
+        isVanished = vanished;
+    }
+
+    public boolean isVanished() {
+        return isVanished;
     }
 }
