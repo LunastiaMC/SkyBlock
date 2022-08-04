@@ -7,9 +7,6 @@ import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
 import fr.lunastia.skyblock.core.utils.ColorUtils;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-
-import java.util.Objects;
 
 @Command("clear")
 @Permission("skyblock.clear.command")

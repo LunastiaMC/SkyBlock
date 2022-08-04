@@ -29,6 +29,22 @@ public class Manager {
         GAMEMODES.put("spectator", "Spectateur");
     }
 
+    public static SessionManager getSessionManager() {
+        return sessionManager;
+    }
+
+    public static RankManager getRankManager() {
+        return rankManager;
+    }
+
+    public static DatabaseManager getDatabaseManager() {
+        return databaseManager;
+    }
+
+    public static GUIManager getGUIManager() {
+        return guiManager;
+    }
+
     public void init() {
         sessionManager = new SessionManager();
         databaseManager = new DatabaseManager();
@@ -60,21 +76,5 @@ public class Manager {
 
         // Chargement des évènements
         Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());
-    }
-
-    public static SessionManager getSessionManager() {
-        return sessionManager;
-    }
-
-    public static RankManager getRankManager() {
-        return rankManager;
-    }
-
-    public static DatabaseManager getDatabaseManager() {
-        return databaseManager;
-    }
-
-    public static GUIManager getGUIManager() {
-        return guiManager;
     }
 }

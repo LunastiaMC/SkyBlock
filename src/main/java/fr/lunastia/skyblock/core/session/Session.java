@@ -13,8 +13,8 @@ import java.sql.SQLException;
 public class Session {
 
     private final Player player;
-    private Rank rank;
     private final String[] permissions;
+    private Rank rank;
     private Long money;
     private boolean isVanished;
     private boolean isFreezed;
@@ -108,6 +108,9 @@ public class Session {
     // |  $$$$$$/   | $$    /$$$$$$| $$$$$$$$|  $$$$$$/
     // \______/    |__/   |______/|________/ \______/
 
+    public boolean isFreezed() {
+        return isFreezed;
+    }
 
     public void setFreezed(boolean freezed) {
         if (freezed) {
@@ -122,8 +125,8 @@ public class Session {
         this.getPlayer().setFreezeTicks(1);
     }
 
-    public boolean isFreezed() {
-        return isFreezed;
+    public boolean isVanished() {
+        return isVanished;
     }
 
     public void setVanished(boolean vanished) {
@@ -137,9 +140,5 @@ public class Session {
         isVanished = false;
         ColorUtils.sendMessage(player, "Vous venez de vous cacher !", ColorUtils.PREFIX);
         this.getPlayer().getActivePotionEffects().forEach(potionEffect -> this.getPlayer().removePotionEffect(potionEffect.getType()));
-    }
-
-    public boolean isVanished() {
-        return isVanished;
     }
 }

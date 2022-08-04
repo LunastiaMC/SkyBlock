@@ -5,7 +5,6 @@ import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
 import fr.lunastia.skyblock.core.gui.TrashGUI;
 import fr.lunastia.skyblock.core.manager.Manager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 @Command("trash")

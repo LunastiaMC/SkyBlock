@@ -2,8 +2,6 @@ package fr.lunastia.skyblock.core.manager;
 
 import fr.lunastia.skyblock.core.session.Session;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,8 +12,8 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class SessionManager {
-    private HashMap<String, Session> sessions;
     public ArrayList<Session> vanished;
+    private HashMap<String, Session> sessions;
 
     public SessionManager() {
         this.sessions = new HashMap<>();

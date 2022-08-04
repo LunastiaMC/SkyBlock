@@ -29,7 +29,7 @@ public class FreezeListeners implements Listener {
             Session session = Manager.getSessionManager().getSession(player);
             if (session.isFreezed()) {
                 event.setCancelled(true);
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,new TextComponent("§bVous ne pouvez pas vous déplacer lorsque vous êtes immobilisé."));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§bVous ne pouvez pas vous déplacer lorsque vous êtes immobilisé."));
             }
         }
     }
