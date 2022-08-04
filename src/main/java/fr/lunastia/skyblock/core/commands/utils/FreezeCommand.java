@@ -26,13 +26,8 @@ public class FreezeCommand {
             return;
         }
 
-        if (Manager.getSessionManager().isFreezed(session)) {
-            Manager.getSessionManager().setFreeze(session, false);
-            ColorUtils.sendMessage(target, "Vous vous pouvez à nouveau vous dégourdir les pieds.", ColorUtils.PREFIX);
-        } else {
-            Manager.getSessionManager().setFreeze(session, true);
-            ColorUtils.sendMessage(target, "Vous venez d'être immobilisé, par §f" + player.getName(), ColorUtils.PREFIX);
-        }
+        if (Manager.getSessionManager().isFreezed(session)) session.setFreezed(false);
+        else session.setFreezed(true);
     }
 
     @Subcommand("list")
