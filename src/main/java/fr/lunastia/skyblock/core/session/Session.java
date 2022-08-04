@@ -116,7 +116,7 @@ public class Session {
         }
 
         isFreezed = false;
-        ColorUtils.sendMessage(this.getPlayer(), "Vous venez d'être immobilisé, par §f" + player.getName(), ColorUtils.PREFIX);
+        ColorUtils.sendMessage(this.getPlayer(), "Vous venez d'être immobilisé", ColorUtils.PREFIX);
         this.getPlayer().setFreezeTicks(1);
     }
 
