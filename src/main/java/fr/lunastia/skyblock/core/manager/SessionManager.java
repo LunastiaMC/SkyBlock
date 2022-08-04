@@ -16,10 +16,12 @@ import java.util.UUID;
 public class SessionManager {
     private HashMap<String, Session> sessions;
     public ArrayList<Session> vanished;
+    public ArrayList<Session> freezed;
 
     public SessionManager() {
         this.sessions = new HashMap<>();
         this.vanished = new ArrayList<>();
+        this.freezed = new ArrayList<>();
     }
 
     public void loadSession(Player player) throws SQLException {
@@ -97,11 +99,22 @@ public class SessionManager {
         session.getPlayer().getActivePotionEffects().forEach(potionEffect -> session.getPlayer().removePotionEffect(potionEffect.getType()));
     }
 
-    public ArrayList<Session> getVanished() {
-        return vanished;
+    public boolean isFreezed(Session session) {
+        return freezed.contains(session);
     }
 
-    public boolean isVanished(Session session) {
-        return vanished.contains(session);
+    public ArrayList<Session> getFreezed() {
+        return freezed;
+    }
+
+    public void setFreeze(Session session, boolean effect) {
+        if (effect) {
+            freezed.add(session);
+            session.getPlayer().setFreezeTicks((999 * 999999999));
+            return;
+        }
+
+        freezed.remove(session);
+        session.getPlayer().setFreezeTicks(0);
     }
 }
