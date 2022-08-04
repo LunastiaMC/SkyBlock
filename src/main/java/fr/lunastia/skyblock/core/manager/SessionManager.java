@@ -103,18 +103,4 @@ public class SessionManager {
         return freezed.contains(session);
     }
 
-    public ArrayList<Session> getFreezed() {
-        return freezed;
-    }
-
-    public void setFreeze(Session session, boolean effect) {
-        if (effect) {
-            freezed.add(session);
-            session.getPlayer().setFreezeTicks((800 * 999999999));
-            return;
-        }
-
-        freezed.remove(session);
-        session.getPlayer().setFreezeTicks(1);
-    }
 }
