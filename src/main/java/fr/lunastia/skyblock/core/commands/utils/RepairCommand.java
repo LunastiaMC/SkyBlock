@@ -17,7 +17,7 @@ public class RepairCommand {
             return;
         }
 
-        if (!player.getInventory().getItemInMainHand().getType().isEdible()) {
+        if (player.getInventory().getItemInMainHand().getType().isEdible() || player.getInventory().getItemInMainHand().getType().isBlock()) {
             ColorUtils.sendMessage(player, "Cet objet ne peut pas être réparé !", ColorUtils.PREFIX, true);
             return;
         }
