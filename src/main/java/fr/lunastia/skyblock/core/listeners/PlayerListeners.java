@@ -84,17 +84,4 @@ public class PlayerListeners implements Listener {
             event.getDrops().remove(event.getEntity().getInventory().getHelmet());
         }
     }
-
-    // Cancel damage from frozen players.
-    @EventHandler
-    public void onDamage(EntityDamageEvent event) {
-        if (event.getEntity() instanceof Player) {
-            Player player = (Player) event.getEntity();
-            if (player.isFrozen()) {
-                if (Manager.getSessionManager().isFreezed(Manager.getSessionManager().getSession(player))) {
-                    event.setCancelled(true);
-                }
-            }
-        }
-    }
 }

@@ -110,11 +110,11 @@ public class SessionManager {
     public void setFreeze(Session session, boolean effect) {
         if (effect) {
             freezed.add(session);
-            session.getPlayer().setFreezeTicks((999 * 999999999));
+            session.getPlayer().setFreezeTicks((800 * 999999999));
             return;
         }
 
         freezed.remove(session);
-        session.getPlayer().setFreezeTicks(0);
+        session.getPlayer().setFreezeTicks(1);
     }
 }
