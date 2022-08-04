@@ -18,6 +18,14 @@ public class ItemUtils {
         return item;
     }
 
+    public static ItemStack customizedItem(ItemStack item, ArrayList<String> lines) {
+        ItemMeta meta = item.getItemMeta();
+        assert meta != null;
+        meta.setLore(lines);
+        item.setItemMeta(meta);
+        return item;
+    }
+
     public static int countInventory(Inventory inventory) {
         int count = 0;
         for (int i = 0; i < inventory.getSize(); i++) {
