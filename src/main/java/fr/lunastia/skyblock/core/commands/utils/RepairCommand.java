@@ -3,14 +3,17 @@ package fr.lunastia.skyblock.core.commands.utils;
 import dev.jorel.commandapi.annotations.Command;
 import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
+import fr.lunastia.skyblock.core.gui.RepairGUI;
+import fr.lunastia.skyblock.core.manager.GUIManager;
+import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.utils.ColorUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 
 @Command("repair")
-@Permission("skyblock.repair.command")
 public class RepairCommand {
     @Default
     public static void repair(Player player) {
@@ -30,7 +33,6 @@ public class RepairCommand {
             return;
         }
 
-        player.getInventory().getItemInMainHand().setDurability((short) 0);
-        ColorUtils.sendMessage(player, "Votre objet a été réparé !", ColorUtils.PREFIX);
+        Manager.getGUIManager().open(player, RepairGUI.class);
     }
 }
