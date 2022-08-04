@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 public class RepairCommand {
     @Default
     public static void repair(Player player) {
-        if (player.getInventory().getItemInMainHand().getType() == Material.AIR) {
+        if (player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
             ColorUtils.sendMessage(player, "Vous n'avez pas d'objet dans votre main !", ColorUtils.PREFIX, true);
             return;
         }
