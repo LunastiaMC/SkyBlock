@@ -26,7 +26,7 @@ public class FreezeCommand {
             return;
         }
 
-        if (Manager.getSessionManager().isFreezed(session)) session.setFreezed(false);
+        if (session.isFreezed()) session.setFreezed(false);
         else session.setFreezed(true);
     }
 
