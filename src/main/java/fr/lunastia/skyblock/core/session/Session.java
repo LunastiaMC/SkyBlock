@@ -4,6 +4,8 @@ import com.nametagedit.plugin.NametagEdit;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.utils.ColorUtils;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -125,7 +127,16 @@ public class Session {
     }
 
     public void setVanished(boolean vanished) {
-        isVanished = vanished;
+        if (vanished) {
+            isVanished = true;
+            ColorUtils.sendMessage(player, "Vous venez de vous révéler !", ColorUtils.PREFIX);
+            this.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999999, 1, false, false, false));
+            return;
+        }
+
+        isVanished = false;
+        ColorUtils.sendMessage(player, "Vous venez de vous cacher !", ColorUtils.PREFIX);
+        this.getPlayer().getActivePotionEffects().forEach(potionEffect -> this.getPlayer().removePotionEffect(potionEffect.getType()));
     }
 
     public boolean isVanished() {
