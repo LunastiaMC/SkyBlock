@@ -60,10 +60,6 @@ public class Manager {
         Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());
     }
 
-    public static HashMap<String, String> getStringGamemodes() {
-        return GAMEMODES;
-    }
-
     public static SessionManager getSessionManager() {
         return sessionManager;
     }
