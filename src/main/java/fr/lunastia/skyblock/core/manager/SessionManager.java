@@ -16,7 +16,6 @@ import java.util.UUID;
 public class SessionManager {
     private HashMap<String, Session> sessions;
     public ArrayList<Session> vanished;
-    public ArrayList<Session> freezed;
 
     public SessionManager() {
         this.sessions = new HashMap<>();
@@ -77,28 +76,4 @@ public class SessionManager {
     public HashMap<String, Session> getSessions() {
         return this.sessions;
     }
-
-    public boolean isVanished(Session session) {
-        return vanished.contains(session);
-    }
-
-    public ArrayList<Session> getVanished() {
-        return vanished;
-    }
-
-    public void setVanish(Session session, boolean effect) {
-        if (effect) {
-            vanished.add(session);
-            session.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999999, 1, false, false, false));
-            return;
-        }
-
-        vanished.remove(session);
-        session.getPlayer().getActivePotionEffects().forEach(potionEffect -> session.getPlayer().removePotionEffect(potionEffect.getType()));
-    }
-
-    public boolean isFreezed(Session session) {
-        return freezed.contains(session);
-    }
-
 }
