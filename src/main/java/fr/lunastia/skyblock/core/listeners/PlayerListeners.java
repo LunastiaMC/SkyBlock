@@ -7,8 +7,10 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -80,6 +82,19 @@ public class PlayerListeners implements Listener {
 
         if (event.getEntity().getInventory().getHelmet().getItemMeta().getDisplayName().contains("Chapeau")) {
             event.getDrops().remove(event.getEntity().getInventory().getHelmet());
+        }
+    }
+
+    // Cancel damage from frozen players.
+    @EventHandler
+    public void onDamage(EntityDamageEvent event) {
+        if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
+            if (player.isFrozen()) {
+                if (Manager.getSessionManager().isFreezed(Manager.getSessionManager().getSession(player))) {
+                    event.setCancelled(true);
+                }
+            }
         }
     }
 }
