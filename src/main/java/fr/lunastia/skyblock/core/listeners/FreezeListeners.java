@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class FreezeListeners implements Listener {
@@ -31,6 +32,15 @@ public class FreezeListeners implements Listener {
                 event.setCancelled(true);
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§bVous ne pouvez pas vous déplacer lorsque vous êtes immobilisé."));
             }
+        }
+    }
+
+    @EventHandler
+    public void onInventoryOpen(InventoryOpenEvent event) {
+        Player player = (Player) event.getPlayer();
+        Session session = Manager.getSessionManager().getSession(player);
+        if (session.isFreezed()) {
+            event.setCancelled(true);
         }
     }
 }

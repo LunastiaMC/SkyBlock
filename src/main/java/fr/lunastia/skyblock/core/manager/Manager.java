@@ -7,6 +7,7 @@ import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
 import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.database.DatabaseManager;
+import fr.lunastia.skyblock.core.listeners.FreezeListeners;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 
 import java.util.HashMap;
@@ -76,5 +77,6 @@ public class Manager {
 
         // Chargement des évènements
         Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());
+        Core.getInstance().getServer().getPluginManager().registerEvents(new FreezeListeners(), Core.getInstance());
     }
 }
