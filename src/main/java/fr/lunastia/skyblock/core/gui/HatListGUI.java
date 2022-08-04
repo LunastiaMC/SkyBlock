@@ -47,7 +47,7 @@ public class HatListGUI implements GUIBuilder {
 
         assert section != null;
         if (section.contains(String.valueOf(slot))) {
-            if (player.hasPermission(section.getString(String.valueOf(slot) + ".permission"))) {
+            if (player.hasPermission(section.getString(slot + ".permission"))) {
                 if (player.getInventory().getHelmet() != null) {
                     if (player.getInventory().getHelmet().getItemMeta().getDisplayName().contains("Chapeau")) {
                         String displayName = section.getString(slot + ".displayName");
