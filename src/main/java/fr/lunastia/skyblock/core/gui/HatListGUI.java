@@ -74,4 +74,14 @@ public class HatListGUI implements GUIBuilder {
             }
         }
     }
+
+    @Override
+    public void onClose(Player player, Inventory inventory) {
+        return;
+    }
+
+    @Override
+    public void onOpen(Player player, Inventory inventory) {
+        return;
+    }
 }
