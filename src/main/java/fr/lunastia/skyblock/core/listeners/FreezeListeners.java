@@ -41,6 +41,7 @@ public class FreezeListeners implements Listener {
         Session session = Manager.getSessionManager().getSession(player);
         if (session.isFreezed()) {
             event.setCancelled(true);
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§bVous ne pouvez pas ouvrir d'inventaires lorsque vous êtes immobilisé."));
         }
     }
 }
