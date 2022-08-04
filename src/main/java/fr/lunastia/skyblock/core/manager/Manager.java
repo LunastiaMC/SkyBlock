@@ -55,6 +55,7 @@ public class Manager {
         CommandAPI.registerCommand(CraftCommand.class);
         CommandAPI.registerCommand(VanishCommand.class);
         CommandAPI.registerCommand(InventoryOpenCommand.class);
+        CommandAPI.registerCommand(RepairCommand.class);
 
         // Chargement des évènements
         Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());
