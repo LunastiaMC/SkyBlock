@@ -35,6 +35,7 @@ public class RankCommand {
             "streamer",
             "moderator",
             "manager",
+            "developper",
             "administrator"
     }) String rank) {
         Session session = Manager.getSessionManager().getSession(player);
