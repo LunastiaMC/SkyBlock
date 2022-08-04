@@ -108,7 +108,16 @@ public class Session {
 
 
     public void setFreezed(boolean freezed) {
-        isFreezed = freezed;
+        if (freezed) {
+            isFreezed = true;
+            this.getPlayer().setFreezeTicks((800 * 999999999));
+            ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", ColorUtils.PREFIX);
+            return;
+        }
+
+        isFreezed = false;
+        ColorUtils.sendMessage(this.getPlayer(), "Vous venez d'être immobilisé, par §f" + player.getName(), ColorUtils.PREFIX);
+        this.getPlayer().setFreezeTicks(1);
     }
 
     public boolean isFreezed() {
