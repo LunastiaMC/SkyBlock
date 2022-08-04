@@ -79,13 +79,14 @@ public class SessionManager {
     }
 
     public void setVanish(Session session, boolean effect) {
-        if (effect){
+        if (effect) {
             vanished.add(session);
-            session.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999999, 1,false,false,false));
-        }else{
-            vanished.remove(session);
-            session.getPlayer().getActivePotionEffects().forEach(potionEffect -> session.getPlayer().removePotionEffect(potionEffect.getType()));
+            session.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999999, 1, false, false, false));
+            return;
         }
+
+        vanished.remove(session);
+        session.getPlayer().getActivePotionEffects().forEach(potionEffect -> session.getPlayer().removePotionEffect(potionEffect.getType()));
     }
 
     public ArrayList<Session> getVanished() {
