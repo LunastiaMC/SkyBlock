@@ -55,6 +55,7 @@ public class Manager {
         CommandAPI.registerCommand(CraftCommand.class);
         CommandAPI.registerCommand(VanishCommand.class);
         CommandAPI.registerCommand(InventoryOpenCommand.class);
+        CommandAPI.registerCommand(FreezeCommand.class);
         CommandAPI.registerCommand(TrashCommand.class);
 
         // Chargement des évènements
