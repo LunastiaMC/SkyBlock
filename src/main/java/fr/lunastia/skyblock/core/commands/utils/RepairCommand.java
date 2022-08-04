@@ -6,6 +6,8 @@ import dev.jorel.commandapi.annotations.Permission;
 import fr.lunastia.skyblock.core.utils.ColorUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 
 @Command("repair")
 @Permission("skyblock.repair.command")
@@ -17,8 +19,9 @@ public class RepairCommand {
             return;
         }
 
-        if (player.getInventory().getItemInMainHand().getType().isEdible() || player.getInventory().getItemInMainHand().getType().isBlock()) {
-            ColorUtils.sendMessage(player, "Cet objet ne peut pas être réparé !", ColorUtils.PREFIX, true);
+        ItemStack itemStack = player.getInventory().getItemInMainHand();
+        if (!(itemStack.getItemMeta() instanceof Damageable) || itemStack.getType().isBlock()) {
+            ColorUtils.sendMessage(player, "Cet item ne peut pas être réparé", ColorUtils.PREFIX, true);
             return;
         }
 
