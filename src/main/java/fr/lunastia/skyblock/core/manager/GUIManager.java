@@ -50,7 +50,7 @@ public class GUIManager implements Listener {
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
-                    event.setCancelled(true);
+                    event.setCancelled(gui.clickCancelled());
                 });
     }
 

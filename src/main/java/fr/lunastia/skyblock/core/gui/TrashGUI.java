@@ -25,7 +25,7 @@ public class TrashGUI implements GUIBuilder {
 
     @Override
     public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) {
-        return;
+
     }
 
     @Override
@@ -40,5 +40,10 @@ public class TrashGUI implements GUIBuilder {
     @Override
     public void onOpen(Player player, Inventory inventory) {
         return;
+    }
+
+    @Override
+    public boolean clickCancelled() {
+        return false;
     }
 }

@@ -84,4 +84,9 @@ public class HatListGUI implements GUIBuilder {
     public void onOpen(Player player, Inventory inventory) {
         return;
     }
+
+    @Override
+    public boolean clickCancelled() {
+        return true;
+    }
 }

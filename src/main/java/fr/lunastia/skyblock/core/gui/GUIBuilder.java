@@ -19,4 +19,6 @@ public interface GUIBuilder {
     void onClose(Player player, Inventory inventory);
 
     void onOpen(Player player, Inventory inventory);
+
+    boolean clickCancelled();
 }
