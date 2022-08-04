@@ -2,6 +2,7 @@ package fr.lunastia.skyblock.core.manager;
 
 import dev.jorel.commandapi.CommandAPI;
 import fr.lunastia.skyblock.core.Core;
+import fr.lunastia.skyblock.core.commands.admin.GUICommand;
 import fr.lunastia.skyblock.core.commands.admin.RankCommand;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
@@ -74,6 +75,7 @@ public class Manager {
         CommandAPI.registerCommand(InventoryOpenCommand.class);
         CommandAPI.registerCommand(FreezeCommand.class);
         CommandAPI.registerCommand(TrashCommand.class);
+        CommandAPI.registerCommand(GUICommand.class);
 
         // Chargement des évènements
         Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());
