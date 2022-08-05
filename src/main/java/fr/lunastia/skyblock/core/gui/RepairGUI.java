@@ -1,23 +1,27 @@
 package fr.lunastia.skyblock.core.gui;
 
-import fr.lunastia.skyblock.core.utils.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.Repairable;
 
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class RepairGUI implements GUIBuilder {
 
     private final HashMap<Integer, Integer> repairTiers;
+    private HashMap<Integer, Integer> repairCost;
 
     public RepairGUI() {
         this.repairTiers = new HashMap<>();
+        this.repairCost = new HashMap<>();
         repairTiers.put(20, 20);
         repairTiers.put(22, 50);
         repairTiers.put(24, 100);
@@ -35,20 +39,28 @@ public class RepairGUI implements GUIBuilder {
 
     @Override
     public void getContents(Player player, Inventory inventory) {
-        ItemStack itemStack = player.getInventory().getItemInMainHand().clone();
-
         for (int i = 0; i < inventory.getSize(); i++) {
             Integer[] intArray = new Integer[]{20, 22, 24};
             List<Integer> intList = new ArrayList<>(Arrays.asList(intArray));
             if (intList.contains(i)) {
-                if (itemStack.getItemMeta() instanceof Repairable){
-                    ArrayList<String> lore = new ArrayList<>();
-                    lore.add("§7Réparer l'item avec §f" + repairTiers.get(i) + "% §7de durabilité supplémentaire");
-                    assert itemStack instanceof Repairable;
-                    lore.add("§7Coût: §e" + ((Repairable) itemStack.getItemMeta()).getRepairCost() + " pièces");
+                ItemStack itemStack = player.getInventory().getItemInMainHand().clone();
+                ItemMeta itemMeta = itemStack.getItemMeta();
 
-                    ItemStack newItem = ItemUtils.customizedItem(itemStack, lore);
-                    inventory.setItem(i, newItem);
+                if (itemMeta instanceof Damageable) {
+                    double P_20 = 0.20 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
+                    double P_50 = 0.50 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
+
+                    Double p20 = P_20;
+                    Double p50 = P_50;
+
+                    ((Damageable) itemMeta).setDamage(switch (i) {
+                        case 20 -> ((Damageable) itemMeta).getDamage() - p20.intValue();
+                        case 22 -> ((Damageable) itemMeta).getDamage() - p50.intValue();
+                        default -> 0;
+                    });
+
+                    itemStack.setItemMeta(itemMeta);
+                    inventory.setItem(i, itemStack);
                 }
             } else {
                 if (i >= 10 && i <= 16) inventory.setItem(i, new ItemStack(Material.GRAY_STAINED_GLASS_PANE));
