@@ -40,5 +40,8 @@ public class ItemUtils {
     public static void getPriceByMaterial(Material material) {
         System.out.println(material.toString());
         System.out.println(material.name());
+    public static int getPriceByMaterial(Material material) {
+        if (material == Material.LEATHER_HELMET || material == Material.LEATHER_CHESTPLATE || material == Material.LEATHER_LEGGINGS || material == Material.LEATHER_BOOTS) {
+            return 50;
     }
 }
