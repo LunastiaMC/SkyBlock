@@ -59,5 +59,7 @@ public class ItemUtils {
             return 100;
         } else if (material == Material.ELYTRA) {
             return 100;
+        } else if (material == Material.CROSSBOW) {
+            return 500;
     }
 }
