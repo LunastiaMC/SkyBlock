@@ -61,5 +61,7 @@ public class ItemUtils {
             return 100;
         } else if (material == Material.CROSSBOW) {
             return 500;
+        } else if (material == Material.BOW) {
+            return 100;
     }
 }
