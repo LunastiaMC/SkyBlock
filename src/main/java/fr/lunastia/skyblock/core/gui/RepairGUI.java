@@ -1,6 +1,8 @@
 package fr.lunastia.skyblock.core.gui;
 
+import fr.lunastia.skyblock.core.utils.ColorUtils;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -74,7 +76,7 @@ public class RepairGUI implements GUIBuilder {
 
     @Override
     public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) throws SQLException {
-        ItemUtils.getPriceByMaterial(itemStack.getType());
+        ColorUtils.sendMessage(player, "La réparation va vous coûter §f" + ItemUtils.getPriceByMaterial(itemStack.getType()) + "§7 points d'expérience", ColorUtils.REPAIR);
     }
 
     @Override
