@@ -1,6 +1,7 @@
 package fr.lunastia.skyblock.core.utils;
 
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -34,5 +35,10 @@ public class ItemUtils {
             }
         }
         return count;
+    }
+
+    public static void getPriceByMaterial(Material material) {
+        System.out.println(material.toString());
+        System.out.println(material.name());
     }
 }
