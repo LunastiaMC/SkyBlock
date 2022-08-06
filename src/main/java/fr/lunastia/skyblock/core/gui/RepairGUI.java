@@ -21,10 +21,16 @@ public class RepairGUI implements GUIBuilder {
 
     private final HashMap<Integer, Integer> repairTiers;
     private HashMap<Integer, Integer> repairCost;
+    private HashMap<Integer, Integer> defaultCost;
 
     public RepairGUI() {
         this.repairTiers = new HashMap<>();
         this.repairCost = new HashMap<>();
+        this.defaultCost = new HashMap<>();
+        defaultCost.put(20, 500);
+        defaultCost.put(22, 1000);
+        defaultCost.put(24, 1500);
+
         repairTiers.put(20, 20);
         repairTiers.put(22, 50);
         repairTiers.put(24, 100);
@@ -53,17 +59,24 @@ public class RepairGUI implements GUIBuilder {
                     double P_20 = 0.20 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
                     double P_50 = 0.50 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
 
-                    Double p20 = P_20;
-                    Double p50 = P_50;
-
                     ((Damageable) itemMeta).setDamage(switch (i) {
-                        case 20 -> ((Damageable) itemMeta).getDamage() - p20.intValue();
-                        case 22 -> ((Damageable) itemMeta).getDamage() - p50.intValue();
+                        case 20 -> ((Damageable) itemMeta).getDamage() - (int) P_20;
+                        case 22 -> ((Damageable) itemMeta).getDamage() - (int) P_50;
                         default -> 0;
                     });
 
                     itemStack.setItemMeta(itemMeta);
-                    inventory.setItem(i, itemStack);
+
+                    int price = defaultCost.get(i);
+                    price += ItemUtils.getPriceByMaterial(itemStack.getType());
+                    // TODO: Enchantments
+
+                    ArrayList<String> lore = new ArrayList<>();
+                    lore.add("§7Coût de réparation: §e" + defaultCost.get(i) + " pièces §7");
+                    lore.add("§7Coût supplémentaire: §e+" + ItemUtils.getPriceByMaterial(itemStack.getType()) + " pièces §7(Matériau)");
+                    lore.add(" ");
+                    lore.add("§7§l➤ §r§7Prix final: §e+" + price + " pièces");
+                    inventory.setItem(i, ItemUtils.customizedItem(itemStack, lore));
                 }
             } else {
                 if (i >= 10 && i <= 16) inventory.setItem(i, new ItemStack(Material.GRAY_STAINED_GLASS_PANE));
@@ -76,7 +89,7 @@ public class RepairGUI implements GUIBuilder {
 
     @Override
     public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) throws SQLException {
-        ColorUtils.sendMessage(player, "La réparation va vous coûter §f" + ItemUtils.getPriceByMaterial(itemStack.getType()) + "§7 points d'expérience", ColorUtils.REPAIR);
+        ColorUtils.sendMessage(player, "La réparation va vous coûter §e" + ItemUtils.getPriceByMaterial(itemStack.getType()) + " pièces", ColorUtils.REPAIR);
     }
 
     @Override
