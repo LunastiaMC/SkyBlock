@@ -1,5 +1,6 @@
 package fr.lunastia.skyblock.core.gui;
 
+import fr.lunastia.skyblock.core.utils.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -73,7 +74,7 @@ public class RepairGUI implements GUIBuilder {
 
     @Override
     public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) throws SQLException {
-
+        ItemUtils.getPriceByMaterial(itemStack.getType());
     }
 
     @Override
