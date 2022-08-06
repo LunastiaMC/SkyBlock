@@ -57,5 +57,7 @@ public class ItemUtils {
             return 100;
         } else if (material == Material.SHEARS) {
             return 100;
+        } else if (material == Material.ELYTRA) {
+            return 100;
     }
 }
