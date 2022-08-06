@@ -51,5 +51,7 @@ public class ItemUtils {
             return 100;
         } else if (material == Material.WOODEN_SWORD || material == Material.WOODEN_PICKAXE || material == Material.WOODEN_AXE || material == Material.WOODEN_HOE || material == Material.WOODEN_SHOVEL) {
             return 5;
+        } else if (material == Material.TRIDENT) {
+            return 500;
     }
 }
