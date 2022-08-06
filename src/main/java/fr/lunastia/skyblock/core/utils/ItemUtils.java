@@ -47,5 +47,7 @@ public class ItemUtils {
             return 150;
         } else if (material == Material.DIAMOND_HELMET || material == Material.DIAMOND_CHESTPLATE || material == Material.DIAMOND_LEGGINGS || material == Material.DIAMOND_BOOTS || material == Material.DIAMOND_SWORD || material == Material.DIAMOND_PICKAXE || material == Material.DIAMOND_AXE || material == Material.DIAMOND_HOE || material == Material.DIAMOND_SHOVEL) {
             return 250;
+        } else if (material == Material.GOLDEN_HELMET || material == Material.GOLDEN_CHESTPLATE || material == Material.GOLDEN_LEGGINGS || material == Material.GOLDEN_BOOTS || material == Material.GOLDEN_SWORD || material == Material.GOLDEN_PICKAXE || material == Material.GOLDEN_AXE || material == Material.GOLDEN_HOE || material == Material.GOLDEN_SHOVEL) {
+            return 100;
     }
 }
