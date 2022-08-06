@@ -55,5 +55,7 @@ public class ItemUtils {
             return 500;
         } else if (material == Material.FLINT_AND_STEEL) {
             return 100;
+        } else if (material == Material.SHEARS) {
+            return 100;
     }
 }
