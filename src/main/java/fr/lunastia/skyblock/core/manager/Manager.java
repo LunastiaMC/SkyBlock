@@ -10,6 +10,7 @@ import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.database.DatabaseManager;
 import fr.lunastia.skyblock.core.listeners.FreezeListeners;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
+import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import org.bukkit.enchantments.Enchantment;
 
 import java.util.ArrayList;
@@ -21,8 +22,11 @@ public class Manager {
     private static RankManager rankManager;
     private static DatabaseManager databaseManager;
     private static GUIManager guiManager;
+    private static RepairUtils repairUtils;
 
     public Manager() {
+        repairUtils = new RepairUtils();
+
         GAMEMODES.put("0", "Survie");
         GAMEMODES.put("1", "Créatif");
         GAMEMODES.put("2", "Aventure");
@@ -47,6 +51,10 @@ public class Manager {
 
     public static GUIManager getGUIManager() {
         return guiManager;
+    }
+
+    public static RepairUtils getRepairUtils() {
+        return repairUtils;
     }
 
     public void init() {

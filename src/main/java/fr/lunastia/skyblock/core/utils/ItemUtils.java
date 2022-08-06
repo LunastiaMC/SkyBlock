@@ -1,7 +1,6 @@
 package fr.lunastia.skyblock.core.utils;
 
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -10,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ItemUtils {
+
     public static ItemStack customizedItem(ItemStack item, String name, ArrayList<String> lines) {
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
@@ -35,41 +35,5 @@ public class ItemUtils {
             }
         }
         return count;
-    }
-
-    public static int getPriceByMaterial(Material material) {
-        if (material == Material.LEATHER_HELMET || material == Material.LEATHER_CHESTPLATE || material == Material.LEATHER_LEGGINGS || material == Material.LEATHER_BOOTS) {
-            return 50;
-        } else if (material == Material.IRON_HELMET || material == Material.IRON_CHESTPLATE || material == Material.IRON_LEGGINGS || material == Material.IRON_BOOTS || material == Material.IRON_SWORD || material == Material.IRON_PICKAXE || material == Material.IRON_AXE || material == Material.IRON_HOE || material == Material.IRON_SHOVEL) {
-            return 150;
-        } else if (material == Material.DIAMOND_HELMET || material == Material.DIAMOND_CHESTPLATE || material == Material.DIAMOND_LEGGINGS || material == Material.DIAMOND_BOOTS || material == Material.DIAMOND_SWORD || material == Material.DIAMOND_PICKAXE || material == Material.DIAMOND_AXE || material == Material.DIAMOND_HOE || material == Material.DIAMOND_SHOVEL) {
-            return 250;
-        } else if (material == Material.GOLDEN_HELMET || material == Material.GOLDEN_CHESTPLATE || material == Material.GOLDEN_LEGGINGS || material == Material.GOLDEN_BOOTS || material == Material.GOLDEN_SWORD || material == Material.GOLDEN_PICKAXE || material == Material.GOLDEN_AXE || material == Material.GOLDEN_HOE || material == Material.GOLDEN_SHOVEL) {
-            return 100;
-        } else if (material == Material.NETHERITE_HELMET || material == Material.NETHERITE_CHESTPLATE || material == Material.NETHERITE_LEGGINGS || material == Material.NETHERITE_BOOTS || material == Material.NETHERITE_SWORD || material == Material.NETHERITE_PICKAXE || material == Material.NETHERITE_AXE || material == Material.NETHERITE_HOE || material == Material.NETHERITE_SHOVEL) {
-            return 1500;
-        } else if (material == Material.WOODEN_SWORD || material == Material.WOODEN_PICKAXE || material == Material.WOODEN_AXE || material == Material.WOODEN_HOE || material == Material.WOODEN_SHOVEL) {
-            return 5;
-        } else if (material == Material.TRIDENT) {
-            return 500;
-        } else if (material == Material.FLINT_AND_STEEL) {
-            return 100;
-        } else if (material == Material.SHEARS) {
-            return 100;
-        } else if (material == Material.ELYTRA) {
-            return 100;
-        } else if (material == Material.CROSSBOW) {
-            return 500;
-        } else if (material == Material.BOW) {
-            return 100;
-        } else if (material == Material.SHIELD) {
-            return 250;
-        } else if (material == Material.FISHING_ROD) {
-            return 100;
-        } else if (material == Material.CARROT_ON_A_STICK || material == Material.WARPED_FUNGUS_ON_A_STICK) {
-            return 20;
-        } else {
-            return 0;
-        }
     }
 }

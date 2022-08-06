@@ -19,18 +19,18 @@ public class RepairCommand {
     @Default
     public static void repair(Player player) {
         if (player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
-            ColorUtils.sendMessage(player, "Vous n'avez pas d'objet dans votre main !", ColorUtils.PREFIX, true);
+            ColorUtils.sendMessage(player, "Vous n'avez pas d'objet dans votre main !", ColorUtils.REPAIR, true);
             return;
         }
 
         ItemStack itemStack = player.getInventory().getItemInMainHand();
         if (!(itemStack.getItemMeta() instanceof Damageable) || !(itemStack.getItemMeta() instanceof Repairable) || itemStack.getType().isBlock()) {
-            ColorUtils.sendMessage(player, "Cet item ne peut pas être réparé", ColorUtils.PREFIX, true);
+            ColorUtils.sendMessage(player, "Cet item ne peut pas être réparé", ColorUtils.REPAIR, true);
             return;
         }
 
         if (player.getInventory().getItemInMainHand().getDurability() == 0) {
-            ColorUtils.sendMessage(player, "Votre objet est déjà impeccable !", ColorUtils.PREFIX, true);
+            ColorUtils.sendMessage(player, "Votre objet est déjà impeccable !", ColorUtils.REPAIR, true);
             return;
         }
 
