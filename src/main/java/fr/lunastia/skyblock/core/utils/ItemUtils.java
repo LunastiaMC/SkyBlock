@@ -43,5 +43,7 @@ public class ItemUtils {
     public static int getPriceByMaterial(Material material) {
         if (material == Material.LEATHER_HELMET || material == Material.LEATHER_CHESTPLATE || material == Material.LEATHER_LEGGINGS || material == Material.LEATHER_BOOTS) {
             return 50;
+        } else if (material == Material.IRON_HELMET || material == Material.IRON_CHESTPLATE || material == Material.IRON_LEGGINGS || material == Material.IRON_BOOTS || material == Material.IRON_SWORD || material == Material.IRON_PICKAXE || material == Material.IRON_AXE || material == Material.IRON_HOE || material == Material.IRON_SHOVEL) {
+            return 150;
     }
 }
