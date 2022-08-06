@@ -46,6 +46,8 @@ public class ItemUtils {
             return 250;
         } else if (material == Material.GOLDEN_HELMET || material == Material.GOLDEN_CHESTPLATE || material == Material.GOLDEN_LEGGINGS || material == Material.GOLDEN_BOOTS || material == Material.GOLDEN_SWORD || material == Material.GOLDEN_PICKAXE || material == Material.GOLDEN_AXE || material == Material.GOLDEN_HOE || material == Material.GOLDEN_SHOVEL) {
             return 100;
+        } else if (material == Material.NETHERITE_HELMET || material == Material.NETHERITE_CHESTPLATE || material == Material.NETHERITE_LEGGINGS || material == Material.NETHERITE_BOOTS || material == Material.NETHERITE_SWORD || material == Material.NETHERITE_PICKAXE || material == Material.NETHERITE_AXE || material == Material.NETHERITE_HOE || material == Material.NETHERITE_SHOVEL) {
+            return 1500;
         } else if (material == Material.WOODEN_SWORD || material == Material.WOODEN_PICKAXE || material == Material.WOODEN_AXE || material == Material.WOODEN_HOE || material == Material.WOODEN_SHOVEL) {
             return 5;
         } else if (material == Material.TRIDENT) {
