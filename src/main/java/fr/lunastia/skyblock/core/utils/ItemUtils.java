@@ -9,10 +9,19 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class ItemUtils {
+
     public static ItemStack customizedItem(ItemStack item, String name, ArrayList<String> lines) {
         ItemMeta meta = item.getItemMeta();
         assert meta != null;
         meta.setDisplayName(ChatColor.RESET + ColorUtils.colorize(ChatColor.translateAlternateColorCodes('&', name)));
+        meta.setLore(lines);
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    public static ItemStack customizedItem(ItemStack item, ArrayList<String> lines) {
+        ItemMeta meta = item.getItemMeta();
+        assert meta != null;
         meta.setLore(lines);
         item.setItemMeta(meta);
         return item;
