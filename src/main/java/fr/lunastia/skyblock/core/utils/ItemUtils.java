@@ -67,5 +67,8 @@ public class ItemUtils {
             return 250;
         } else if (material == Material.FISHING_ROD) {
             return 100;
+        } else if (material == Material.CARROT_ON_A_STICK || material == Material.WARPED_FUNGUS_ON_A_STICK) {
+            return 20;
+        }
     }
 }
