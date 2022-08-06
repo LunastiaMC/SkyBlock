@@ -53,5 +53,7 @@ public class ItemUtils {
             return 5;
         } else if (material == Material.TRIDENT) {
             return 500;
+        } else if (material == Material.FLINT_AND_STEEL) {
+            return 100;
     }
 }
