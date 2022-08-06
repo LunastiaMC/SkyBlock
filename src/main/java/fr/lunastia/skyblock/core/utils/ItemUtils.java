@@ -65,5 +65,7 @@ public class ItemUtils {
             return 100;
         } else if (material == Material.SHIELD) {
             return 250;
+        } else if (material == Material.FISHING_ROD) {
+            return 100;
     }
 }
