@@ -94,6 +94,11 @@ public class RepairGUI implements GUIBuilder {
     @Override
     public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) {
         if (slot == 20 || slot == 22 || slot == 24) {
+            if (itemStack.getType() == Material.BARRIER) {
+                player.closeInventory();
+                return;
+            }
+
             Session session = Manager.getSessionManager().getSession(player);
             if (session.getMoney() < repairCost.get(slot)) {
                 ColorUtils.sendMessage(player,"Vous n'avez pas assez de pièces pour réparer cet objet.",ColorUtils.REPAIR,true);
@@ -117,7 +122,7 @@ public class RepairGUI implements GUIBuilder {
                     case 22 -> ((Damageable) itemMeta).getDamage() - (int) P_50;
                     default -> 0;
                 });
-                
+
                 player.closeInventory();
                 mainHand.setItemMeta(itemMeta);
                 ColorUtils.sendMessage(player, "Vous venez de payer §e" + repairCost.get(slot) + " pièces §7pour réparer votre objet.", ColorUtils.REPAIR);
