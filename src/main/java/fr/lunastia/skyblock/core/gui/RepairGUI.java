@@ -76,6 +76,7 @@ public class RepairGUI implements GUIBuilder {
                         ArrayList<String> lore = new ArrayList<>();
                         lore.add("§cL'amélioration précédente répare déjà cet item");
                         ItemUtils.setLore(replaceBy, lore);
+                        inventory.setItem(i, replaceBy);
                         return;
                     }
 
