@@ -71,7 +71,7 @@ public class RepairGUI implements GUIBuilder {
                         items.put(i, false);
                     }
 
-                    if (items.get(i - 2)) {
+                    if (items.get(i)) {
                         ItemStack replaceBy = new ItemStack(Material.BARRIER);
                         ArrayList<String> lore = new ArrayList<>();
                         lore.add("§cL'amélioration précédente répare déjà cet item");
