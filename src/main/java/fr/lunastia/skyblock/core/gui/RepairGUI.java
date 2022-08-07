@@ -54,8 +54,8 @@ public class RepairGUI implements GUIBuilder {
                 ItemMeta itemMeta = itemStack.getItemMeta();
 
                 if (itemMeta instanceof Damageable) {
-                    double P_20 = 0.20 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
-                    double P_50 = 0.50 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
+                    double P_20 = 1.2 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
+                    double P_50 = 1.5 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
 
                     ((Damageable) itemMeta).setDamage(switch (i) {
                         case 20 -> ((Damageable) itemMeta).getDamage() - (int) P_20;
