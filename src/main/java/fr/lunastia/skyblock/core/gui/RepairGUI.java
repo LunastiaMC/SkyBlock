@@ -5,9 +5,7 @@ import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.utils.ColorUtils;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
-import net.md_5.bungee.api.chat.TranslatableComponent;
 import org.bukkit.Material;
-import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
@@ -15,7 +13,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,10 +22,12 @@ public class RepairGUI implements GUIBuilder {
 
     private final HashMap<Integer, Integer> repairTiers;
     private HashMap<Integer, Integer> repairCost;
+    private HashMap<Integer, Boolean> items;
 
     public RepairGUI() {
         this.repairTiers = new HashMap<>();
         this.repairCost = new HashMap<>();
+        this.items = new HashMap<>();
 
         repairTiers.put(20, 20);
         repairTiers.put(22, 50);
@@ -65,6 +64,21 @@ public class RepairGUI implements GUIBuilder {
                     });
 
                     itemStack.setItemMeta(itemMeta);
+
+                    if (player.getInventory().getItemInMainHand().getDurability() == 0) {
+                        items.put(i, true);
+                    } else {
+                        items.put(i, false);
+                    }
+
+                    if (items.get(i - 2)) {
+                        ItemStack replaceBy = new ItemStack(Material.BARRIER);
+                        ArrayList<String> lore = new ArrayList<>();
+                        lore.add("§cL'amélioration précédente répare déjà cet item");
+                        ItemUtils.setLore(replaceBy, lore);
+                        return;
+                    }
+
                     ArrayList<String> lore = new ArrayList<>();
                     repairCost.put(i, Manager.getRepairUtils().getPriceByItem(itemStack, i));
 
@@ -101,7 +115,7 @@ public class RepairGUI implements GUIBuilder {
 
             Session session = Manager.getSessionManager().getSession(player);
             if (session.getMoney() < repairCost.get(slot)) {
-                ColorUtils.sendMessage(player,"Vous n'avez pas assez de pièces pour réparer cet objet.",ColorUtils.REPAIR,true);
+                ColorUtils.sendMessage(player, "Vous n'avez pas assez de pièces pour réparer cet objet.", ColorUtils.REPAIR, true);
                 return;
             }
 
@@ -126,7 +140,7 @@ public class RepairGUI implements GUIBuilder {
                 player.closeInventory();
                 mainHand.setItemMeta(itemMeta);
                 ColorUtils.sendMessage(player, "Vous venez de payer §e" + repairCost.get(slot) + " pièces §7pour réparer votre objet.", ColorUtils.REPAIR);
-            }else{
+            } else {
                 ColorUtils.sendMessage(player, "Vous ne pouvez pas réparer cet objet.", ColorUtils.REPAIR, true);
             }
         }
