@@ -11,10 +11,8 @@ import fr.lunastia.skyblock.core.database.DatabaseManager;
 import fr.lunastia.skyblock.core.listeners.FreezeListeners;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
-import org.bukkit.enchantments.Enchantment;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Manager {
@@ -24,6 +22,7 @@ public class Manager {
     private static DatabaseManager databaseManager;
     private static GUIManager guiManager;
     private static RepairUtils repairUtils;
+    private static WarpManager warpManager;
     private static HeadDatabaseAPI headDatabaseAPI;
 
     public Manager() {
@@ -59,6 +58,9 @@ public class Manager {
         return repairUtils;
     }
 
+    public static WarpManager getWarpManager() {
+        return warpManager;
+    }
 
     public static HeadDatabaseAPI getHeadDatabaseAPI() {
         return headDatabaseAPI;
@@ -69,6 +71,7 @@ public class Manager {
         databaseManager = new DatabaseManager();
         rankManager = new RankManager();
         guiManager = new GUIManager();
+        warpManager = new WarpManager();
         HeadDatabaseAPI headDatabase = new HeadDatabaseAPI();
 
         // Suppression des commandes de base
