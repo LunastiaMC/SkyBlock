@@ -24,6 +24,7 @@ public class Core extends JavaPlugin {
         this.saveResource("config.yml", false);
         this.saveResource("ranks.yml", true);
         this.saveResource("hats.yml", true);
+        this.saveResource("warps.yml", false);
 
         final Manager manager = new Manager();
         manager.init();
