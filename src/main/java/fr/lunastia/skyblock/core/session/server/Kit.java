@@ -63,4 +63,8 @@ public class Kit {
         this.inventory = inventory;
         Manager.getKitManager().updateKit(this);
     }
+
+    public String getPermission() {
+        return permission;
+    }
 }
