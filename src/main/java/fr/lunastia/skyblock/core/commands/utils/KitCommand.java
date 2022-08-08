@@ -39,6 +39,24 @@ public class KitCommand {
             e.printStackTrace();
         }
     }
+    @Subcommand("edit")
+    @Permission("skyblock.kit.update")
+    public static void permission(Player player, @AStringArgument String identifier, @AMultiLiteralArgument({"displayName", "headId", "permission"}) String type, @AStringArgument String value) throws SQLException {
+        if (!Manager.getKitManager().exist(identifier)) {
+            ColorUtils.sendMessage(player, "Cet équipement n'existe pas !", ColorUtils.PREFIX, true);
+            return;
+        }
+
+        Kit kit = Manager.getKitManager().getKit(identifier);
+        switch (type) {
+            case "displayName" -> kit.setDisplayName(value);
+            case "headId" -> kit.setHeadId(Integer.parseInt(value));
+            case "permission" -> kit.setPermission(value);
+        }
+
+        ColorUtils.sendMessage(player, "L'équipement a bien été modifié !", ColorUtils.PREFIX);
+    }
+
     @Subcommand("inventory")
     @Permission("skyblock.kit.inventory")
     public static void inventory(Player player, @AStringArgument String identifier) throws SQLException {
