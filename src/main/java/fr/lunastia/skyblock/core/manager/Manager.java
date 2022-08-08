@@ -19,6 +19,7 @@ public class Manager {
     private static DatabaseManager databaseManager;
     private static GUIManager guiManager;
     private static RepairUtils repairUtils;
+    private static KitManager kitManager;
 
     public Manager() {
         repairUtils = new RepairUtils();
@@ -58,6 +59,7 @@ public class Manager {
         databaseManager = new DatabaseManager();
         rankManager = new RankManager();
         guiManager = new GUIManager();
+        kitManager = new KitManager();
 
         // Suppression des commandes de base
         CommandAPI.unregister("clear", true);
