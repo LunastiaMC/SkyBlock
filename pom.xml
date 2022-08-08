@@ -55,6 +55,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.arcaniax</groupId>
+            <artifactId>HeadDatabase-API</artifactId>
+            <version>1.3.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>dev.jorel</groupId>
             <artifactId>commandapi-annotations</artifactId>
             <version>8.4.1</version>
@@ -73,5 +80,6 @@
             <artifactId>nametagedit</artifactId>
             <version>4.5.8</version>
         </dependency>
+
     </dependencies>
 </project>
