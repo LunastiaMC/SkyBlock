@@ -18,13 +18,14 @@ public class KitManager {
         // TODO: Charger les kits qui sont déjà dans la base de données
     }
 
-    public void addKit(String identifier, Kit kit) throws SQLException {
+    public void addKit(Kit kit) throws SQLException {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
 
-        final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO kits (identifier, displayName, inventory64) VALUES (?,?,?)");
+        final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO kits (identifier, displayName, headId, inventory64) VALUES (?,?,?,?)");
         statementCreation.setString(1, kit.identifier());
         statementCreation.setString(2, kit.displayName());
-        statementCreation.setString(3, BukkitSerialization.toBase64(kit.inventory()));
+        statementCreation.setInt(3, kit.headId());
+        statementCreation.setString(4, BukkitSerialization.toBase64(kit.inventory()));
         statementCreation.execute();
 
         this.kits.put(kit.identifier(), kit);
