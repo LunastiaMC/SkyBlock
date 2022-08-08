@@ -39,4 +39,16 @@ public class KitCommand {
             e.printStackTrace();
         }
     }
+    @Subcommand("inventory")
+    @Permission("skyblock.kit.inventory")
+    public static void inventory(Player player, @AStringArgument String identifier) throws SQLException {
+        if (!Manager.getKitManager().exist(identifier)) {
+            ColorUtils.sendMessage(player, "Cet équipement n'existe pas !", ColorUtils.PREFIX, true);
+            return;
+        }
+
+        Kit kit = Manager.getKitManager().getKit(identifier);
+        kit.setInventory(player.getInventory());
+        ColorUtils.sendMessage(player, "L'équipement a bien été modifié !", ColorUtils.PREFIX);
+    }
 }
