@@ -35,37 +35,53 @@ public class KitCommand {
         final Kit kit = new Kit(identifier, displayName, headId, "kit.default", player.getInventory());
         try {
             Manager.getKitManager().addKit(kit);
-            ColorUtils.sendMessage(player, "L'équipement a bien été ajouté !", ColorUtils.PREFIX);
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+        ColorUtils.sendMessage(player, "L'équipement a bien été ajouté !", ColorUtils.PREFIX);
     }
 
     @Subcommand("edit")
     @Permission("skyblock.kit.update")
-    public static void permission(Player player, @AStringArgument String identifier, @AMultiLiteralArgument({"displayName", "headId", "permission"}) String type, @AStringArgument String value) {
+    public static void permission(Player player, @AStringArgument String
+            identifier, @AMultiLiteralArgument({"displayName", "headId", "permission"}) String type, @AStringArgument String
+                                          value) {
         if (!Manager.getKitManager().exist(identifier)) {
             ColorUtils.sendMessage(player, "Cet équipement n'existe pas !", ColorUtils.PREFIX, true);
             return;
         }
 
         Kit kit = Manager.getKitManager().getKit(identifier);
-        try {
-            switch (type) {
-                case "displayName" -> kit.setDisplayName(value);
-                case "headId" -> kit.setHeadId(Integer.parseInt(value));
-                case "permission" -> kit.setPermission(value);
+        switch (type) {
+            case "displayName" -> {
+                try {
+                    kit.setDisplayName(value);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
-            ColorUtils.sendMessage(player, "L'équipement a bien été modifié !", ColorUtils.PREFIX);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            case "headId" -> {
+                try {
+                    kit.setHeadId(Integer.parseInt(value));
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            case "permission" -> {
+                try {
+                    kit.setPermission(value);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
+        ColorUtils.sendMessage(player, "L'équipement a bien été modifié !", ColorUtils.PREFIX);
 
     }
 
     @Subcommand("inventory")
     @Permission("skyblock.kit.inventory")
-    public static void inventory(Player player, @AStringArgument String identifier) throws SQLException {
+    public static void inventory(Player player, @AStringArgument String identifier) {
         if (!Manager.getKitManager().exist(identifier)) {
             ColorUtils.sendMessage(player, "Cet équipement n'existe pas !", ColorUtils.PREFIX, true);
             return;
@@ -74,9 +90,9 @@ public class KitCommand {
         Kit kit = Manager.getKitManager().getKit(identifier);
         try {
             kit.setInventory(player.getInventory());
-            ColorUtils.sendMessage(player, "L'équipement a bien été modifié !", ColorUtils.PREFIX);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        ColorUtils.sendMessage(player, "L'équipement a bien été modifié !", ColorUtils.PREFIX);
     }
 }
