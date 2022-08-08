@@ -15,6 +15,7 @@ public class KitManager {
 
     public KitManager() {
         kits = new HashMap<>();
+        // TODO: Charger les kits qui sont déjà dans la base de données
     }
 
     public void addKit(String identifier, Kit kit) throws SQLException {
@@ -27,5 +28,31 @@ public class KitManager {
         statementCreation.execute();
 
         this.kits.put(kit.identifier(), kit);
+    }
+
+    public void removeKit(String identifier) throws SQLException {
+        Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
+
+        final PreparedStatement statementCreation = connection.prepareStatement("DELETE FROM kits WHERE identifier = ?");
+        statementCreation.setString(1, identifier);
+        statementCreation.execute();
+
+        this.kits.remove(identifier);
+    }
+
+    public Kit getKit(String identifier) {
+        return this.kits.get(identifier);
+    }
+
+    public HashMap<String, Kit> getKits() {
+        return this.kits;
+    }
+
+    public boolean exist(String identifier) {
+        return this.kits.containsKey(identifier);
+    }
+
+    public boolean exist(Kit kit) {
+        return this.kits.containsKey(kit.identifier());
     }
 }
