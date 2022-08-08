@@ -28,6 +28,7 @@ public class KitManager {
                     resultSet.getString("identifier"),
                     resultSet.getString("identifier"),
                     resultSet.getInt("headId"),
+                    resultSet.getString("permission"),
                     BukkitSerialization.fromBase64(resultSet.getString("items"))
             ));
         }
@@ -38,13 +39,14 @@ public class KitManager {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
 
         final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO kits (identifier, displayName, headId, inventory64) VALUES (?,?,?,?)");
-        statementCreation.setString(1, kit.identifier());
-        statementCreation.setString(2, kit.displayName());
-        statementCreation.setInt(3, kit.headId());
-        statementCreation.setString(4, BukkitSerialization.toBase64(kit.inventory()));
+        statementCreation.setString(1, kit.getIdentifier());
+        statementCreation.setString(2, kit.getDisplayName());
+        statementCreation.setInt(3, kit.getHeadId());
+        statementCreation.setString(4, kit.getPermission());
+        statementCreation.setString(4, BukkitSerialization.toBase64(kit.getInventory()));
         statementCreation.execute();
 
-        this.kits.put(kit.identifier(), kit);
+        this.kits.put(kit.getIdentifier(), kit);
     }
 
     public void removeKit(String identifier) throws SQLException {
@@ -70,6 +72,9 @@ public class KitManager {
     }
 
     public boolean exist(Kit kit) {
-        return this.kits.containsKey(kit.identifier());
+        return this.kits.containsKey(kit.getIdentifier());
+    }
+
+        statementCreation.execute();
     }
 }
