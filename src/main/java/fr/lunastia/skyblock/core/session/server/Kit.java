@@ -67,4 +67,9 @@ public class Kit {
     public String getPermission() {
         return permission;
     }
+
+    public void setPermission(String permission) throws SQLException {
+        this.permission = permission;
+        Manager.getKitManager().updateKit(this);
+    }
 }
