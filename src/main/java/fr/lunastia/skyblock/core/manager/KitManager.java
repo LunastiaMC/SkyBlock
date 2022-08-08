@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class KitManager {
     private HashMap<String, Kit> kits;
 
-    public KitManager() {
+    public KitManager() throws SQLException, IOException {
         kits = new HashMap<>();
         // TODO: Charger les kits qui sont déjà dans la base de données
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
