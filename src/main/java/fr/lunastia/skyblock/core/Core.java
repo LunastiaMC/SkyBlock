@@ -4,6 +4,7 @@ import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class Core extends JavaPlugin {
@@ -26,7 +27,11 @@ public class Core extends JavaPlugin {
         this.saveResource("hats.yml", true);
 
         final Manager manager = new Manager();
-        manager.init();
+        try {
+            manager.init();
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
 
         // On charge les sessions des joueurs, si le plugin à été reload
         this.getServer().getOnlinePlayers().forEach(player -> {
