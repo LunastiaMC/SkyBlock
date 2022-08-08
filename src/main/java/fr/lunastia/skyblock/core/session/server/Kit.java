@@ -46,4 +46,8 @@ public class Kit {
         Manager.getKitManager().updateKit(this);
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
 }
