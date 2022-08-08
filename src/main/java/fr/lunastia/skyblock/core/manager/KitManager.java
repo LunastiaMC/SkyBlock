@@ -75,6 +75,15 @@ public class KitManager {
         return this.kits.containsKey(kit.getIdentifier());
     }
 
+    public void updateKit(Kit kit) throws SQLException {
+        Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
+
+        final PreparedStatement statementCreation = connection.prepareStatement("UPDATE kits SET displayName = ?, headId = ?, permission = ?, inventory64 = ? WHERE identifier = ?");
+        statementCreation.setString(1, kit.getDisplayName());
+        statementCreation.setInt(2, kit.getHeadId());
+        statementCreation.setString(3, kit.getPermission());
+        statementCreation.setString(4, BukkitSerialization.toBase64(kit.getInventory()));
+        statementCreation.setString(5, kit.getIdentifier());
         statementCreation.execute();
     }
 }
