@@ -59,4 +59,8 @@ public class Kit {
         return inventory;
     }
 
+    public void setInventory(Inventory inventory) throws SQLException {
+        this.inventory = inventory;
+        Manager.getKitManager().updateKit(this);
+    }
 }
