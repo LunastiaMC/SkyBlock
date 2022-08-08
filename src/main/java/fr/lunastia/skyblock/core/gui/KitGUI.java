@@ -15,7 +15,7 @@ public class KitGUI implements GUIBuilder{
 
     @Override
     public int getSize() {
-        return 0;
+        return 9;
     }
 
     @Override
