@@ -40,4 +40,10 @@ public class Kit {
     public int getHeadId() {
         return headId;
     }
+
+    public void setHeadId(int headId) throws SQLException {
+        this.headId = headId;
+        Manager.getKitManager().updateKit(this);
+    }
+
 }
