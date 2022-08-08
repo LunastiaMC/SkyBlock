@@ -2,15 +2,16 @@ package fr.lunastia.skyblock.core.manager;
 
 import dev.jorel.commandapi.CommandAPI;
 import fr.lunastia.skyblock.core.Core;
-import fr.lunastia.skyblock.core.commands.admin.*;
-import fr.lunastia.skyblock.core.commands.economy.*;
+import fr.lunastia.skyblock.core.commands.admin.GUICommand;
+import fr.lunastia.skyblock.core.commands.admin.RankCommand;
+import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
+import fr.lunastia.skyblock.core.commands.economy.PayCommand;
 import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.database.DatabaseManager;
 import fr.lunastia.skyblock.core.listeners.FreezeListeners;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
-import org.bukkit.enchantments.Enchantment;
 
 import java.util.HashMap;
 
@@ -56,8 +57,13 @@ public class Manager {
     public static RepairUtils getRepairUtils() {
         return repairUtils;
     }
+
     public static HeadDatabaseAPI getHeadDatabaseAPI() {
         return headDatabaseAPI;
+    }
+
+    public static KitManager getKitManager() {
+        return kitManager;
     }
 
     public void init() {
