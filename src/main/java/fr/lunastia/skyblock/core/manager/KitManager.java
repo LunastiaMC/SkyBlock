@@ -1,12 +1,13 @@
 package fr.lunastia.skyblock.core.manager;
 
 
-import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.session.server.Kit;
 import fr.lunastia.skyblock.core.utils.BukkitSerialization;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
@@ -16,6 +17,7 @@ public class KitManager {
     public KitManager() throws SQLException, IOException {
         kits = new HashMap<>();
         // TODO: Charger les kits qui sont déjà dans la base de données
+
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
         final PreparedStatement statementFinder = connection.prepareStatement("SELECT * FROM kits");
         final ResultSet resultSet = statementFinder.executeQuery();
