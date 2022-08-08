@@ -50,4 +50,8 @@ public class Kit {
         return displayName;
     }
 
+    public void setDisplayName(String displayName) throws SQLException {
+        this.displayName = displayName;
+        Manager.getKitManager().updateKit(this);
+    }
 }
