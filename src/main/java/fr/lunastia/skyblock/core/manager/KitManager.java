@@ -16,6 +16,20 @@ public class KitManager {
     public KitManager() {
         kits = new HashMap<>();
         // TODO: Charger les kits qui sont déjà dans la base de données
+        Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
+        final PreparedStatement statementFinder = connection.prepareStatement("SELECT * FROM kits");
+        final ResultSet resultSet = statementFinder.executeQuery();
+
+        while (resultSet.next()) {
+            System.out.println("Kit " + resultSet.getString("identifier") + " chargé");
+            kits.put(resultSet.getString("identifier"), new Kit(
+                    resultSet.getString("identifier"),
+                    resultSet.getString("identifier"),
+                    resultSet.getInt("headId"),
+                    BukkitSerialization.fromBase64(resultSet.getString("items"))
+            ));
+        }
+
     }
 
     public void addKit(Kit kit) throws SQLException {
