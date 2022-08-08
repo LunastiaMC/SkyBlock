@@ -28,6 +28,11 @@ public class Kit {
     //       Avant de donner le kit vérifier si il a de la place, si il en à pas on drop a terre
     //       En lui notifiant qu'on a jeter a terre ces objets
 
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
     public ItemStack getHead() {
         return Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(headId));
     }
