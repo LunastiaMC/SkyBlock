@@ -10,6 +10,8 @@ import dev.jorel.commandapi.annotations.arguments.AIntegerArgument;
 import dev.jorel.commandapi.annotations.arguments.AStringArgument;
 import fr.lunastia.skyblock.core.gui.KitGUI;
 import fr.lunastia.skyblock.core.manager.Manager;
+import fr.lunastia.skyblock.core.session.server.Kit;
+import fr.lunastia.skyblock.core.utils.ColorUtils;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
@@ -24,5 +26,17 @@ public class KitCommand {
     @Subcommand("add")
     @Permission("skyblock.kit.add")
     public static void add(Player player, @AStringArgument String identifier, @AIntegerArgument Integer headId, @AGreedyStringArgument String displayName) {
+        if(Manager.getKitManager().exist(identifier)) {
+            ColorUtils.sendMessage(player, "Cet équipement existe déjà !", ColorUtils.PREFIX, true);
+            return;
+        }
+
+        final Kit kit = new Kit(identifier, displayName, headId, player.getInventory());
+        try {
+            Manager.getKitManager().addKit(kit);
+            ColorUtils.sendMessage(player, "L'équipement a bien été ajouté !", ColorUtils.PREFIX);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
