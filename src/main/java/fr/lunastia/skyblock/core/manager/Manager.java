@@ -13,6 +13,8 @@ import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 public class Manager {
@@ -66,13 +68,13 @@ public class Manager {
         return kitManager;
     }
 
-    public void init() {
+    public void init() throws SQLException, IOException {
         sessionManager = new SessionManager();
         databaseManager = new DatabaseManager();
         rankManager = new RankManager();
         guiManager = new GUIManager();
         kitManager = new KitManager();
-        HeadDatabaseAPI headDatabase = new HeadDatabaseAPI();
+        headDatabaseAPI = new HeadDatabaseAPI();
 
         // Suppression des commandes de base
         CommandAPI.unregister("clear", true);
