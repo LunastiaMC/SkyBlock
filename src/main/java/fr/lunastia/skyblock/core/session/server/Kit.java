@@ -54,4 +54,9 @@ public class Kit {
         this.displayName = displayName;
         Manager.getKitManager().updateKit(this);
     }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
 }
