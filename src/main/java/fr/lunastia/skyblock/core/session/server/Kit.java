@@ -4,7 +4,23 @@ import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public record Kit(String identifier, String displayName, int headId, Inventory inventory) {
+import java.sql.SQLException;
+
+public class Kit {
+
+    private final String identifier;
+    private String displayName;
+    private int headId;
+    private String permission;
+    private Inventory inventory;
+
+    public Kit(String identifier, String displayName, int headId, String permission, Inventory inventory) {
+        this.identifier = identifier;
+        this.displayName = displayName;
+        this.headId = headId;
+        this.permission = permission;
+        this.inventory = inventory;
+    }
     // TODO: Faire une fonction pour distribuer les objets de inventory
     //       Si il a la main de gauche vide par exemple alors sa lui applique l'objet de deuxième main de inventory
     //       Sinon, sa lui met dans son inventaire
