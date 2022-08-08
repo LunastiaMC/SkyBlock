@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class KitGUI implements GUIBuilder{
     @Override
     public String getName() {
-        return "Kit List";
+        return "Liste des kits";
     }
 
     @Override
