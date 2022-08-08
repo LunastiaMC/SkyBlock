@@ -36,4 +36,8 @@ public class Kit {
     public ItemStack getHead() {
         return Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(headId));
     }
+
+    public int getHeadId() {
+        return headId;
+    }
 }
