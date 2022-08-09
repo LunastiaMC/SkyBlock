@@ -32,7 +32,7 @@ public class SessionManager {
             statementCreation.setInt(2, Manager.getRankManager().getDefaultRank().id());
             statementCreation.setLong(3, 0);
             statementCreation.setString(4, "");
-            statementCreation.setString(5, "");
+            statementCreation.setNull(5, Types.NULL);
             statementCreation.setBoolean(6, false);
             statementCreation.setBoolean(7, false);
             statementCreation.execute();
@@ -53,7 +53,7 @@ public class SessionManager {
             statement.setLong(2, session.getMoney());
             statement.setString(3, session.getPermissions());
             if (session.getIslandUUID() != null) {
-                statement.setString(4, session.getIslandUUID().toString());
+                statement.setString(4, session.getIslandUUID());
             } else {
                 statement.setNull(4, Types.NULL);
             }

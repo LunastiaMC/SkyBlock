@@ -161,6 +161,6 @@ public class Session {
     }
 
     public String getIslandUUID() {
-        return island.getUuid().toString();
+        return island.getUuid();
     }
 }

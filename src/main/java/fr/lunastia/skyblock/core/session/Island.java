@@ -4,13 +4,13 @@ import java.util.UUID;
 
 public class Island {
 
-    private final UUID uuid;
+    private final String uuid;
 
-    public Island(UUID uuid) {
+    public Island(String uuid) {
         this.uuid = uuid;
     }
 
-    public UUID getUuid() {
+    public String getUuid() {
         return uuid;
     }
 }
