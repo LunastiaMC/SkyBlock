@@ -163,4 +163,8 @@ public class Session {
     public Island getIsland() {
         return island;
     }
+
+    public String getIslandUUID() {
+        return island.getUuid().toString();
+    }
 }
