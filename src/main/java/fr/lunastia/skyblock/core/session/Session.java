@@ -30,9 +30,12 @@ public class Session {
         setFreezed(rs.getBoolean("freezed"), rs.getBoolean("freezed"));
         setVanished(rs.getBoolean("vanished"), rs.getBoolean("vanished"));
 
+        if (rs.getString("island") != null) {
+            Manager.getIslandManager().loadIsland(rs.getString("island"));
+        }
     }
 
-    public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished) {
+    public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished, String islandUUID) throws SQLException {
         this.player = player;
         this.rank = Manager.getRankManager().getRank(rank);
         this.money = money;
@@ -42,6 +45,9 @@ public class Session {
         setFreezed(isFreezed, isFreezed);
         setVanished(isVanished, isVanished);
 
+        if (islandUUID != null) {
+            Manager.getIslandManager().loadIsland(islandUUID);
+        }
     }
 
     public Player getPlayer() {
