@@ -30,13 +30,14 @@ public class SessionManager {
             final Session session = new Session(player, resultSet);
             this.sessions.put(player.getUniqueId().toString(), session);
         } else {
-            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money, permissions, freezed, vanished) VALUES (?,?,?,?,?,?)");
+            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money, permissions, island, freezed, vanished) VALUES (?,?,?,?,?,?,?)");
             statementCreation.setString(1, player.getUniqueId().toString());
             statementCreation.setInt(2, Manager.getRankManager().getDefaultRank().id());
             statementCreation.setLong(3, 0);
             statementCreation.setString(4, "");
-            statementCreation.setBoolean(5, false);
+            statementCreation.setString(5, "");
             statementCreation.setBoolean(6, false);
+            statementCreation.setBoolean(7, false);
             statementCreation.execute();
 
             final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{}, false, false);
@@ -50,13 +51,14 @@ public class SessionManager {
         Session session = this.sessions.get(player.getUniqueId().toString());
 
         try {
-            final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ?, money = ?, permissions = ?, freezed = ?, vanished = ? WHERE uuid = ?");
+            final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ?, money = ?, permissions = ?, island = ?, freezed = ?, vanished = ? WHERE uuid = ?");
             statement.setInt(1, session.getRank().id());
             statement.setLong(2, session.getMoney());
             statement.setString(3, session.getPermissions());
-            statement.setBoolean(4, session.isFreezed());
-            statement.setBoolean(5, session.isVanished());
-            statement.setString(6, player.getUniqueId().toString());
+            statement.setString(4, session.getIsland());
+            statement.setBoolean(5, session.isFreezed());
+            statement.setBoolean(6, session.isVanished());
+            statement.setString(7, player.getUniqueId().toString());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
