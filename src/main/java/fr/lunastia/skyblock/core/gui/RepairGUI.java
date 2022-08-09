@@ -1,13 +1,12 @@
 package fr.lunastia.skyblock.core.gui;
 
+import com.google.common.cache.AbstractCache;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.utils.ColorUtils;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
-import net.md_5.bungee.api.chat.TranslatableComponent;
 import org.bukkit.Material;
-import org.bukkit.enchantments.EnchantmentWrapper;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.Inventory;
@@ -15,25 +14,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 public class RepairGUI implements GUIBuilder {
 
-    private final HashMap<Integer, Integer> repairTiers;
     private HashMap<Integer, Integer> repairCost;
-
-    public RepairGUI() {
-        this.repairTiers = new HashMap<>();
-        this.repairCost = new HashMap<>();
-
-        repairTiers.put(20, 20);
-        repairTiers.put(22, 50);
-        repairTiers.put(24, 100);
-    }
 
     @Override
     public String getName() {
@@ -47,24 +33,16 @@ public class RepairGUI implements GUIBuilder {
 
     @Override
     public void getContents(Player player, Inventory inventory) {
+        repairCost = new HashMap<>();
+
         for (int i = 0; i < inventory.getSize(); i++) {
-            Integer[] intArray = new Integer[]{20, 22, 24};
-            List<Integer> intList = new ArrayList<>(Arrays.asList(intArray));
-            if (intList.contains(i)) {
+            if (i == 24) {
                 ItemStack itemStack = player.getInventory().getItemInMainHand().clone();
                 ItemMeta itemMeta = itemStack.getItemMeta();
 
                 if (itemMeta instanceof Damageable) {
-                    double P_20 = 0.20 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
-                    double P_50 = 0.50 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
-
-                    ((Damageable) itemMeta).setDamage(switch (i) {
-                        case 20 -> ((Damageable) itemMeta).getDamage() - (int) P_20;
-                        case 22 -> ((Damageable) itemMeta).getDamage() - (int) P_50;
-                        default -> 0;
-                    });
-
                     itemStack.setItemMeta(itemMeta);
+
                     ArrayList<String> lore = new ArrayList<>();
                     repairCost.put(i, Manager.getRepairUtils().getPriceByItem(itemStack, i));
 
@@ -72,7 +50,7 @@ public class RepairGUI implements GUIBuilder {
                         lore.add(" ");
                     }
 
-                    lore.add("§7Coût de réparation: §e" + RepairUtils.defaultCost.get(i) + " pièces §7(" + repairTiers.get(i) + "%)");
+                    lore.add("§7Coût de réparation: §e" + RepairUtils.defaultCost);
                     lore.add("§7Coût additionnels:");
                     lore.add("§7- Matériau: §e+" + Manager.getRepairUtils().getPriceByMaterial(itemStack.getType()) + " pièces");
                     Manager.getRepairUtils().getPriceByEnchantment(itemStack).forEach((enchantment, priceByEnchantment) -> {
@@ -94,9 +72,14 @@ public class RepairGUI implements GUIBuilder {
     @Override
     public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) {
         if (slot == 20 || slot == 22 || slot == 24) {
+            if (itemStack.getType() == Material.BARRIER) {
+                player.closeInventory();
+                return;
+            }
+
             Session session = Manager.getSessionManager().getSession(player);
             if (session.getMoney() < repairCost.get(slot)) {
-                ColorUtils.sendMessage(player,"Vous n'avez pas assez de pièces pour réparer cet objet.",ColorUtils.REPAIR,true);
+                ColorUtils.sendMessage(player, "Vous n'avez pas assez de pièces pour réparer cet objet.", ColorUtils.REPAIR, true);
                 return;
             }
 
@@ -117,11 +100,11 @@ public class RepairGUI implements GUIBuilder {
                     case 22 -> ((Damageable) itemMeta).getDamage() - (int) P_50;
                     default -> 0;
                 });
-                
+
                 player.closeInventory();
                 mainHand.setItemMeta(itemMeta);
                 ColorUtils.sendMessage(player, "Vous venez de payer §e" + repairCost.get(slot) + " pièces §7pour réparer votre objet.", ColorUtils.REPAIR);
-            }else{
+            } else {
                 ColorUtils.sendMessage(player, "Vous ne pouvez pas réparer cet objet.", ColorUtils.REPAIR, true);
             }
         }

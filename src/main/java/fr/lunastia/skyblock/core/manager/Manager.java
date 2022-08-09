@@ -12,11 +12,9 @@ import fr.lunastia.skyblock.core.listeners.FreezeListeners;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
-
 import java.util.HashMap;
 
 public class Manager {
-    public static final HashMap<String, String> GAMEMODES = new HashMap<>();
     private static SessionManager sessionManager;
     private static RankManager rankManager;
     private static DatabaseManager databaseManager;
@@ -26,15 +24,6 @@ public class Manager {
 
     public Manager() {
         repairUtils = new RepairUtils();
-
-        GAMEMODES.put("0", "Survie");
-        GAMEMODES.put("1", "Créatif");
-        GAMEMODES.put("2", "Aventure");
-        GAMEMODES.put("3", "Spectateur");
-        GAMEMODES.put("survival", "Survie");
-        GAMEMODES.put("creative", "Créatif");
-        GAMEMODES.put("adventure", "Aventure");
-        GAMEMODES.put("spectator", "Spectateur");
     }
 
     public static SessionManager getSessionManager() {
@@ -56,6 +45,7 @@ public class Manager {
     public static RepairUtils getRepairUtils() {
         return repairUtils;
     }
+
     public static HeadDatabaseAPI getHeadDatabaseAPI() {
         return headDatabase;
     }
