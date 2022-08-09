@@ -12,9 +12,7 @@ import fr.lunastia.skyblock.core.listeners.FreezeListeners;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
-import org.bukkit.enchantments.Enchantment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Manager {
