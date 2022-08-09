@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 @Permission("skyblock.logs.command")
 public class LogsCommand {
     @Default
-    public void logs(Player player, @AStringArgument String target) {
+    public static void logs(Player player, @AStringArgument String target) {
 
     }
 }
