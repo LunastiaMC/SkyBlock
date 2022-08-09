@@ -18,6 +18,7 @@ public class Session {
     private Long money;
     private boolean isVanished;
     private boolean isFreezed;
+    private Island island;
 
     public Session(Player player, ResultSet rs) throws SQLException {
         this.player = player;
@@ -128,7 +129,8 @@ public class Session {
         }
 
         isFreezed = false;
-        if (messages) ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", ColorUtils.PREFIX);
+        if (messages)
+            ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", ColorUtils.PREFIX);
         this.getPlayer().setFreezeTicks(1);
     }
 
@@ -147,5 +149,18 @@ public class Session {
         isVanished = false;
         if (messages) ColorUtils.sendMessage(player, "Vous venez de vous révéler !", ColorUtils.PREFIX);
         this.getPlayer().getActivePotionEffects().forEach(potionEffect -> this.getPlayer().removePotionEffect(potionEffect.getType()));
+    }
+
+    //  /$$$$$$  /$$$$$$  /$$        /$$$$$$  /$$   /$$ /$$$$$$$
+    // |_  $$_/ /$$__  $$| $$       /$$__  $$| $$$ | $$| $$__  $$
+    //   | $$  | $$  \__/| $$      | $$  \ $$| $$$$| $$| $$  \ $$
+    //   | $$  |  $$$$$$ | $$      | $$$$$$$$| $$ $$ $$| $$  | $$
+    //   | $$   \____  $$| $$      | $$__  $$| $$  $$$$| $$  | $$
+    //   | $$   /$$  \ $$| $$      | $$  | $$| $$\  $$$| $$  | $$
+    //  /$$$$$$|  $$$$$$/| $$$$$$$$| $$  | $$| $$ \  $$| $$$$$$$/
+    // |______/ \______/ |________/|__/  |__/|__/  \__/|_______/
+
+    public Island getIsland() {
+        return island;
     }
 }
