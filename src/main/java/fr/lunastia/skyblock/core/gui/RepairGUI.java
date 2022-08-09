@@ -1,5 +1,6 @@
 package fr.lunastia.skyblock.core.gui;
 
+import com.google.common.cache.AbstractCache;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.utils.ColorUtils;
@@ -14,25 +15,11 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 public class RepairGUI implements GUIBuilder {
 
-    private final HashMap<Integer, Integer> repairTiers;
     private HashMap<Integer, Integer> repairCost;
-    private HashMap<Integer, Boolean> items;
-
-    public RepairGUI() {
-        this.repairTiers = new HashMap<>();
-        this.repairCost = new HashMap<>();
-        this.items = new HashMap<>();
-
-        repairTiers.put(20, 20);
-        repairTiers.put(22, 50);
-        repairTiers.put(24, 100);
-    }
 
     @Override
     public String getName() {
@@ -46,39 +33,15 @@ public class RepairGUI implements GUIBuilder {
 
     @Override
     public void getContents(Player player, Inventory inventory) {
+        repairCost = new HashMap<>();
+
         for (int i = 0; i < inventory.getSize(); i++) {
-            Integer[] intArray = new Integer[]{20, 22, 24};
-            List<Integer> intList = new ArrayList<>(Arrays.asList(intArray));
-            if (intList.contains(i)) {
+            if (i == 24) {
                 ItemStack itemStack = player.getInventory().getItemInMainHand().clone();
                 ItemMeta itemMeta = itemStack.getItemMeta();
 
                 if (itemMeta instanceof Damageable) {
-                    double P_20 = 1.2 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
-                    double P_50 = 1.5 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
-
-                    ((Damageable) itemMeta).setDamage(switch (i) {
-                        case 20 -> ((Damageable) itemMeta).getDamage() - (int) P_20;
-                        case 22 -> ((Damageable) itemMeta).getDamage() - (int) P_50;
-                        default -> 0;
-                    });
-
                     itemStack.setItemMeta(itemMeta);
-
-                    if (player.getInventory().getItemInMainHand().getDurability() == 0) {
-                        items.put(i, true);
-                    } else {
-                        items.put(i, false);
-                    }
-
-                    if (items.get(i)) {
-                        ItemStack replaceBy = new ItemStack(Material.BARRIER);
-                        ArrayList<String> lore = new ArrayList<>();
-                        lore.add("§cL'amélioration précédente répare déjà cet item");
-                        ItemUtils.setLore(replaceBy, lore);
-                        inventory.setItem(i, replaceBy);
-                        return;
-                    }
 
                     ArrayList<String> lore = new ArrayList<>();
                     repairCost.put(i, Manager.getRepairUtils().getPriceByItem(itemStack, i));
@@ -87,7 +50,7 @@ public class RepairGUI implements GUIBuilder {
                         lore.add(" ");
                     }
 
-                    lore.add("§7Coût de réparation: §e" + RepairUtils.defaultCost.get(i) + " pièces §7(" + repairTiers.get(i) + "%)");
+                    lore.add("§7Coût de réparation: §e" + RepairUtils.defaultCost);
                     lore.add("§7Coût additionnels:");
                     lore.add("§7- Matériau: §e+" + Manager.getRepairUtils().getPriceByMaterial(itemStack.getType()) + " pièces");
                     Manager.getRepairUtils().getPriceByEnchantment(itemStack).forEach((enchantment, priceByEnchantment) -> {
