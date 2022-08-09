@@ -36,4 +36,11 @@ public class ItemUtils {
         }
         return count;
     }
+
+    public static void setLore(ItemStack itemStack, ArrayList<String> lore) {
+        ItemMeta meta = itemStack.getItemMeta();
+        assert meta != null;
+        meta.setLore(lore);
+        itemStack.setItemMeta(meta);
+    }
 }

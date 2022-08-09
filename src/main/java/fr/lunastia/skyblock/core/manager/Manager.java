@@ -25,7 +25,8 @@ public class Manager {
     private static GUIManager guiManager;
     private static RepairUtils repairUtils;
     private static KitManager kitManager;
-    private static HeadDatabaseAPI headDatabaseAPI;
+
+    private static HeadDatabaseAPI headDatabase;
 
     public Manager() {
         repairUtils = new RepairUtils();
@@ -61,7 +62,7 @@ public class Manager {
     }
 
     public static HeadDatabaseAPI getHeadDatabaseAPI() {
-        return headDatabaseAPI;
+        return headDatabase;
     }
 
     public static KitManager getKitManager() {
@@ -74,7 +75,7 @@ public class Manager {
         rankManager = new RankManager();
         guiManager = new GUIManager();
         kitManager = new KitManager();
-        headDatabaseAPI = new HeadDatabaseAPI();
+        headDatabase = new HeadDatabaseAPI();
 
         // Suppression des commandes de base
         CommandAPI.unregister("clear", true);
