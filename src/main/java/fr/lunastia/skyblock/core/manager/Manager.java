@@ -10,6 +10,7 @@ import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.database.DatabaseManager;
 import fr.lunastia.skyblock.core.listeners.FreezeListeners;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
+import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
 
@@ -20,6 +21,7 @@ public class Manager {
     private static GUIManager guiManager;
     private static RepairUtils repairUtils;
     private static HeadDatabaseAPI headDatabase;
+    private static IslandManager islandManager;
 
     public Manager() {
         repairUtils = new RepairUtils();
@@ -47,6 +49,10 @@ public class Manager {
 
     public static HeadDatabaseAPI getHeadDatabaseAPI() {
         return headDatabase;
+    }
+
+    public static IslandManager getIslandManager() {
+        return islandManager;
     }
 
     public void init() {
