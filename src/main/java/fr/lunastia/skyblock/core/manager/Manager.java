@@ -24,7 +24,7 @@ public class Manager {
     private static DatabaseManager databaseManager;
     private static GUIManager guiManager;
     private static RepairUtils repairUtils;
-    private static HeadDatabaseAPI headDatabaseAPI;
+    private static HeadDatabaseAPI headDatabase;
 
     public Manager() {
         repairUtils = new RepairUtils();
@@ -59,7 +59,7 @@ public class Manager {
         return repairUtils;
     }
     public static HeadDatabaseAPI getHeadDatabaseAPI() {
-        return headDatabaseAPI;
+        return headDatabase;
     }
 
     public void init() {
@@ -67,7 +67,7 @@ public class Manager {
         databaseManager = new DatabaseManager();
         rankManager = new RankManager();
         guiManager = new GUIManager();
-        HeadDatabaseAPI headDatabase = new HeadDatabaseAPI();
+        headDatabase = new HeadDatabaseAPI();
 
         // Suppression des commandes de base
         CommandAPI.unregister("clear", true);
