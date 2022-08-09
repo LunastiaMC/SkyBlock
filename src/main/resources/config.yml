@@ -4,3 +4,13 @@ database:
   username: root
   password: password
   database: database
+
+gamemodes:
+  0: "Survie"
+  1: "Créatif"
+  2: "Aventure"
+  3: "Spectateur"
+  "survival": "Survie"
+  "creative": "Créatif"
+  "adventure": "Aventure"
+  "spectator": "Spectateur"
