@@ -30,8 +30,6 @@ public class Session {
         setFreezed(rs.getBoolean("freezed"), rs.getBoolean("freezed"));
         setVanished(rs.getBoolean("vanished"), rs.getBoolean("vanished"));
 
-        NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
-        player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
     }
 
     public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished) {
@@ -44,8 +42,6 @@ public class Session {
         setFreezed(isFreezed, isFreezed);
         setVanished(isVanished, isVanished);
 
-        NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
-        player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
     }
 
     public Player getPlayer() {
