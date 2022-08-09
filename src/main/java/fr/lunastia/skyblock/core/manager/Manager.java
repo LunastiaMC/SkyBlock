@@ -13,9 +13,6 @@ import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
 
-import java.io.File;
-import java.util.HashMap;
-
 public class Manager {
     private static SessionManager sessionManager;
     private static RankManager rankManager;
@@ -62,6 +59,11 @@ public class Manager {
         // Suppression des commandes de base
         CommandAPI.unregister("clear", true);
         CommandAPI.unregister("gamemode", true);
+        CommandAPI.unregister("kick", true);
+        CommandAPI.unregister("ban", true);
+        CommandAPI.unregister("ban-ip", true);
+        CommandAPI.unregister("pardon", true);
+        CommandAPI.unregister("pardon-ip", true);
 
         // Chargement des commandes
         CommandAPI.registerCommand(RankCommand.class);
