@@ -12,14 +12,13 @@ import java.util.HashMap;
 
 public class RankManager {
 
-    private ConfigurationSection file;
-    private HashMap<Integer, Rank> ranks;
+    private final HashMap<Integer, Rank> ranks;
 
     public RankManager() {
         ranks = new HashMap<>();
 
         final YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(Core.getInstance().getDataFolder(), "ranks.yml"));
-        file = config.getConfigurationSection("ranks");
+        ConfigurationSection file = config.getConfigurationSection("ranks");
 
         assert file != null;
         for (String rankId : file.getKeys(false)) {
