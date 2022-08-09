@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 @Command("island")
 public class IslandCommand {
     @Default
-    public void island(Player player) {
+    public static void island(Player player) {
         Session session = Manager.getSessionManager().getSession(player);
     }
 
