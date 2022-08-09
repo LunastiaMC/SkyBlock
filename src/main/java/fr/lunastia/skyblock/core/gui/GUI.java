@@ -2,6 +2,7 @@ package fr.lunastia.skyblock.core.gui;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -21,4 +22,6 @@ public interface GUI {
     void onOpen(Player player, Inventory inventory);
 
     boolean clickCancelled();
+
+    InventoryType getInventoryType();
 }
