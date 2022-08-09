@@ -1,7 +1,7 @@
 package fr.lunastia.skyblock.core.manager;
 
 import fr.lunastia.skyblock.core.Core;
-import fr.lunastia.skyblock.core.gui.GUIBuilder;
+import fr.lunastia.skyblock.core.gui.GUI;
 import fr.lunastia.skyblock.core.gui.HatListGUI;
 import fr.lunastia.skyblock.core.gui.RepairGUI;
 import fr.lunastia.skyblock.core.gui.TrashGUI;
@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GUIManager implements Listener {
-    private final Map<Class<? extends GUIBuilder>, GUIBuilder> registeredGUIs;
+    private final Map<Class<? extends GUI>, GUI> registeredGUIs;
 
     public GUIManager() {
         this.registeredGUIs = new HashMap<>();
@@ -32,7 +32,7 @@ public class GUIManager implements Listener {
         Bukkit.getPluginManager().registerEvents(this, Core.getInstance());
     }
 
-    private Map<Class<? extends GUIBuilder>, GUIBuilder> getRegisteredGUIs() {
+    private Map<Class<? extends GUI>, GUI> getRegisteredGUIs() {
         return registeredGUIs;
     }
 
@@ -80,16 +80,20 @@ public class GUIManager implements Listener {
                 });
     }
 
-    public void addMenu(GUIBuilder builder) {
+    public void addMenu(GUI builder) {
         getRegisteredGUIs().put(builder.getClass(), builder);
     }
 
-    public void open(Player player, Class<? extends GUIBuilder> GUIClass) {
+    public void open(Player player, Class<? extends GUI> GUIClass) {
         if (!getRegisteredGUIs().containsKey(GUIClass)) return;
+        GUI gui = getRegisteredGUIs().get(GUIClass);
 
-        GUIBuilder builder = getRegisteredGUIs().get(GUIClass);
-        Inventory inventory = Bukkit.createInventory(null, builder.getSize(), builder.getName());
-        builder.getContents(player, inventory);
+        Inventory inventory = null;
+
+        if (gui.getInventoryType() == null) inventory = Bukkit.createInventory(null, gui.getSize(), gui.getName());
+        else inventory = Bukkit.createInventory(null, gui.getInventoryType(), gui.getName());
+
+        gui.getContents(player, inventory);
         player.openInventory(inventory);
     }
 }
