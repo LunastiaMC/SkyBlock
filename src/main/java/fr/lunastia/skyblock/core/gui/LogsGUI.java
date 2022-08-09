@@ -1,46 +1,42 @@
 package fr.lunastia.skyblock.core.gui;
 
-import fr.lunastia.skyblock.core.utils.ColorUtils;
-import fr.lunastia.skyblock.core.utils.ItemUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class TrashGUI implements GUI {
+import java.sql.SQLException;
+
+public class LogsGUI implements GUI {
     @Override
     public String getName() {
-        return "Poubelle";
+        return null;
     }
 
     @Override
     public int getSize() {
-        return 54;
+        return 9;
     }
 
     @Override
     public void getContents(Player player, Inventory inventory) {
-        return;
+
     }
 
     @Override
-    public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) {
+    public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) throws SQLException {
 
     }
 
     @Override
     public void onClose(Player player, Inventory inventory) {
-        Integer count = ItemUtils.countInventory(inventory);
-        if (count > 0) {
-            ColorUtils.sendMessage(player, "Vous venez de jeter un total de §f" + count + " items §7à la poubelle", ColorUtils.TRASH);
-        }
-        return;
+
     }
 
     @Override
     public void onOpen(Player player, Inventory inventory) {
-        return;
+
     }
 
     @Override
