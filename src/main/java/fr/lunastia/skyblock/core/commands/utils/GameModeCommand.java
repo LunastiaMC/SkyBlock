@@ -6,9 +6,14 @@ import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.arguments.AMultiLiteralArgument;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
+import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.utils.ColorUtils;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+
+import java.io.File;
 
 @Command("gamemode")
 @Alias("gm")
@@ -18,15 +23,22 @@ public class GameModeCommand {
     @Default
     public static void gamemode(Player player, @AMultiLiteralArgument({"creative", "1", "survival", "0", "adventure", "2", "spectator", "3"}) String mode) {
         changeGamemode(player, mode);
-        ColorUtils.sendMessage(player, "Vous avez changé votre mode de jeu en §f" + Manager.GAMEMODES.get(mode), ColorUtils.PREFIX);
+        ColorUtils.sendMessage(player, "Vous avez changé votre mode de jeu en §f" + getNameGameMode(mode), ColorUtils.PREFIX);
     }
 
     @Default
     @Permission("skyblock.gamemode.other.command")
     public static void gamemode(Player player, @APlayerArgument Player target, @AMultiLiteralArgument({"creative", "1", "survival", "0", "adventure", "2", "spectator", "3"}) String mode) {
         changeGamemode(target, mode);
-        ColorUtils.sendMessage(target, "Votre mode de jeu a été modifié en §f" + Manager.GAMEMODES.get(mode) + "§7 par §f" + player.getName(), ColorUtils.PREFIX);
-        ColorUtils.sendMessage(player, "Vous avez changé le mode de jeu de §f" + target.getName() + " §7en §f" + Manager.GAMEMODES.get(mode), ColorUtils.PREFIX);
+        ColorUtils.sendMessage(target, "Votre mode de jeu a été modifié en §f" + getNameGameMode(mode) + "§7 par §f" + player.getName(), ColorUtils.PREFIX);
+        ColorUtils.sendMessage(player, "Vous avez changé le mode de jeu de §f" + target.getName() + " §7en §f" + getNameGameMode(mode), ColorUtils.PREFIX);
+    }
+
+    public static String getNameGameMode(String mode) {
+        final YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(Core.getInstance().getDataFolder(), "config.yml"));
+        ConfigurationSection file = config.getConfigurationSection("gamemodes");
+        assert file != null;
+        return file.getString(mode);
     }
 
     private static void changeGamemode(Player target, String mode) {
