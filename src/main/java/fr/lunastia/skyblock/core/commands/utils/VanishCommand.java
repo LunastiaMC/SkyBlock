@@ -6,7 +6,8 @@ import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.Subcommand;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Session;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
 
 @Command("vanish")
@@ -29,6 +30,6 @@ public class VanishCommand {
                 list.append("§7- ").append(session.getPlayer().getName()).append("\n");
             }
         });
-        ColorUtils.sendMessage(player, list.toString(), ColorUtils.PREFIX);
+        ColorUtils.sendMessage(player, list.toString(), Colors.PREFIX);
     }
 }

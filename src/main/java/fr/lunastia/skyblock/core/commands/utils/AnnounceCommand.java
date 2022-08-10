@@ -5,7 +5,6 @@ import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.arguments.AGreedyStringArgument;
 import dev.jorel.commandapi.annotations.arguments.AMultiLiteralArgument;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -14,7 +13,8 @@ import org.bukkit.entity.Player;
 public class AnnounceCommand {
     @Default
     public static void announce(Player player, @AMultiLiteralArgument({"green", "red", "blue", "aqua", "orange", "yellow", "white"}) String type, @AGreedyStringArgument String message) {
-        String prefix = ColorUtils.colorize(switch (type) {
+        /*
+        String prefix = Colors.colorize(switch (type) {
             case "green" ->
                     "&#18ff7b&l[&#1dfc7b&lA&#22f87c&lN&#27f57c&lN&#2df27c&lO&#32ee7c&lN&#37eb7d&lC&#3ce77d&lE&#41e47d&l] §r§7";
             case "red" ->
@@ -29,14 +29,15 @@ public class AnnounceCommand {
                     "&#e6ff1b&l[&#e4fc20&lA&#e1f825&lN&#dff52a&lN&#ddf22f&lO&#daee34&lN&#d8eb39&lC&#d5e73e&lE&#d3e443&l] §r§7";
             case "white" ->
                     "&#ffecec&l[&#fce9e9&lA&#f8e6e6&lN&#f5e3e3&lN&#f2e1e1&lO&#eedede&lN&#ebdbdb&lC&#e7d8d8&lE&#e4d5d5&l] §r§7";
-            default -> ColorUtils.PREFIX;
+            default -> Colors.PREFIX;
         });
 
-        String coloredText = ColorUtils.colorize(message);
+        String coloredText = Colors.colorize(message);
+        */
 
         Bukkit.getOnlinePlayers().forEach(p -> {
             p.sendMessage(" ");
-            p.sendMessage(prefix + coloredText);
+            // p.sendMessage(prefix + coloredText);
             p.sendMessage(" ");
         });
     }

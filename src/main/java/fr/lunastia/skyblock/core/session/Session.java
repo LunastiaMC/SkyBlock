@@ -2,7 +2,8 @@ package fr.lunastia.skyblock.core.session;
 
 import com.nametagedit.plugin.NametagEdit;
 import fr.lunastia.skyblock.core.manager.Manager;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -126,13 +127,12 @@ public class Session {
         if (freezed) {
             isFreezed = true;
             this.getPlayer().setFreezeTicks((800 * 999999999));
-            if (messages) ColorUtils.sendMessage(this.getPlayer(), "Vous venez d'être immobilisé", ColorUtils.PREFIX);
+            if (messages) ColorUtils.sendMessage(this.getPlayer(), "Vous venez d'être immobilisé", Colors.PREFIX);
             return;
         }
 
         isFreezed = false;
-        if (messages)
-            ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", ColorUtils.PREFIX);
+        if (messages) ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", Colors.PREFIX);
         this.getPlayer().setFreezeTicks(1);
     }
 
@@ -143,13 +143,13 @@ public class Session {
     public void setVanished(boolean vanished, boolean messages) {
         if (vanished) {
             isVanished = true;
-            if (messages) ColorUtils.sendMessage(player, "Vous venez de vous cacher !", ColorUtils.PREFIX);
+            if (messages) ColorUtils.sendMessage(player, "Vous venez de vous cacher !", Colors.PREFIX);
             this.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999999, 1, false, false, false));
             return;
         }
 
         isVanished = false;
-        if (messages) ColorUtils.sendMessage(player, "Vous venez de vous révéler !", ColorUtils.PREFIX);
+        if (messages) ColorUtils.sendMessage(player, "Vous venez de vous révéler !", Colors.PREFIX);
         this.getPlayer().getActivePotionEffects().forEach(potionEffect -> this.getPlayer().removePotionEffect(potionEffect.getType()));
     }
 
