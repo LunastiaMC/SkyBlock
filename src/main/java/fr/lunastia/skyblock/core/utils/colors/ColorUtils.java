@@ -41,11 +41,11 @@ public class ColorUtils {
         return matcher.appendTail(buffer).toString();
     }
 
-    public static void sendMessage(Player player, String message, String prefix) {
+    public static void sendMessage(Player player, String message, Colors prefix) {
         player.sendMessage(colorize(prefix + "§7 " + message));
     }
 
-    public static void sendMessage(Player player, String message, String prefix, Boolean isError) {
+    public static void sendMessage(Player player, String message, Colors prefix, Boolean isError) {
         player.sendMessage(colorize(prefix + (isError ? "§c " : "§7 ") + message));
     }
 }
