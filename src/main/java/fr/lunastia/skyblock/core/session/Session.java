@@ -2,7 +2,7 @@ package fr.lunastia.skyblock.core.session;
 
 import com.nametagedit.plugin.NametagEdit;
 import fr.lunastia.skyblock.core.manager.Manager;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;

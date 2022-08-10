@@ -7,7 +7,7 @@ import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.Subcommand;
 import fr.lunastia.skyblock.core.gui.HatListGUI;
 import fr.lunastia.skyblock.core.manager.Manager;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 

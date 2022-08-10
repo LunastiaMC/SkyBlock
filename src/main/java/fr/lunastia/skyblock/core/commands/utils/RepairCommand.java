@@ -2,14 +2,11 @@ package fr.lunastia.skyblock.core.commands.utils;
 
 import dev.jorel.commandapi.annotations.Command;
 import dev.jorel.commandapi.annotations.Default;
-import dev.jorel.commandapi.annotations.Permission;
 import fr.lunastia.skyblock.core.gui.RepairGUI;
-import fr.lunastia.skyblock.core.manager.GUIManager;
 import fr.lunastia.skyblock.core.manager.Manager;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.Repairable;

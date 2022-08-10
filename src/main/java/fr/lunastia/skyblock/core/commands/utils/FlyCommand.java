@@ -3,7 +3,7 @@ package fr.lunastia.skyblock.core.commands.utils;
 import dev.jorel.commandapi.annotations.Command;
 import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 

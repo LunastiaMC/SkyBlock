@@ -5,7 +5,7 @@ import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.arguments.AGreedyStringArgument;
 import dev.jorel.commandapi.annotations.arguments.AMultiLiteralArgument;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

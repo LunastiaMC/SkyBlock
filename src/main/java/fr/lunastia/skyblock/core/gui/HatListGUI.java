@@ -1,7 +1,7 @@
 package fr.lunastia.skyblock.core.gui;
 
 import fr.lunastia.skyblock.core.Core;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;

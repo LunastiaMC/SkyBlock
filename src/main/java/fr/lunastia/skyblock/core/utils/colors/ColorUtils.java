@@ -1,4 +1,4 @@
-package fr.lunastia.skyblock.core.utils;
+package fr.lunastia.skyblock.core.utils.colors;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
