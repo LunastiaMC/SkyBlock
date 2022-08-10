@@ -2,7 +2,6 @@ package fr.lunastia.skyblock.core.manager;
 
 import dev.jorel.commandapi.CommandAPI;
 import fr.lunastia.skyblock.core.Core;
-import fr.lunastia.skyblock.core.commands.admin.GUICommand;
 import fr.lunastia.skyblock.core.commands.admin.RankCommand;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
@@ -12,9 +11,6 @@ import fr.lunastia.skyblock.core.listeners.FreezeListeners;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
-
-import java.io.File;
-import java.util.HashMap;
 
 public class Manager {
     private static SessionManager sessionManager;
@@ -82,7 +78,6 @@ public class Manager {
         CommandAPI.registerCommand(RepairCommand.class);
         CommandAPI.registerCommand(FreezeCommand.class);
         CommandAPI.registerCommand(TrashCommand.class);
-        CommandAPI.registerCommand(GUICommand.class);
 
         // Chargement des évènements
         Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());

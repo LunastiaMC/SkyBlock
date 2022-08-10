@@ -5,7 +5,8 @@ import dev.jorel.commandapi.annotations.Command;
 import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
 
 @Command("enderchest")
@@ -21,7 +22,7 @@ public class EnderInventoryCommand {
     @Permission("skyblock.ec.other.command")
     public static void see(Player player, @APlayerArgument Player target) {
         if (target.getName().equals(player.getName())) {
-            ColorUtils.sendMessage(player, "Vous ne pouvez ouvrir votre propre inventaire !", ColorUtils.PREFIX, true);
+            ColorUtils.sendMessage(player, "Vous ne pouvez ouvrir votre propre inventaire !", Colors.PREFIX, true);
             return;
         }
 

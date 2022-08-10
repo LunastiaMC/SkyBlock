@@ -1,10 +1,10 @@
 package fr.lunastia.skyblock.core.gui;
 
-import com.google.common.cache.AbstractCache;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Session;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -79,12 +79,12 @@ public class RepairGUI implements GUIBuilder {
 
             Session session = Manager.getSessionManager().getSession(player);
             if (session.getMoney() < repairCost.get(slot)) {
-                ColorUtils.sendMessage(player, "Vous n'avez pas assez de pièces pour réparer cet objet.", ColorUtils.REPAIR, true);
+                ColorUtils.sendMessage(player, "Vous n'avez pas assez de pièces pour réparer cet objet.", Colors.REPAIR, true);
                 return;
             }
 
             if (player.getInventory().getItemInMainHand().getDurability() == 0) {
-                ColorUtils.sendMessage(player, "Votre objet est déjà impeccable !", ColorUtils.REPAIR, true);
+                ColorUtils.sendMessage(player, "Votre objet est déjà impeccable !", Colors.REPAIR, true);
                 return;
             }
 
@@ -103,9 +103,9 @@ public class RepairGUI implements GUIBuilder {
 
                 player.closeInventory();
                 mainHand.setItemMeta(itemMeta);
-                ColorUtils.sendMessage(player, "Vous venez de payer §e" + repairCost.get(slot) + " pièces §7pour réparer votre objet.", ColorUtils.REPAIR);
+                ColorUtils.sendMessage(player, "Vous venez de payer §e" + repairCost.get(slot) + " pièces §7pour réparer votre objet.", Colors.REPAIR);
             } else {
-                ColorUtils.sendMessage(player, "Vous ne pouvez pas réparer cet objet.", ColorUtils.REPAIR, true);
+                ColorUtils.sendMessage(player, "Vous ne pouvez pas réparer cet objet.", Colors.REPAIR, true);
             }
         }
 
