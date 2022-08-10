@@ -21,7 +21,7 @@ import java.util.Locale;
 public class ReportCommand {
     @Default
     public static void report(Player player) {
-        ColorUtils.sendMessage(player, "Si vous shouaitez signaler un joueur executez §f/report player§c, si vous avez besoins de signaler une faille, un bug executez §f/report bug", ColorUtils.PREFIX, true);
+        ColorUtils.sendMessage(player, "Si vous shouaitez signaler un joueur executez §f/report player§c, si vous avez besoins de signaler une faille, un bug executez §f/report bug", Colors.PREFIX, true);
     }
 
     @Subcommand("bug")
@@ -41,7 +41,7 @@ public class ReportCommand {
 
         try {
             webhook.execute();
-            ColorUtils.sendMessage(player, "Votre report a bien été prit en compte !", ColorUtils.PREFIX);
+            ColorUtils.sendMessage(player, "Votre report a bien été prit en compte !", Colors.PREFIX);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -50,12 +50,12 @@ public class ReportCommand {
     @Subcommand("player")
     public static void player(Player player, @APlayerArgument Player player_reported, @AGreedyStringArgument String description) {
         if (!Bukkit.getOnlinePlayers().contains(player_reported)) {
-            ColorUtils.sendMessage(player, "Ce joueur n'est pas connecté sur le serveur", ColorUtils.PREFIX);
+            ColorUtils.sendMessage(player, "Ce joueur n'est pas connecté sur le serveur", Colors.PREFIX);
             return;
         }
 
         if (player.getName().equals(player_reported.getName())) {
-            ColorUtils.sendMessage(player, "Vous ne pouvez pas vous signaler vous-même !", ColorUtils.PREFIX, true);
+            ColorUtils.sendMessage(player, "Vous ne pouvez pas vous signaler vous-même !", Colors.PREFIX, true);
             return;
         }
 
@@ -75,7 +75,7 @@ public class ReportCommand {
 
         try {
             webhook.execute();
-            ColorUtils.sendMessage(player, "Votre report a bien été prit en compte !", ColorUtils.PREFIX);
+            ColorUtils.sendMessage(player, "Votre report a bien été prit en compte !", Colors.PREFIX);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
