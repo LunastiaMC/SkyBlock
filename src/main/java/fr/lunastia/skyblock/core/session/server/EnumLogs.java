@@ -11,6 +11,8 @@ public enum EnumLogs {
     PLAYER_MUTED,
     PLAYER_UNMUTED,
     PLAYER_MUTE_EXPIRED,
+    PLAYER_TELEPORT,
+    PLAYER_TELEPORTED_BY_FORCE, // /tp Joueur1 Joueur2
 
     EnumLogs(String action) {
     }
