@@ -1,5 +1,10 @@
 package fr.lunastia.skyblock.core.session.server.logs;
 
-public class LogTypeModeration {
+import fr.lunastia.skyblock.core.session.server.EnumLogs;
+import org.bukkit.entity.Player;
 
+public class LogTypeModeration implements Log {
+    public LogTypeModeration(EnumLogs type, Player target, Player moderator, String reason) {
+
+    }
 }
