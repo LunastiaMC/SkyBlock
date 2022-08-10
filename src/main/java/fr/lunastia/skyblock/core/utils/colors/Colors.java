@@ -8,7 +8,13 @@ public enum Colors {
     REPAIR("&#8f9873&l[&#919972&lE&#929a72&ln&#949b71&lc&#959c70&ll&#979d70&lu&#999e6f&lm&#9a9f6e&le &#9ca06e&la&#9da16d&lm&#9fa26d&lé&#a0a36c&ll&#a2a46b&li&#a4a56b&lo&#a5a66a&lr&#a7a769&lé&#a8a869&le&#aaa968&l]§r§7"),
     MOD("&#ff3c3c&l[&#f43939&lS&#ea3737&la&#df3434&ln&#d53131&lc&#ca2f2f&lt&#c02c2c&li&#b52929&lo&#ab2727&ln&#a02424&l]");
 
-    Colors(String k) {
+    private final String k;
 
+    Colors(String k) {
+        this.k = k;
+    }
+
+    public String color() {
+        return k;
     }
 }
