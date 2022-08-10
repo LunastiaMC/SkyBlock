@@ -4,7 +4,8 @@ import dev.jorel.commandapi.annotations.Command;
 import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
 
 @Command("feed")
@@ -13,13 +14,13 @@ public class FeedCommand {
     @Default
     public static void feed(Player player) {
         player.setFoodLevel(20);
-        ColorUtils.sendMessage(player, "Vous avez été nourri !", ColorUtils.PREFIX);
+        ColorUtils.sendMessage(player, "Vous avez été nourri !", Colors.PREFIX);
     }
 
     @Default
     public static void feed(Player player, @APlayerArgument Player target) {
         target.setFoodLevel(20);
-        ColorUtils.sendMessage(target, "Vous avez été nourri par §f" + player.getName() + "§7 !", ColorUtils.PREFIX);
-        ColorUtils.sendMessage(player, "Vous avez nourri §f" + target.getName() + "§7 !", ColorUtils.PREFIX);
+        ColorUtils.sendMessage(target, "Vous avez été nourri par §f" + player.getName() + "§7 !", Colors.PREFIX);
+        ColorUtils.sendMessage(player, "Vous avez nourri §f" + target.getName() + "§7 !", Colors.PREFIX);
     }
 }

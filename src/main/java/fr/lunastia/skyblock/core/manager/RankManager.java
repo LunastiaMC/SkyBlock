@@ -2,7 +2,7 @@ package fr.lunastia.skyblock.core.manager;
 
 import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.session.Rank;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 

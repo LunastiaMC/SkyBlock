@@ -1,8 +1,9 @@
 package fr.lunastia.skyblock.core.gui;
 
 import fr.lunastia.skyblock.core.Core;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -53,25 +54,25 @@ public class HatListGUI implements GUI {
                     if (player.getInventory().getHelmet().getItemMeta().getDisplayName().contains("Chapeau")) {
                         String displayName = section.getString(slot + ".displayName");
                         if (player.getInventory().getHelmet().getItemMeta().getDisplayName() == section.getString(slot + ".displayName")) {
-                            ColorUtils.sendMessage(player, "Vous avez deja le chapeau §d" + displayName, ColorUtils.HAT);
+                            ColorUtils.sendMessage(player, "Vous avez deja le chapeau §d" + displayName, Colors.HAT);
                             return;
                         }
-                        ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName, ColorUtils.HAT);
+                        ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName, Colors.HAT);
                         ItemStack item = ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(String.valueOf(slot) + ".id"))), section.getString(String.valueOf(slot) + ".displayName"), new ArrayList<>());
                         player.getInventory().setHelmet(item);
                         return;
                     }
-                    ColorUtils.sendMessage(player, "Veuillez enlevez votre casque avant de mettre un chapeau !", ColorUtils.HAT);
+                    ColorUtils.sendMessage(player, "Veuillez enlevez votre casque avant de mettre un chapeau !", Colors.HAT);
                     return;
                 }
 
                 String displayName = section.getString(slot + ".displayName");
                 ItemStack item = ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(String.valueOf(slot) + ".id"))), section.getString(String.valueOf(slot) + ".displayName"), new ArrayList<>());
 
-                ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName, ColorUtils.HAT);
+                ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName, Colors.HAT);
                 player.getInventory().setHelmet(item);
             } else {
-                ColorUtils.sendMessage(player, "Vous n'avez pas encore débloqué ce chapeau !", ColorUtils.HAT, true);
+                ColorUtils.sendMessage(player, "Vous n'avez pas encore débloqué ce chapeau !", Colors.HAT, true);
             }
         }
     }
