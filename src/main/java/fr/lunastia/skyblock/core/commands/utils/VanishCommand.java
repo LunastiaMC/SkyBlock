@@ -29,6 +29,6 @@ public class VanishCommand {
                 list.append("§7- ").append(session.getPlayer().getName()).append("\n");
             }
         });
-        ColorUtils.sendMessage(player, list.toString(), ColorUtils.PREFIX);
+        ColorUtils.sendMessage(player, list.toString(), Colors.PREFIX);
     }
 }
