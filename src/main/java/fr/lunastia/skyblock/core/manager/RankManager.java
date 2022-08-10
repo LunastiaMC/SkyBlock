@@ -27,7 +27,7 @@ public class RankManager {
             assert rank != null;
 
             ArrayList<String> permissions = new ArrayList<>(rank.getStringList("permissions"));
-            ranks.put(Integer.parseInt(rankId), new Rank(Integer.parseInt(rankId), rank.getString("name"), ColorUtils.colorize(rank.getString("coloredName")), ColorUtils.colorize(rank.getString("nametagName")), ColorUtils.colorize(rank.getString("arrow")), permissions));
+            ranks.put(Integer.parseInt(rankId), new Rank(Integer.parseInt(rankId), rank.getString("name"), Colors.colorize(rank.getString("coloredName")), Colors.colorize(rank.getString("nametagName")), Colors.colorize(rank.getString("arrow")), permissions));
         }
     }
 
