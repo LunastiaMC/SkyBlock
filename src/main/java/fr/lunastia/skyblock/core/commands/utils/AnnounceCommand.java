@@ -16,7 +16,7 @@ public class AnnounceCommand {
     @Default
     public static void announce(Player player, @AMultiLiteralArgument({"green", "red", "blue", "aqua", "orange", "yellow", "white"}) String type, @AGreedyStringArgument String message) {
         /*
-        String prefix = ColorUtils.colorize(switch (type) {
+        String prefix = Colors.colorize(switch (type) {
             case "green" ->
                     "&#18ff7b&l[&#1dfc7b&lA&#22f87c&lN&#27f57c&lN&#2df27c&lO&#32ee7c&lN&#37eb7d&lC&#3ce77d&lE&#41e47d&l] §r§7";
             case "red" ->
@@ -34,7 +34,7 @@ public class AnnounceCommand {
             default -> Colors.PREFIX;
         });
 
-        String coloredText = ColorUtils.colorize(message);
+        String coloredText = Colors.colorize(message);
         */
 
         Bukkit.getOnlinePlayers().forEach(p -> {
