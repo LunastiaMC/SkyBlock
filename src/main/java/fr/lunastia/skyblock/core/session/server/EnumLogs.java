@@ -29,6 +29,8 @@ public enum EnumLogs {
     ISLAND_VISITOR_KICKED,
     ISLAND_VISITOR_BANNED,
     ISLAND_VISITOR_UNBANNED,
+    ISLAND_WEATHER_CHANGED,
+    ISLAND_TIME_CHANGED;
 
     EnumLogs(String action) {
     }
