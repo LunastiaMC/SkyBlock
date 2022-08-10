@@ -129,7 +129,8 @@ public class Session {
         }
 
         isFreezed = false;
-        if (messages) ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", Colors.PREFIX);
+        if (messages)
+            ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", Colors.PREFIX);
         this.getPlayer().setFreezeTicks(1);
     }
 

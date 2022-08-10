@@ -2,8 +2,8 @@ package fr.lunastia.skyblock.core.gui;
 
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Session;
-import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import org.bukkit.Material;
