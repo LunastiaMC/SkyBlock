@@ -32,6 +32,29 @@ public enum EnumLogs {
     ISLAND_WEATHER_CHANGED,
     ISLAND_TIME_CHANGED;
 
-    EnumLogs(String action) {
+    public static EnumLogs getByName(final String name) {
+        for (final EnumLogs enumLogs : values()) {
+            if (enumLogs.name().equalsIgnoreCase(name)) {
+                return enumLogs;
+            }
+        }
+        return null;
+    }
+
+    public static EnumLogs getByIndex(final int index) {
+        for (final EnumLogs enumLogs : values()) {
+            if (enumLogs.ordinal() == index) {
+                return enumLogs;
+            }
+        }
+        return null;
+    }
+
+    public static boolean isPlayerLog(final EnumLogs enumLogs) {
+        return enumLogs.ordinal() <= PLAYER_KIT_USE.ordinal();
+    }
+
+    public static boolean isIslandLog(final EnumLogs enumLogs) {
+        return enumLogs.ordinal() >= ISLAND_MEMBER_ADDED.ordinal();
     }
 }
