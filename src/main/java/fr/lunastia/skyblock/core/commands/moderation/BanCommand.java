@@ -11,6 +11,7 @@ import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import fr.lunastia.skyblock.core.session.server.logs.Log;
 import fr.lunastia.skyblock.core.session.server.logs.LogTypeModeration;
 import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
 
 @Command("ban")
@@ -25,7 +26,7 @@ public class BanCommand {
             "years"
     }) String time, @AIntegerArgument(min = 1) int duration, @AGreedyStringArgument String reason
     ) {
-        ColorUtils.sendMessage(player, "Vous venez de bannir &#ff3c3c" + target.getName() + "§7 pour une durée de &#ff3c3c" + duration + " " + translateDuration(time) + "§7 pour la raison: &#ff3c3c" + reason,ColorUtils.MOD);
+        ColorUtils.sendMessage(player, "Vous venez de bannir &#ff3c3c" + target.getName() + "§7 pour une durée de &#ff3c3c" + duration + " " + translateDuration(time) + "§7 pour la raison: &#ff3c3c" + reason, Colors.MOD);
     }
 
     public static String translateDuration(String time) {
