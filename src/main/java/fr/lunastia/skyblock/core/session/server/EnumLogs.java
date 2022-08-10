@@ -13,6 +13,10 @@ public enum EnumLogs {
     PLAYER_MUTE_EXPIRED,
     PLAYER_TELEPORT,
     PLAYER_TELEPORTED_BY_FORCE, // /tp Joueur1 Joueur2
+    PLAYER_KIT_USE,
+    KIT_ADDED,
+    KIT_REMOVED,
+    KIT_UPDATED,
 
     EnumLogs(String action) {
     }
