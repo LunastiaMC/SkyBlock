@@ -7,7 +7,7 @@ public enum Colors {
     TRASH("&#868484&l[&#888787&lP&#8b8a8a&lo&#8d8d8c&lu&#8f908f&lb&#929492&le&#949795&ll&#969a97&ll&#999d9a&le&#9ba09d&l]§r§7"),
     REPAIR("&#8f9873&l[&#919972&lE&#929a72&ln&#949b71&lc&#959c70&ll&#979d70&lu&#999e6f&lm&#9a9f6e&le &#9ca06e&la&#9da16d&lm&#9fa26d&lé&#a0a36c&ll&#a2a46b&li&#a4a56b&lo&#a5a66a&lr&#a7a769&lé&#a8a869&le&#aaa968&l]§r§7");
 
-    Colors(String s) {
+    Colors(String k) {
 
     }
 }
