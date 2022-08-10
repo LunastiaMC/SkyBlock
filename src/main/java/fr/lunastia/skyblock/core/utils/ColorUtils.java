@@ -17,6 +17,7 @@ public class ColorUtils {
     public static final String HAT = "&#fb5cf1&l[&#f058e6&lC&#e654da&lh&#db50cf&la&#d04cc3&lp&#db4dbf&le&#e74fbc&la&#f250b8&lu&#fd51b4&l]§r§7";
     public static final String TRASH = "&#868484&l[&#888787&lP&#8b8a8a&lo&#8d8d8c&lu&#8f908f&lb&#929492&le&#949795&ll&#969a97&ll&#999d9a&le&#9ba09d&l]§r§7";
     public static final String REPAIR = "&#8f9873&l[&#919972&lE&#929a72&ln&#949b71&lc&#959c70&ll&#979d70&lu&#999e6f&lm&#9a9f6e&le &#9ca06e&la&#9da16d&lm&#9fa26d&lé&#a0a36c&ll&#a2a46b&li&#a4a56b&lo&#a5a66a&lr&#a7a769&lé&#a8a869&le&#aaa968&l]";
+    public static final String MOD = "&#ff3c3c&l[&#f43939&lS&#ea3737&la&#df3434&ln&#d53131&lc&#ca2f2f&lt&#c02c2c&li&#b52929&lo&#ab2727&ln&#a02424&l]";
 
     public static String colorize(String message) {
         message = matchHexaReplace("&#", message);
