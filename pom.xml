@@ -50,7 +50,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.19.2-R0.1-SNAPSHOT</version>
+            <version>1.19.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -64,14 +64,14 @@
         <dependency>
             <groupId>dev.jorel</groupId>
             <artifactId>commandapi-annotations</artifactId>
-            <version>8.5.0</version>
+            <version>8.4.1</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>dev.jorel</groupId>
             <artifactId>commandapi-core</artifactId>
-            <version>8.5.0</version>
+            <version>8.4.1</version>
             <scope>provided</scope>
         </dependency>
 
