@@ -3,7 +3,6 @@ package fr.lunastia.skyblock.core.session.server.logs;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import org.bukkit.entity.Player;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class LogTypeModeration implements Log {
