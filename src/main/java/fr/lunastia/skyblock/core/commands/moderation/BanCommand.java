@@ -13,25 +13,22 @@ import org.bukkit.entity.Player;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 @Command("ban")
 @Permission("skyblock.ban.command")
 public class BanCommand {
     @Default
-    public static void ban(Player player, @APlayerArgument Player target, @AMultiLiteralArgument({
-            "hours",
-            "days",
-            "weeks",
-            "months",
-            "years"
-    }) String time, @AIntegerArgument(min = 1) int duration, @AGreedyStringArgument String reason
-    ) {
-        Date dt = new Date();
-        Date tomorrow = new Date(dt.getTime() + durationToFormat(time, duration));
+    public static void ban(Player player, @APlayerArgument Player target, @AMultiLiteralArgument({"hours", "days", "weeks", "months", "years"}) String type, @AIntegerArgument(min = 1) int duration, @AGreedyStringArgument String reason) {
         DateFormat format = new SimpleDateFormat("EEEE yyyy-MM-dd HH:mm:ss a");
-        ColorUtils.sendMessage(player, format.format(tomorrow), Colors.PREFIX);
+        ColorUtils.sendMessage(player, format.format(getDate(type, duration,false)), Colors.PREFIX);
+    }
+
+    @Default
+    public static void ban(Player player, @APlayerArgument Player target, @AMultiLiteralArgument({"hours", "days", "weeks", "months", "years"}) String type, @AIntegerArgument(min = 1) int duration) {
+        ColorUtils.sendMessage(player, getDate(type, duration,false), Colors.PREFIX);
     }
 
     public static String translateDuration(String time) {
@@ -45,14 +42,29 @@ public class BanCommand {
         };
     }
 
-    public static Integer durationToFormat(String type, int duration) {
-        return switch (type) {
-            case "hours" -> duration * 60 * 60;
-            case "days" -> duration * 60 * 60 * 24;
-            case "weeks" -> duration * 60 * 60 * 24 * 7;
-            case "months" -> duration * 60 * 60 * 24 * 30;
-            case "years" -> duration * 60 * 60 * 24 * 365;
-            default -> 0;
-        };
+    public static String getDate(String type, int number, boolean full) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE d MMM y");
+
+        Date date = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+
+        if (Objects.equals(type, "years")) c.add(Calendar.YEAR, number);
+        if (Objects.equals(type, "months")) c.add(Calendar.MONTH, number);
+        if (Objects.equals(type, "weeks")) c.add(Calendar.WEEK_OF_YEAR, number);
+        if (Objects.equals(type, "days")) c.add(Calendar.DAY_OF_YEAR, number);
+        if (Objects.equals(type, "hours")) c.add(Calendar.HOUR, number);
+
+        if (full) {
+            Date currentDatePlusOne = c.getTime();
+            return currentDatePlusOne.toString();
+        }
+
+        Date currentDatePlusOne = c.getTime();
+        String dateLongStr = dateFormat.format(currentDatePlusOne);
+        String[] words = dateLongStr.split(" ");
+        words[0] = words[0].substring(0, 1).toUpperCase() + words[0].substring(1);
+        words[2] = words[2].substring(0, 1).toUpperCase() + words[2].substring(1);
+        return String.join(" ", words);
     }
 }
