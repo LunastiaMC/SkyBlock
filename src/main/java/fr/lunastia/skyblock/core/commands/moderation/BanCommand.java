@@ -11,6 +11,11 @@ import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Command("ban")
 @Permission("skyblock.ban.command")
 public class BanCommand {
@@ -23,7 +28,10 @@ public class BanCommand {
             "years"
     }) String time, @AIntegerArgument(min = 1) int duration, @AGreedyStringArgument String reason
     ) {
-        ColorUtils.sendMessage(player, "Vous venez de bannir &#ff3c3c" + target.getName() + "§7 pour une durée de &#ff3c3c" + duration + " " + translateDuration(time) + "§7 pour la raison: &#ff3c3c" + reason, Colors.MOD);
+        Date dt = new Date();
+        Date tomorrow = new Date(dt.getTime() + durationToFormat(time, duration));
+        DateFormat format = new SimpleDateFormat("EEEE yyyy-MM-dd HH:mm:ss a");
+        ColorUtils.sendMessage(player, format.format(tomorrow), Colors.PREFIX);
     }
 
     public static String translateDuration(String time) {
@@ -34,6 +42,17 @@ public class BanCommand {
             case "months" -> "mois";
             case "years" -> "années";
             default -> "";
+        };
+    }
+
+    public static Integer durationToFormat(String type, int duration) {
+        return switch (type) {
+            case "hours" -> duration * 60 * 60;
+            case "days" -> duration * 60 * 60 * 24;
+            case "weeks" -> duration * 60 * 60 * 24 * 7;
+            case "months" -> duration * 60 * 60 * 24 * 30;
+            case "years" -> duration * 60 * 60 * 24 * 365;
+            default -> 0;
         };
     }
 }
