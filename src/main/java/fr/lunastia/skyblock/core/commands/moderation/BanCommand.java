@@ -22,7 +22,7 @@ import java.util.Objects;
 @Permission("skyblock.ban.command")
 public class BanCommand {
     @Default
-    public static void ban(Player player, @APlayerArgument Player target, @AMultiLiteralArgument({"hours", "days", "weeks", "months", "years"}) String type, @AIntegerArgument(min = 1) int duration, @AGreedyStringArgument String reason) {
+    public static void ban(Player player, @APlayerArgument Player target, @AMultiLiteralArgument({"days", "weeks", "months", "years"}) String type, @AIntegerArgument(min = 1) int duration, @AGreedyStringArgument String reason) {
         ColorUtils.sendMessage(player, "Vous venez de bannir le joueur " + Colors.MOD_RED.color() + target.getName() + " §7pour " + Colors.MOD_RED.color() + duration + " " + translateDuration(type) + "§7, pour la raison: " + Colors.MOD_RED.color() + reason + "\n§7Il pourra se reconnecter le: " + Colors.MOD_RED.color() + getDate(type, duration, false), Colors.PREFIX);
         try {
             Manager.getModerationManager().addBan(target, getDate(type, duration, true), reason);
@@ -32,8 +32,8 @@ public class BanCommand {
     }
 
     @Default
-    public static void ban(Player player, @APlayerArgument Player target, @AMultiLiteralArgument({"hours", "days", "weeks", "months", "years"}) String type, @AIntegerArgument(min = 1) int duration) {
-        ColorUtils.sendMessage(player, "Vous venez de bannir le joueur " + Colors.MOD_RED.color() + target.getName() + " §7pour " + Colors.MOD_RED.color() + duration + " " + translateDuration(type) + "§7, son bannissement sera fini le " + Colors.MOD_RED.color() + getDate(type, duration, false), Colors.PREFIX);
+    public static void ban(Player player, @APlayerArgument Player target, @AMultiLiteralArgument({"days", "weeks", "months", "years"}) String type, @AIntegerArgument(min = 1) int duration) {
+        ColorUtils.sendMessage(player, "Vous venez de bannir le joueur " + Colors.MOD_RED.color() + target.getName() + " §7pour " + Colors.MOD_RED.color() + duration + " " + translateDuration(type) + "§7, son bannissement sera fini le " + Colors.MOD_RED.color() + getDate(type, duration, true), Colors.PREFIX);
         try {
             Manager.getModerationManager().addBan(target, getDate(type, duration, true), null);
         } catch (SQLException e) {
