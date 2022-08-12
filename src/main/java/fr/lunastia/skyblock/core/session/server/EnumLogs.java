@@ -101,7 +101,7 @@ public enum EnumLogs {
             case PLAYER_BANNED:
                 lore.add(ColorUtils.colorize("§l§7➤ §r§7Joueur banni: " + PLAYER_BANNED.itemColor.color() + infos.getString("target_name")));
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + PLAYER_BANNED.itemColor.color() + infos.getString("startAt")));
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Durée de bannissement: " + PLAYER_BANNED.itemColor.color() + TextUtils.getDifferenceDays(new Date(infos.getString("startAt")), new Date(infos.getString("expireAt"))) + "jours"));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Durée de bannissement: " + PLAYER_BANNED.itemColor.color() + TextUtils.getDifferenceDays(new Date(infos.getString("startAt")), new Date(infos.getString("expireAt"))) + " jours"));
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Raison: " + PLAYER_BANNED.itemColor.color() + infos.getString("reason")));
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Banni par: " + PLAYER_BANNED.itemColor.color() + infos.getString("moderator_name")));
                 break;
