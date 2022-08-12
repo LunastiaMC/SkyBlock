@@ -19,7 +19,7 @@ public class ModerationManager {
     public boolean isBanned(Player player) throws SQLException {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
 
-        final PreparedStatement statementFinder = connection.prepareStatement("SELECT * FROM banned WHERE uuid = ?");
+        final PreparedStatement statementFinder = connection.prepareStatement("SELECT * FROM bans WHERE uuid = ?");
         statementFinder.setString(1, player.getUniqueId().toString());
         final ResultSet resultSet = statementFinder.executeQuery();
 
