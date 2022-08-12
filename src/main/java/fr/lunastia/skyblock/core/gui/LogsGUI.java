@@ -40,7 +40,8 @@ public class LogsGUI implements GUI {
         while (resultSet.next()) {
             EnumLogs logType = EnumLogs.valueOf(resultSet.getString("type"));
 
-            ItemStack item = ItemUtils.customizedItem(
+            ItemStack item = null;
+            item = ItemUtils.customizedItem(
                     Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(logType.getItemHead())),
                     ColorUtils.colorize(logType.getItemColor().color() + logType.getItemTitle()),
                     logType.getItemLore(logType, resultSet)
