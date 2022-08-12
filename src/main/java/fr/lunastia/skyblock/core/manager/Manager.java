@@ -7,6 +7,7 @@ import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
 import fr.lunastia.skyblock.core.commands.moderation.BanCommand;
 import fr.lunastia.skyblock.core.commands.moderation.KickCommand;
+import fr.lunastia.skyblock.core.commands.moderation.LogsCommand;
 import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.database.DatabaseManager;
 import fr.lunastia.skyblock.core.listeners.FreezeListeners;
@@ -93,6 +94,7 @@ public class Manager {
         CommandAPI.registerCommand(TrashCommand.class);
         CommandAPI.registerCommand(KickCommand.class);
         CommandAPI.registerCommand(BanCommand.class);
+        CommandAPI.registerCommand(LogsCommand.class);
 
         // Chargement des évènements
         Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());
