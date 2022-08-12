@@ -7,11 +7,17 @@ import fr.lunastia.skyblock.core.gui.TrashGUI;
 import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.entity.Player;
 
+import java.sql.SQLException;
+
 @Command("trash")
 @Permission("skyblock.trash.command")
 public class TrashCommand {
     @Default
     public static void trash(Player player) {
-        Manager.getGUIManager().open(player, TrashGUI.class);
+        try {
+            Manager.getGUIManager().open(player, TrashGUI.class);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

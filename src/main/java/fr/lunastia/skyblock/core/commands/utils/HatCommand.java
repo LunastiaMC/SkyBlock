@@ -12,12 +12,18 @@ import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import java.sql.SQLException;
+
 @Command("hat")
 @Permission("skyblock.hat.command")
 public class HatCommand {
     @Default
     public static void hat(Player player) {
-        Manager.getGUIManager().open(player, HatListGUI.class);
+        try {
+            Manager.getGUIManager().open(player, HatListGUI.class);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
