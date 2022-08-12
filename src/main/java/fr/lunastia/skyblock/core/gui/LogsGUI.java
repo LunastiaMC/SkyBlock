@@ -42,7 +42,7 @@ public class LogsGUI implements GUI {
             EnumLogs logType = EnumLogs.valueOf(resultSet.getString("type"));
 
             ItemStack item = ItemUtils.customizedItem(
-                    getItem(resultSet.getString("target_name")),
+                    Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(logType.getItemHead())),
                     ColorUtils.colorize(logType.getItemColor().color() + logType.getItemTitle()),
                     new ArrayList<>());
             inventory.setItem(slot, item);
