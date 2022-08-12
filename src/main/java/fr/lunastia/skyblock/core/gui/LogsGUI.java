@@ -67,9 +67,7 @@ public class LogsGUI implements GUI {
     }
 
     public ItemStack getItem(String player) {
-        boolean isNewVersion = Arrays.stream(Material.values())
-                .map(Material::name).toList().contains("PLAYER_HEAD");
-
+        boolean isNewVersion = Arrays.stream(Material.values()).map(Material::name).toList().contains("PLAYER_HEAD");
         Material type = Material.matchMaterial(isNewVersion ? "PLAYER_HEAD" : "SKULL_ITEM");
         assert type != null;
         ItemStack item = new ItemStack(type);
@@ -79,7 +77,6 @@ public class LogsGUI implements GUI {
 
         SkullMeta meta = (SkullMeta) item.getItemMeta();
         assert meta != null;
-        // get player profile
         meta.setOwner(player);
         item.setItemMeta(meta);
         return item;
