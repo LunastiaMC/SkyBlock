@@ -41,6 +41,7 @@ public class BanCommand {
 
             LogTypeModeration log = new LogTypeModeration(EnumLogs.PLAYER_BANNED, target, player, reason);
             log.setExpireAt(getDate(type, duration, true));
+            log.setStartAt(new Date().toString());
             log.send();
         } catch (SQLException e) {
             e.printStackTrace();
