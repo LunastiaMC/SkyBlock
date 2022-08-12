@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class SessionManager {
-    public ArrayList<Session> vanished;
     private HashMap<String, Session> sessions;
 
     public SessionManager() {
