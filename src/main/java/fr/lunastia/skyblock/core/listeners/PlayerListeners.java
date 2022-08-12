@@ -4,6 +4,7 @@ import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import fr.lunastia.skyblock.core.session.server.logs.LogTypeCommon;
+import fr.lunastia.skyblock.core.utils.TextUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.Material;
@@ -22,13 +23,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class PlayerListeners implements Listener {
-    public static long getDifferenceDays(Date d1, Date d2) {
-        long diff = d2.getTime() - d1.getTime();
-        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-    }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) throws SQLException {
@@ -37,8 +33,7 @@ public class PlayerListeners implements Listener {
         if (Manager.getModerationManager().isBanned(player)) {
             ResultSet infos = Manager.getModerationManager().getBanInfo(player);
             if (infos.next()) {
-                long days = getDifferenceDays(new Date(infos.getString("startDate")), new Date(infos.getString("endDate")));
-                System.out.println(days);
+                long days = TextUtils.getDifferenceDays(new Date(infos.getString("startDate")), new Date(infos.getString("endDate")));
                 if (days <= (long) 0) {
                     Manager.getModerationManager().delBan(player.getUniqueId().toString());
                     Manager.getSessionManager().loadSession(player);
