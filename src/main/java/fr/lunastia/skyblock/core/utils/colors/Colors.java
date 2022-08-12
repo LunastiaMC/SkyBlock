@@ -10,7 +10,8 @@ public enum Colors {
 
     // Colors
     MOD_RED("&#ff3c3c"),
-    DISCORD_COLOR("&#5865F2");
+    DISCORD_COLOR("&#5865F2"),
+    LOGS("&#89fbf4&l[&#74e6dd&lL&#5ed1c7&lo&#49bcb0&lg&#33a799&l]");
 
     private final String k;
 
