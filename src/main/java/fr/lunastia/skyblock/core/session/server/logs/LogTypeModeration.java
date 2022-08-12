@@ -43,6 +43,6 @@ public class LogTypeModeration implements Log {
     }
 
     public void send() {
-        Log.super.send(type, target, moderator, reason, expireAt);
+        Log.super.sendModLog(type, target, moderator, reason, expireAt);
     }
 }
