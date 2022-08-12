@@ -2,6 +2,8 @@ package fr.lunastia.skyblock.core.listeners;
 
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Session;
+import fr.lunastia.skyblock.core.session.server.EnumLogs;
+import fr.lunastia.skyblock.core.session.server.logs.LogTypeCommon;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.Material;
@@ -19,7 +21,6 @@ import org.bukkit.inventory.ItemStack;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -60,6 +61,9 @@ public class PlayerListeners implements Listener {
         } else {
             Manager.getSessionManager().loadSession(player);
         }
+
+        LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_JOIN,player);
+        log.send();
     }
 
     @EventHandler
@@ -69,6 +73,9 @@ public class PlayerListeners implements Listener {
         if (Manager.getSessionManager().hasSession(player)) {
             Manager.getSessionManager().saveSession(player);
         }
+
+        LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_QUIT,player);
+        log.send();
     }
 
     @EventHandler
