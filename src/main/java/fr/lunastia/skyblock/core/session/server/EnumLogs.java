@@ -9,11 +9,27 @@ public enum EnumLogs {
 
     private final String itemTitle;
 
-    EnumLogs(String itemTitle) {
+    EnumLogs(String itemDescription, String itemTitle, Colors color, Integer itemHead) {
         this.itemTitle = itemTitle;
+        this.itemDescription = itemDescription;
+        this.itemColor = color;
+        this.itemHead = itemHead;
     }
 
     public String getItemTitle() {
         return itemTitle;
     }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public Colors getItemColor() {
+        return itemColor;
+    }
+
+    public Integer getItemHead() {
+        return itemHead;
+    }
+
 }
