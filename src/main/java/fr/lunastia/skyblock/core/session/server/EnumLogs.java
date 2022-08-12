@@ -6,8 +6,10 @@ import fr.lunastia.skyblock.core.utils.colors.Colors;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public enum EnumLogs {
     PLAYER_JOIN("", "Connexion", Colors.COMMON, 8768),
@@ -100,8 +102,12 @@ public enum EnumLogs {
                 break;
             case PLAYER_BANNED:
                 lore.add(ColorUtils.colorize("§l§7➤ §r§7Joueur banni: " + PLAYER_BANNED.itemColor.color() + infos.getString("target_name")));
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + PLAYER_BANNED.itemColor.color() + infos.getString("startAt")));
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Durée de bannissement: " + PLAYER_BANNED.itemColor.color() + TextUtils.getDifferenceDays(new Date(infos.getString("startAt")), new Date(infos.getString("expireAt"))) + " jours"));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + PLAYER_BANNED.itemColor.color() + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(infos.getString("startAt")))));
+                if (Objects.equals(infos.getString("expireAt"), "perm")) {
+                    lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Durée de bannissement: §r" + PLAYER_BANNED.itemColor.color() + "Permanent"));
+                } else {
+                    lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Durée de bannissement: " + PLAYER_BANNED.itemColor.color() + TextUtils.getDifferenceDays(new Date(infos.getString("startAt")), new Date(infos.getString("expireAt"))) + " jours"));
+                }
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Raison: " + PLAYER_BANNED.itemColor.color() + infos.getString("reason")));
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Banni par: " + PLAYER_BANNED.itemColor.color() + infos.getString("moderator_name")));
                 break;

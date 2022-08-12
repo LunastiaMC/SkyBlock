@@ -41,6 +41,26 @@ public class BanCommand {
         }
     }
 
+    @Default
+    public static void ban(Player player, @APlayerArgument Player target, @AGreedyStringArgument String reason) {
+        try {
+            Manager.getModerationManager().addBan(target, player, "perm", reason);
+            ColorUtils.sendMessage(player, "Vous venez de bannir le joueur " + Colors.MOD_RED.color() + target.getName() + " §7pour une durée permanente, pour la raison: " + Colors.MOD_RED.color() + reason, Colors.PREFIX);
+            String[] message = new String[]{
+                    ColorUtils.colorize(Colors.MOD_RED.color() + "§lVous êtes banni(e) du serveur\n\n"),
+                    ColorUtils.colorize("§7§l➤§r§7 Pour la raison suivante: " + Colors.MOD_RED.color() + reason) + "\n",
+                    ColorUtils.colorize("§7§l➤§r§7 La durée est permanente") + "\n",
+                    "\n",
+                    ColorUtils.colorize("§r§7Si vous pensez qu'il y a une erreur") + "\n",
+                    ColorUtils.colorize("§r§7vous pouvez ouvrir un ticket sur le discord") + "\n",
+                    ColorUtils.colorize(Colors.DISCORD_COLOR.color() + "discord.gg/F9aQyQZxQr")
+            };
+            target.kickPlayer(String.join("", message));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static String translateDuration(String time) {
         return switch (time) {
             case "days" -> "jour(s)";

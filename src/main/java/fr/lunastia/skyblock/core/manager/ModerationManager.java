@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Objects;
 
 public class ModerationManager {
 
@@ -38,16 +39,23 @@ public class ModerationManager {
     public void addBan(Player player, Player moderator, String expire, String reason) throws SQLException {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
         final PreparedStatement statement = connection.prepareStatement("INSERT INTO bans (uuid, startDate, endDate, reason) VALUES (?,?,?,?)");
+
         String start = getMinimizedDate(new Date());
-        String expireMMZ = getMinimizedDate(expire);
+        LogTypeModeration log = new LogTypeModeration(EnumLogs.PLAYER_BANNED, player, moderator, reason);
+
         statement.setString(1, player.getUniqueId().toString());
         statement.setString(2, start);
-        statement.setString(3, expireMMZ);
+        if (Objects.equals(expire, "perm")) {
+            String expireMMZ = getMinimizedDate(expire);
+            statement.setString(3, expireMMZ);
+            log.setExpireAt(expireMMZ);
+        } else {
+            statement.setString(3, "perm");
+            log.setExpireAt("perm");
+        }
         statement.setString(4, reason);
         statement.execute();
 
-        LogTypeModeration log = new LogTypeModeration(EnumLogs.PLAYER_BANNED, player, moderator, reason);
-        log.setExpireAt(expireMMZ);
         log.setStartAt(start);
         log.send();
     }
@@ -67,16 +75,29 @@ public class ModerationManager {
         final ResultSet resultSet = statementFinder.executeQuery();
 
         if (resultSet.next()) {
-            long days = TextUtils.getDifferenceDays(new Date(resultSet.getString("startDate")), new Date(resultSet.getString("endDate")));
-            if (days <= (long) 0) {
-                Manager.getModerationManager().delBan(player.getUniqueId().toString());
-                Manager.getSessionManager().loadSession(player);
-                return false;
-            } else {
-                String reason = resultSet.getString("reason");
-                if (reason == null) reason = "Aucune raison";
+            String reason = resultSet.getString("reason");
+            if (reason == null) reason = "Aucune raison";
 
-                String[] message = new String[]{
+            String[] message = {};
+            if (resultSet.getString("endDate").equals("perm")) {
+                message = new String[]{
+                        ColorUtils.colorize(Colors.MOD_RED.color() + "§lVous êtes banni(e) du serveur\n\n"),
+                        ColorUtils.colorize("§7§l➤§r§7 Pour la raison suivante: " + Colors.MOD_RED.color() + reason) + "\n",
+                        ColorUtils.colorize("§7§l➤§r§7 Votre bannissement est malheureusement permanent."),
+                        "\n",
+                        ColorUtils.colorize("§r§7Si vous pensez qu'il y a une erreur") + "\n",
+                        ColorUtils.colorize("§r§7vous pouvez ouvrir un ticket sur le discord") + "\n",
+                        ColorUtils.colorize(Colors.DISCORD_COLOR.color() + "discord.gg/F9aQyQZxQr")
+                };
+            } else {
+                long days = TextUtils.getDifferenceDays(new Date(resultSet.getString("startDate")), new Date(resultSet.getString("endDate")));
+                if (days <= (long) 0) {
+                    Manager.getModerationManager().delBan(player.getUniqueId().toString());
+                    Manager.getSessionManager().loadSession(player);
+                    return false;
+                }
+
+                message = new String[]{
                         ColorUtils.colorize(Colors.MOD_RED.color() + "§lVous êtes banni(e) du serveur\n\n"),
                         ColorUtils.colorize("§7§l➤§r§7 Pour la raison suivante: " + Colors.MOD_RED.color() + reason) + "\n",
                         ColorUtils.colorize("§7§l➤§r§7 Votre banissement expirera dans " + Colors.MOD_RED.color() + days + " jour(s)") + "\n",
@@ -85,9 +106,9 @@ public class ModerationManager {
                         ColorUtils.colorize("§r§7vous pouvez ouvrir un ticket sur le discord") + "\n",
                         ColorUtils.colorize(Colors.DISCORD_COLOR.color() + "discord.gg/F9aQyQZxQr")
                 };
-                player.kickPlayer(String.join("", message));
-                return true;
             }
+            player.kickPlayer(String.join("", message));
+            return true;
         }
         return resultSet.next();
     }
