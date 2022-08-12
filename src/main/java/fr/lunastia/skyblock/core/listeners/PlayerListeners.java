@@ -40,10 +40,7 @@ public class PlayerListeners implements Listener {
 
                 long days = getDifferenceDays(new Date(infos.getString("startDate")), new Date(infos.getString("endDate")));
 
-                player.kickPlayer(ColorUtils.colorize(Colors.MOD_RED.color() + "Vous êtes banni(e) du serveur" +
-                        "\n" +
-                        "\n§7§l➤§r§7 Pour la raison suivante: " + Colors.MOD_RED.color() + reason + "" +
-                        "\n§7§l➤§r§7 Votre banissement expirera le " + Colors.MOD_RED.color() + "cccccc"));
+                player.kickPlayer(ColorUtils.colorize(Colors.MOD_RED.color() + "Vous êtes banni(e) du serveur" + "\n" + "\n§7§l➤§r§7 Pour la raison suivante: " + Colors.MOD_RED.color() + reason + "\n§7§l➤§r§7 Votre banissement expirera dans " + Colors.MOD_RED.color() + days + " jour(s)"));
             }
         } else {
             Manager.getSessionManager().loadSession(player);
