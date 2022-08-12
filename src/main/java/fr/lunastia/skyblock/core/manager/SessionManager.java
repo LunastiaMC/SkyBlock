@@ -78,4 +78,8 @@ public class SessionManager {
     public HashMap<String, Session> getSessions() {
         return this.sessions;
     }
+
+    public boolean hasSession(Player player) {
+        return this.sessions.containsKey(player.getUniqueId().toString());
+    }
 }
