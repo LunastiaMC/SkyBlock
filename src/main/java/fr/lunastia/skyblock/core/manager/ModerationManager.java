@@ -8,12 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ModerationManager {
-    public void addBan(Player player, String expire, String reason) {
+    public void addBan(Player player, String expire, String reason) throws SQLException {
 
     }
 
-    public void delBan(String target) {
-        
+    public void delBan(String target) throws SQLException {
     }
 
     public boolean isBanned(Player player) throws SQLException {
