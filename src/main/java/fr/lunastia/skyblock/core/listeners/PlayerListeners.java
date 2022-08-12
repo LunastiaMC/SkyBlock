@@ -31,7 +31,14 @@ public class PlayerListeners implements Listener {
                 if (reason == null) reason = "Aucune raison";
 
 
-        Manager.getSessionManager().loadSession(player);
+                player.kickPlayer(ColorUtils.colorize(Colors.MOD_RED.color() + "Vous êtes banni(e) du serveur" +
+                        "\n" +
+                        "\n§7§l➤§r§7 Pour la raison suivante: " + Colors.MOD_RED.color() + reason + "" +
+                        "\n§7§l➤§r§7 Votre banissement expirera le " + Colors.MOD_RED.color() + "cccccc"));
+            }
+        } else {
+            Manager.getSessionManager().loadSession(player);
+        }
     }
 
     @EventHandler
