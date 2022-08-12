@@ -33,6 +33,7 @@ public class Manager {
         rankManager = new RankManager();
         guiManager = new GUIManager();
         headDatabase = new HeadDatabaseAPI();
+        moderationManager = new ModerationManager();
 
         // Suppression des commandes de base
         CommandAPI.unregister("clear", true);
