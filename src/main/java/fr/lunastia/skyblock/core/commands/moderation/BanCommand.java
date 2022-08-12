@@ -8,8 +8,6 @@ import dev.jorel.commandapi.annotations.arguments.AIntegerArgument;
 import dev.jorel.commandapi.annotations.arguments.AMultiLiteralArgument;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
 import fr.lunastia.skyblock.core.manager.Manager;
-import fr.lunastia.skyblock.core.session.server.EnumLogs;
-import fr.lunastia.skyblock.core.session.server.logs.LogTypeModeration;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
@@ -26,7 +24,7 @@ public class BanCommand {
     @Default
     public static void ban(Player player, @APlayerArgument Player target, @AMultiLiteralArgument({"days", "weeks", "months", "years"}) String type, @AIntegerArgument(min = 1) int duration, @AGreedyStringArgument String reason) {
         try {
-            Manager.getModerationManager().addBan(target, getDate(type, duration, true), reason);
+            Manager.getModerationManager().addBan(target, player, getDate(type, duration, true), reason);
             ColorUtils.sendMessage(player, "Vous venez de bannir le joueur " + Colors.MOD_RED.color() + target.getName() + " §7pour " + Colors.MOD_RED.color() + duration + " " + translateDuration(type) + "§7, pour la raison: " + Colors.MOD_RED.color() + reason + "\n§7Il pourra se reconnecter le: " + Colors.MOD_RED.color() + getDate(type, duration, false), Colors.PREFIX);
             String[] message = new String[]{
                     ColorUtils.colorize(Colors.MOD_RED.color() + "§lVous êtes banni(e) du serveur\n\n"),
@@ -38,11 +36,6 @@ public class BanCommand {
                     ColorUtils.colorize(Colors.DISCORD_COLOR.color() + "discord.gg/F9aQyQZxQr")
             };
             target.kickPlayer(String.join("", message));
-
-            LogTypeModeration log = new LogTypeModeration(EnumLogs.PLAYER_BANNED, target, player, reason);
-            log.setExpireAt(getDate(type, duration, true));
-            log.setStartAt(new Date().toString());
-            log.send();
         } catch (SQLException e) {
             e.printStackTrace();
         }

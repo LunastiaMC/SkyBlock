@@ -1,5 +1,7 @@
 package fr.lunastia.skyblock.core.manager;
 
+import fr.lunastia.skyblock.core.session.server.EnumLogs;
+import fr.lunastia.skyblock.core.session.server.logs.LogTypeModeration;
 import fr.lunastia.skyblock.core.utils.TextUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
@@ -22,22 +24,21 @@ public class ModerationManager {
     // | $$$$$$$/| $$  | $$| $$ \  $$
     // |_______/ |__/  |__/|__/  \__/
 
-    public void addBan(Player player, String expire, String reason) throws SQLException {
+    public void addBan(Player player, Player moderator, String expire, String reason) throws SQLException {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
         final PreparedStatement statement = connection.prepareStatement("INSERT INTO bans (uuid, startDate, endDate, reason) VALUES (?,?,?,?)");
+        String start = getMinimizedDate(new Date());
+        String expireMMZ = getMinimizedDate(expire);
         statement.setString(1, player.getUniqueId().toString());
-
-        Date date = new Date();
-        String startString = date.toString();
-
-        String[] startSplit = startString.split(" ");
-        statement.setString(2, startSplit[2] + " " + startSplit[1] + " " + startSplit[5] + " " + startSplit[3]);
-
-        String[] expireSplit = expire.split(" ");
-        statement.setString(3, expireSplit[2] + " " + expireSplit[1] + " " + expireSplit[5] + " " + expireSplit[3]);
-
+        statement.setString(2, start);
+        statement.setString(3, expireMMZ);
         statement.setString(4, reason);
         statement.execute();
+
+        LogTypeModeration log = new LogTypeModeration(EnumLogs.PLAYER_BANNED, player, moderator, reason);
+        log.setExpireAt(expireMMZ);
+        log.setStartAt(start);
+        log.send();
     }
 
     public void delBan(String target) throws SQLException {
