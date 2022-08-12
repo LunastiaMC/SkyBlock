@@ -21,6 +21,7 @@ public class Manager {
     private static GUIManager guiManager;
     private static RepairUtils repairUtils;
     private static HeadDatabaseAPI headDatabase;
+    private static ModerationManager moderationManager;
 
     public Manager() {
         repairUtils = new RepairUtils();
@@ -92,5 +93,9 @@ public class Manager {
 
     public static HeadDatabaseAPI getHeadDatabaseAPI() {
         return headDatabase;
+    }
+
+    public static ModerationManager getModerationManager() {
+        return moderationManager;
     }
 }
