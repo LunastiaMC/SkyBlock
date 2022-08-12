@@ -3,18 +3,26 @@ package fr.lunastia.skyblock.core.manager;
 import org.bukkit.entity.Player;
 
 import java.sql.*;
+import java.util.Date;
 
 public class ModerationManager {
     public void addBan(Player player, String expire, String reason) throws SQLException {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
-        final PreparedStatement statement = connection.prepareStatement("INSERT INTO bans (uuid, expire, reason) VALUES (?,?,?)");
+        final PreparedStatement statement = connection.prepareStatement("INSERT INTO bans (uuid, startDate, endDate, reason) VALUES (?,?,?,?)");
         statement.setString(1, player.getUniqueId().toString());
 
-        if (expire == null) statement.setNull(2, Types.NULL);
-        else statement.setString(2, expire);
+        Date date = new Date();
+        String startString = date.toString();
 
-        if (reason == null) statement.setNull(3, Types.NULL);
-        else statement.setString(3, reason);
+        String[] startSplit = startString.split(" ");
+        statement.setString(2, startSplit[2] + " " + startSplit[1] + " " + startSplit[5] + " " + startSplit[3]);
+
+        String[] expireSplit = expire.split(" ");
+        statement.setString(3, expireSplit[2] + " " + expireSplit[1] + " " + expireSplit[5] + " " + expireSplit[3]);
+
+        if (reason == null) statement.setNull(4, Types.NULL);
+        else statement.setString(4, reason);
+
         statement.execute();
     }
 
