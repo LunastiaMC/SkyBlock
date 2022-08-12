@@ -5,9 +5,14 @@ import fr.lunastia.skyblock.core.utils.colors.Colors;
 import java.util.ArrayList;
 
 public enum EnumLogs {
+
     PLAYER_OPEN_INVENTORY("", "Ouverture d'un inventaire", Colors.COMMON,227),
 
+
+    private final String itemDescription;
     private final String itemTitle;
+    private final Colors itemColor;
+    private final Integer itemHead;
 
     EnumLogs(String itemDescription, String itemTitle, Colors color, Integer itemHead) {
         this.itemTitle = itemTitle;
