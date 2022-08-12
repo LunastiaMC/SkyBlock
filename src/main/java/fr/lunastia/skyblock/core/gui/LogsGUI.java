@@ -21,12 +21,12 @@ public class LogsGUI implements GUI {
 
     @Override
     public String getName() {
-        return null;
+        return "Fichier journeaux";
     }
 
     @Override
     public int getSize() {
-        return 9;
+        return 54;
     }
 
     @Override
