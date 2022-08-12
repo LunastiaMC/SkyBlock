@@ -6,7 +6,6 @@ import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.arguments.AGreedyStringArgument;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
-import fr.lunastia.skyblock.core.session.server.logs.Log;
 import fr.lunastia.skyblock.core.session.server.logs.LogTypeModeration;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
