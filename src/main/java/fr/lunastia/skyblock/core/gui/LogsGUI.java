@@ -58,7 +58,7 @@ public class LogsGUI implements GUI {
 
     @Override
     public boolean clickCancelled() {
-        return false;
+        return true;
     }
 
     @Override
