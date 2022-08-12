@@ -2,7 +2,10 @@ package fr.lunastia.skyblock.core.manager;
 
 import org.bukkit.entity.Player;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 public class ModerationManager {
@@ -30,9 +33,7 @@ public class ModerationManager {
         String[] expireSplit = expire.split(" ");
         statement.setString(3, expireSplit[2] + " " + expireSplit[1] + " " + expireSplit[5] + " " + expireSplit[3]);
 
-        if (reason == null) statement.setNull(4, Types.NULL);
-        else statement.setString(4, reason);
-
+        statement.setString(4, reason);
         statement.execute();
     }
 
