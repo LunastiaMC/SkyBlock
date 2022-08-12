@@ -16,6 +16,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HatListGUI implements GUI {
     @Override
@@ -64,6 +65,7 @@ public class HatListGUI implements GUI {
                         player.getInventory().setHelmet(item);
 
                         LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_CHANGE_HAT, player, displayName);
+                        log.setStartDate(new Date().toString());
                         log.send();
                         return;
                     }
