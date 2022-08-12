@@ -5,10 +5,26 @@ import fr.lunastia.skyblock.core.utils.colors.Colors;
 import java.util.ArrayList;
 
 public enum EnumLogs {
+    PLAYER_JOIN("", "Connexion", Colors.COMMON,8768),
+    PLAYER_QUIT("", "Déconnexion", Colors.COMMON,8774),
+    PLAYER_KICKED("", "Expulsion", Colors.WARNING,48927),
+    PLAYER_BANNED("", "Bannissement", Colors.BAD,48927),
+    PLAYER_IP_BANNED("", "Bannissement par IP", Colors.BAD,48927),
+    PLAYER_UNBANNED("", "Débannissement", Colors.BAD,48927),
+    PLAYER_IP_UNBANNED("", "Débannissement par IP", Colors.BAD,48927),
+    PLAYER_MUTED("", "Mise en sourdine", Colors.WARNING,48927),
+    PLAYER_UNMUTED("", "Rétablissement de la parole", Colors.WARNING,48927),
+    PLAYER_UNMUTED_EXPIRED("", "Rétablissement de la parole par temps expiré", Colors.COMMON,47475),
+    PLAYER_FREEZED("", "Gel", Colors.WARNING,29472),
+    PLAYER_UNFREEZED("", "Dégel", Colors.WARNING,29472),
+    PLAYER_CHANGE_HAT("", "Changement de chapeau", Colors.COMMON,55055),
+    PLAYER_GAMEMODE_CHANGED_BY_FORCE("", "Changement de mode de jeu par force", Colors.WARNING,8765),
+    PLAYER_CHANGE_GAMEMODE("", "Changement de mode de jeu", Colors.WARNING,8765),
+    PLAYER_RANK_UPDATED("", "Changement de grade", Colors.BAD,33946),
+    PLAYER_TELEPORT("", "Téléportation", Colors.WARNING,1109),
+    PLAYER_TELEPORTED_BY_FORCE("", "Téléportation par force", Colors.WARNING,1109),
     PLAYER_KIT_USE("", "Utilisation d'un équipement", Colors.COMMON,51459),
-
     PLAYER_OPEN_INVENTORY("", "Ouverture d'un inventaire", Colors.COMMON,227),
-
     KIT_ADDED("", "Ajout d'un équipement", Colors.WARNING,51459),
     KIT_REMOVED("", "Suppression d'un équipement", Colors.WARNING,51459),
     KIT_UPDATED("", "Mise à jour d'un équipement", Colors.WARNING,51459),
