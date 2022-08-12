@@ -3,6 +3,7 @@ package fr.lunastia.skyblock.core.session.server;
 import fr.lunastia.skyblock.core.utils.TextUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
+import org.bukkit.entity.Player;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -81,41 +82,42 @@ public enum EnumLogs {
         return itemHead;
     }
 
-    public ArrayList<String> getItemLore(EnumLogs log, ResultSet infos) throws SQLException {
+    public ArrayList<String> getItemLore(EnumLogs log, ResultSet infos, Player player) throws SQLException {
         ArrayList<String> lore = new ArrayList<>();
         lore.add("§l§7• §r" + log.getItemDescription());
         lore.add(" ");
+        lore.add(ColorUtils.colorize("§l§7➤ §r§7Joueur: §r" + log.itemColor.color() + infos.getString("target_name")));
+        lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + log.itemColor.color() + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(infos.getString("startAt")))));
+        lore.add(" ");
         switch (log) {
-            case PLAYER_JOIN:
-                lore.add(ColorUtils.colorize("§l§7➤ §r§7Joueur: §r" + PLAYER_JOIN.itemColor.color() + infos.getString("target_name")));
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + PLAYER_JOIN.itemColor.color() + infos.getString("startAt")));
-                break;
-            case PLAYER_QUIT:
-                lore.add(ColorUtils.colorize("§l§7➤ §r§7Joueur: §r" + PLAYER_QUIT.itemColor.color() + infos.getString("target_name")));
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + PLAYER_QUIT.itemColor.color() + infos.getString("startAt")));
-                break;
             case PLAYER_KICKED:
-                lore.add(ColorUtils.colorize("§l§7➤ §r§7Joueur: §r" + PLAYER_KICKED.itemColor.color() + infos.getString("target_name")));
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7Raison: §r" + PLAYER_KICKED.itemColor.color() + infos.getString("reason")));
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + PLAYER_KICKED.itemColor.color() + infos.getString("startAt")));
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7Modérateur: §r" + PLAYER_KICKED.itemColor.color() + infos.getString("moderator_name")));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Raison: §r" + log.itemColor.color() + infos.getString("reason")));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Modérateur: §r" + log.itemColor.color() + infos.getString("moderator_name")));
                 break;
             case PLAYER_BANNED:
-                lore.add(ColorUtils.colorize("§l§7➤ §r§7Joueur banni: " + PLAYER_BANNED.itemColor.color() + infos.getString("target_name")));
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + PLAYER_BANNED.itemColor.color() + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(infos.getString("startAt")))));
-                if (Objects.equals(infos.getString("expireAt"), "perm")) {
-                    lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Durée de bannissement: §r" + PLAYER_BANNED.itemColor.color() + "Permanent"));
-                } else {
-                    lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Durée de bannissement: " + PLAYER_BANNED.itemColor.color() + TextUtils.getDifferenceDays(new Date(infos.getString("startAt")), new Date(infos.getString("expireAt"))) + " jours"));
+                isPermanent(infos, lore, log);
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Raison: " + log.itemColor.color() + infos.getString("reason")));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Banni par: " + log.itemColor.color() + infos.getString("moderator_name")));
+                break;
+            case PLAYER_IP_BANNED:
+                if (player.isOp()) {
+                    lore.add(ColorUtils.colorize("§l§7➥ §r§7Adresse IP: " + log.itemColor.color() + infos.getString("ip")));
                 }
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Raison: " + PLAYER_BANNED.itemColor.color() + infos.getString("reason")));
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7" + "Banni par: " + PLAYER_BANNED.itemColor.color() + infos.getString("moderator_name")));
+                isPermanent(infos, lore, log);
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Raison: " + log.itemColor.color() + infos.getString("reason")));
                 break;
             case PLAYER_CHANGE_HAT:
-                lore.add(ColorUtils.colorize("§l§7➤ §r§7Joueur: §r" + PLAYER_CHANGE_HAT.itemColor.color() + infos.getString("target_name")));
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r" + PLAYER_CHANGE_HAT.itemColor.color() + infos.getString("hat_name")));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r" + log.itemColor.color() + infos.getString("hat_name")));
                 break;
         }
         return lore;
+    }
+
+    private void isPermanent(ResultSet infos, ArrayList<String> lore, EnumLogs log) throws SQLException {
+        if (infos.getString("expireAt").equals("perm")) {
+            lore.add(ColorUtils.colorize("§l§7➥ §r§7Durée de bannissement: §r" + log.itemColor.color() + "Permanent"));
+        } else {
+            lore.add(ColorUtils.colorize("§l§7➥ §r§7Durée de bannissement: " + log.itemColor.color() + TextUtils.getDifferenceDays(new Date(infos.getString("startAt")), new Date(infos.getString("expireAt"))) + " jours"));
+        }
     }
 }

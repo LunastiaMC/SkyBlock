@@ -5,12 +5,14 @@ import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.arguments.AGreedyStringArgument;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
+import fr.lunastia.skyblock.core.manager.ModerationManager;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import fr.lunastia.skyblock.core.session.server.logs.LogTypeModeration;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Command("kick")
@@ -30,7 +32,7 @@ public class KickCommand {
 
         target.kickPlayer(String.join("", message));
         LogTypeModeration log = new LogTypeModeration(EnumLogs.PLAYER_KICKED, target, player, reason);
-        log.setStartAt(new Date().toString());
+        log.setStartAt(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
         log.send();
     }
 }

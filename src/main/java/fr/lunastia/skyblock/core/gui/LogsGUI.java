@@ -44,7 +44,7 @@ public class LogsGUI implements GUI {
             item = ItemUtils.customizedItem(
                     Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(logType.getItemHead())),
                     ColorUtils.colorize(logType.getItemColor().color() + logType.getItemTitle()),
-                    logType.getItemLore(logType, resultSet)
+                    logType.getItemLore(logType, resultSet, player)
             );
 
             inventory.setItem(slot, item);
