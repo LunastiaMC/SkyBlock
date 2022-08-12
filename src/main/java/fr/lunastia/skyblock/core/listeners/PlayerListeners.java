@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -35,12 +36,26 @@ public class PlayerListeners implements Listener {
         if (Manager.getModerationManager().isBanned(player)) {
             ResultSet infos = Manager.getModerationManager().getBanInfo(player);
             if (infos.next()) {
-                String reason = infos.getString("reason");
-                if (reason == null) reason = "Aucune raison";
-
                 long days = getDifferenceDays(new Date(infos.getString("startDate")), new Date(infos.getString("endDate")));
+                System.out.println(days);
+                if (days <= (long) 0) {
+                    Manager.getModerationManager().delBan(player.getUniqueId().toString());
+                    Manager.getSessionManager().loadSession(player);
+                } else {
+                    String reason = infos.getString("reason");
+                    if (reason == null) reason = "Aucune raison";
 
-                player.kickPlayer(ColorUtils.colorize(Colors.MOD_RED.color() + "Vous êtes banni(e) du serveur" + "\n" + "\n§7§l➤§r§7 Pour la raison suivante: " + Colors.MOD_RED.color() + reason + "\n§7§l➤§r§7 Votre banissement expirera dans " + Colors.MOD_RED.color() + days + " jour(s)"));
+                    String[] message = new String[]{
+                            ColorUtils.colorize(Colors.MOD_RED.color() + "§lVous êtes banni(e) du serveur\n\n"),
+                            ColorUtils.colorize("§7§l➤§r§7 Pour la raison suivante: " + Colors.MOD_RED.color() + reason) + "\n",
+                            ColorUtils.colorize("§7§l➤§r§7 Votre banissement expirera dans " + Colors.MOD_RED.color() + days + " jour(s)") + "\n",
+                            "\n",
+                            ColorUtils.colorize("§r§7Si vous pensez qu'il y a une erreur") + "\n",
+                            ColorUtils.colorize("§r§7vous pouvez ouvrir un ticket sur le discord") + "\n",
+                            ColorUtils.colorize(Colors.DISCORD_COLOR.color() + "discord.gg/F9aQyQZxQr")
+                    };
+                    player.kickPlayer(String.join("", message));
+                }
             }
         } else {
             Manager.getSessionManager().loadSession(player);
