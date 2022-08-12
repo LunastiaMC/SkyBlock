@@ -80,9 +80,8 @@ public class PlayerListeners implements Listener {
         assert item != null;
         String inventoryName = event.getView().getTitle();
         // TODO: Mettre dans un array puis .contains() pour ne pas avoir à tester toutes les valeurs.
-        if (inventoryName.equals("Liste des chapeaux disponibles")) return;
 
-        if (Objects.requireNonNull(player.getInventory().getHelmet().getItemMeta()).getDisplayName().contains("Chapeau")) {
+        if (Objects.requireNonNull(item.getItemMeta()).getDisplayName().contains("Chapeau")) {
             event.setCancelled(true);
             ColorUtils.sendMessage(player, "Vous devez retirer le chapeau en faisant §d/hat remove §7!", Colors.HAT);
         }
