@@ -34,6 +34,7 @@ public class ModerationManager {
 
         return resultSet.next();
     }
+
     public ResultSet getBanInfo(Player player) throws SQLException {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
 
