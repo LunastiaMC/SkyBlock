@@ -13,7 +13,7 @@ public interface GUI {
 
     int getSize();
 
-    void getContents(Player player, Inventory inventory);
+    void getContents(Player player, Inventory inventory) throws SQLException;
 
     void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) throws SQLException;
 
