@@ -27,6 +27,34 @@ public class Manager {
         repairUtils = new RepairUtils();
     }
 
+    public static SessionManager getSessionManager() {
+        return sessionManager;
+    }
+
+    public static RankManager getRankManager() {
+        return rankManager;
+    }
+
+    public static DatabaseManager getDatabaseManager() {
+        return databaseManager;
+    }
+
+    public static GUIManager getGUIManager() {
+        return guiManager;
+    }
+
+    public static RepairUtils getRepairUtils() {
+        return repairUtils;
+    }
+
+    public static HeadDatabaseAPI getHeadDatabaseAPI() {
+        return headDatabase;
+    }
+
+    public static ModerationManager getModerationManager() {
+        return moderationManager;
+    }
+
     public void init() {
         sessionManager = new SessionManager();
         databaseManager = new DatabaseManager();
@@ -69,34 +97,5 @@ public class Manager {
         // Chargement des évènements
         Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());
         Core.getInstance().getServer().getPluginManager().registerEvents(new FreezeListeners(), Core.getInstance());
-    }
-
-
-    public static SessionManager getSessionManager() {
-        return sessionManager;
-    }
-
-    public static RankManager getRankManager() {
-        return rankManager;
-    }
-
-    public static DatabaseManager getDatabaseManager() {
-        return databaseManager;
-    }
-
-    public static GUIManager getGUIManager() {
-        return guiManager;
-    }
-
-    public static RepairUtils getRepairUtils() {
-        return repairUtils;
-    }
-
-    public static HeadDatabaseAPI getHeadDatabaseAPI() {
-        return headDatabase;
-    }
-
-    public static ModerationManager getModerationManager() {
-        return moderationManager;
     }
 }
