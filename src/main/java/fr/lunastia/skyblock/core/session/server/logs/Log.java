@@ -2,6 +2,7 @@ package fr.lunastia.skyblock.core.session.server.logs;
 
 import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.manager.Manager;
+import fr.lunastia.skyblock.core.manager.ModerationManager;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import org.bukkit.entity.Player;
 
@@ -40,7 +41,7 @@ public interface Log {
                 statement.setString(1, type.toString());
                 statement.setString(2, target.getUniqueId().toString());
                 statement.setString(3, target.getName());
-                statement.setString(4, startAt);
+                statement.setString(4, ModerationManager.getMinimizedDate(startAt));
                 statement.setString(5, hat);
                 statement.execute();
             } catch (SQLException e) {
