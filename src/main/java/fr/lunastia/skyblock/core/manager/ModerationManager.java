@@ -6,7 +6,16 @@ import java.sql.*;
 
 public class ModerationManager {
     public void addBan(Player player, String expire, String reason) throws SQLException {
+        Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
+        final PreparedStatement statement = connection.prepareStatement("INSERT INTO bans (uuid, expire, reason) VALUES (?,?,?)");
+        statement.setString(1, player.getUniqueId().toString());
+        
+        if (expire == null) statement.setNull(2, Types.NULL);
+        else statement.setString(2, expire);
 
+        if (reason == null) statement.setNull(3, Types.NULL);
+        else statement.setString(3, reason);
+        statement.execute();
     }
 
     public void delBan(String target) throws SQLException {
