@@ -84,7 +84,7 @@ public class GUIManager implements Listener {
         getRegisteredGUIs().put(builder.getClass(), builder);
     }
 
-    public void open(Player player, Class<? extends GUI> GUIClass) {
+    public void open(Player player, Class<? extends GUI> GUIClass) throws SQLException {
         if (!getRegisteredGUIs().containsKey(GUIClass)) return;
         GUI gui = getRegisteredGUIs().get(GUIClass);
 
