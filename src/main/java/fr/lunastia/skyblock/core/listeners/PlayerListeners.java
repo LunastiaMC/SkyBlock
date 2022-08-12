@@ -16,7 +16,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class PlayerListeners implements Listener {
@@ -44,7 +48,7 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) throws SQLException {
         Player player = event.getPlayer();
-        Manager.getSessionManager().saveSession(player);
+
         if (Manager.getSessionManager().hasSession(player)) {
             Manager.getSessionManager().saveSession(player);
         }
