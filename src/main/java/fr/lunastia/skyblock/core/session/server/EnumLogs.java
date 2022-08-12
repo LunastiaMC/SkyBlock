@@ -32,4 +32,13 @@ public enum EnumLogs {
         return itemHead;
     }
 
+    public ArrayList<String> getItemLore(EnumLogs log) {
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add("§l§7➥ §r" + log.getItemDescription());
+        lore.add(" ");
+        if (log == EnumLogs.PLAYER_BANNED) {
+
+        }
+        return lore;
+    }
 }
