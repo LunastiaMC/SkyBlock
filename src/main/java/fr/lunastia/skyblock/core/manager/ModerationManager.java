@@ -19,6 +19,10 @@ public class ModerationManager {
     }
 
     public void delBan(String target) throws SQLException {
+        Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
+        final PreparedStatement statement = connection.prepareStatement("DELETE FROM bans WHERE uuid = ?");
+        statement.setString(1, target);
+        statement.execute();
     }
 
     public boolean isBanned(Player player) throws SQLException {
