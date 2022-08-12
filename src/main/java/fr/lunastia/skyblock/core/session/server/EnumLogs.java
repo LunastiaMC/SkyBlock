@@ -37,6 +37,7 @@ public enum EnumLogs {
     ISLAND_VISITOR_UNBANNED("Visiteur d'île débanni(e)"),
     ISLAND_WEATHER_CHANGED("Changement du temps de l'île"),
     ISLAND_TIME_CHANGED("Changement de l'heure de l'île");
+    PLAYER_OPEN_INVENTORY("", "Ouverture d'un inventaire", Colors.COMMON,227),
 
     private final String itemTitle;
 
