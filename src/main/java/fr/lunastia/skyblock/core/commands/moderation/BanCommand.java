@@ -24,11 +24,13 @@ public class BanCommand {
     public static void ban(Player player, @APlayerArgument Player target, @AMultiLiteralArgument({"hours", "days", "weeks", "months", "years"}) String type, @AIntegerArgument(min = 1) int duration, @AGreedyStringArgument String reason) {
         DateFormat format = new SimpleDateFormat("EEEE yyyy-MM-dd HH:mm:ss a");
         ColorUtils.sendMessage(player, format.format(getDate(type, duration,false)), Colors.PREFIX);
+        ColorUtils.sendMessage(player, "Vous venez de bannir le joueur " + Colors.MOD_RED.color() + target.getName() + " §7pour " + Colors.MOD_RED.color() + duration + " " + translateDuration(type) + "§7, pour la raison: " + Colors.MOD_RED.color() + reason + "\n§7Il pourra se reconnecter le: " + Colors.MOD_RED.color() + getDate(type, duration, false), Colors.PREFIX);
     }
 
     @Default
     public static void ban(Player player, @APlayerArgument Player target, @AMultiLiteralArgument({"hours", "days", "weeks", "months", "years"}) String type, @AIntegerArgument(min = 1) int duration) {
         ColorUtils.sendMessage(player, getDate(type, duration,false), Colors.PREFIX);
+        ColorUtils.sendMessage(player, "Vous venez de bannir le joueur " + Colors.MOD_RED.color() + target.getName() + " §7pour " + Colors.MOD_RED.color() + duration + " " + translateDuration(type) + "§7, son bannissement sera fini le " + Colors.MOD_RED.color() + getDate(type, duration, false), Colors.PREFIX);
     }
 
     public static String translateDuration(String time) {
