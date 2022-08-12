@@ -5,6 +5,8 @@ import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.arguments.AGreedyStringArgument;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
+import fr.lunastia.skyblock.core.session.server.EnumLogs;
+import fr.lunastia.skyblock.core.session.server.logs.LogTypeModeration;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
@@ -24,5 +26,8 @@ public class KickCommand {
                 ColorUtils.colorize(Colors.DISCORD_COLOR.color() + "discord.gg/F9aQyQZxQr")
         };
         target.kickPlayer(String.join("", message));
+
+        LogTypeModeration log = new LogTypeModeration(EnumLogs.PLAYER_KICKED, target, player, reason);
+        log.send();
     }
 }
