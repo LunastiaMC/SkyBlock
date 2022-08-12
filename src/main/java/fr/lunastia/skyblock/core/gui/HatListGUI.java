@@ -63,7 +63,7 @@ public class HatListGUI implements GUI {
                         ItemStack item = ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(String.valueOf(slot) + ".id"))), section.getString(String.valueOf(slot) + ".displayName"), new ArrayList<>());
                         player.getInventory().setHelmet(item);
 
-                        LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_CHANGE_HAT, player);
+                        LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_CHANGE_HAT, player, displayName);
                         log.send();
                         return;
                     }
