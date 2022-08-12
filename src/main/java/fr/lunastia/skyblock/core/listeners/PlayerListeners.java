@@ -23,7 +23,13 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) throws SQLException {
         Player player = event.getPlayer();
+
         if (Manager.getModerationManager().isBanned(player)) {
+            ResultSet infos = Manager.getModerationManager().getBanInfo(player);
+            if (infos.next()) {
+                String reason = infos.getString("reason");
+                if (reason == null) reason = "Aucune raison";
+
 
         Manager.getSessionManager().loadSession(player);
     }
