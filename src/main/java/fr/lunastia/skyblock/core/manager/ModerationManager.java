@@ -9,7 +9,7 @@ public class ModerationManager {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
         final PreparedStatement statement = connection.prepareStatement("INSERT INTO bans (uuid, expire, reason) VALUES (?,?,?)");
         statement.setString(1, player.getUniqueId().toString());
-        
+
         if (expire == null) statement.setNull(2, Types.NULL);
         else statement.setString(2, expire);
 
