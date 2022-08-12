@@ -16,7 +16,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class LogsGUI implements GUI {
@@ -44,7 +43,9 @@ public class LogsGUI implements GUI {
             ItemStack item = ItemUtils.customizedItem(
                     Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(logType.getItemHead())),
                     ColorUtils.colorize(logType.getItemColor().color() + logType.getItemTitle()),
-                    new ArrayList<>());
+                    logType.getItemLore(logType, resultSet)
+            );
+
             inventory.setItem(slot, item);
             slot++;
         }
