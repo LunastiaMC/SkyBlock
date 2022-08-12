@@ -1,7 +1,9 @@
 package fr.lunastia.skyblock.core.gui;
 
 import fr.lunastia.skyblock.core.manager.Manager;
+import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
