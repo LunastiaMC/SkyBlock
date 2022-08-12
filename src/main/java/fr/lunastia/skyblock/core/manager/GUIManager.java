@@ -1,10 +1,7 @@
 package fr.lunastia.skyblock.core.manager;
 
 import fr.lunastia.skyblock.core.Core;
-import fr.lunastia.skyblock.core.gui.GUI;
-import fr.lunastia.skyblock.core.gui.HatListGUI;
-import fr.lunastia.skyblock.core.gui.RepairGUI;
-import fr.lunastia.skyblock.core.gui.TrashGUI;
+import fr.lunastia.skyblock.core.gui.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,6 +25,7 @@ public class GUIManager implements Listener {
         this.addMenu(new HatListGUI());
         this.addMenu(new TrashGUI());
         this.addMenu(new RepairGUI());
+        this.addMenu(new LogsGUI());
 
         Bukkit.getPluginManager().registerEvents(this, Core.getInstance());
     }
