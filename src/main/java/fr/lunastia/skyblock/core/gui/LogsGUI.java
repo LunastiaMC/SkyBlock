@@ -35,7 +35,7 @@ public class LogsGUI implements GUI {
     public void getContents(Player player, Inventory inventory) throws SQLException {
         // TODO: Add page system
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
-        final PreparedStatement statement = connection.prepareStatement("SELECT * FROM logs ORDER BY logged_at DESC 53;");
+        final PreparedStatement statement = connection.prepareStatement("SELECT * FROM logs ORDER BY logged_at DESC LIMIT 53;");
         final ResultSet resultSet = statement.executeQuery();
         int slot = 0;
         while (resultSet.next()) {
