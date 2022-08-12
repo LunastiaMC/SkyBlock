@@ -15,6 +15,17 @@ import java.util.Date;
 
 public class ModerationManager {
 
+    public static String getMinimizedDate(Date fullDate) {
+        String startString = fullDate.toString();
+        String[] startSplit = startString.split(" ");
+        return startSplit[2] + " " + startSplit[1] + " " + startSplit[5] + " " + startSplit[3];
+    }
+
+    public static String getMinimizedDate(String fullDate) {
+        String[] startSplit = fullDate.split(" ");
+        return startSplit[2] + " " + startSplit[1] + " " + startSplit[5] + " " + startSplit[3];
+    }
+
     //  /$$$$$$$   /$$$$$$  /$$   /$$
     // | $$__  $$ /$$__  $$| $$$ | $$
     // | $$  \ $$| $$  \ $$| $$$$| $$
