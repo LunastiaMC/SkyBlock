@@ -1,6 +1,8 @@
 package fr.lunastia.skyblock.core.gui;
 
 import fr.lunastia.skyblock.core.Core;
+import fr.lunastia.skyblock.core.session.server.EnumLogs;
+import fr.lunastia.skyblock.core.session.server.logs.LogTypeCommon;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
@@ -60,6 +62,9 @@ public class HatListGUI implements GUI {
                         ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName, Colors.HAT);
                         ItemStack item = ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(String.valueOf(slot) + ".id"))), section.getString(String.valueOf(slot) + ".displayName"), new ArrayList<>());
                         player.getInventory().setHelmet(item);
+
+                        LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_CHANGE_HAT, player);
+                        log.send();
                         return;
                     }
                     ColorUtils.sendMessage(player, "Veuillez enlevez votre casque avant de mettre un chapeau !", Colors.HAT);
