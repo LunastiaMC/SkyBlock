@@ -3,21 +3,19 @@ package fr.lunastia.skyblock.core.session.server.logs;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import org.bukkit.entity.Player;
 
-import java.sql.Timestamp;
-
 public class LogTypeModeration implements Log {
     private final EnumLogs type;
     private final Player target;
     private final Player moderator;
     private final String reason;
-    private Timestamp expireAt;
+    private String expireAt;
 
     public LogTypeModeration(EnumLogs type, Player target, Player moderator, String reason) {
         this.type = type;
         this.target = target;
         this.moderator = moderator;
         this.reason = reason;
-        this.expireAt = new Timestamp(System.currentTimeMillis() + (1000 * 60 * 60 * 24));
+        this.expireAt = null;
     }
 
     public EnumLogs getType() {
@@ -36,11 +34,15 @@ public class LogTypeModeration implements Log {
         return reason;
     }
 
-    public Timestamp getExpireAt() {
+    public String getExpireAt() {
         return expireAt;
     }
 
-    public void setExpireAt(Timestamp expireAt) {
+    public void setExpireAt(String expireAt) {
         this.expireAt = expireAt;
+    }
+
+    public void send() {
+        Log.super.send(type, target, moderator, reason, expireAt);
     }
 }
