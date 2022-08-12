@@ -2,10 +2,7 @@ package fr.lunastia.skyblock.core.manager;
 
 import org.bukkit.entity.Player;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ModerationManager {
     public void addBan(Player player, String expire, String reason) throws SQLException {
