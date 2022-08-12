@@ -24,8 +24,6 @@ public class PlayerListeners implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) throws SQLException {
         Player player = event.getPlayer();
         if (Manager.getModerationManager().isBanned(player)) {
-            player.kickPlayer(ColorUtils.colorize(Colors.MOD_RED.color() + "Vous êtes banni(e) du serveur."));
-        }
 
         Manager.getSessionManager().loadSession(player);
     }
