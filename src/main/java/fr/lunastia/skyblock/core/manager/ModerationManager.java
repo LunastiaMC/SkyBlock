@@ -6,6 +6,16 @@ import java.sql.*;
 import java.util.Date;
 
 public class ModerationManager {
+
+    //  /$$$$$$$   /$$$$$$  /$$   /$$
+    // | $$__  $$ /$$__  $$| $$$ | $$
+    // | $$  \ $$| $$  \ $$| $$$$| $$
+    // | $$$$$$$ | $$$$$$$$| $$ $$ $$
+    // | $$__  $$| $$__  $$| $$  $$$$
+    // | $$  \ $$| $$  | $$| $$\  $$$
+    // | $$$$$$$/| $$  | $$| $$ \  $$
+    // |_______/ |__/  |__/|__/  \__/
+
     public void addBan(Player player, String expire, String reason) throws SQLException {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
         final PreparedStatement statement = connection.prepareStatement("INSERT INTO bans (uuid, startDate, endDate, reason) VALUES (?,?,?,?)");
@@ -51,4 +61,13 @@ public class ModerationManager {
 
         return statementFinder.executeQuery();
     }
+
+    //  /$$      /$$ /$$   /$$ /$$$$$$$$ /$$$$$$$$
+    // | $$$    /$$$| $$  | $$|__  $$__/| $$_____/
+    // | $$$$  /$$$$| $$  | $$   | $$   | $$
+    // | $$ $$/$$ $$| $$  | $$   | $$   | $$$$$
+    // | $$  $$$| $$| $$  | $$   | $$   | $$__/
+    // | $$\  $ | $$| $$  | $$   | $$   | $$
+    // | $$ \/  | $$|  $$$$$$/   | $$   | $$$$$$$$
+    // |__/     |__/ \______/    |__/   |________/
 }
