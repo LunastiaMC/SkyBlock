@@ -33,6 +33,10 @@ public class LogTypeCommon implements Log {
         this.hat = hat;
     }
 
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
     public void send() {
         Log.super.sendCommonLog(type, target, startDate, hat);
     }
