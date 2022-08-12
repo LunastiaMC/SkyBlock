@@ -25,4 +25,12 @@ public class ModerationManager {
 
         return resultSet.next();
     }
+    public ResultSet getBanInfo(Player player) throws SQLException {
+        Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
+
+        final PreparedStatement statementFinder = connection.prepareStatement("SELECT * FROM bans WHERE uuid = ?");
+        statementFinder.setString(1, player.getUniqueId().toString());
+
+        return statementFinder.executeQuery();
+    }
 }
