@@ -18,12 +18,16 @@ import org.bukkit.inventory.ItemStack;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class PlayerListeners implements Listener {
+    public static long getDifferenceDays(Date d1, Date d2) {
+        long diff = d2.getTime() - d1.getTime();
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+    }
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) throws SQLException {
         Player player = event.getPlayer();
@@ -34,6 +38,7 @@ public class PlayerListeners implements Listener {
                 String reason = infos.getString("reason");
                 if (reason == null) reason = "Aucune raison";
 
+                long days = getDifferenceDays(new Date(infos.getString("startDate")), new Date(infos.getString("endDate")));
 
                 player.kickPlayer(ColorUtils.colorize(Colors.MOD_RED.color() + "Vous êtes banni(e) du serveur" +
                         "\n" +
