@@ -33,12 +33,18 @@ public class LogsGUI implements GUI {
 
     @Override
     public void getContents(Player player, Inventory inventory) throws SQLException {
+        // TODO: Add page system
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
-        final PreparedStatement statement = connection.prepareStatement("SELECT * FROM logs LIMIT 10");
+        final PreparedStatement statement = connection.prepareStatement("SELECT * FROM logs ORDER BY logged_at DESC 53;");
         final ResultSet resultSet = statement.executeQuery();
         int slot = 0;
         while (resultSet.next()) {
-            ItemStack item = ItemUtils.customizedItem(getItem(resultSet.getString("target_name")), new ArrayList<>());
+            EnumLogs logType = EnumLogs.valueOf(resultSet.getString("type"));
+
+            ItemStack item = ItemUtils.customizedItem(
+                    getItem(resultSet.getString("target_name")),
+                    ColorUtils.colorize(logType.getItemColor().color() + logType.getItemTitle()),
+                    new ArrayList<>());
             inventory.setItem(slot, item);
             slot++;
         }
