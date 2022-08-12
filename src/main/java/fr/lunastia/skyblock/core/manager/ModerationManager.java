@@ -46,12 +46,12 @@ public class ModerationManager {
         statement.setString(1, player.getUniqueId().toString());
         statement.setString(2, start);
         if (Objects.equals(expire, "perm")) {
+            statement.setString(3, "perm");
+            log.setExpireAt("perm");
+        } else {
             String expireMMZ = getMinimizedDate(expire);
             statement.setString(3, expireMMZ);
             log.setExpireAt(expireMMZ);
-        } else {
-            statement.setString(3, "perm");
-            log.setExpireAt("perm");
         }
         statement.setString(4, reason);
         statement.execute();
@@ -84,7 +84,7 @@ public class ModerationManager {
                         ColorUtils.colorize(Colors.MOD_RED.color() + "§lVous êtes banni(e) du serveur\n\n"),
                         ColorUtils.colorize("§7§l➤§r§7 Pour la raison suivante: " + Colors.MOD_RED.color() + reason) + "\n",
                         ColorUtils.colorize("§7§l➤§r§7 Votre bannissement est malheureusement permanent."),
-                        "\n",
+                        "\n\n",
                         ColorUtils.colorize("§r§7Si vous pensez qu'il y a une erreur") + "\n",
                         ColorUtils.colorize("§r§7vous pouvez ouvrir un ticket sur le discord") + "\n",
                         ColorUtils.colorize(Colors.DISCORD_COLOR.color() + "discord.gg/F9aQyQZxQr")
