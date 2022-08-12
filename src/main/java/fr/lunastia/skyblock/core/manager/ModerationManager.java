@@ -1,5 +1,8 @@
 package fr.lunastia.skyblock.core.manager;
 
+import fr.lunastia.skyblock.core.utils.TextUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
 
 import java.sql.Connection;
@@ -51,6 +54,29 @@ public class ModerationManager {
         statementFinder.setString(1, player.getUniqueId().toString());
         final ResultSet resultSet = statementFinder.executeQuery();
 
+        if (resultSet.next()) {
+            long days = TextUtils.getDifferenceDays(new Date(resultSet.getString("startDate")), new Date(resultSet.getString("endDate")));
+            if (days <= (long) 0) {
+                Manager.getModerationManager().delBan(player.getUniqueId().toString());
+                Manager.getSessionManager().loadSession(player);
+                return false;
+            } else {
+                String reason = resultSet.getString("reason");
+                if (reason == null) reason = "Aucune raison";
+
+                String[] message = new String[]{
+                        ColorUtils.colorize(Colors.MOD_RED.color() + "§lVous êtes banni(e) du serveur\n\n"),
+                        ColorUtils.colorize("§7§l➤§r§7 Pour la raison suivante: " + Colors.MOD_RED.color() + reason) + "\n",
+                        ColorUtils.colorize("§7§l➤§r§7 Votre banissement expirera dans " + Colors.MOD_RED.color() + days + " jour(s)") + "\n",
+                        "\n",
+                        ColorUtils.colorize("§r§7Si vous pensez qu'il y a une erreur") + "\n",
+                        ColorUtils.colorize("§r§7vous pouvez ouvrir un ticket sur le discord") + "\n",
+                        ColorUtils.colorize(Colors.DISCORD_COLOR.color() + "discord.gg/F9aQyQZxQr")
+                };
+                player.kickPlayer(String.join("", message));
+                return true;
+            }
+        }
         return resultSet.next();
     }
 
