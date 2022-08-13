@@ -52,6 +52,7 @@ public class LogsGUI implements GUI {
             slot++;
         }
 
+        // TODO
         inventory.setItem(54, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("50509"), "§cPage suivante", new ArrayList<>()));
     }
 
