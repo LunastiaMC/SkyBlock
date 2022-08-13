@@ -26,6 +26,8 @@ public enum EnumLogs {
     PLAYER_UNMUTED_EXPIRED("", "Rétablissement de la parole par temps expiré", Colors.COMMON, 47475),
     PLAYER_FREEZED("", "Gel", Colors.WARNING, 29472),
     PLAYER_UNFREEZED("", "Dégel", Colors.WARNING, 29472),
+    PLAYER_VANISHED("", "Disparition", Colors.COMMON, 20388),
+    PLAYER_UNVANISHED("", "Réapparition", Colors.COMMON, 20388),
     PLAYER_CHANGE_HAT("", "Changement de chapeau", Colors.COMMON, 55055),
     PLAYER_CHANGE_HAT_TO_AIR("", "Chapeau retiré de la tête", Colors.COMMON, 55055),
     PLAYER_GAMEMODE_CHANGED_BY_FORCE("", "Changement de mode de jeu par force", Colors.WARNING, 8765),
