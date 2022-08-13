@@ -23,7 +23,7 @@ public class RepairGUI implements GUI {
     private HashMap<Integer, Integer> repairCost;
 
     @Override
-    public String getName() {
+    public String name() {
         return "Réparation";
     }
 
@@ -132,5 +132,8 @@ public class RepairGUI implements GUI {
         return null;
     }
 
-
+    @Override
+    public void setArgument(String argument) {
+        return;
+    }
 }

@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class TrashGUI implements GUI {
     @Override
-    public String getName() {
+    public String name() {
         return "Poubelle";
     }
 
@@ -52,5 +52,10 @@ public class TrashGUI implements GUI {
     @Override
     public InventoryType getInventoryType() {
         return null;
+    }
+
+    @Override
+    public void setArgument(String argument) {
+        return;
     }
 }
