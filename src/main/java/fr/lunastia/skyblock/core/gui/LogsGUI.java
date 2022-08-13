@@ -4,24 +4,24 @@ import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.SkullMeta;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class LogsGUI implements GUI {
-    private HashMap<Integer, String> argument;
+    private HashMap<Integer, String> argument = new HashMap<>();
 
     public LogsGUI() {
 
@@ -33,8 +33,8 @@ public class LogsGUI implements GUI {
 
     @Override
     public String getName() {
-        if (argument != null) {
-            return "Journeaux de " + argument;
+        if (!Objects.equals(argument.get(0), "null")) {
+            return "Journeaux de " + argument.get(0);
         }
 
         return "Fichier journeaux";
@@ -48,16 +48,11 @@ public class LogsGUI implements GUI {
     @Override
     public void getContents(Player player, Inventory inventory) throws SQLException {
         // TODO: Add page system
-        Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
-        PreparedStatement statement = null;
-        if (argument != null) {
-            statement = connection.prepareStatement("SELECT * FROM logs WHERE target_name = ? ORDER BY logged_at DESC LIMIT 45;");
-            statement.setString(1, argument.get(0));
-        } else {
-            statement = connection.prepareStatement("SELECT * FROM logs ORDER BY logged_at DESC LIMIT 45;");
-        }
+        final ResultSet resultSet = getByPage(Integer.parseInt(argument.get(1)));
+        setInventory(resultSet, inventory, player);
+    }
 
-        final ResultSet resultSet = statement.executeQuery();
+    private void setInventory(ResultSet resultSet, Inventory inventory, Player player) throws SQLException {
         int slot = 0;
         while (resultSet.next()) {
             EnumLogs logType = EnumLogs.valueOf(resultSet.getString("type"));
@@ -73,14 +68,36 @@ public class LogsGUI implements GUI {
             slot++;
         }
 
-        // TODO
-        inventory.setItem(46, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("7789"), "§cPage précédente", new ArrayList<>()));
-        inventory.setItem(50, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("32582"), "§cRecharger", new ArrayList<>()));
-        inventory.setItem(54, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("7786"), "§cPage suivante", new ArrayList<>()));
+        if (Integer.parseInt(argument.get(1)) >= 1) {
+            inventory.setItem(45, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("7789"), "§cPage précédente (" + argument.get(1) + ")", new ArrayList<>()));
+        } else {
+            inventory.setItem(45, ItemUtils.customizedItem(new ItemStack(Material.BARRIER), "§cPremière page atteinte", new ArrayList<>()));
+        }
+
+        inventory.setItem(49, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("32582"), "§cRecharger", new ArrayList<>()));
+
+        if (inventory.getItem(44) != null) {
+            inventory.setItem(53, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("7786"), "§cPage suivante (" + (Integer.parseInt(argument.get(1)) + 1) + ")", new ArrayList<>()));
+        } else {
+            inventory.setItem(53, ItemUtils.customizedItem(new ItemStack(Material.BARRIER), "§cPage non-complète", new ArrayList<>()));
+        }
     }
 
     @Override
     public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) throws SQLException {
+        if (itemStack.getType() == Material.BARRIER) return;
+
+        switch (slot) {
+            case 45 -> {
+                argument.put(1, String.valueOf(Integer.parseInt(argument.get(1)) - 1));
+                setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
+            }
+            case 49 -> setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
+            case 53 -> {
+                argument.put(1, Integer.toString(Integer.parseInt(argument.get(1)) + 1));
+                setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
+            }
+        }
     }
 
     @Override
@@ -103,24 +120,22 @@ public class LogsGUI implements GUI {
         return null;
     }
 
-    public ItemStack getItem(String player) {
-        boolean isNewVersion = Arrays.stream(Material.values()).map(Material::name).toList().contains("PLAYER_HEAD");
-        Material type = Material.matchMaterial(isNewVersion ? "PLAYER_HEAD" : "SKULL_ITEM");
-        assert type != null;
-        ItemStack item = new ItemStack(type);
-        if (!isNewVersion) {
-            item.setDurability((short) 3);
-        }
-
-        SkullMeta meta = (SkullMeta) item.getItemMeta();
-        assert meta != null;
-        meta.setOwner(player);
-        item.setItemMeta(meta);
-        return item;
-    }
-
     @Override
     public void setArgument(HashMap<Integer, String> arguments) {
-        this.argument = argument;
+        this.argument = arguments;
+    }
+
+    public ResultSet getByPage(int page) throws SQLException {
+        Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
+        PreparedStatement statement = null;
+        if (!Objects.equals(argument.get(0), "null")) {
+            statement = connection.prepareStatement("SELECT * FROM logs WHERE target_name = ? ORDER BY logged_at DESC LIMIT 45 OFFSET ?;");
+            statement.setString(1, argument.get(0));
+            statement.setInt(2, page == 0 ? 0 : page * 45);
+        } else {
+            statement = connection.prepareStatement("SELECT * FROM logs ORDER BY logged_at DESC LIMIT 45 OFFSET ?;");
+            statement.setInt(1, page == 0 ? 0 : page * 45);
+        }
+        return statement.executeQuery();
     }
 }
