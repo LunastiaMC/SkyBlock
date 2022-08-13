@@ -43,7 +43,7 @@ public class GUIManager implements Listener {
         if (event.getCurrentItem() == null) return;
 
         getRegisteredGUIs().values().stream()
-                .filter(menu -> event.getView().getTitle().equals(menu.name()))
+                .filter(menu -> event.getView().getTitle().equals(menu.getName()))
                 .forEach(gui -> {
                     try {
                         gui.onClick(player, inventory, item, event.getSlot(), event.getClick());
@@ -60,7 +60,7 @@ public class GUIManager implements Listener {
         Inventory inventory = event.getInventory();
 
         getRegisteredGUIs().values().stream()
-                .filter(menu -> event.getView().getTitle().equals(menu.name()))
+                .filter(menu -> event.getView().getTitle().equals(menu.getName()))
                 .forEach(gui -> {
                     gui.onOpen(player, inventory);
                 });
@@ -72,7 +72,7 @@ public class GUIManager implements Listener {
         Inventory inventory = event.getInventory();
 
         getRegisteredGUIs().values().stream()
-                .filter(menu -> event.getView().getTitle().equals(menu.name()))
+                .filter(menu -> event.getView().getTitle().equals(menu.getName()))
                 .forEach(gui -> {
                     gui.onClose(player, inventory);
                 });
@@ -88,8 +88,8 @@ public class GUIManager implements Listener {
 
         Inventory inventory = null;
 
-        if (gui.getInventoryType() == null) inventory = Bukkit.createInventory(null, gui.getSize(), gui.name());
-        else inventory = Bukkit.createInventory(null, gui.getInventoryType(), gui.name());
+        if (gui.getInventoryType() == null) inventory = Bukkit.createInventory(null, gui.getSize(), gui.getName());
+        else inventory = Bukkit.createInventory(null, gui.getInventoryType(), gui.getName());
 
         gui.getContents(player, inventory);
         player.openInventory(inventory);
@@ -103,8 +103,8 @@ public class GUIManager implements Listener {
 
         Inventory inventory = null;
 
-        if (gui.getInventoryType() == null) inventory = Bukkit.createInventory(null, gui.getSize(), gui.name());
-        else inventory = Bukkit.createInventory(null, gui.getInventoryType(), gui.name());
+        if (gui.getInventoryType() == null) inventory = Bukkit.createInventory(null, gui.getSize(), gui.getName());
+        else inventory = Bukkit.createInventory(null, gui.getInventoryType(), gui.getName());
 
         gui.getContents(player, inventory);
         player.openInventory(inventory);
