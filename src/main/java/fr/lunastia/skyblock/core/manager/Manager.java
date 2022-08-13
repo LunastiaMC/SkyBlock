@@ -12,7 +12,6 @@ import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.database.DatabaseManager;
 import fr.lunastia.skyblock.core.listeners.FreezeListeners;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
-import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
 
@@ -56,6 +55,7 @@ public class Manager {
 
     public static IslandManager getIslandManager() {
         return islandManager;
+    }
 
     public static ModerationManager getModerationManager() {
         return moderationManager;
