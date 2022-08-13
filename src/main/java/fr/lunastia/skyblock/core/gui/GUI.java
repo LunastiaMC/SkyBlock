@@ -23,5 +23,7 @@ public interface GUI {
 
     boolean clickCancelled();
 
+    // To merge
+
     InventoryType getInventoryType();
 }
