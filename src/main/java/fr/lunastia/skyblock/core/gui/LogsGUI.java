@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class LogsGUI implements GUI {
     private String argument;
@@ -26,7 +27,7 @@ public class LogsGUI implements GUI {
 
     }
 
-    public LogsGUI(String argument) {
+    public LogsGUI(HashMap<Integer, String> argument) {
         this.argument = argument;
     }
 
@@ -117,7 +118,7 @@ public class LogsGUI implements GUI {
     }
 
     @Override
-    public void setArgument(String argument) {
+    public void setArgument(HashMap<Integer, String> arguments) {
         this.argument = argument;
     }
 }

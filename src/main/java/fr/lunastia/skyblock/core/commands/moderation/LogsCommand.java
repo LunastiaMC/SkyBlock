@@ -10,6 +10,7 @@ import fr.lunastia.skyblock.core.manager.Manager;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
 @Command("logs")
 @Permission("skyblock.logs.command")
@@ -27,7 +28,9 @@ public class LogsCommand {
     public static void find(Player player, @AStringArgument String target) {
         System.out.println(target);
         try {
-            Manager.getGUIManager().open(player, LogsGUI.class, target);
+            HashMap<Integer, String> args = new HashMap<>();
+            args.put(0, target);
+            Manager.getGUIManager().open(player, LogsGUI.class, args);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
