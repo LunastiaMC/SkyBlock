@@ -18,7 +18,11 @@ public class LogsCommand {
     @Default
     public static void logs(Player player) {
         try {
-            Manager.getGUIManager().open(player, LogsGUI.class);
+            HashMap<Integer, String> args = new HashMap<>();
+            args.put(0, "null");
+            args.put(1, "0");
+            System.out.println(args);
+            Manager.getGUIManager().open(player, LogsGUI.class, args);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -30,6 +34,7 @@ public class LogsCommand {
         try {
             HashMap<Integer, String> args = new HashMap<>();
             args.put(0, target);
+            args.put(1, "0");
             Manager.getGUIManager().open(player, LogsGUI.class, args);
         } catch (SQLException e) {
             throw new RuntimeException(e);
