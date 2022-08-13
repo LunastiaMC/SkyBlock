@@ -43,7 +43,7 @@ public class GUIManager implements Listener {
         if (event.getCurrentItem() == null) return;
 
         getRegisteredGUIs().values().stream()
-                .filter(menu -> event.getView().getTitle().equals(menu.getName()))
+                .filter(menu -> event.getView().getTitle().equals(menu.name()))
                 .forEach(gui -> {
                     try {
                         gui.onClick(player, inventory, item, event.getSlot(), event.getClick());
@@ -60,7 +60,7 @@ public class GUIManager implements Listener {
         Inventory inventory = event.getInventory();
 
         getRegisteredGUIs().values().stream()
-                .filter(menu -> event.getView().getTitle().equals(menu.getName()))
+                .filter(menu -> event.getView().getTitle().equals(menu.name()))
                 .forEach(gui -> {
                     gui.onOpen(player, inventory);
                 });
@@ -72,7 +72,7 @@ public class GUIManager implements Listener {
         Inventory inventory = event.getInventory();
 
         getRegisteredGUIs().values().stream()
-                .filter(menu -> event.getView().getTitle().equals(menu.getName()))
+                .filter(menu -> event.getView().getTitle().equals(menu.name()))
                 .forEach(gui -> {
                     gui.onClose(player, inventory);
                 });
@@ -88,8 +88,23 @@ public class GUIManager implements Listener {
 
         Inventory inventory = null;
 
-        if (gui.getInventoryType() == null) inventory = Bukkit.createInventory(null, gui.getSize(), gui.getName());
-        else inventory = Bukkit.createInventory(null, gui.getInventoryType(), gui.getName());
+        if (gui.getInventoryType() == null) inventory = Bukkit.createInventory(null, gui.getSize(), gui.name());
+        else inventory = Bukkit.createInventory(null, gui.getInventoryType(), gui.name());
+
+        gui.getContents(player, inventory);
+        player.openInventory(inventory);
+    }
+
+    public void open(Player player, Class<? extends GUI> GUIClass, String argument) throws SQLException {
+        if (!getRegisteredGUIs().containsKey(GUIClass)) return;
+        GUI gui = getRegisteredGUIs().get(GUIClass);
+        gui.setArgument(argument);
+        System.out.println(argument);
+
+        Inventory inventory = null;
+
+        if (gui.getInventoryType() == null) inventory = Bukkit.createInventory(null, gui.getSize(), gui.name());
+        else inventory = Bukkit.createInventory(null, gui.getInventoryType(), gui.name());
 
         gui.getContents(player, inventory);
         player.openInventory(inventory);

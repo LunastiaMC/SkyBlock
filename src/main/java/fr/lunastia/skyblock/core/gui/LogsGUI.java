@@ -19,9 +19,22 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 public class LogsGUI implements GUI {
+    private String argument;
+
+    public LogsGUI() {
+
+    }
+
+    public LogsGUI(String argument) {
+        this.argument = argument;
+    }
 
     @Override
-    public String getName() {
+    public String name() {
+        if (argument != null) {
+            return "Journeaux de " + argument;
+        }
+
         return "Fichier journeaux";
     }
 
@@ -34,7 +47,14 @@ public class LogsGUI implements GUI {
     public void getContents(Player player, Inventory inventory) throws SQLException {
         // TODO: Add page system
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
-        final PreparedStatement statement = connection.prepareStatement("SELECT * FROM logs ORDER BY logged_at DESC LIMIT 53;");
+        PreparedStatement statement = null;
+        if (argument != null) {
+            statement = connection.prepareStatement("SELECT * FROM logs WHERE target_name = ? ORDER BY logged_at DESC LIMIT 53;");
+            statement.setString(1, argument);
+        } else {
+            statement = connection.prepareStatement("SELECT * FROM logs ORDER BY logged_at DESC LIMIT 53;");
+        }
+
         final ResultSet resultSet = statement.executeQuery();
         int slot = 0;
         while (resultSet.next()) {
@@ -90,5 +110,10 @@ public class LogsGUI implements GUI {
         meta.setOwner(player);
         item.setItemMeta(meta);
         return item;
+    }
+
+    @Override
+    public void setArgument(String argument) {
+        this.argument = argument;
     }
 }
