@@ -1,5 +1,6 @@
 package fr.lunastia.skyblock.core.utils;
 
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;

@@ -8,8 +8,9 @@ import dev.jorel.commandapi.annotations.arguments.ALongArgument;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Session;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
 import fr.lunastia.skyblock.core.utils.TextUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
 
 @Command("money")
@@ -21,7 +22,7 @@ public class MoneyCommand {
             return;
         }
 
-        ColorUtils.sendMessage(player, "Il y à un total de §e" + TextUtils.formatValue(session.getMoney()) + " pièce(s) §7sur votre compte", ColorUtils.BANK);
+        ColorUtils.sendMessage(player, "Il y à un total de §e" + TextUtils.formatValue(session.getMoney()) + " pièce(s) §7sur votre compte", Colors.BANK);
     }
 
     @Subcommand("balance")
@@ -32,7 +33,7 @@ public class MoneyCommand {
             return;
         }
 
-        ColorUtils.sendMessage(player, "Le joueur §e" + target.getName() + " §7a un total de §e" + TextUtils.formatValue(targetSession.getMoney()) + " §7de §epièce(s)", ColorUtils.BANK);
+        ColorUtils.sendMessage(player, "Le joueur §e" + target.getName() + " §7a un total de §e" + TextUtils.formatValue(targetSession.getMoney()) + " §7de §epièce(s)", Colors.BANK);
     }
 
     @Subcommand("add")
@@ -44,8 +45,8 @@ public class MoneyCommand {
         }
 
         session.addMoney(amount);
-        ColorUtils.sendMessage(player, "Vous venez d'ajouter un total de §e" + TextUtils.formatValue(amount) + " pièce(s) §7à " + target.getName(), ColorUtils.BANK);
-        ColorUtils.sendMessage(target, "Vous venez de recevoir un total de §e" + TextUtils.formatValue(amount) + " pièce(s) §7de " + player.getName(), ColorUtils.BANK);
+        ColorUtils.sendMessage(player, "Vous venez d'ajouter un total de §e" + TextUtils.formatValue(amount) + " pièce(s) §7à " + target.getName(), Colors.BANK);
+        ColorUtils.sendMessage(target, "Vous venez de recevoir un total de §e" + TextUtils.formatValue(amount) + " pièce(s) §7de " + player.getName(), Colors.BANK);
     }
 
     @Subcommand("del")
@@ -57,8 +58,8 @@ public class MoneyCommand {
         }
 
         session.reduceMoney(amount);
-        ColorUtils.sendMessage(player, "Vous venez de retirer un total de §e" + TextUtils.formatValue(amount) + " pièce(s) §7à " + target.getName(), ColorUtils.BANK);
-        ColorUtils.sendMessage(target, "Votre compte à été déduit de §e" + TextUtils.formatValue(amount) + " pièce(s) §7de " + player.getName(), ColorUtils.BANK);
+        ColorUtils.sendMessage(player, "Vous venez de retirer un total de §e" + TextUtils.formatValue(amount) + " pièce(s) §7à " + target.getName(), Colors.BANK);
+        ColorUtils.sendMessage(target, "Votre compte à été déduit de §e" + TextUtils.formatValue(amount) + " pièce(s) §7de " + player.getName(), Colors.BANK);
     }
 
     @Subcommand("set")
@@ -70,6 +71,6 @@ public class MoneyCommand {
         }
 
         session.setMoney(amount);
-        ColorUtils.sendMessage(player, "Vous venez de définir le compte de §e" + target.getName() + "§fà §e" + TextUtils.formatValue(amount) + " pièce(s)", ColorUtils.BANK);
+        ColorUtils.sendMessage(player, "Vous venez de définir le compte de §e" + target.getName() + "§fà §e" + TextUtils.formatValue(amount) + " pièce(s)", Colors.BANK);
     }
 }

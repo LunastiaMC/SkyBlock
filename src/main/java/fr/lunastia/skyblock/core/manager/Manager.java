@@ -2,18 +2,18 @@ package fr.lunastia.skyblock.core.manager;
 
 import dev.jorel.commandapi.CommandAPI;
 import fr.lunastia.skyblock.core.Core;
-import fr.lunastia.skyblock.core.commands.admin.GUICommand;
 import fr.lunastia.skyblock.core.commands.admin.RankCommand;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
+import fr.lunastia.skyblock.core.commands.moderation.BanCommand;
+import fr.lunastia.skyblock.core.commands.moderation.KickCommand;
+import fr.lunastia.skyblock.core.commands.moderation.LogsCommand;
 import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.database.DatabaseManager;
 import fr.lunastia.skyblock.core.listeners.FreezeListeners;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
-import java.io.IOException;
-import java.sql.SQLException;
 
 public class Manager {
     private static SessionManager sessionManager;
@@ -24,6 +24,7 @@ public class Manager {
     private static KitManager kitManager;
 
     private static HeadDatabaseAPI headDatabase;
+    private static ModerationManager moderationManager;
 
     public Manager() {
         repairUtils = new RepairUtils();
@@ -57,17 +58,27 @@ public class Manager {
         return kitManager;
     }
 
-    public void init() throws SQLException, IOException {
+    public static ModerationManager getModerationManager() {
+        return moderationManager;
+    }
+
+    public void init() {
         sessionManager = new SessionManager();
         databaseManager = new DatabaseManager();
         rankManager = new RankManager();
         guiManager = new GUIManager();
         kitManager = new KitManager();
         headDatabase = new HeadDatabaseAPI();
+        moderationManager = new ModerationManager();
 
         // Suppression des commandes de base
         CommandAPI.unregister("clear", true);
         CommandAPI.unregister("gamemode", true);
+        CommandAPI.unregister("kick", true);
+        CommandAPI.unregister("ban", true);
+        CommandAPI.unregister("ban-ip", true);
+        CommandAPI.unregister("pardon", true);
+        CommandAPI.unregister("pardon-ip", true);
 
         // Chargement des commandes
         CommandAPI.registerCommand(RankCommand.class);
@@ -88,8 +99,10 @@ public class Manager {
         CommandAPI.registerCommand(RepairCommand.class);
         CommandAPI.registerCommand(FreezeCommand.class);
         CommandAPI.registerCommand(TrashCommand.class);
-        CommandAPI.registerCommand(GUICommand.class);
         CommandAPI.registerCommand(KitCommand.class);
+        CommandAPI.registerCommand(KickCommand.class);
+        CommandAPI.registerCommand(BanCommand.class);
+        CommandAPI.registerCommand(LogsCommand.class);
 
         // Chargement des évènements
         Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());

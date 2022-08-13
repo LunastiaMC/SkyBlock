@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class SessionManager {
-    public ArrayList<Session> vanished;
     private HashMap<String, Session> sessions;
 
     public SessionManager() {
@@ -77,5 +76,9 @@ public class SessionManager {
 
     public HashMap<String, Session> getSessions() {
         return this.sessions;
+    }
+
+    public boolean hasSession(Player player) {
+        return this.sessions.containsKey(player.getUniqueId().toString());
     }
 }

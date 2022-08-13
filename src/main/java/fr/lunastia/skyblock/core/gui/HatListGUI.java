@@ -1,19 +1,24 @@
 package fr.lunastia.skyblock.core.gui;
 
 import fr.lunastia.skyblock.core.Core;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.session.server.EnumLogs;
+import fr.lunastia.skyblock.core.session.server.logs.LogTypeCommon;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-public class HatListGUI implements GUIBuilder {
+public class HatListGUI implements GUI {
     @Override
     public String getName() {
         return "Liste des chapeaux disponibles";
@@ -52,25 +57,29 @@ public class HatListGUI implements GUIBuilder {
                     if (player.getInventory().getHelmet().getItemMeta().getDisplayName().contains("Chapeau")) {
                         String displayName = section.getString(slot + ".displayName");
                         if (player.getInventory().getHelmet().getItemMeta().getDisplayName() == section.getString(slot + ".displayName")) {
-                            ColorUtils.sendMessage(player, "Vous avez deja le chapeau §d" + displayName, ColorUtils.HAT);
+                            ColorUtils.sendMessage(player, "Vous avez deja le chapeau §d" + displayName, Colors.HAT);
                             return;
                         }
-                        ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName, ColorUtils.HAT);
+                        ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName, Colors.HAT);
                         ItemStack item = ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(String.valueOf(slot) + ".id"))), section.getString(String.valueOf(slot) + ".displayName"), new ArrayList<>());
                         player.getInventory().setHelmet(item);
+
+                        LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_CHANGE_HAT, player, displayName);
+                        log.setStartDate(new Date().toString());
+                        log.send();
                         return;
                     }
-                    ColorUtils.sendMessage(player, "Veuillez enlevez votre casque avant de mettre un chapeau !", ColorUtils.HAT);
+                    ColorUtils.sendMessage(player, "Veuillez enlevez votre casque avant de mettre un chapeau !", Colors.HAT);
                     return;
                 }
 
                 String displayName = section.getString(slot + ".displayName");
                 ItemStack item = ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(String.valueOf(slot) + ".id"))), section.getString(String.valueOf(slot) + ".displayName"), new ArrayList<>());
 
-                ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName, ColorUtils.HAT);
+                ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName, Colors.HAT);
                 player.getInventory().setHelmet(item);
             } else {
-                ColorUtils.sendMessage(player, "Vous n'avez pas encore débloqué ce chapeau !", ColorUtils.HAT, true);
+                ColorUtils.sendMessage(player, "Vous n'avez pas encore débloqué ce chapeau !", Colors.HAT, true);
             }
         }
     }
@@ -88,5 +97,10 @@ public class HatListGUI implements GUIBuilder {
     @Override
     public boolean clickCancelled() {
         return true;
+    }
+
+    @Override
+    public InventoryType getInventoryType() {
+        return null;
     }
 }
