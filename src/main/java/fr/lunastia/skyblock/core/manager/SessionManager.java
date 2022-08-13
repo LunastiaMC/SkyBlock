@@ -4,7 +4,6 @@ import fr.lunastia.skyblock.core.session.Session;
 import org.bukkit.entity.Player;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -36,7 +35,7 @@ public class SessionManager {
             statementCreation.setNull(7, Types.NULL);
             statementCreation.execute();
 
-            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{}, false, false,null);
+            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{}, false, false, null);
             this.sessions.put(player.getUniqueId().toString(), session);
         }
     }

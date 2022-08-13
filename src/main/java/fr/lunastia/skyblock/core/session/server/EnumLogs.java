@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Objects;
 
 public enum EnumLogs {
     PLAYER_JOIN("", "Connexion", Colors.COMMON, 8768),

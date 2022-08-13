@@ -23,10 +23,10 @@ public enum Hats {
 
 
     private final UUID uuid;
-    private Integer head = null;
-    private String identifier = null;
     private final String displayName;
     private final String permission;
+    private Integer head = null;
+    private String identifier = null;
 
     Hats(UUID uuid, String minecraftIdentifier, String displayName, String permission) {
         this.uuid = uuid;
@@ -57,6 +57,22 @@ public enum Hats {
         return null;
     }
 
+    public static Hats getHat(ItemStack itemStack) {
+        NamespacedKey key = new NamespacedKey(Core.getInstance(), "hatId");
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        PersistentDataContainer container = itemMeta.getPersistentDataContainer();
+
+        if (container.has(key, PersistentDataType.STRING)) {
+            String foundValue = container.get(key, PersistentDataType.STRING);
+            for (Hats hat : Hats.values()) {
+                if (hat.getUniqueId().toString().equals(foundValue)) {
+                    return hat;
+                }
+            }
+        }
+        return null;
+    }
+
     public UUID getUniqueId() {
         return uuid;
     }
@@ -81,25 +97,9 @@ public enum Hats {
         return permission;
     }
 
-    public static Hats getHat(ItemStack itemStack) {
-        NamespacedKey key = new NamespacedKey(Core.getInstance(), "hatId");
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        PersistentDataContainer container = itemMeta.getPersistentDataContainer();
-
-        if (container.has(key, PersistentDataType.STRING)) {
-            String foundValue = container.get(key, PersistentDataType.STRING);
-            for (Hats hat : Hats.values()) {
-                if (hat.getUniqueId().toString().equals(foundValue)) {
-                    return hat;
-                }
-            }
-        }
-        return null;
-    }
-
     public ItemStack getItemStack() {
         if (this.isHead()) {
-            return ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(this.getHead())), "§d" + this.getDisplayName(),new ArrayList<>());
+            return ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(this.getHead())), "§d" + this.getDisplayName(), new ArrayList<>());
         } else {
             return ItemUtils.customizedItem(new ItemStack(Objects.requireNonNull(Material.matchMaterial(this.getIdentifier()))), "§d" + this.getDisplayName(), new ArrayList<>());
         }

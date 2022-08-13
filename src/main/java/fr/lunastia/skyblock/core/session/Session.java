@@ -183,6 +183,10 @@ public class Session {
         this.hat = hat;
     }
 
+    public Hats getHat() {
+        return hat;
+    }
+
     public void setHat(Hats hat) {
         if (hat == null) {
             this.player.getInventory().setHelmet(null);
@@ -191,10 +195,6 @@ public class Session {
         }
 
         this.hat = hat;
-    }
-
-    public Hats getHat() {
-        return hat;
     }
 
     public boolean hasHat() {
