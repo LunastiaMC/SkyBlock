@@ -34,6 +34,15 @@ public enum EnumLogs {
     PLAYER_GAMEMODE_CHANGED_BY_FORCE("", "Changement de mode de jeu par force", Colors.WARNING, 8765),
     PLAYER_CHANGE_GAMEMODE("", "Changement de mode de jeu", Colors.WARNING, 8765),
     PLAYER_RANK_UPDATED("", "Changement de grade", Colors.BAD, 33946),
+    PLAYER_MONEY_UPDATED("", "Changement de solde", Colors.BAD, 33946),
+    MONEY_PAY("Payement à un joueur"),
+    MONEY_RECEIVE("Payement reçu"),
+    MONEY_ADDED("Argent ajouté"),
+    MONEY_REMOVED("Argent retiré"),
+    MONEY_SET("Argent défini"),
+    MONEY_DEPOSIT_ISLAND_BANK("Dépôt d'argent sur la banque d'île"),
+    MONEY_WITHDRAW_ISLAND_BANK("Retrait d'argent de la banque d'île"),
+
     PLAYER_TELEPORT("", "Téléportation", Colors.WARNING, 1109),
     PLAYER_TELEPORTED_BY_FORCE("", "Téléportation par force", Colors.WARNING, 1109),
     PLAYER_KIT_USE("", "Utilisation d'un équipement", Colors.COMMON, 51459),
@@ -60,12 +69,27 @@ public enum EnumLogs {
     private final String itemTitle;
     private final Colors itemColor;
     private final Integer itemHead;
+    private final String moneyType;
 
     EnumLogs(String itemDescription, String itemTitle, Colors color, Integer itemHead) {
         this.itemTitle = itemTitle;
         this.itemDescription = itemDescription;
         this.itemColor = color;
         this.itemHead = itemHead;
+        this.moneyType = null;
+    }
+
+    EnumLogs(String moneyType) {
+        this.itemTitle = null;
+        this.itemDescription = null;
+        this.itemColor = null;
+        this.itemHead = null;
+
+        this.moneyType = moneyType;
+    }
+
+    public String getMoneyType() {
+        return moneyType;
     }
 
     public String getItemTitle() {

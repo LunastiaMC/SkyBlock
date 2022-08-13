@@ -47,4 +47,23 @@ public interface Log {
             }
         });
     }
+
+    default void sendEconomyLog(EnumLogs type, Player target, Integer oldBalance, Integer newBalance, Integer amount) {
+        Core.getInstance().getServer().getScheduler().runTaskAsynchronously(Core.getInstance(), () -> {
+            try {
+                Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
+                final PreparedStatement statement = connection.prepareStatement("INSERT INTO logs (type, target, target_name, startAt, balance_old, balance_new, balance_transaction) VALUES (?,?,?,?,?,?,?)");
+                statement.setString(1, type.toString());
+                statement.setString(2, target.getUniqueId().toString());
+                statement.setString(3, target.getName());
+                statement.setString(4, ModerationManager.getMinimizedDate(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date())));
+                statement.setInt(5, oldBalance);
+                statement.setInt(6, newBalance);
+                statement.setInt(7, amount);
+                statement.execute();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 }
