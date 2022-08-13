@@ -5,6 +5,7 @@ import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -162,7 +163,18 @@ public class Session {
     // |__/  |__/|__/  |__/   |__/   \______/
 
 
+    public void setHat(Hats hat, ItemStack itemStack) {
+        this.player.getInventory().setHelmet(itemStack);
+        this.hat = hat;
+    }
+
     public void setHat(Hats hat) {
+        if (hat == null) {
+            this.player.getInventory().setHelmet(null);
+            this.hat = null;
+            return;
+        }
+
         this.hat = hat;
     }
 
