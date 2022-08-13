@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HatListGUI implements GUI {
     @Override
@@ -102,7 +103,7 @@ public class HatListGUI implements GUI {
     }
 
     @Override
-    public void setArgument(String argument) {
+    public void setArgument(HashMap<Integer, String> argument) {
         return;
     }
 }

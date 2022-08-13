@@ -126,7 +126,7 @@ public class RepairGUI implements GUI {
     }
 
     @Override
-    public void setArgument(String argument) {
+    public void setArgument(HashMap<Integer, String> argument) {
         return;
     }
 }

@@ -1,4 +1,4 @@
-package fr.lunastia.skyblock.core.commands.utils;
+package fr.lunastia.skyblock.core.commands.moderation;
 
 import dev.jorel.commandapi.annotations.Command;
 import dev.jorel.commandapi.annotations.Default;
