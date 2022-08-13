@@ -53,12 +53,12 @@ public class SessionManager {
             statement.setString(3, session.getPermissions());
             statement.setBoolean(4, session.isFreezed());
             statement.setBoolean(5, session.isVanished());
-            statement.setString(6, player.getUniqueId().toString());
             if (session.hasHat()) {
-                statement.setString(7, session.getHat().getUniqueId().toString());
+                statement.setString(6, session.getHat().getUniqueId().toString());
             } else {
-                statement.setNull(7, Types.NULL);
+                statement.setNull(6, Types.NULL);
             }
+            statement.setString(7, player.getUniqueId().toString());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
