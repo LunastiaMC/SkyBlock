@@ -9,6 +9,8 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
+
 public class TrashGUI implements GUI {
     @Override
     public String getName() {
@@ -55,7 +57,7 @@ public class TrashGUI implements GUI {
     }
 
     @Override
-    public void setArgument(String argument) {
+    public void setArgument(HashMap<Integer, String> argument) {
         return;
     }
 }

@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class LogsGUI implements GUI {
-    private String argument;
+    private HashMap<Integer, String> argument;
 
     public LogsGUI() {
 
@@ -52,7 +52,7 @@ public class LogsGUI implements GUI {
         PreparedStatement statement = null;
         if (argument != null) {
             statement = connection.prepareStatement("SELECT * FROM logs WHERE target_name = ? ORDER BY logged_at DESC LIMIT 45;");
-            statement.setString(1, argument);
+            statement.setString(1, argument.get(0));
         } else {
             statement = connection.prepareStatement("SELECT * FROM logs ORDER BY logged_at DESC LIMIT 45;");
         }
