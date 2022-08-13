@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class TrashGUI implements GUI {
     @Override
-    public String name() {
+    public String getName() {
         return "Poubelle";
     }
 
@@ -32,7 +32,7 @@ public class TrashGUI implements GUI {
 
     @Override
     public void onClose(Player player, Inventory inventory) {
-        Integer count = ItemUtils.countInventory(inventory);
+        int count = ItemUtils.countInventory(inventory);
         if (count > 0) {
             ColorUtils.sendMessage(player, "Vous venez de jeter un total de §f" + count + " items §7à la poubelle", Colors.TRASH);
         }

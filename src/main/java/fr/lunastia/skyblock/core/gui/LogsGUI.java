@@ -30,7 +30,7 @@ public class LogsGUI implements GUI {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         if (argument != null) {
             return "Journeaux de " + argument;
         }

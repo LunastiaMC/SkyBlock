@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import java.sql.SQLException;
 
 public interface GUI {
-    String name();
+    String getName();
 
     int getSize();
 
