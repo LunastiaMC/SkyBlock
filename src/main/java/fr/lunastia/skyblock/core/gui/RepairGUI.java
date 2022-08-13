@@ -9,6 +9,7 @@ import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -17,7 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RepairGUI implements GUIBuilder {
+public class RepairGUI implements GUI {
 
     private HashMap<Integer, Integer> repairCost;
 
@@ -124,6 +125,11 @@ public class RepairGUI implements GUIBuilder {
     @Override
     public boolean clickCancelled() {
         return true;
+    }
+
+    @Override
+    public InventoryType getInventoryType() {
+        return null;
     }
 
 

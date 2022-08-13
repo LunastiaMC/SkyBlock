@@ -10,12 +10,14 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-public class HatListGUI implements GUIBuilder {
+public class HatListGUI implements GUI {
     @Override
     public String getName() {
         return "Liste des chapeaux disponibles";
@@ -65,6 +67,10 @@ public class HatListGUI implements GUIBuilder {
                         ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + displayName, Colors.HAT);
                         ItemStack item = ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(String.valueOf(slot) + ".id"))), section.getString(String.valueOf(slot) + ".displayName"), new ArrayList<>());
                         player.getInventory().setHelmet(item);
+
+                        LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_CHANGE_HAT, player, displayName);
+                        log.setStartDate(new Date().toString());
+                        log.send();
                         return;
                     }
                     ColorUtils.sendMessage(player, "Veuillez enlevez votre casque avant de mettre un chapeau !", Colors.HAT);
@@ -95,5 +101,10 @@ public class HatListGUI implements GUIBuilder {
     @Override
     public boolean clickCancelled() {
         return true;
+    }
+
+    @Override
+    public InventoryType getInventoryType() {
+        return null;
     }
 }
