@@ -5,6 +5,7 @@ import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -19,6 +20,7 @@ public class Session {
     private Long money;
     private boolean isVanished;
     private boolean isFreezed;
+    private Hats hat;
 
     public Session(Player player, ResultSet rs) throws SQLException {
         this.player = player;
@@ -149,5 +151,38 @@ public class Session {
         isVanished = false;
         if (messages) ColorUtils.sendMessage(player, "Vous venez de vous révéler !", Colors.PREFIX);
         this.getPlayer().getActivePotionEffects().forEach(potionEffect -> this.getPlayer().removePotionEffect(potionEffect.getType()));
+    }
+
+    // /$$   /$$  /$$$$$$  /$$$$$$$$ /$$$$$$
+    // | $$  | $$ /$$__  $$|__  $$__//$$__  $$
+    // | $$  | $$| $$  \ $$   | $$  | $$  \__/
+    // | $$$$$$$$| $$$$$$$$   | $$  |  $$$$$$
+    // | $$__  $$| $$__  $$   | $$   \____  $$
+    // | $$  | $$| $$  | $$   | $$   /$$  \ $$
+    // | $$  | $$| $$  | $$   | $$  |  $$$$$$/
+    // |__/  |__/|__/  |__/   |__/   \______/
+
+
+    public void setHat(Hats hat, ItemStack itemStack) {
+        this.player.getInventory().setHelmet(itemStack);
+        this.hat = hat;
+    }
+
+    public void setHat(Hats hat) {
+        if (hat == null) {
+            this.player.getInventory().setHelmet(null);
+            this.hat = null;
+            return;
+        }
+
+        this.hat = hat;
+    }
+
+    public Hats getHat() {
+        return hat;
+    }
+
+    public boolean hasHat() {
+        return hat != null;
     }
 }
