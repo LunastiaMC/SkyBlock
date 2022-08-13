@@ -43,10 +43,17 @@ public enum Hats {
         return permission;
     }
 
-    public static Hats getHat(Material type) {
-        for (Hats hat : Hats.values()) {
-            if (Objects.equals(hat.getIdentifier(), type.toString())) {
-                return hat;
+    public static Hats getHat(ItemStack itemStack) {
+        NamespacedKey key = new NamespacedKey(Core.getInstance(), "hatId");
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        PersistentDataContainer container = itemMeta.getPersistentDataContainer();
+
+        if(container.has(key , PersistentDataType.STRING)) {
+            String foundValue = container.get(key, PersistentDataType.STRING);
+            for(Hats hat : Hats.values()) {
+                if(hat.getUniqueId().toString().equals(foundValue)) {
+                    return hat;
+                }
             }
         }
         return null;
