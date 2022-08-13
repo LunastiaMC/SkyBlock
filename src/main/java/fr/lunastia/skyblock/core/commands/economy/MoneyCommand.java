@@ -72,5 +72,6 @@ public class MoneyCommand {
 
         session.setMoney(amount);
         ColorUtils.sendMessage(player, "Vous venez de définir le compte de §e" + target.getName() + "§fà §e" + TextUtils.formatValue(amount) + " pièce(s)", Colors.BANK);
+        ColorUtils.sendMessage(target,"Votre argent a été défini à §e" + TextUtils.formatValue(amount) + " pièce(s)", Colors.BANK);
     }
 }
