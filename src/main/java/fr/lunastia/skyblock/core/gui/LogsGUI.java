@@ -68,6 +68,11 @@ public class LogsGUI implements GUI {
             slot++;
         }
 
+        // remove all items when all displayed
+        for (int i = slot; i < inventory.getSize(); i++) {
+            inventory.setItem(i, null);
+        }
+
         if (Integer.parseInt(argument.get(1)) >= 1) {
             inventory.setItem(45, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("7789"), "§cPage précédente (" + argument.get(1) + ")", new ArrayList<>()));
         } else {
