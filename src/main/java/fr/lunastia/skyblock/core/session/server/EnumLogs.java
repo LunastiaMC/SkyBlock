@@ -95,7 +95,7 @@ public enum EnumLogs {
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Modérateur: §r" + log.itemColor.color() + infos.getString("moderator_name")));
                 break;
             case PLAYER_BANNED:
-                isPermanent(infos, lore, log);
+                isPermanentBan(infos, lore, log);
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Raison: " + log.itemColor.color() + infos.getString("reason")));
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Banni par: " + log.itemColor.color() + infos.getString("moderator_name")));
                 break;
@@ -103,7 +103,7 @@ public enum EnumLogs {
                 if (player.isOp()) {
                     lore.add(ColorUtils.colorize("§l§7➥ §r§7Adresse IP: " + log.itemColor.color() + infos.getString("ip")));
                 }
-                isPermanent(infos, lore, log);
+                isPermanentBan(infos, lore, log);
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Raison: " + log.itemColor.color() + infos.getString("reason")));
                 break;
             case PLAYER_CHANGE_HAT:
@@ -113,7 +113,7 @@ public enum EnumLogs {
         return lore;
     }
 
-    private void isPermanent(ResultSet infos, ArrayList<String> lore, EnumLogs log) throws SQLException {
+    private void isPermanentBan(ResultSet infos, ArrayList<String> lore, EnumLogs log) throws SQLException {
         if (infos.getString("expireAt").equals("perm")) {
             lore.add(ColorUtils.colorize("§l§7➥ §r§7Durée de bannissement: §r" + log.itemColor.color() + "Permanent"));
         } else {
