@@ -8,6 +8,7 @@ import dev.jorel.commandapi.annotations.arguments.AIntegerArgument;
 import dev.jorel.commandapi.annotations.arguments.AMultiLiteralArgument;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
 import fr.lunastia.skyblock.core.manager.Manager;
+import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
@@ -55,6 +56,7 @@ public class BanCommand {
                     ColorUtils.colorize("§r§7vous pouvez ouvrir un ticket sur le discord") + "\n",
                     ColorUtils.colorize(Colors.DISCORD_COLOR.color() + "discord.gg/F9aQyQZxQr")
             };
+
             target.kickPlayer(String.join("", message));
         } catch (SQLException e) {
             e.printStackTrace();

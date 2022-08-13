@@ -48,8 +48,10 @@ public class PlayerListeners implements Listener {
             }
         }
 
-        LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_QUIT, player, new Date());
-        log.send();
+        if (!session.wasKicked()) {
+            LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_QUIT, player, new Date());
+            log.send();
+        }
     }
 
     @EventHandler
