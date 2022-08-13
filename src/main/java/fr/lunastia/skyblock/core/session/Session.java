@@ -11,6 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 public class Session {
 
@@ -32,11 +33,14 @@ public class Session {
         setFreezed(rs.getBoolean("freezed"), rs.getBoolean("freezed"));
         setVanished(rs.getBoolean("vanished"), rs.getBoolean("vanished"));
 
+        Hats hat = Hats.fromUUID(rs.getString("hat"));
+        if (hat != null) setHat(hat, hat.getItemStack());
+
         NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
         player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
     }
 
-    public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished) {
+    public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished, Hats hat) {
         this.player = player;
         this.rank = Manager.getRankManager().getRank(rank);
         this.money = money;
@@ -45,6 +49,9 @@ public class Session {
         Rank.applyPermissions(player, permissions);
         setFreezed(isFreezed, isFreezed);
         setVanished(isVanished, isVanished);
+
+        if (hat == null) setHat(null);
+        else setHat(hat, hat.getItemStack());
 
         NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
         player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());

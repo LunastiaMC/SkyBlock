@@ -36,7 +36,7 @@ public class SessionManager {
             statementCreation.setNull(7, Types.NULL);
             statementCreation.execute();
 
-            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{}, false, false);
+            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{}, false, false,null);
             this.sessions.put(player.getUniqueId().toString(), session);
         }
     }

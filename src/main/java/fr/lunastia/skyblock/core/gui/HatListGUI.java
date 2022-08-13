@@ -44,12 +44,7 @@ public class HatListGUI implements GUI {
                 lore.add("§a§l✔ §r§aVous avez débloqué ce chapeau");
             }
 
-            ItemStack itemStack = null;
-            if (hat.isHead()) {
-                itemStack = ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(hat.getHead())), "§d" + hat.getDisplayName(), lore);
-            } else {
-                itemStack = ItemUtils.customizedItem(new ItemStack(Objects.requireNonNull(Material.matchMaterial(hat.getIdentifier()))), "§d" + hat.getDisplayName(), lore);
-            }
+            ItemStack itemStack = hat.getItemStack();
 
             NamespacedKey key = new NamespacedKey(Core.getInstance(), "hatId");
             ItemMeta itemMeta = itemStack.getItemMeta();
@@ -84,7 +79,7 @@ public class HatListGUI implements GUI {
             return;
         }
 
-        session.setHat(hat, itemStack);
+        session.setHat(hat, hat.getItemStack());
         ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + hat.getDisplayName(), Colors.HAT);
         player.closeInventory();
     }

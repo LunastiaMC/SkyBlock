@@ -1,6 +1,8 @@
 package fr.lunastia.skyblock.core.session;
 
 import fr.lunastia.skyblock.core.Core;
+import fr.lunastia.skyblock.core.manager.Manager;
+import fr.lunastia.skyblock.core.utils.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -8,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -16,7 +19,7 @@ public enum Hats {
     TINTED_GLASS(UUID.fromString("fbd30c53-b6cc-40be-b96d-415fa6879844"), "tinted_glass", "Chapeau en verre teinté", "skyblock.hat.use"),
     WOOL(UUID.fromString("b1863e8f-7150-4a13-a5bf-436212b216d1"), "white_wool", "Chapeau en laine", "skyblock.hat.use"),
     NETHERITE_BLOCK(UUID.fromString("4214efdd-af74-493b-8924-396edb561240"), "netherite_block", "Chapeau de bloc de netherite", "skyblock.hat.use"),
-    CHICK(UUID.fromString("aecf25cf-8b8b-4044-94c1-e51be76c1a8f"),42983,"Détective Cocotte","skyblock.hat.use");
+    CHICK(UUID.fromString("aecf25cf-8b8b-4044-94c1-e51be76c1a8f"), 42983, "Détective Cocotte", "skyblock.hat.use");
 
 
     private final UUID uuid;
@@ -45,6 +48,15 @@ public enum Hats {
         return Hats.values();
     }
 
+    public static Hats fromUUID(String uuid) {
+        for (Hats h : Hats.values()) {
+            if (h.uuid.toString().equals(uuid)) {
+                return h;
+            }
+        }
+        return null;
+    }
+
     public UUID getUniqueId() {
         return uuid;
     }
@@ -52,6 +64,7 @@ public enum Hats {
     public String getIdentifier() {
         return identifier;
     }
+
     public boolean isHead() {
         return identifier == null;
     }
@@ -73,14 +86,22 @@ public enum Hats {
         ItemMeta itemMeta = itemStack.getItemMeta();
         PersistentDataContainer container = itemMeta.getPersistentDataContainer();
 
-        if(container.has(key , PersistentDataType.STRING)) {
+        if (container.has(key, PersistentDataType.STRING)) {
             String foundValue = container.get(key, PersistentDataType.STRING);
-            for(Hats hat : Hats.values()) {
-                if(hat.getUniqueId().toString().equals(foundValue)) {
+            for (Hats hat : Hats.values()) {
+                if (hat.getUniqueId().toString().equals(foundValue)) {
                     return hat;
                 }
             }
         }
         return null;
+    }
+
+    public ItemStack getItemStack() {
+        if (this.isHead()) {
+            return ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(this.getHead())), "§d" + this.getDisplayName(),new ArrayList<>());
+        } else {
+            return ItemUtils.customizedItem(new ItemStack(Objects.requireNonNull(Material.matchMaterial(this.getIdentifier()))), "§d" + this.getDisplayName(), new ArrayList<>());
+        }
     }
 }

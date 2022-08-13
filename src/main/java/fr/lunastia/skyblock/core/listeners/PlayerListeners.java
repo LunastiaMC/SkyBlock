@@ -38,9 +38,14 @@ public class PlayerListeners implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) throws SQLException {
         Player player = event.getPlayer();
+        Session session = Manager.getSessionManager().getSession(player);
 
         if (Manager.getSessionManager().hasSession(player)) {
             Manager.getSessionManager().saveSession(player);
+
+            if (session.hasHat()) {
+                player.getInventory().setHelmet(null);
+            }
         }
 
         LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_QUIT, player, new Date());
@@ -93,7 +98,8 @@ public class PlayerListeners implements Listener {
             return;
         }
 
-        if (event.getEntity().getInventory().getHelmet().getItemMeta().getDisplayName().contains("Chapeau")) {
+        Session session = Manager.getSessionManager().getSession(event.getEntity());
+        if (session.hasHat()) {
             event.getDrops().remove(event.getEntity().getInventory().getHelmet());
         }
     }
