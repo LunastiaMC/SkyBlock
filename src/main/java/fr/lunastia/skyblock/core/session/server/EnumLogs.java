@@ -28,6 +28,7 @@ public enum EnumLogs {
     PLAYER_UNFREEZED("", "Dégel", Colors.WARNING, 29472),
     PLAYER_VANISHED("", "Disparition", Colors.COMMON, 20388),
     PLAYER_UNVANISHED("", "Réapparition", Colors.COMMON, 20388),
+    // TODO: Heal, Feed, Fly, Invsee (& other), Report
     PLAYER_CHANGE_HAT("", "Changement de chapeau", Colors.COMMON, 55055),
     PLAYER_CHANGE_HAT_TO_AIR("", "Chapeau retiré de la tête", Colors.COMMON, 55055),
     PLAYER_GAMEMODE_CHANGED_BY_FORCE("", "Changement de mode de jeu par force", Colors.WARNING, 8765),
