@@ -1,6 +1,7 @@
 package fr.lunastia.skyblock.core.gui;
 
 import fr.lunastia.skyblock.core.Core;
+import fr.lunastia.skyblock.core.session.Hats;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
@@ -27,10 +28,22 @@ public class HatListGUI implements GUIBuilder {
 
     @Override
     public void getContents(Player player, Inventory inventory) {
+        // Foreach all hats in Hats.java
+        Hats[] hats = Hats.getHats();
+        int i = 0;
+        for (Hats hat : hats) {
             ArrayList<String> lore = new ArrayList<>();
+            if (!player.hasPermission(hat.getPermission())) {
                 lore.add("§c§l✘ §r§cVous n'avez pas débloqué ce chapeau");
-                // TODO: lore.add("§cDébloquer ce chapeau avec le grade ...");
+                continue;
+            } else {
+                lore.add("§a§l✔ §r§aVous avez débloqué ce chapeau");
             }
+            i++;
+
+            // Get item
+            ItemStack item = new ItemStack(Material.valueOf(hat.getIdentifier()));
+            inventory.setItem(i, ItemUtils.customizedItem(item, "§d" + hat.getDisplayName(), lore));
         }
     }
 
