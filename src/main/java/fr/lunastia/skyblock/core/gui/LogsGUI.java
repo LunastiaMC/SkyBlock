@@ -51,10 +51,10 @@ public class LogsGUI implements GUI {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
         PreparedStatement statement = null;
         if (argument != null) {
-            statement = connection.prepareStatement("SELECT * FROM logs WHERE target_name = ? ORDER BY logged_at DESC LIMIT 53;");
+            statement = connection.prepareStatement("SELECT * FROM logs WHERE target_name = ? ORDER BY logged_at DESC LIMIT 45;");
             statement.setString(1, argument);
         } else {
-            statement = connection.prepareStatement("SELECT * FROM logs ORDER BY logged_at DESC LIMIT 53;");
+            statement = connection.prepareStatement("SELECT * FROM logs ORDER BY logged_at DESC LIMIT 45;");
         }
 
         final ResultSet resultSet = statement.executeQuery();
@@ -74,7 +74,9 @@ public class LogsGUI implements GUI {
         }
 
         // TODO
-        inventory.setItem(54, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("50509"), "§cPage suivante", new ArrayList<>()));
+        inventory.setItem(46, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("7789"), "§cPage précédente", new ArrayList<>()));
+        inventory.setItem(50, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("32582"), "§cRecharger", new ArrayList<>()));
+        inventory.setItem(54, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("7786"), "§cPage suivante", new ArrayList<>()));
     }
 
     @Override
