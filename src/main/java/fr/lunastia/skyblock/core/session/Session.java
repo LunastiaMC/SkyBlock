@@ -11,7 +11,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.UUID;
 
 public class Session {
 
@@ -22,6 +21,7 @@ public class Session {
     private boolean isVanished;
     private boolean isFreezed;
     private Hats hat;
+    private boolean wasKicked = false;
 
     public Session(Player player, ResultSet rs) throws SQLException {
         this.player = player;
@@ -160,6 +160,14 @@ public class Session {
         this.getPlayer().getActivePotionEffects().forEach(potionEffect -> this.getPlayer().removePotionEffect(potionEffect.getType()));
     }
 
+    public boolean wasKicked() {
+        return wasKicked;
+    }
+
+    public void setKicked() {
+        wasKicked = true;
+    }
+
     // /$$   /$$  /$$$$$$  /$$$$$$$$ /$$$$$$
     // | $$  | $$ /$$__  $$|__  $$__//$$__  $$
     // | $$  | $$| $$  \ $$   | $$  | $$  \__/
@@ -175,6 +183,10 @@ public class Session {
         this.hat = hat;
     }
 
+    public Hats getHat() {
+        return hat;
+    }
+
     public void setHat(Hats hat) {
         if (hat == null) {
             this.player.getInventory().setHelmet(null);
@@ -183,10 +195,6 @@ public class Session {
         }
 
         this.hat = hat;
-    }
-
-    public Hats getHat() {
-        return hat;
     }
 
     public boolean hasHat() {

@@ -55,6 +55,7 @@ public class BanCommand {
                     ColorUtils.colorize("§r§7vous pouvez ouvrir un ticket sur le discord") + "\n",
                     ColorUtils.colorize(Colors.DISCORD_COLOR.color() + "discord.gg/F9aQyQZxQr")
             };
+
             target.kickPlayer(String.join("", message));
         } catch (SQLException e) {
             e.printStackTrace();

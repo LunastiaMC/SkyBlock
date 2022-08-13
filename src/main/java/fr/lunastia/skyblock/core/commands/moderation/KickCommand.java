@@ -5,7 +5,8 @@ import dev.jorel.commandapi.annotations.Default;
 import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.arguments.AGreedyStringArgument;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
-import fr.lunastia.skyblock.core.manager.ModerationManager;
+import fr.lunastia.skyblock.core.manager.Manager;
+import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import fr.lunastia.skyblock.core.session.server.logs.LogTypeModeration;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
@@ -29,6 +30,11 @@ public class KickCommand {
                 ColorUtils.colorize("§r§7vous pouvez ouvrir un ticket sur le discord") + "\n",
                 ColorUtils.colorize(Colors.DISCORD_COLOR.color() + "discord.gg/F9aQyQZxQr")
         };
+
+        Session sessionTarget = Manager.getSessionManager().getSession(target);
+        if (sessionTarget != null) {
+            sessionTarget.setKicked();
+        }
 
         target.kickPlayer(String.join("", message));
         LogTypeModeration log = new LogTypeModeration(EnumLogs.PLAYER_KICKED, target, player, reason);

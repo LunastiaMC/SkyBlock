@@ -23,6 +23,8 @@ public interface GUI {
 
     boolean clickCancelled();
 
+    // To merge
+
     InventoryType getInventoryType();
 
     void setArgument(String argument);

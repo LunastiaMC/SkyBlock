@@ -6,11 +6,9 @@ import fr.lunastia.skyblock.core.manager.ModerationManager;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import org.bukkit.entity.Player;
 
-import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Types;
 
 public interface Log {
     default void sendModLog(EnumLogs type, Player target, Player moderator, String reason, String startAt, String expireAt) {

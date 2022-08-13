@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class LogsGUI implements GUI {
@@ -70,6 +71,9 @@ public class LogsGUI implements GUI {
             inventory.setItem(slot, item);
             slot++;
         }
+
+        // TODO
+        inventory.setItem(54, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("50509"), "§cPage suivante", new ArrayList<>()));
     }
 
     @Override
