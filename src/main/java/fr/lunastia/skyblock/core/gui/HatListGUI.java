@@ -27,17 +27,10 @@ public class HatListGUI implements GUIBuilder {
 
     @Override
     public void getContents(Player player, Inventory inventory) {
-        YamlConfiguration config = YamlConfiguration.loadConfiguration(Core.getInstance().getHatConfig());
-        ConfigurationSection section = config.getConfigurationSection("hats");
-        for (String string : section.getKeys(false)) {
             ArrayList<String> lore = new ArrayList<>();
-            if (player.hasPermission(section.getString(string + ".permission"))) {
-                lore.add("§a§l✔ §r§aVous avez débloqué ce chapeau");
-            } else {
                 lore.add("§c§l✘ §r§cVous n'avez pas débloqué ce chapeau");
                 // TODO: lore.add("§cDébloquer ce chapeau avec le grade ...");
             }
-            inventory.setItem(Integer.parseInt(string), ItemUtils.customizedItem(new ItemStack(Material.matchMaterial(section.getString(string + ".id"))), section.getString(string + ".displayName"), lore));
         }
     }
 
