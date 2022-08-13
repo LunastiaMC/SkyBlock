@@ -19,6 +19,7 @@ public class Session {
     private Long money;
     private boolean isVanished;
     private boolean isFreezed;
+    private Hats hat;
 
     public Session(Player player, ResultSet rs) throws SQLException {
         this.player = player;
@@ -149,5 +150,27 @@ public class Session {
         isVanished = false;
         if (messages) ColorUtils.sendMessage(player, "Vous venez de vous révéler !", Colors.PREFIX);
         this.getPlayer().getActivePotionEffects().forEach(potionEffect -> this.getPlayer().removePotionEffect(potionEffect.getType()));
+    }
+
+    // /$$   /$$  /$$$$$$  /$$$$$$$$ /$$$$$$
+    // | $$  | $$ /$$__  $$|__  $$__//$$__  $$
+    // | $$  | $$| $$  \ $$   | $$  | $$  \__/
+    // | $$$$$$$$| $$$$$$$$   | $$  |  $$$$$$
+    // | $$__  $$| $$__  $$   | $$   \____  $$
+    // | $$  | $$| $$  | $$   | $$   /$$  \ $$
+    // | $$  | $$| $$  | $$   | $$  |  $$$$$$/
+    // |__/  |__/|__/  |__/   |__/   \______/
+
+
+    public void setHat(Hats hat) {
+        this.hat = hat;
+    }
+
+    public Hats getHat() {
+        return hat;
+    }
+
+    public boolean hasHat() {
+        return hat != null;
     }
 }
