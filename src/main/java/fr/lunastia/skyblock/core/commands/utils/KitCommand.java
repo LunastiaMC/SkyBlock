@@ -12,7 +12,8 @@ import dev.jorel.commandapi.annotations.arguments.AStringArgument;
 import fr.lunastia.skyblock.core.gui.KitGUI;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.server.Kit;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
@@ -21,14 +22,18 @@ import java.sql.SQLException;
 public class KitCommand {
     @Default
     public static void kit(Player player) {
-        Manager.getGUIManager().open(player, KitGUI.class);
+        try {
+            Manager.getGUIManager().open(player, KitGUI.class);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Subcommand("add")
     @Permission("skyblock.kit.add")
     public static void add(Player player, @AStringArgument String identifier, @AIntegerArgument Integer headId, @AGreedyStringArgument String displayName) {
         if (Manager.getKitManager().exist(identifier)) {
-            ColorUtils.sendMessage(player, "Cet équipement existe déjà !", ColorUtils.PREFIX, true);
+            ColorUtils.sendMessage(player, "Cet équipement existe déjà !", Colors.PREFIX, true);
             return;
         }
 
@@ -38,7 +43,7 @@ public class KitCommand {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        ColorUtils.sendMessage(player, "L'équipement a bien été ajouté !", ColorUtils.PREFIX);
+        ColorUtils.sendMessage(player, "L'équipement a bien été ajouté !", Colors.PREFIX);
     }
 
     @Subcommand("edit")
@@ -47,7 +52,7 @@ public class KitCommand {
             identifier, @AMultiLiteralArgument({"displayName", "headId", "permission"}) String type, @AStringArgument String
                                           value) {
         if (!Manager.getKitManager().exist(identifier)) {
-            ColorUtils.sendMessage(player, "Cet équipement n'existe pas !", ColorUtils.PREFIX, true);
+            ColorUtils.sendMessage(player, "Cet équipement n'existe pas !", Colors.PREFIX, true);
             return;
         }
 
@@ -75,7 +80,7 @@ public class KitCommand {
                 }
             }
         }
-        ColorUtils.sendMessage(player, "L'équipement a bien été modifié !", ColorUtils.PREFIX);
+        ColorUtils.sendMessage(player, "L'équipement a bien été modifié !", Colors.PREFIX);
 
     }
 
@@ -83,7 +88,7 @@ public class KitCommand {
     @Permission("skyblock.kit.inventory")
     public static void inventory(Player player, @AStringArgument String identifier) {
         if (!Manager.getKitManager().exist(identifier)) {
-            ColorUtils.sendMessage(player, "Cet équipement n'existe pas !", ColorUtils.PREFIX, true);
+            ColorUtils.sendMessage(player, "Cet équipement n'existe pas !", Colors.PREFIX, true);
             return;
         }
 
@@ -93,6 +98,6 @@ public class KitCommand {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        ColorUtils.sendMessage(player, "L'équipement a bien été modifié !", ColorUtils.PREFIX);
+        ColorUtils.sendMessage(player, "L'équipement a bien été modifié !", Colors.PREFIX);
     }
 }

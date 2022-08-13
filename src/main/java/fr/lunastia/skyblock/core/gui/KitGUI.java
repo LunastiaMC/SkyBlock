@@ -2,12 +2,13 @@ package fr.lunastia.skyblock.core.gui;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
 
-public class KitGUI implements GUIBuilder{
+public class KitGUI implements GUI {
     @Override
     public String getName() {
         return "Liste des kits";
@@ -41,5 +42,10 @@ public class KitGUI implements GUIBuilder{
     @Override
     public boolean clickCancelled() {
         return false;
+    }
+
+    @Override
+    public InventoryType getInventoryType() {
+        return null;
     }
 }

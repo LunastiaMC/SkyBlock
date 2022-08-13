@@ -15,6 +15,9 @@ import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 public class Manager {
     private static SessionManager sessionManager;
     private static RankManager rankManager;
@@ -62,7 +65,7 @@ public class Manager {
         return moderationManager;
     }
 
-    public void init() {
+    public void init() throws SQLException, IOException {
         sessionManager = new SessionManager();
         databaseManager = new DatabaseManager();
         rankManager = new RankManager();
