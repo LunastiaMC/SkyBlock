@@ -41,10 +41,10 @@ public class HatCommand {
         }
 
         if (session.hasHat()) {
-            ColorUtils.sendMessage(player, "Vous venez de retirer le chapeau " + session.getHat().getDisplayName(), Colors.PREFIX);
+            ColorUtils.sendMessage(player, "Vous venez de retirer le chapeau §d" + session.getHat().getDisplayName(), Colors.HAT);
             session.setHat(null);
         } else {
-            ColorUtils.sendMessage(player, "Vous n'avez pas de chapeau", Colors.PREFIX);
+            ColorUtils.sendMessage(player, "Vous n'avez pas de chapeau", Colors.PREFIX,true);
         }
     }
 }
