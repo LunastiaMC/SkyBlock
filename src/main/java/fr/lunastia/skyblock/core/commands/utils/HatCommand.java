@@ -7,17 +7,25 @@ import dev.jorel.commandapi.annotations.Permission;
 import dev.jorel.commandapi.annotations.Subcommand;
 import fr.lunastia.skyblock.core.gui.HatListGUI;
 import fr.lunastia.skyblock.core.manager.Manager;
+import fr.lunastia.skyblock.core.session.server.EnumLogs;
+import fr.lunastia.skyblock.core.session.server.logs.LogTypeCommon;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+
+import java.sql.SQLException;
 
 @Command("hat")
 @Permission("skyblock.hat.command")
 public class HatCommand {
     @Default
     public static void hat(Player player) {
-        Manager.getGUIManager().open(player, HatListGUI.class);
+        try {
+            Manager.getGUIManager().open(player, HatListGUI.class);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -43,6 +51,8 @@ public class HatCommand {
             if (player.getInventory().getHelmet().getItemMeta().getDisplayName().contains("Chapeau")) {
                 player.getInventory().setHelmet(null);
                 ColorUtils.sendMessage(player, "Vous venez de retirer votre chapeau !", Colors.HAT);
+                LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_CHANGE_HAT_TO_AIR, player);
+                log.send();
             } else {
                 ColorUtils.sendMessage(player, "Vous devez avoir un chapeau pour executer cette commande !", Colors.HAT);
             }
