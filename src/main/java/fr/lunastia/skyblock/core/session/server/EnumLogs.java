@@ -90,25 +90,24 @@ public enum EnumLogs {
         lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + log.itemColor.color() + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(infos.getString("startAt")))));
         lore.add(" ");
         switch (log) {
-            case PLAYER_KICKED:
+            case PLAYER_KICKED -> {
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Raison: §r" + log.itemColor.color() + infos.getString("reason")));
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Modérateur: §r" + log.itemColor.color() + infos.getString("moderator_name")));
-                break;
-            case PLAYER_BANNED:
+            }
+            case PLAYER_BANNED -> {
                 isPermanentBan(infos, lore, log);
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Raison: " + log.itemColor.color() + infos.getString("reason")));
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Banni par: " + log.itemColor.color() + infos.getString("moderator_name")));
-                break;
-            case PLAYER_IP_BANNED:
+            }
+            case PLAYER_IP_BANNED -> {
                 if (player.isOp()) {
                     lore.add(ColorUtils.colorize("§l§7➥ §r§7Adresse IP: " + log.itemColor.color() + infos.getString("ip")));
                 }
                 isPermanentBan(infos, lore, log);
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Raison: " + log.itemColor.color() + infos.getString("reason")));
-                break;
-            case PLAYER_CHANGE_HAT:
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r" + log.itemColor.color() + infos.getString("hat_name")));
-                break;
+            }
+            case PLAYER_CHANGE_HAT ->
+                    lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r" + log.itemColor.color() + infos.getString("hat_name")));
         }
         return lore;
     }
