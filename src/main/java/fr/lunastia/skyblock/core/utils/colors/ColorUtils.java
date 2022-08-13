@@ -34,10 +34,10 @@ public class ColorUtils {
     }
 
     public static void sendMessage(Player player, String message, Colors prefix) {
-        player.sendMessage(colorize(prefix + "§7 " + message));
+        player.sendMessage(colorize(prefix.color() + "§7 " + message));
     }
 
     public static void sendMessage(Player player, String message, Colors prefix, Boolean isError) {
-        player.sendMessage(colorize(prefix + (isError ? "§c " : "§7 ") + message));
+        player.sendMessage(colorize(prefix.color() + (isError ? "§c " : "§7 ") + message));
     }
 }

@@ -12,6 +12,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.Repairable;
 
+import java.sql.SQLException;
+
 @Command("repair")
 public class RepairCommand {
     @Default
@@ -32,6 +34,10 @@ public class RepairCommand {
             return;
         }
 
-        Manager.getGUIManager().open(player, RepairGUI.class);
+        try {
+            Manager.getGUIManager().open(player, RepairGUI.class);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
