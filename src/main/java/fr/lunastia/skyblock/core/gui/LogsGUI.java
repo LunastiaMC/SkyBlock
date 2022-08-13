@@ -11,11 +11,13 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.checkerframework.checker.units.qual.A;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class LogsGUI implements GUI {
@@ -50,6 +52,8 @@ public class LogsGUI implements GUI {
             inventory.setItem(slot, item);
             slot++;
         }
+
+        inventory.setItem(54, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("50509"), "§cPage suivante", new ArrayList<>()));
     }
 
     @Override
