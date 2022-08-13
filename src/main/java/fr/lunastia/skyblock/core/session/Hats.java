@@ -1,5 +1,8 @@
 package fr.lunastia.skyblock.core.session;
 
+import org.bukkit.Material;
+
+import java.util.Objects;
 import java.util.UUID;
 
 public enum Hats {
@@ -38,5 +41,14 @@ public enum Hats {
 
     public String getPermission() {
         return permission;
+    }
+
+    public static Hats getHat(Material type) {
+        for (Hats hat : Hats.values()) {
+            if (Objects.equals(hat.getIdentifier(), type.toString())) {
+                return hat;
+            }
+        }
+        return null;
     }
 }
