@@ -120,9 +120,9 @@ public enum Hats {
 
     public ItemStack getItemStack() {
         if (this.isHead()) {
-            return ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(this.getHead())), "§d" + this.getDisplayName(), new ArrayList<>(),"hatId",uuid);
+            return ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(this.getHead())), "§d" + this.getDisplayName(), new ArrayList<>(), "hatId", uuid);
         } else {
-            return ItemUtils.customizedItem(new ItemStack(Objects.requireNonNull(Material.matchMaterial(this.getIdentifier()))), "§d" + this.getDisplayName(), new ArrayList<>(),"hatId",uuid);
+            return ItemUtils.customizedItem(new ItemStack(Objects.requireNonNull(Material.matchMaterial(this.getIdentifier()))), "§d" + this.getDisplayName(), new ArrayList<>(), "hatId", uuid);
         }
     }
 }
