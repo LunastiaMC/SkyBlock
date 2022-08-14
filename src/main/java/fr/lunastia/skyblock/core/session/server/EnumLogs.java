@@ -165,13 +165,19 @@ public enum EnumLogs {
             case PLAYER_FREEZED, PLAYER_UNFREEZED -> {
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Modérateur: " + log.itemColor.color() + infos.getString("moderator_name")));
             }
-            case PLAYER_CHANGE_HAT -> {
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r" + log.itemColor.color() + infos.getString("hat_name")));
+            case PLAYER_CHANGE_HAT, PLAYER_CHANGE_HAT_TO_AIR -> {
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r§d" + infos.getString("hat_name")));
             }
             case LOGS_OPEN, LOGS_CLOSE -> {
                 String logsOpened = infos.getString("logs_opened_player") == null ? "Global" : infos.getString("logs_opened_player");
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Cible: " + log.itemColor.color() + logsOpened));
             }
+        }
+
+        if (player.isOp()) {
+            lore.add(ColorUtils.colorize("§l§7➥ §r§7ID: " + log.itemColor.color() + infos.getString("uuid")));
+            lore.add(ColorUtils.colorize("§eClic gauche pour archiver"));
+            lore.add(ColorUtils.colorize("§eClic droit pour supprimer"));
         }
         return lore;
     }
