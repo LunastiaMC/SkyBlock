@@ -8,6 +8,8 @@ import dev.jorel.commandapi.annotations.Subcommand;
 import fr.lunastia.skyblock.core.gui.HatListGUI;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Session;
+import fr.lunastia.skyblock.core.session.server.EnumLogs;
+import fr.lunastia.skyblock.core.session.server.logs.LogTypeCommon;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
