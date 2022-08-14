@@ -133,8 +133,22 @@ public enum EnumLogs {
                 isPermanentBan(infos, lore, log);
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Raison: " + log.itemColor.color() + infos.getString("reason")));
             }
-            case PLAYER_CHANGE_HAT ->
-                    lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r" + log.itemColor.color() + infos.getString("hat_name")));
+            case PLAYER_MONEY_UPDATED -> {
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Transaction: " + log.itemColor.color() + "+" + infos.getString("balance_transaction") + " pièce(s)"));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Ancien solde: " + log.itemColor.color() + infos.getString("balance_old") + " pièce(s)"));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Nouveau solde: " + log.itemColor.color() + infos.getString("balance_new") + " pièce(s)"));
+                lore.add(" ");
+
+                EnumLogs type = EnumLogs.valueOf(infos.getString("balance_transaction_type"));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Type de transaction: " + log.itemColor.color() + type.getMoneyType()));
+                if (type == MONEY_ADDED || type == MONEY_REMOVED || type == MONEY_SET) {
+                    lore.add(ColorUtils.colorize("§l§7➥ §r§7Modérateur: " + log.itemColor.color() + infos.getString("moderator_name")));
+                } else if (type == MONEY_DEPOSIT_ISLAND_BANK || type == MONEY_WITHDRAW_ISLAND_BANK) {
+                    lore.add(ColorUtils.colorize("§l§7➥ §r§7Île de: " + log.itemColor.color() + "Pas encore disponible"));
+                } else if (type == MONEY_PAY || type == MONEY_RECEIVE) {
+                    lore.add(ColorUtils.colorize("§l§7➥ §r§7Autre joueur: " + log.itemColor.color() + infos.getString("balance_transaction_target")));
+                }
+            }
             }
             case PLAYER_GAMEMODE_CHANGED_BY_FORCE -> {
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Ancien mode de jeu: " + log.itemColor.color() + GameModeCommand.getNameGameMode(String.valueOf(infos.getInt("old_gamemode")))));
