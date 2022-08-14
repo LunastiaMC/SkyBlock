@@ -60,7 +60,7 @@ public interface Log {
                 statement.setString(1, type.toString());
                 statement.setString(2, target.getUniqueId().toString());
                 statement.setString(3, target.getName());
-                statement.setString(4, ModerationManager.getMinimizedDate(startAt));
+                statement.setString(4, startAt);
                 statement.setString(5, hat);
                 statement.execute();
             } catch (SQLException e) {

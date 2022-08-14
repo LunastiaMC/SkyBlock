@@ -30,7 +30,7 @@ public class PlayerListeners implements Listener {
         if (!Manager.getModerationManager().isBanned(player)) {
             Manager.getSessionManager().loadSession(player);
 
-            LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_JOIN, player, new Date());
+            LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_JOIN, player);
             log.send();
         }
     }
@@ -49,7 +49,7 @@ public class PlayerListeners implements Listener {
         }
 
         if (!session.wasKicked()) {
-            LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_QUIT, player, new Date());
+            LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_QUIT, player);
             log.send();
         }
     }
