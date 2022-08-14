@@ -1,5 +1,6 @@
 package fr.lunastia.skyblock.core.session.server;
 
+import fr.lunastia.skyblock.core.commands.moderation.GameModeCommand;
 import fr.lunastia.skyblock.core.utils.TextUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
@@ -31,10 +32,10 @@ public enum EnumLogs {
     // TODO: Heal, Feed, Fly, Invsee (& other), Report
     PLAYER_CHANGE_HAT("", "Changement de chapeau", Colors.COMMON, 55055),
     PLAYER_CHANGE_HAT_TO_AIR("", "Chapeau retiré de la tête", Colors.COMMON, 55055),
-    PLAYER_GAMEMODE_CHANGED_BY_FORCE("", "Changement de mode de jeu par force", Colors.WARNING, 8765),
     PLAYER_CHANGE_GAMEMODE("", "Changement de mode de jeu", Colors.WARNING, 8765),
+    PLAYER_GAMEMODE_CHANGED_BY_FORCE("", "Changement de mode de jeu par force", Colors.WARNING, 8765),
     PLAYER_RANK_UPDATED("", "Changement de grade", Colors.BAD, 33946),
-    PLAYER_MONEY_UPDATED("", "Changement de solde", Colors.BAD, 33946),
+    PLAYER_MONEY_UPDATED("", "Changement de solde", Colors.WARNING, 33946),
     MONEY_PAY("Payement à un joueur"),
     MONEY_RECEIVE("Payement reçu"),
     MONEY_ADDED("Argent ajouté"),
@@ -134,6 +135,15 @@ public enum EnumLogs {
             }
             case PLAYER_CHANGE_HAT ->
                     lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r" + log.itemColor.color() + infos.getString("hat_name")));
+            }
+            case PLAYER_GAMEMODE_CHANGED_BY_FORCE -> {
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Ancien mode de jeu: " + log.itemColor.color() + GameModeCommand.getNameGameMode(String.valueOf(infos.getInt("old_gamemode")))));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Nouveau mode de jeu: " + log.itemColor.color() + GameModeCommand.getNameGameMode(String.valueOf(infos.getInt("new_gamemode")))));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Modérateur: " + log.itemColor.color() + infos.getString("moderator_name")));
+            }
+            case PLAYER_CHANGE_HAT -> {
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r" + log.itemColor.color() + infos.getString("hat_name")));
+            }
         }
         return lore;
     }
