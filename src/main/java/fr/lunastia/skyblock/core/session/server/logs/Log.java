@@ -19,14 +19,21 @@ public interface Log {
                 final PreparedStatement statement = connection.prepareStatement("INSERT INTO logs (type, target, target_name, moderator, moderator_name, reason, startAt, expireAt) VALUES (?,?,?,?,?,?,?,?)");
                 statement.setString(1, type.toString());
                 if (target == null) {
+                    System.out.println("aa");
                     statement.setNull(2, Types.NULL);
                     statement.setNull(3, Types.NULL);
                 } else {
+                    System.out.println("bb");
                     statement.setString(2, target.getUniqueId().toString());
                     statement.setString(3, target.getName());
                 }
-                statement.setString(4, moderator.getUniqueId().toString());
-                statement.setString(5, moderator.getName());
+                if (moderator == null) {
+                    statement.setNull(4, Types.NULL);
+                    statement.setNull(5, Types.NULL);
+                } else {
+                    statement.setString(4, moderator.getUniqueId().toString());
+                    statement.setString(5, moderator.getName());
+                }
                 if (reason == null) {
                     statement.setNull(6, Types.NULL);
                 } else {
@@ -55,6 +62,40 @@ public interface Log {
                 statement.setString(3, target.getName());
                 statement.setString(4, ModerationManager.getMinimizedDate(startAt));
                 statement.setString(5, hat);
+                statement.execute();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    default void sendLogs(EnumLogs type, Player player, String startAt, boolean a) {
+        Core.getInstance().getServer().getScheduler().runTaskAsynchronously(Core.getInstance(), () -> {
+            try {
+                Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
+                final PreparedStatement statement = connection.prepareStatement("INSERT INTO logs (type, target, target_name, startAt) VALUES (?,?,?,?)");
+                statement.setString(1, type.toString());
+                statement.setString(2, player.getUniqueId().toString());
+                statement.setString(3, player.getName());
+                statement.setString(4, startAt);
+                statement.execute();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    default void sendLogs(EnumLogs type, Player player, String target, String startAt, boolean a) {
+        Core.getInstance().getServer().getScheduler().runTaskAsynchronously(Core.getInstance(), () -> {
+            try {
+                Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
+                final PreparedStatement statement = connection.prepareStatement("INSERT INTO logs (type, target, target_name, moderator, moderator_name, startAt) VALUES (?,?,?,?,?,?)");
+                statement.setString(1, type.toString());
+                statement.setNull(2, Types.NULL);
+                statement.setString(3, target);
+                statement.setString(4, player.getUniqueId().toString());
+                statement.setString(5, player.getName());
+                statement.setString(6, startAt);
                 statement.execute();
             } catch (SQLException e) {
                 e.printStackTrace();
