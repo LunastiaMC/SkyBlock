@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
 
-@Command("hat")
+@Command("hats")
 @Permission("skyblock.hat.command")
 public class HatCommand {
     @Default
