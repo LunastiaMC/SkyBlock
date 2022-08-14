@@ -175,9 +175,9 @@ public enum EnumLogs {
         }
 
         if (player.isOp()) {
-            lore.add(ColorUtils.colorize("§l§7➥ §r§7ID: " + log.itemColor.color() + infos.getString("uuid")));
+            lore.add(" ");
             lore.add(ColorUtils.colorize("§eClic gauche pour archiver"));
-            lore.add(ColorUtils.colorize("§eClic droit pour supprimer"));
+            lore.add(ColorUtils.colorize("§8" + infos.getString("uuid")));
         }
         return lore;
     }
