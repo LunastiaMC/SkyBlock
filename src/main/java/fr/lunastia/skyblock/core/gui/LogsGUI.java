@@ -2,9 +2,9 @@ package fr.lunastia.skyblock.core.gui;
 
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
+import fr.lunastia.skyblock.core.session.server.logs.LogTypeLogs;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
-import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -97,17 +97,27 @@ public class LogsGUI implements GUI {
                 argument.put(1, String.valueOf(Integer.parseInt(argument.get(1)) - 1));
                 setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
             }
-            case 49 -> setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
+            case 49 -> {
+                setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
+            }
             case 53 -> {
                 argument.put(1, Integer.toString(Integer.parseInt(argument.get(1)) + 1));
                 setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
             }
         }
+
+        getName();
     }
 
     @Override
     public void onClose(Player player, Inventory inventory) {
-
+        LogTypeLogs log = null;
+        if (argument.get(0) != null) {
+            log = new LogTypeLogs(EnumLogs.LOGS_OPEN, player, argument.get(1));
+        } else {
+            log = new LogTypeLogs(EnumLogs.LOGS_OPEN, player, null);
+        }
+        log.send();
     }
 
     @Override

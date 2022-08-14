@@ -64,7 +64,10 @@ public enum EnumLogs {
     ISLAND_VISITOR_BANNED("", "Bannissement d'un visiteur sur l'île", Colors.COMMON, 53343),
     ISLAND_VISITOR_UNBANNED("", "Débannissement d'un visiteur sur l'île", Colors.COMMON, 53343),
     ISLAND_WEATHER_CHANGED("", "Changement du temps de l'île", Colors.COMMON, 34467),
-    ISLAND_TIME_CHANGED("", "Changement de l'heure de l'île", Colors.COMMON, 8369);
+    ISLAND_TIME_CHANGED("", "Changement de l'heure de l'île", Colors.COMMON, 8369),
+
+    LOGS_OPEN("", "Ouverture des fichiers journaux", Colors.BAD, 35128),
+    LOGS_CLOSE("", "Fermeture des fichiers journaux", Colors.BAD, 35128);
 
     private final String itemDescription;
     private final String itemTitle;
@@ -160,17 +163,20 @@ public enum EnumLogs {
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Modérateur: " + log.itemColor.color() + infos.getString("moderator_name")));
             }
             case PLAYER_FREEZED, PLAYER_UNFREEZED -> {
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7Cible: " + log.itemColor.color() + infos.getString("target_name")));
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Modérateur: " + log.itemColor.color() + infos.getString("moderator_name")));
             }
             case PLAYER_CHANGE_HAT -> {
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r" + log.itemColor.color() + infos.getString("hat_name")));
+            }
+            case LOGS_OPEN, LOGS_CLOSE -> {
+
             }
         }
         return lore;
     }
 
     private void isPermanentBan(ResultSet infos, ArrayList<String> lore, EnumLogs log) throws SQLException {
+        assert log.itemColor != null;
         if (infos.getString("expireAt").equals("perm")) {
             lore.add(ColorUtils.colorize("§l§7➥ §r§7Durée de bannissement: §r" + log.itemColor.color() + "Permanent"));
         } else {
