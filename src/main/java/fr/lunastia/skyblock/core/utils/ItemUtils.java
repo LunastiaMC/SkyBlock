@@ -38,6 +38,9 @@ public class ItemUtils {
         return count;
     }
 
+    /**
+     * @deprecated Use {@link #customizedItem(ItemStack, String, ArrayList)} instead
+     */
     public static void setLore(ItemStack itemStack, ArrayList<String> lore) {
         ItemMeta meta = itemStack.getItemMeta();
         assert meta != null;
