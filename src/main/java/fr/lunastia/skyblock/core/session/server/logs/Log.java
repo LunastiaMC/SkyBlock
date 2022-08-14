@@ -18,13 +18,26 @@ public interface Log {
                 Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
                 final PreparedStatement statement = connection.prepareStatement("INSERT INTO logs (type, target, target_name, moderator, moderator_name, reason, startAt, expireAt) VALUES (?,?,?,?,?,?,?,?)");
                 statement.setString(1, type.toString());
-                statement.setString(2, target.getUniqueId().toString());
-                statement.setString(3, target.getName());
+                if (target == null) {
+                    statement.setNull(2, Types.NULL);
+                    statement.setNull(3, Types.NULL);
+                } else {
+                    statement.setString(2, target.getUniqueId().toString());
+                    statement.setString(3, target.getName());
+                }
                 statement.setString(4, moderator.getUniqueId().toString());
                 statement.setString(5, moderator.getName());
-                statement.setString(6, reason);
+                if (reason == null) {
+                    statement.setNull(6, Types.NULL);
+                } else {
+                    statement.setString(6, reason);
+                }
                 statement.setString(7, startAt);
-                statement.setString(8, expireAt);
+                if (expireAt == null) {
+                    statement.setNull(8, Types.NULL);
+                } else {
+                    statement.setString(8, expireAt);
+                }
                 statement.execute();
             } catch (SQLException e) {
                 e.printStackTrace();
