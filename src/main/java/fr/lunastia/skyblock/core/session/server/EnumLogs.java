@@ -22,13 +22,13 @@ public enum EnumLogs {
     PLAYER_UNBANNED_EXPIRED("", "Bannissement expiré", Colors.BAD, 47475),
     PLAYER_IP_UNBANNED("", "Débannissement par IP", Colors.BAD, 48927),
     PLAYER_IP_UNBANNED_EXPIRED("", "Bannissement par IP expiré", Colors.BAD, 47475),
-    PLAYER_MUTED("", "Mise en sourdine", Colors.WARNING, 48927),
-    PLAYER_UNMUTED("", "Rétablissement de la parole", Colors.WARNING, 48927),
-    PLAYER_UNMUTED_EXPIRED("", "Rétablissement de la parole par temps expiré", Colors.COMMON, 47475),
-    PLAYER_FREEZED("", "Gel", Colors.WARNING, 29472),
-    PLAYER_UNFREEZED("", "Dégel", Colors.WARNING, 29472),
-    PLAYER_VANISHED("", "Disparition", Colors.COMMON, 20388),
-    PLAYER_UNVANISHED("", "Réapparition", Colors.COMMON, 20388),
+    PLAYER_MUTED("", "Mise en sourdine", Colors.GOOD, 48927),
+    PLAYER_UNMUTED("", "Rétablissement de la parole", Colors.GOOD, 48927),
+    PLAYER_UNMUTED_EXPIRED("", "Rétablissement de la parole par temps expiré", Colors.GOOD, 47475),
+    PLAYER_FREEZED("", "Gel", Colors.NORMAL, 29472),
+    PLAYER_UNFREEZED("", "Dégel", Colors.NORMAL, 29472),
+    PLAYER_VANISHED("", "Disparition", Colors.NORMAL, 20388),
+    PLAYER_UNVANISHED("", "Réapparition", Colors.NORMAL, 20388),
     // TODO: Heal, Feed, Fly, Invsee (& other), Report
     PLAYER_CHANGE_HAT("", "Changement de chapeau", Colors.COMMON, 55055),
     PLAYER_CHANGE_HAT_TO_AIR("", "Chapeau retiré de la tête", Colors.COMMON, 55055),
@@ -113,6 +113,7 @@ public enum EnumLogs {
         ArrayList<String> lore = new ArrayList<>();
         lore.add("§l§7• §r" + log.getItemDescription());
         lore.add(" ");
+        assert log.itemColor != null;
         lore.add(ColorUtils.colorize("§l§7➤ §r§7Joueur: §r" + log.itemColor.color() + infos.getString("target_name")));
         lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + log.itemColor.color() + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(infos.getString("startAt")))));
         lore.add(" ");
@@ -156,6 +157,10 @@ public enum EnumLogs {
             case PLAYER_GAMEMODE_CHANGED_BY_FORCE -> {
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Ancien mode de jeu: " + log.itemColor.color() + GameModeCommand.getNameGameMode(String.valueOf(infos.getInt("old_gamemode")))));
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Nouveau mode de jeu: " + log.itemColor.color() + GameModeCommand.getNameGameMode(String.valueOf(infos.getInt("new_gamemode")))));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Modérateur: " + log.itemColor.color() + infos.getString("moderator_name")));
+            }
+            case PLAYER_FREEZED, PLAYER_UNFREEZED -> {
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Cible: " + log.itemColor.color() + infos.getString("target_name")));
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Modérateur: " + log.itemColor.color() + infos.getString("moderator_name")));
             }
             case PLAYER_CHANGE_HAT -> {
