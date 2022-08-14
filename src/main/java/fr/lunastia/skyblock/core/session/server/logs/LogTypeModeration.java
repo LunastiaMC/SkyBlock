@@ -20,12 +20,12 @@ public class LogTypeModeration implements Log {
         this.expireAt = null;
     }
 
-    public void setExpireAt(String expireAt) {
-        this.expireAt = expireAt;
-    }
-
     public void setStartAt(String date) {
         this.startAt = date;
+    }
+
+    public void setExpireAt(String expireAt) {
+        this.expireAt = expireAt;
     }
 
     public void send() {
