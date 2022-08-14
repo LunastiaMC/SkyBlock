@@ -32,7 +32,7 @@ public class FreezeCommand {
             return;
         }
 
-        LogTypeModeration log = new LogTypeModeration(!session.isFreezed() ? EnumLogs.PLAYER_UNFREEZED : EnumLogs.PLAYER_FREEZED, target, player, null);
+        LogTypeModeration log = new LogTypeModeration(session.isFreezed() ? EnumLogs.PLAYER_UNFREEZED : EnumLogs.PLAYER_FREEZED, target, player, null);
         log.setStartAt(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
         log.send();
 

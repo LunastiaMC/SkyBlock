@@ -22,7 +22,7 @@ public class VanishCommand {
     public static void vanish(Player player) {
         Session session = Manager.getSessionManager().getSession(player);
 
-        LogTypeModeration log = new LogTypeModeration(!session.isVanished() ? EnumLogs.PLAYER_VANISHED : EnumLogs.PLAYER_UNVANISHED, null, player, null);
+        LogTypeModeration log = new LogTypeModeration(session.isVanished() ? EnumLogs.PLAYER_UNVANISHED : EnumLogs.PLAYER_VANISHED, player, null, null);
         log.setStartAt(new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
         log.send();
 
