@@ -84,7 +84,7 @@ public class LogsGUI implements GUI {
         if (inventory.getItem(44) != null) {
             inventory.setItem(53, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("7786"), "§cPage suivante (" + (Integer.parseInt(argument.get(1)) + 1) + ")", new ArrayList<>()));
         } else {
-            inventory.setItem(53, ItemUtils.customizedItem(new ItemStack(Material.BARRIER), "§cPage non-complète", new ArrayList<>()));
+            inventory.setItem(53, ItemUtils.customizedItem(new ItemStack(Material.BARRIER), "§cDernière page atteinte", new ArrayList<>()));
         }
     }
 
