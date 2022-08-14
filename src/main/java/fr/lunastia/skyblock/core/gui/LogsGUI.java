@@ -1,16 +1,21 @@
 package fr.lunastia.skyblock.core.gui;
 
+import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import fr.lunastia.skyblock.core.session.server.logs.LogTypeLogs;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -92,6 +97,19 @@ public class LogsGUI implements GUI {
 
     @Override
     public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) throws SQLException {
+        if (player.isOp()) {
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            assert itemMeta != null;
+            NamespacedKey key = new NamespacedKey(Core.getInstance(), "logId");
+            if (itemMeta.getPersistentDataContainer().has(key,PersistentDataType.STRING)){
+                String logUUID = itemMeta.getPersistentDataContainer().get(key, PersistentDataType.STRING);
+                if (clickType == ClickType.LEFT) {
+                    ColorUtils.sendMessage(player, "Cette fonctionnalité n'est pas encore disponible",Colors.LOGS,true);
+                }
+                return;
+            }
+        }
+
         if (itemStack.getType() == Material.BARRIER) return;
 
         switch (slot) {
@@ -107,8 +125,6 @@ public class LogsGUI implements GUI {
                 setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
             }
         }
-
-        getName();
     }
 
     @Override
