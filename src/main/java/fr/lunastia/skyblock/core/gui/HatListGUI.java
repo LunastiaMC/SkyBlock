@@ -6,6 +6,7 @@ import fr.lunastia.skyblock.core.session.Hats;
 import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import fr.lunastia.skyblock.core.session.server.logs.LogTypeCommon;
+import fr.lunastia.skyblock.core.utils.ItemUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.NamespacedKey;
@@ -33,7 +34,7 @@ public class HatListGUI implements GUI {
 
     @Override
     public void getContents(Player player, Inventory inventory) {
-        Hats[] hats = Hats.getHats();
+        Hats[] hats = Hats.getActivesHats();
         int i = 0;
         for (Hats hat : hats) {
             ArrayList<String> lore = new ArrayList<>();
@@ -45,13 +46,6 @@ public class HatListGUI implements GUI {
             }
 
             ItemStack itemStack = hat.getItemStack();
-
-            NamespacedKey key = new NamespacedKey(Core.getInstance(), "hatId");
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            assert itemMeta != null;
-            itemMeta.getPersistentDataContainer().set(key, PersistentDataType.STRING, hat.getUniqueId().toString());
-            itemStack.setItemMeta(itemMeta);
-
             inventory.setItem(i, itemStack);
             i++;
         }
