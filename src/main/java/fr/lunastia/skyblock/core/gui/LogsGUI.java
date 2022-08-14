@@ -68,7 +68,6 @@ public class LogsGUI implements GUI {
             slot++;
         }
 
-        // remove all items when all displayed
         for (int i = slot; i < inventory.getSize(); i++) {
             inventory.setItem(i, null);
         }
