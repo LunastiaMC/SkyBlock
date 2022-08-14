@@ -41,6 +41,9 @@ public class HatCommand {
         }
 
         if (session.hasHat()) {
+            LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_CHANGE_HAT_TO_AIR, player, session.getHat().getDisplayName());
+            log.send();
+
             ColorUtils.sendMessage(player, "Vous venez de retirer le chapeau §d" + session.getHat().getDisplayName(), Colors.HAT);
             session.setHat(null);
         } else {

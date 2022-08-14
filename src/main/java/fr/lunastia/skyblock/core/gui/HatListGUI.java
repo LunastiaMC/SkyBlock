@@ -4,6 +4,8 @@ import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.session.Hats;
 import fr.lunastia.skyblock.core.session.Session;
+import fr.lunastia.skyblock.core.session.server.EnumLogs;
+import fr.lunastia.skyblock.core.session.server.logs.LogTypeCommon;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.NamespacedKey;
@@ -78,6 +80,10 @@ public class HatListGUI implements GUI {
         }
 
         session.setHat(hat, hat.getItemStack());
+
+        LogTypeCommon log = new LogTypeCommon(EnumLogs.PLAYER_CHANGE_HAT, player, hat.getDisplayName());
+        log.send();
+
         ColorUtils.sendMessage(player, "Vous venez d'appliquer le chapeau §d" + hat.getDisplayName(), Colors.HAT);
         player.closeInventory();
     }
