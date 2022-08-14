@@ -149,6 +149,9 @@ public enum EnumLogs {
                     lore.add(ColorUtils.colorize("§l§7➥ §r§7Autre joueur: " + log.itemColor.color() + infos.getString("balance_transaction_target")));
                 }
             }
+            case PLAYER_CHANGE_GAMEMODE -> {
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Ancien mode de jeu: " + log.itemColor.color() + GameModeCommand.getNameGameMode(String.valueOf(infos.getInt("old_gamemode")))));
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Nouveau mode de jeu: " + log.itemColor.color() + GameModeCommand.getNameGameMode(String.valueOf(infos.getInt("new_gamemode")))));
             }
             case PLAYER_GAMEMODE_CHANGED_BY_FORCE -> {
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Ancien mode de jeu: " + log.itemColor.color() + GameModeCommand.getNameGameMode(String.valueOf(infos.getInt("old_gamemode")))));
