@@ -7,6 +7,7 @@ import dev.jorel.commandapi.annotations.Subcommand;
 import dev.jorel.commandapi.annotations.arguments.ALongArgument;
 import dev.jorel.commandapi.annotations.arguments.APlayerArgument;
 import fr.lunastia.skyblock.core.manager.Manager;
+import fr.lunastia.skyblock.core.manager.ModerationManager;
 import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import fr.lunastia.skyblock.core.session.server.logs.LogTypeCommon;
@@ -16,6 +17,9 @@ import fr.lunastia.skyblock.core.utils.TextUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Command("money")
 public class MoneyCommand {
@@ -49,7 +53,8 @@ public class MoneyCommand {
         }
 
         LogTypeEconomy log = new LogTypeEconomy(EnumLogs.PLAYER_MONEY_UPDATED,target,session.getMoney().intValue(),session.getMoney().intValue() + amount.intValue(),amount.intValue());
-        log.setMoneyType(EnumLogs.MONEY_ADDED);
+        log.setTransactionType(EnumLogs.MONEY_ADDED);
+        log.setModerator(player);
         log.send();
 
         session.addMoney(amount);
@@ -66,7 +71,8 @@ public class MoneyCommand {
         }
 
         LogTypeEconomy log = new LogTypeEconomy(EnumLogs.PLAYER_MONEY_UPDATED,target,session.getMoney().intValue(),session.getMoney().intValue() - amount.intValue(),amount.intValue());
-        log.setMoneyType(EnumLogs.MONEY_REMOVED);
+        log.setTransactionType(EnumLogs.MONEY_REMOVED);
+        log.setModerator(player);
         log.send();
 
         session.reduceMoney(amount);
@@ -83,7 +89,8 @@ public class MoneyCommand {
         }
 
         LogTypeEconomy log = new LogTypeEconomy(EnumLogs.PLAYER_MONEY_UPDATED, target, session.getMoney().intValue(), session.getMoney().intValue() + amount.intValue(), amount.intValue());
-        log.setMoneyType(EnumLogs.MONEY_SET);
+        log.setTransactionType(EnumLogs.MONEY_SET);
+        log.setModerator(player);
         log.send();
 
         session.setMoney(amount);

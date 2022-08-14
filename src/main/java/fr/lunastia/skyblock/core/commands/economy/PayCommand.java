@@ -34,13 +34,15 @@ public class PayCommand {
 
         if (session.getMoney() > amount) {
             LogTypeEconomy log = new LogTypeEconomy(EnumLogs.PLAYER_MONEY_UPDATED, player, session.getMoney().intValue(), session.getMoney().intValue() - amount.intValue(), amount.intValue());
-            log.setMoneyType(EnumLogs.MONEY_PAY);
+            log.setTransactionType(EnumLogs.MONEY_PAY);
+            log.setTransactionTarget(targetSession.getPlayer().getName());
             log.send();
             targetSession.addMoney(amount);
             ColorUtils.sendMessage(player, "Vous venez d'envoyer §e" + TextUtils.formatValue(amount) + " §7de §epièces §7à §e" + target.getName() + " §7, il vous reste, §e" + TextUtils.formatValue(session.getMoney()) + " §7de §epièces §7dans votre compte", Colors.BANK);
 
             LogTypeEconomy log1 = new LogTypeEconomy(EnumLogs.PLAYER_MONEY_UPDATED, targetSession.getPlayer(), targetSession.getMoney().intValue(), targetSession.getMoney().intValue() + amount.intValue(), amount.intValue());
-            log1.setMoneyType(EnumLogs.MONEY_RECEIVE);
+            log1.setTransactionType(EnumLogs.MONEY_RECEIVE);
+            log1.setTransactionTarget(player.getName());
             log1.send();
             session.reduceMoney(amount);
             ColorUtils.sendMessage(target, "Vous venez de recevoir §e" + TextUtils.formatValue(amount) + " §7de §epièces §7de la part de §e" + player.getName(), Colors.BANK);
