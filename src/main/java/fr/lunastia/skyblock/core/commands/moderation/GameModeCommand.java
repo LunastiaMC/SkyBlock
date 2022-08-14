@@ -1,4 +1,4 @@
-package fr.lunastia.skyblock.core.commands.utils;
+package fr.lunastia.skyblock.core.commands.moderation;
 
 import dev.jorel.commandapi.annotations.Alias;
 import dev.jorel.commandapi.annotations.Command;
@@ -22,14 +22,15 @@ public class GameModeCommand {
 
     @Default
     public static void gamemode(Player player, @AMultiLiteralArgument({"creative", "1", "survival", "0", "adventure", "2", "spectator", "3"}) String mode) {
-        changeGamemode(player, mode);
         ColorUtils.sendMessage(player, "Vous avez changé votre mode de jeu en §f" + getNameGameMode(mode), Colors.PREFIX);
+        changeGamemode(player, mode);
     }
 
     @Default
     @Permission("skyblock.gamemode.other.command")
     public static void gamemode(Player player, @APlayerArgument Player target, @AMultiLiteralArgument({"creative", "1", "survival", "0", "adventure", "2", "spectator", "3"}) String mode) {
         changeGamemode(target, mode);
+
         ColorUtils.sendMessage(target, "Votre mode de jeu a été modifié en §f" + getNameGameMode(mode) + "§7 par §f" + player.getName(), Colors.PREFIX);
         ColorUtils.sendMessage(player, "Vous avez changé le mode de jeu de §f" + target.getName() + " §7en §f" + getNameGameMode(mode), Colors.PREFIX);
     }
