@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.UUID;
 
 public class LogsGUI implements GUI {
     private HashMap<Integer, String> argument = new HashMap<>();
@@ -61,7 +62,9 @@ public class LogsGUI implements GUI {
             item = ItemUtils.customizedItem(
                     Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(logType.getItemHead())),
                     ColorUtils.colorize(logType.getItemColor().color() + logType.getItemTitle()),
-                    logType.getItemLore(logType, resultSet, player)
+                    logType.getItemLore(logType, resultSet, player),
+                    "logId",
+                    UUID.fromString(resultSet.getString("uuid"))
             );
 
             inventory.setItem(slot, item);
@@ -112,9 +115,9 @@ public class LogsGUI implements GUI {
     public void onClose(Player player, Inventory inventory) {
         LogTypeLogs log = null;
         if (!Objects.equals(argument.get(0), "null")) {
-            log = new LogTypeLogs(EnumLogs.LOGS_CLOSE, player,argument.get(0));
+            log = new LogTypeLogs(EnumLogs.LOGS_CLOSE, player, argument.get(0));
         } else {
-            log = new LogTypeLogs(EnumLogs.LOGS_CLOSE, player,null);
+            log = new LogTypeLogs(EnumLogs.LOGS_CLOSE, player, null);
         }
         log.send();
     }
