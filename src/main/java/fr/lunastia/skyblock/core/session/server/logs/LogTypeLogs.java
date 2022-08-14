@@ -9,26 +9,21 @@ import java.util.Date;
 public class LogTypeLogs implements Log {
     private final EnumLogs type;
     private final Player player;
-    private String target;
+    private String openedPlayer;
     private final String startAt;
 
-    public LogTypeLogs(EnumLogs type, Player player, String target) {
+    public LogTypeLogs(EnumLogs type, Player player, String openedPlayer) {
         this.type = type;
         this.player = player;
-        this.target = target;
+        this.openedPlayer = openedPlayer;
         this.startAt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
     }
 
     public void setTarget(String target) {
-        this.target = target;
+        this.openedPlayer = target;
     }
 
     public void send() {
-        if (target == null) {
-            Log.super.sendLogs(type, player, startAt, true);
-            return;
-        }
-
-        Log.super.sendLogs(type, player, target, startAt, true);
+        Log.super.sendLogs(type, player, startAt,openedPlayer,true);
     }
 }

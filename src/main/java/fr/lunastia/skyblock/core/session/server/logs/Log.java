@@ -69,33 +69,20 @@ public interface Log {
         });
     }
 
-    default void sendLogs(EnumLogs type, Player player, String startAt, boolean a) {
+    default void sendLogs(EnumLogs type, Player player, String startAt, String openedPlayer, boolean a) {
         Core.getInstance().getServer().getScheduler().runTaskAsynchronously(Core.getInstance(), () -> {
             try {
                 Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
-                final PreparedStatement statement = connection.prepareStatement("INSERT INTO logs (type, target, target_name, startAt) VALUES (?,?,?,?)");
+                final PreparedStatement statement = connection.prepareStatement("INSERT INTO logs (type, target, target_name, startAt, logs_opened_player) VALUES (?,?,?,?,?)");;
                 statement.setString(1, type.toString());
                 statement.setString(2, player.getUniqueId().toString());
                 statement.setString(3, player.getName());
                 statement.setString(4, startAt);
-                statement.execute();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
-    default void sendLogs(EnumLogs type, Player player, String target, String startAt, boolean a) {
-        Core.getInstance().getServer().getScheduler().runTaskAsynchronously(Core.getInstance(), () -> {
-            try {
-                Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
-                final PreparedStatement statement = connection.prepareStatement("INSERT INTO logs (type, target, target_name, moderator, moderator_name, startAt) VALUES (?,?,?,?,?,?)");
-                statement.setString(1, type.toString());
-                statement.setNull(2, Types.NULL);
-                statement.setString(3, target);
-                statement.setString(4, player.getUniqueId().toString());
-                statement.setString(5, player.getName());
-                statement.setString(6, startAt);
+                if (openedPlayer != null) {
+                    statement.setString(5, openedPlayer);
+                } else {
+                    statement.setNull(5, Types.NULL);
+                }
                 statement.execute();
             } catch (SQLException e) {
                 e.printStackTrace();

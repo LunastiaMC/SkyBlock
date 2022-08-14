@@ -111,10 +111,10 @@ public class LogsGUI implements GUI {
     @Override
     public void onClose(Player player, Inventory inventory) {
         LogTypeLogs log = null;
-        if (argument.get(0) != null) {
-            log = new LogTypeLogs(EnumLogs.LOGS_OPEN, player, argument.get(1));
+        if (!Objects.equals(argument.get(0), "null")) {
+            log = new LogTypeLogs(EnumLogs.LOGS_CLOSE, player,argument.get(0));
         } else {
-            log = new LogTypeLogs(EnumLogs.LOGS_OPEN, player, null);
+            log = new LogTypeLogs(EnumLogs.LOGS_CLOSE, player,null);
         }
         log.send();
     }

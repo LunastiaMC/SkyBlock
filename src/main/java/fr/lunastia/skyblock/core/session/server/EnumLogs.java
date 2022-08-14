@@ -169,7 +169,8 @@ public enum EnumLogs {
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r" + log.itemColor.color() + infos.getString("hat_name")));
             }
             case LOGS_OPEN, LOGS_CLOSE -> {
-
+                String logsOpened = infos.getString("logs_opened_player") == null ? "Global" : infos.getString("logs_opened_player");
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Cible: " + log.itemColor.color() + logsOpened));
             }
         }
         return lore;
