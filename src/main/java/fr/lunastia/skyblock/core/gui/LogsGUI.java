@@ -54,7 +54,7 @@ public class LogsGUI implements GUI {
     @Override
     public void getContents(Player player, Inventory inventory) throws SQLException {
         // TODO: Add page system
-        final ResultSet resultSet = getByPage(Integer.parseInt(argument.get(1)));
+        final ResultSet resultSet = getByPage(Integer.parseInt(argument.get(1)),argument.get(2));
         setInventory(resultSet, inventory, player);
     }
 
@@ -107,8 +107,8 @@ public class LogsGUI implements GUI {
             NamespacedKey key = new NamespacedKey(Core.getInstance(), "logId");
             if (itemMeta.getPersistentDataContainer().has(key, PersistentDataType.STRING)) {
                 String logUUID = itemMeta.getPersistentDataContainer().get(key, PersistentDataType.STRING);
-                if (clickType == ClickType.LEFT || clickType == ClickType.RIGHT) {
-                    ColorUtils.sendMessage(player, "Cette fonctionnalité n'est pas encore disponible", Colors.LOGS, true);
+                if (clickType == ClickType.LEFT) {
+                    archive(logUUID,true);
                 }
             }
             return;
@@ -119,14 +119,14 @@ public class LogsGUI implements GUI {
         switch (slot) {
             case 51 -> {
                 argument.put(1, String.valueOf(Integer.parseInt(argument.get(1)) - 1));
-                setInventory(getByPage(Integer.parseInt(argument.get(1)))), inventory, player);
+                setInventory(getByPage(Integer.parseInt(argument.get(1)),argument.get(2)), inventory, player);
             }
             case 52 -> {
-                setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
+                setInventory(getByPage(Integer.parseInt(argument.get(1)),argument.get(2)), inventory, player);
             }
             case 53 -> {
                 argument.put(1, Integer.toString(Integer.parseInt(argument.get(1)) + 1));
-                setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
+                setInventory(getByPage(Integer.parseInt(argument.get(1)),argument.get(2)), inventory, player);
             }
         }
     }
@@ -167,11 +167,11 @@ public class LogsGUI implements GUI {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
         PreparedStatement statement = null;
         if (!Objects.equals(argument.get(0), "null")) {
-            statement = connection.prepareStatement("SELECT * FROM logs WHERE target_name = ?" + (archivedOnly ? ", archived = true" : " ") + "ORDER BY logged_at DESC LIMIT 45 OFFSET ?;");
+            statement = connection.prepareStatement("SELECT * FROM logs WHERE target_name = ?" + (archivedOnly ? ", archived = true" : ", archived = false") + " ORDER BY logged_at DESC LIMIT 45 OFFSET ?;");
             statement.setString(1, argument.get(0));
             statement.setInt(2, page == 0 ? 0 : page * 45);
         } else {
-            statement = connection.prepareStatement("SELECT * FROM logs" + (archivedOnly ? ", WHERE archived = true" : " ") + "ORDER BY logged_at DESC LIMIT 45 OFFSET ?;");
+            statement = connection.prepareStatement("SELECT * FROM logs" + (archivedOnly ? " WHERE archived = true" : "WHERE archived = false") + " ORDER BY logged_at DESC LIMIT 45 OFFSET ?;");
             statement.setInt(1, page == 0 ? 0 : page * 45);
         }
         return statement.executeQuery();
