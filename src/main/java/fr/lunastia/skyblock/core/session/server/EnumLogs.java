@@ -118,7 +118,7 @@ public enum EnumLogs {
         lore.add(" ");
         assert log.itemColor != null;
         lore.add(ColorUtils.colorize("§l§7➤ §r§7Joueur: §r" + log.itemColor.color() + infos.getString("target_name")));
-        lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + log.itemColor.color() + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(infos.getString("startAt")))));
+        lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + log.itemColor.color() + infos.getString("startAt")));
         lore.add(" ");
         switch (log) {
             case PLAYER_KICKED -> {
