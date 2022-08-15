@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -112,13 +111,13 @@ public enum EnumLogs {
         return itemHead;
     }
 
-    public ArrayList<String> getItemLore(EnumLogs log, ResultSet infos, Player player) throws SQLException {
+    public ArrayList<String> getItemLore(EnumLogs log, ResultSet infos, Player player, boolean archived) throws SQLException {
         ArrayList<String> lore = new ArrayList<>();
         lore.add("§l§7• §r" + log.getItemDescription());
         lore.add(" ");
         assert log.itemColor != null;
         lore.add(ColorUtils.colorize("§l§7➤ §r§7Joueur: §r" + log.itemColor.color() + infos.getString("target_name")));
-        lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + log.itemColor.color() + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(infos.getString("startAt")))));
+        lore.add(ColorUtils.colorize("§l§7➥ §r§7Le: §r" + log.itemColor.color() + infos.getString("startAt")));
         lore.add(" ");
         switch (log) {
             case PLAYER_KICKED -> {
@@ -165,13 +164,21 @@ public enum EnumLogs {
             case PLAYER_FREEZED, PLAYER_UNFREEZED -> {
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Modérateur: " + log.itemColor.color() + infos.getString("moderator_name")));
             }
-            case PLAYER_CHANGE_HAT -> {
-                lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r" + log.itemColor.color() + infos.getString("hat_name")));
+            case PLAYER_CHANGE_HAT, PLAYER_CHANGE_HAT_TO_AIR -> {
+                lore.add(ColorUtils.colorize("§l§7➥ §r§7Chapeau: §r§d" + infos.getString("hat_name")));
             }
             case LOGS_OPEN, LOGS_CLOSE -> {
                 String logsOpened = infos.getString("logs_opened_player") == null ? "Global" : infos.getString("logs_opened_player");
                 lore.add(ColorUtils.colorize("§l§7➥ §r§7Cible: " + log.itemColor.color() + logsOpened));
             }
+        }
+
+        if (player.isOp()) {
+            lore.add(" ");
+            if (archived) lore.add(ColorUtils.colorize("§eClic gauche pour déarchiver"));
+            else lore.add(ColorUtils.colorize("§eClic gauche pour archiver"));
+            // lore.add(ColorUtils.colorize("§eClic droit pour épingler"));
+            lore.add(ColorUtils.colorize("§8" + infos.getString("uuid")));
         }
         return lore;
     }
