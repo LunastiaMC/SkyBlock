@@ -80,14 +80,18 @@ public class LogsGUI implements GUI {
             inventory.setItem(i, null);
         }
 
-        if (Integer.parseInt(argument.get(1)) >= 1) {
-            inventory.setItem(45, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("7789"), "§cPage précédente (" + argument.get(1) + ")", new ArrayList<>()));
-        } else {
-            inventory.setItem(45, ItemUtils.customizedItem(new ItemStack(Material.BARRIER), "§cPremière page atteinte", new ArrayList<>()));
+        if (player.isOp()) {
+            inventory.setItem(45, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("35128"), "§cJourneaux", new ArrayList<>()));
+            // inventory.setItem(46, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("50640"), "§cJourneaux archivés", new ArrayList<>()));
+            // inventory.setItem(47, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("25058"), "§eAfficher les épinglées", new ArrayList<>()));
         }
 
-        inventory.setItem(49, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("32582"), "§cRecharger", new ArrayList<>()));
-
+        if (Integer.parseInt(argument.get(1)) >= 1) {
+            inventory.setItem(51, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("7789"), "§cPage précédente (" + argument.get(1) + ")", new ArrayList<>()));
+        } else {
+            inventory.setItem(51, ItemUtils.customizedItem(new ItemStack(Material.BARRIER), "§cPremière page atteinte", new ArrayList<>()));
+        }
+        inventory.setItem(52, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("32582"), "§cRecharger", new ArrayList<>()));
         if (inventory.getItem(44) != null) {
             inventory.setItem(53, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("7786"), "§cPage suivante (" + (Integer.parseInt(argument.get(1)) + 1) + ")", new ArrayList<>()));
         } else {
@@ -101,23 +105,23 @@ public class LogsGUI implements GUI {
             ItemMeta itemMeta = itemStack.getItemMeta();
             assert itemMeta != null;
             NamespacedKey key = new NamespacedKey(Core.getInstance(), "logId");
-            if (itemMeta.getPersistentDataContainer().has(key,PersistentDataType.STRING)){
+            if (itemMeta.getPersistentDataContainer().has(key, PersistentDataType.STRING)) {
                 String logUUID = itemMeta.getPersistentDataContainer().get(key, PersistentDataType.STRING);
-                if (clickType == ClickType.LEFT) {
-                    ColorUtils.sendMessage(player, "Cette fonctionnalité n'est pas encore disponible",Colors.LOGS,true);
+                if (clickType == ClickType.LEFT || clickType == ClickType.RIGHT) {
+                    ColorUtils.sendMessage(player, "Cette fonctionnalité n'est pas encore disponible", Colors.LOGS, true);
                 }
-                return;
             }
+            return;
+        } else if (itemStack.getType() == Material.BARRIER) {
+            return;
         }
 
-        if (itemStack.getType() == Material.BARRIER) return;
-
         switch (slot) {
-            case 45 -> {
+            case 51 -> {
                 argument.put(1, String.valueOf(Integer.parseInt(argument.get(1)) - 1));
                 setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
             }
-            case 49 -> {
+            case 52 -> {
                 setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
             }
             case 53 -> {

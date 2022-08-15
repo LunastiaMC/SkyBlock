@@ -177,6 +177,7 @@ public enum EnumLogs {
         if (player.isOp()) {
             lore.add(" ");
             lore.add(ColorUtils.colorize("§eClic gauche pour archiver"));
+            // lore.add(ColorUtils.colorize("§eClic droit pour épingler"));
             lore.add(ColorUtils.colorize("§8" + infos.getString("uuid")));
         }
         return lore;
