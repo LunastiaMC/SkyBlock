@@ -119,7 +119,7 @@ public class LogsGUI implements GUI {
         switch (slot) {
             case 51 -> {
                 argument.put(1, String.valueOf(Integer.parseInt(argument.get(1)) - 1));
-                setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
+                setInventory(getByPage(Integer.parseInt(argument.get(1)))), inventory, player);
             }
             case 52 -> {
                 setInventory(getByPage(Integer.parseInt(argument.get(1))), inventory, player);
@@ -130,7 +130,6 @@ public class LogsGUI implements GUI {
             }
         }
     }
-
     @Override
     public void onClose(Player player, Inventory inventory) {
         LogTypeLogs log = null;
