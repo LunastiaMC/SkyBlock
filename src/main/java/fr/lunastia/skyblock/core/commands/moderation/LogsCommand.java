@@ -23,6 +23,7 @@ public class LogsCommand {
             HashMap<Integer, String> args = new HashMap<>();
             args.put(0, "null");
             args.put(1, "0");
+            args.put(2, "false");
             System.out.println(args);
             Manager.getGUIManager().open(player, LogsGUI.class, args);
 
