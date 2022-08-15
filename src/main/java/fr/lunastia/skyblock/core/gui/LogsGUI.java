@@ -162,7 +162,9 @@ public class LogsGUI implements GUI {
         this.argument = arguments;
     }
 
-    public ResultSet getByPage(int page) throws SQLException {
+    public ResultSet getByPage(int page, String a) throws SQLException {
+        boolean archivedOnly = Objects.equals(a, "true");
+
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
         PreparedStatement statement = null;
         if (!Objects.equals(argument.get(0), "null")) {
