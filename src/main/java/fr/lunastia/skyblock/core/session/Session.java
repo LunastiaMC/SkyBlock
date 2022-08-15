@@ -5,6 +5,7 @@ import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -20,6 +21,8 @@ public class Session {
     private boolean isVanished;
     private boolean isFreezed;
     private Island island;
+    private Hats hat;
+    private boolean wasKicked = false;
 
     public Session(Player player, ResultSet rs) throws SQLException {
         this.player = player;
@@ -37,6 +40,14 @@ public class Session {
     }
 
     public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished, String islandUUID) throws SQLException {
+        Hats hat = Hats.fromUUID(rs.getString("hat"));
+        if (hat != null) setHat(hat, hat.getItemStack());
+
+        NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
+        player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
+    }
+
+    public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished, Hats hat) {
         this.player = player;
         this.rank = Manager.getRankManager().getRank(rank);
         this.money = money;
@@ -49,6 +60,12 @@ public class Session {
         if (islandUUID != null) {
             Manager.getIslandManager().loadIsland(islandUUID);
         }
+        
+        if (hat == null) setHat(null);
+        else setHat(hat, hat.getItemStack());
+
+        NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
+        player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
     }
 
     public Player getPlayer() {
@@ -152,6 +169,14 @@ public class Session {
         if (messages) ColorUtils.sendMessage(player, "Vous venez de vous révéler !", Colors.PREFIX);
         this.getPlayer().getActivePotionEffects().forEach(potionEffect -> this.getPlayer().removePotionEffect(potionEffect.getType()));
     }
+    
+    public boolean wasKicked() {
+        return wasKicked;
+    }
+
+    public void setKicked() {
+        wasKicked = true;
+    }
 
     //  /$$$$$$  /$$$$$$  /$$        /$$$$$$  /$$   /$$ /$$$$$$$
     // |_  $$_/ /$$__  $$| $$       /$$__  $$| $$$ | $$| $$__  $$
@@ -168,5 +193,38 @@ public class Session {
 
     public String getIslandUUID() {
         return island.getUuid();
+    }
+
+    // /$$   /$$  /$$$$$$  /$$$$$$$$ /$$$$$$
+    // | $$  | $$ /$$__  $$|__  $$__//$$__  $$
+    // | $$  | $$| $$  \ $$   | $$  | $$  \__/
+    // | $$$$$$$$| $$$$$$$$   | $$  |  $$$$$$
+    // | $$__  $$| $$__  $$   | $$   \____  $$
+    // | $$  | $$| $$  | $$   | $$   /$$  \ $$
+    // | $$  | $$| $$  | $$   | $$  |  $$$$$$/
+    // |__/  |__/|__/  |__/   |__/   \______/
+
+
+    public void setHat(Hats hat, ItemStack itemStack) {
+        this.player.getInventory().setHelmet(itemStack);
+        this.hat = hat;
+    }
+
+    public Hats getHat() {
+        return hat;
+    }
+
+    public void setHat(Hats hat) {
+        if (hat == null) {
+            this.player.getInventory().setHelmet(null);
+            this.hat = null;
+            return;
+        }
+
+        this.hat = hat;
+    }
+
+    public boolean hasHat() {
+        return hat != null;
     }
 }

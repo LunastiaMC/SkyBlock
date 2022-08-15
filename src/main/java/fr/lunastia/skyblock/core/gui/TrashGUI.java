@@ -9,6 +9,8 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
+
 public class TrashGUI implements GUI {
     @Override
     public String getName() {
@@ -32,7 +34,7 @@ public class TrashGUI implements GUI {
 
     @Override
     public void onClose(Player player, Inventory inventory) {
-        Integer count = ItemUtils.countInventory(inventory);
+        int count = ItemUtils.countInventory(inventory);
         if (count > 0) {
             ColorUtils.sendMessage(player, "Vous venez de jeter un total de §f" + count + " items §7à la poubelle", Colors.TRASH);
         }
@@ -52,5 +54,10 @@ public class TrashGUI implements GUI {
     @Override
     public InventoryType getInventoryType() {
         return null;
+    }
+
+    @Override
+    public void setArgument(HashMap<Integer, String> argument) {
+        return;
     }
 }

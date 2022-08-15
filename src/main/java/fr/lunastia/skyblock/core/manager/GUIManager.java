@@ -94,4 +94,17 @@ public class GUIManager implements Listener {
         gui.getContents(player, inventory);
         player.openInventory(inventory);
     }
+
+    public void open(Player player, Class<? extends GUI> GUIClass, HashMap<Integer, String> argument) throws SQLException {
+        if (!getRegisteredGUIs().containsKey(GUIClass)) return;
+        GUI gui = getRegisteredGUIs().get(GUIClass);
+        gui.setArgument(argument);
+
+        Inventory inventory = null;
+        if (gui.getInventoryType() == null) inventory = Bukkit.createInventory(null, gui.getSize(), gui.getName());
+        else inventory = Bukkit.createInventory(null, gui.getInventoryType(), gui.getName());
+
+        gui.getContents(player, inventory);
+        player.openInventory(inventory);
+    }
 }

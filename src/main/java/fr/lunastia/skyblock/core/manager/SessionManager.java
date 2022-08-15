@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import java.lang.reflect.Type;
 import java.sql.*;
 import java.util.ArrayList;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ public class SessionManager {
             final Session session = new Session(player, resultSet);
             this.sessions.put(player.getUniqueId().toString(), session);
         } else {
-            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money, permissions, island, freezed, vanished) VALUES (?,?,?,?,?,?,?)");
+            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money, permissions, island, freezed, vanished, hat) VALUES (?,?,?,?,?,?,?,?)");
             statementCreation.setString(1, player.getUniqueId().toString());
             statementCreation.setInt(2, Manager.getRankManager().getDefaultRank().id());
             statementCreation.setLong(3, 0);
@@ -38,6 +39,10 @@ public class SessionManager {
             statementCreation.execute();
 
             final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{}, false, false, "");
+            statementCreation.setNull(7, Types.NULL);
+            statementCreation.execute();
+
+            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{}, false, false, null);
             this.sessions.put(player.getUniqueId().toString(), session);
         }
     }
@@ -48,7 +53,7 @@ public class SessionManager {
         Session session = this.sessions.get(player.getUniqueId().toString());
 
         try {
-            final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ?, money = ?, permissions = ?, island = ?, freezed = ?, vanished = ? WHERE uuid = ?");
+            final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ?, money = ?, permissions = ?, island = ?, freezed = ?, vanished = ?, hat = ? WHERE uuid = ?");
             statement.setInt(1, session.getRank().id());
             statement.setLong(2, session.getMoney());
             statement.setString(3, session.getPermissions());
@@ -59,7 +64,12 @@ public class SessionManager {
             }
             statement.setBoolean(5, session.isFreezed());
             statement.setBoolean(6, session.isVanished());
-            statement.setString(7, player.getUniqueId().toString());
+            if (session.hasHat()) {
+                statement.setString(7, session.getHat().getUniqueId().toString());
+            } else {
+                statement.setNull(7, Types.NULL);
+            }
+            statement.setString(8, player.getUniqueId().toString());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

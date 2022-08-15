@@ -9,35 +9,24 @@ import java.util.Date;
 public class LogTypeCommon implements Log {
     private final EnumLogs type;
     private final Player target;
-    private String startDate;
+    private String startAt;
     private String hat;
 
     public LogTypeCommon(EnumLogs type, Player target) {
         this.type = type;
         this.target = target;
-        this.startDate = null;
-        this.hat = null;
-    }
-
-    public LogTypeCommon(EnumLogs type, Player target, Date startDate) {
-        this.type = type;
-        this.target = target;
-        this.startDate = startDate.toString();
+        this.startAt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
         this.hat = null;
     }
 
     public LogTypeCommon(EnumLogs type, Player target, String hat) {
         this.type = type;
         this.target = target;
-        this.startDate = null;
+        this.startAt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
         this.hat = hat;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
     public void send() {
-        Log.super.sendCommonLog(type, target, startDate, hat);
+        Log.super.sendCommonLog(type, target, startAt, hat);
     }
 }

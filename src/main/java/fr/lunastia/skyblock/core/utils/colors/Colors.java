@@ -16,6 +16,7 @@ public enum Colors {
     COMMON("&#a5ada3"),
     GOOD("&#66ff3c"),
     WARNING("&#ffcb3c"),
+    NORMAL("&#3c53ff"),
     BAD("&#ff3c3c");
 
     private final String k;

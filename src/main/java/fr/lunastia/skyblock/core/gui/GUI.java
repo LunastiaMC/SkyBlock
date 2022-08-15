@@ -7,6 +7,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public interface GUI {
     String getName();
@@ -23,5 +24,9 @@ public interface GUI {
 
     boolean clickCancelled();
 
+    // To merge
+
     InventoryType getInventoryType();
+
+    void setArgument(HashMap<Integer, String> argument);
 }
