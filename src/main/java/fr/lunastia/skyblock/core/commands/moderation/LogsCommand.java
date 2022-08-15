@@ -47,4 +47,20 @@ public class LogsCommand {
             throw new RuntimeException(e);
         }
     }
+
+    @Subcommand("archiveds")
+    public static void archiveds(Player player) {
+        try {
+            HashMap<Integer, String> args = new HashMap<>();
+            args.put(0, "null");
+            args.put(1, "0");
+            args.put(2, "true");
+            Manager.getGUIManager().open(player, LogsGUI.class, args);
+
+            LogTypeLogs log = new LogTypeLogs(EnumLogs.LOGS_OPEN, player,null);
+            log.send();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
