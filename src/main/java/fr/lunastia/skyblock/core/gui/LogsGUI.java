@@ -175,4 +175,16 @@ public class LogsGUI implements GUI {
         }
         return statement.executeQuery();
     }
+
+    public void archive(String UUID, boolean archived) {
+        // Set "archived" to true in the logs table
+        try {
+            Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
+            PreparedStatement statement = connection.prepareStatement("UPDATE logs SET archived = " + archived + " WHERE uuid = ?;");
+            statement.setString(1, UUID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
