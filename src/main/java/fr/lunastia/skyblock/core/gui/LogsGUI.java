@@ -166,11 +166,11 @@ public class LogsGUI implements GUI {
         Connection connection = Manager.getDatabaseManager().getDatabase().getConnection();
         PreparedStatement statement = null;
         if (!Objects.equals(argument.get(0), "null")) {
-            statement = connection.prepareStatement("SELECT * FROM logs WHERE target_name = ? ORDER BY logged_at DESC LIMIT 45 OFFSET ?;");
+            statement = connection.prepareStatement("SELECT * FROM logs WHERE target_name = ?" + (archivedOnly ? ", archived = true" : " ") + "ORDER BY logged_at DESC LIMIT 45 OFFSET ?;");
             statement.setString(1, argument.get(0));
             statement.setInt(2, page == 0 ? 0 : page * 45);
         } else {
-            statement = connection.prepareStatement("SELECT * FROM logs ORDER BY logged_at DESC LIMIT 45 OFFSET ?;");
+            statement = connection.prepareStatement("SELECT * FROM logs" + (archivedOnly ? ", WHERE archived = true" : " ") + "ORDER BY logged_at DESC LIMIT 45 OFFSET ?;");
             statement.setInt(1, page == 0 ? 0 : page * 45);
         }
         return statement.executeQuery();
