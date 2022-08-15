@@ -40,6 +40,7 @@ public class LogsCommand {
             HashMap<Integer, String> args = new HashMap<>();
             args.put(0, target);
             args.put(1, "0");
+            args.put(2, "false");
             Manager.getGUIManager().open(player, LogsGUI.class, args);
 
             LogTypeLogs log = new LogTypeLogs(EnumLogs.LOGS_OPEN, player, target);
