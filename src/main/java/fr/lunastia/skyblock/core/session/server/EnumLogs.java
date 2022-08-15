@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -112,7 +111,7 @@ public enum EnumLogs {
         return itemHead;
     }
 
-    public ArrayList<String> getItemLore(EnumLogs log, ResultSet infos, Player player) throws SQLException {
+    public ArrayList<String> getItemLore(EnumLogs log, ResultSet infos, Player player, boolean archived) throws SQLException {
         ArrayList<String> lore = new ArrayList<>();
         lore.add("§l§7• §r" + log.getItemDescription());
         lore.add(" ");
@@ -176,7 +175,8 @@ public enum EnumLogs {
 
         if (player.isOp()) {
             lore.add(" ");
-            lore.add(ColorUtils.colorize("§eClic gauche pour archiver"));
+            if (archived) lore.add(ColorUtils.colorize("§eClic gauche pour déarchiver"));
+            else lore.add(ColorUtils.colorize("§eClic gauche pour archiver"));
             // lore.add(ColorUtils.colorize("§eClic droit pour épingler"));
             lore.add(ColorUtils.colorize("§8" + infos.getString("uuid")));
         }
