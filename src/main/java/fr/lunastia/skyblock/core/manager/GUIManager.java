@@ -2,6 +2,7 @@ package fr.lunastia.skyblock.core.manager;
 
 import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.gui.*;
+import fr.lunastia.skyblock.core.gui.island.IslandCreationGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
