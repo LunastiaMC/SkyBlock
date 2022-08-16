@@ -40,30 +40,18 @@ public class Session {
         if (rs.getString("island") != null) {
             Manager.getIslandManager().loadIsland(rs.getString("island"));
         }
-    }
 
-    public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished, String islandUUID) throws SQLException {
-
+        this.island = rs.getString("island");
         NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
         player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
     }
 
-    public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished, Hats hat) {
+    public Session(Player player, Integer rank) {
         this.player = player;
         this.rank = Manager.getRankManager().getRank(rank);
-        this.money = money;
         this.rank.applyPermissions(player);
-        this.permissions = permissions;
+        this.permissions = new String[]{};
         Rank.applyPermissions(player, permissions);
-        setFreezed(isFreezed, isFreezed);
-        setVanished(isVanished, isVanished);
-
-        if (islandUUID != null) {
-            Manager.getIslandManager().loadIsland(islandUUID);
-        }
-        
-        if (hat == null) setHat(null);
-        else setHat(hat, hat.getItemStack());
 
         NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
         player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
@@ -150,7 +138,8 @@ public class Session {
         }
 
         isFreezed = false;
-        if (messages) ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", Colors.PREFIX);
+        if (messages)
+            ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", Colors.PREFIX);
         this.getPlayer().setFreezeTicks(1);
     }
 
@@ -170,7 +159,7 @@ public class Session {
         if (messages) ColorUtils.sendMessage(player, "Vous venez de vous révéler !", Colors.PREFIX);
         this.getPlayer().getActivePotionEffects().forEach(potionEffect -> this.getPlayer().removePotionEffect(potionEffect.getType()));
     }
-    
+
     public boolean wasKicked() {
         return wasKicked;
     }
@@ -189,11 +178,11 @@ public class Session {
     // |______/ \______/ |________/|__/  |__/|__/  \__/|_______/
 
     public Island getIsland() {
-        return island;
+        return Manager.getIslandManager().getIsland(island);
     }
 
     public String getIslandUUID() {
-        return island.getUuid();
+        return island;
     }
 
     // /$$   /$$  /$$$$$$  /$$$$$$$$ /$$$$$$

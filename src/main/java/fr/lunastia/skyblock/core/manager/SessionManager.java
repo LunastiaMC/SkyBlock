@@ -28,18 +28,11 @@ public class SessionManager {
             final Session session = new Session(player, resultSet);
             this.sessions.put(player.getUniqueId().toString(), session);
         } else {
-            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money, permissions, island, freezed, vanished, hat) VALUES (?,?,?,?,?,?,?,?)");
+            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id());
+            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, permissions) VALUES (?,?,?)");
             statementCreation.setString(1, player.getUniqueId().toString());
-            statementCreation.setInt(2, Manager.getRankManager().getDefaultRank().id());
-            statementCreation.setLong(3, 0);
-            statementCreation.setString(4, "");
-            statementCreation.setNull(5, Types.NULL);
-            statementCreation.setBoolean(6, false);
-            statementCreation.setBoolean(7, false);
-            statementCreation.execute();
-
-            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{}, false, false, "");
-            statementCreation.setNull(7, Types.NULL);
+            statementCreation.setInt(2, session.getRank().id());
+            statementCreation.setString(3, "");
             statementCreation.execute();
         }
     }
