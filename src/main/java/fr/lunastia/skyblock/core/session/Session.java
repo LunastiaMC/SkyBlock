@@ -34,14 +34,15 @@ public class Session {
         setFreezed(rs.getBoolean("freezed"), rs.getBoolean("freezed"));
         setVanished(rs.getBoolean("vanished"), rs.getBoolean("vanished"));
 
+        Hats hat = Hats.fromUUID(rs.getString("hat"));
+        if (hat != null) setHat(hat, hat.getItemStack());
+
         if (rs.getString("island") != null) {
             Manager.getIslandManager().loadIsland(rs.getString("island"));
         }
     }
 
     public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished, String islandUUID) throws SQLException {
-        Hats hat = Hats.fromUUID(rs.getString("hat"));
-        if (hat != null) setHat(hat, hat.getItemStack());
 
         NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
         player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
