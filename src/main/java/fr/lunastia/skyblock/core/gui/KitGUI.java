@@ -7,6 +7,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class KitGUI implements GUI {
     @Override
@@ -47,5 +48,10 @@ public class KitGUI implements GUI {
     @Override
     public InventoryType getInventoryType() {
         return null;
+    }
+
+    @Override
+    public void setArgument(HashMap<Integer, String> argument) {
+        return;
     }
 }
