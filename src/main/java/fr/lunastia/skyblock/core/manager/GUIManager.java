@@ -26,6 +26,7 @@ public class GUIManager implements Listener {
         this.addMenu(new TrashGUI());
         this.addMenu(new RepairGUI());
         this.addMenu(new LogsGUI());
+        this.addMenu(new IslandCreationGUI());
 
         Bukkit.getPluginManager().registerEvents(this, Core.getInstance());
     }
