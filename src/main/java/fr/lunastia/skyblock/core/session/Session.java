@@ -37,19 +37,24 @@ public class Session {
         Hats hat = Hats.fromUUID(rs.getString("hat"));
         if (hat != null) setHat(hat, hat.getItemStack());
 
-        if (rs.getString("island") != null) Manager.getIslandManager().loadIsland(rs.getString("island"));
-
-        this.island = rs.getString("island");
         NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
         player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
     }
 
-    public Session(Player player, Integer rank) {
+    public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished, Hats hat, String island) {
         this.player = player;
         this.rank = Manager.getRankManager().getRank(rank);
+        this.money = money;
         this.rank.applyPermissions(player);
-        this.permissions = new String[]{};
+        this.permissions = permissions;
         Rank.applyPermissions(player, permissions);
+        setFreezed(isFreezed, isFreezed);
+        setVanished(isVanished, isVanished);
+
+        if (hat == null) setHat(null);
+        else setHat(hat, hat.getItemStack());
+        if (island == null) this.island = "";
+        else this.island = island;
 
         NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
         player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
