@@ -3,3 +3,5 @@ version: 1.0.3
 description: SkyBlock plugin for Spigot
 api-version: 1.13
 main: fr.lunastia.skyblock.core.Core
+depend:
+  - NametagEdit

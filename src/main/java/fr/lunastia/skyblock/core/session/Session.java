@@ -44,16 +44,6 @@ public class Session {
         this.rank.applyPermissions(this);
         this.permissions = permissions;
         Rank.applyPermissions(player, permissions);
-        setFreezed(isFreezed, isFreezed);
-        setVanished(isVanished, isVanished);
-
-        if (hat == null) setHat(null);
-        else setHat(hat, hat.getItemStack());
-        if (island == null) this.island = "";
-        else this.island = island;
-
-        NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
-        player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
     }
 
     public Player getPlayer() {

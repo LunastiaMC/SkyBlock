@@ -25,7 +25,7 @@ public class SessionManager {
             final Session session = new Session(player, resultSet);
             this.sessions.put(player.getUniqueId().toString(), session);
         } else {
-            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money, permissions, freezed, vanished, island) VALUES (?,?,?,?,?,?,?)");
+            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money, permissions, freezed, vanished) VALUES (?,?,?,?,?,?)");
             statementCreation.setString(1, player.getUniqueId().toString());
             statementCreation.setInt(2, Manager.getRankManager().getDefaultRank().id());
             statementCreation.setLong(3, 0);
@@ -34,7 +34,7 @@ public class SessionManager {
             statementCreation.setBoolean(6, false);
             statementCreation.execute();
 
-            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{},false,false,null,"");
+            final Session session = new Session(player, Manager.getRankManager().getDefaultRank().id(), 0L, new String[]{});
             this.sessions.put(player.getUniqueId().toString(), session);
         }
     }
