@@ -17,11 +17,11 @@ public class Session {
     private final Player player;
     private final String[] permissions;
     private Rank rank;
-    private Long money;
-    private boolean isVanished;
-    private boolean isFreezed;
-    private Island island;
-    private Hats hat;
+    private Long money = 0L;
+    private boolean isVanished = false;
+    private boolean isFreezed = false;
+    private String island = null;
+    private Hats hat = null;
     private boolean wasKicked = false;
 
     public Session(Player player, ResultSet rs) throws SQLException {
