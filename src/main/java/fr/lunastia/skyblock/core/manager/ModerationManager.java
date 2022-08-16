@@ -1,5 +1,6 @@
 package fr.lunastia.skyblock.core.manager;
 
+import fr.lunastia.skyblock.core.session.Session;
 import fr.lunastia.skyblock.core.session.server.EnumLogs;
 import fr.lunastia.skyblock.core.session.server.logs.LogTypeModeration;
 import fr.lunastia.skyblock.core.utils.TextUtils;
@@ -58,6 +59,11 @@ public class ModerationManager {
 
         log.setStartAt(start);
         log.send();
+
+        Session session = Manager.getSessionManager().getSession(player);
+        if (session != null) {
+            session.setKicked();
+        }
     }
 
     public void delBan(String target) throws SQLException {

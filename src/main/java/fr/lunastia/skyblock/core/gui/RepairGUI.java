@@ -37,7 +37,7 @@ public class RepairGUI implements GUI {
         repairCost = new HashMap<>();
 
         for (int i = 0; i < inventory.getSize(); i++) {
-            if (i == 24) {
+            if (i == 22) {
                 ItemStack itemStack = player.getInventory().getItemInMainHand().clone();
                 ItemMeta itemMeta = itemStack.getItemMeta();
 
@@ -72,7 +72,7 @@ public class RepairGUI implements GUI {
 
     @Override
     public void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) {
-        if (slot == 20 || slot == 22 || slot == 24) {
+        if (slot == 22) {
             if (itemStack.getType() == Material.BARRIER) {
                 player.closeInventory();
                 return;
@@ -92,15 +92,8 @@ public class RepairGUI implements GUI {
             ItemStack mainHand = player.getInventory().getItemInMainHand();
             ItemMeta itemMeta = mainHand.getItemMeta();
             if (itemMeta instanceof Damageable) {
-                double P_20 = 0.20 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
-                double P_50 = 0.50 * (itemStack.getType().getMaxDurability() - (itemStack.getType().getMaxDurability() - ((Damageable) itemStack.getItemMeta()).getDamage()));
-
                 session.reduceMoney(Long.valueOf(repairCost.get(slot)));
-                ((Damageable) itemMeta).setDamage(switch (slot) {
-                    case 20 -> ((Damageable) itemMeta).getDamage() - (int) P_20;
-                    case 22 -> ((Damageable) itemMeta).getDamage() - (int) P_50;
-                    default -> 0;
-                });
+                ((Damageable) itemMeta).setDamage(0);
 
                 player.closeInventory();
                 mainHand.setItemMeta(itemMeta);
@@ -132,5 +125,8 @@ public class RepairGUI implements GUI {
         return null;
     }
 
-
+    @Override
+    public void setArgument(HashMap<Integer, String> argument) {
+        return;
+    }
 }

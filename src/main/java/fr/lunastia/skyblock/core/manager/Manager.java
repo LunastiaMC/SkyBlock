@@ -5,9 +5,7 @@ import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.commands.admin.RankCommand;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
-import fr.lunastia.skyblock.core.commands.moderation.BanCommand;
-import fr.lunastia.skyblock.core.commands.moderation.KickCommand;
-import fr.lunastia.skyblock.core.commands.moderation.LogsCommand;
+import fr.lunastia.skyblock.core.commands.moderation.*;
 import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.database.DatabaseManager;
 import fr.lunastia.skyblock.core.listeners.FreezeListeners;
@@ -27,6 +25,7 @@ public class Manager {
     private static KitManager kitManager;
 
     private static HeadDatabaseAPI headDatabase;
+    private static IslandManager islandManager;
     private static ModerationManager moderationManager;
 
     public Manager() {
@@ -59,6 +58,10 @@ public class Manager {
 
     public static KitManager getKitManager() {
         return kitManager;
+    }
+    
+    public static IslandManager getIslandManager() {
+        return islandManager;
     }
 
     public static ModerationManager getModerationManager() {
