@@ -1,5 +1,7 @@
 name: SkyBlock
-version: 1.0.0
-description: SkyBlock plugin for Spigot
+version: 1.0.3
+description: SkyBlock plugin for LunastiaMC
 api-version: 1.13
 main: fr.lunastia.skyblock.core.Core
+depend:
+  - NametagEdit

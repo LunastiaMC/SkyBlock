@@ -1,6 +1,5 @@
 package fr.lunastia.skyblock.core.utils.repair;
 
-import fr.lunastia.skyblock.core.utils.ItemUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -8,14 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 
 public class RepairUtils {
-    public static final HashMap<Integer, Integer> defaultCost = new HashMap<>();
-
-    public RepairUtils() {
-        //              SLOT, COST
-        defaultCost.put(20, 500);
-        defaultCost.put(22, 1000);
-        defaultCost.put(24, 1500);
-    }
+    public static final Integer defaultCost = 1500;
 
     public int getPriceByMaterial(Material material) {
         if (material == Material.LEATHER_HELMET || material == Material.LEATHER_CHESTPLATE || material == Material.LEATHER_LEGGINGS || material == Material.LEATHER_BOOTS) {
@@ -54,7 +46,7 @@ public class RepairUtils {
     }
 
     public int getPriceByItem(ItemStack item, Integer slot) {
-        final int[] price = {defaultCost.get(slot)};
+        final int[] price = {defaultCost};
         price[0] += getPriceByMaterial(item.getType());
         getPriceByEnchantment(item).forEach((enchantment, priceByEnchantment) -> {
             price[0] += priceByEnchantment;

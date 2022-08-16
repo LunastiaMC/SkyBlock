@@ -1,9 +1,10 @@
 package fr.lunastia.skyblock.core.session;
 
-import com.nametagedit.plugin.NametagEdit;
 import fr.lunastia.skyblock.core.manager.Manager;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.Colors;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -15,36 +16,34 @@ public class Session {
     private final Player player;
     private final String[] permissions;
     private Rank rank;
-    private Long money;
-    private boolean isVanished;
-    private boolean isFreezed;
+    private Long money = 0L;
+    private boolean isVanished = false;
+    private boolean isFreezed = false;
+    private String island = null;
+    private Hats hat = null;
+    private boolean wasKicked = false;
 
     public Session(Player player, ResultSet rs) throws SQLException {
         this.player = player;
         this.rank = Manager.getRankManager().getRank(rs.getInt("rank"));
         this.money = rs.getLong("money");
-        this.rank.applyPermissions(player);
+        this.rank.applyPermissions(this);
         this.permissions = rs.getString("permissions").split(";");
         Rank.applyPermissions(player, rs.getString("permissions").split(";"));
         setFreezed(rs.getBoolean("freezed"), rs.getBoolean("freezed"));
         setVanished(rs.getBoolean("vanished"), rs.getBoolean("vanished"));
 
-        NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
-        player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
+        Hats hat = Hats.fromUUID(rs.getString("hat"));
+        if (hat != null) setHat(hat, hat.getItemStack());
     }
 
-    public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished) {
+    public Session(Player player, Integer rank, Long money, String[] permissions) {
         this.player = player;
         this.rank = Manager.getRankManager().getRank(rank);
         this.money = money;
-        this.rank.applyPermissions(player);
+        this.rank.applyPermissions(this);
         this.permissions = permissions;
         Rank.applyPermissions(player, permissions);
-        setFreezed(isFreezed, isFreezed);
-        setVanished(isVanished, isVanished);
-
-        NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
-        player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
     }
 
     public Player getPlayer() {
@@ -66,7 +65,7 @@ public class Session {
 
     public void setRank(Rank rank) {
         this.rank = rank;
-        rank.applyPermissions(player);
+        rank.applyPermissions(this);
     }
 
     public String getPermissions() {
@@ -123,12 +122,14 @@ public class Session {
         if (freezed) {
             isFreezed = true;
             this.getPlayer().setFreezeTicks((800 * 999999999));
-            if (messages) ColorUtils.sendMessage(this.getPlayer(), "Vous venez d'être immobilisé", ColorUtils.PREFIX);
+            if (messages) ColorUtils.sendMessage(this.getPlayer(), "Vous venez d'être immobilisé", Colors.PREFIX);
             return;
         }
 
         isFreezed = false;
-        if (messages) ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", ColorUtils.PREFIX);
+        if (messages) {
+            ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", Colors.PREFIX);
+        }
         this.getPlayer().setFreezeTicks(1);
     }
 
@@ -139,13 +140,73 @@ public class Session {
     public void setVanished(boolean vanished, boolean messages) {
         if (vanished) {
             isVanished = true;
-            if (messages) ColorUtils.sendMessage(player, "Vous venez de vous cacher !", ColorUtils.PREFIX);
+            if (messages) ColorUtils.sendMessage(player, "Vous venez de vous cacher !", Colors.PREFIX);
             this.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 999999999, 1, false, false, false));
             return;
         }
 
         isVanished = false;
-        if (messages) ColorUtils.sendMessage(player, "Vous venez de vous révéler !", ColorUtils.PREFIX);
+        if (messages) {
+            ColorUtils.sendMessage(player, "Vous venez de vous révéler !", Colors.PREFIX);
+        }
         this.getPlayer().getActivePotionEffects().forEach(potionEffect -> this.getPlayer().removePotionEffect(potionEffect.getType()));
+    }
+
+    public boolean wasKicked() {
+        return wasKicked;
+    }
+
+    public void setKicked() {
+        wasKicked = true;
+    }
+
+    //  /$$$$$$  /$$$$$$  /$$        /$$$$$$  /$$   /$$ /$$$$$$$
+    // |_  $$_/ /$$__  $$| $$       /$$__  $$| $$$ | $$| $$__  $$
+    //   | $$  | $$  \__/| $$      | $$  \ $$| $$$$| $$| $$  \ $$
+    //   | $$  |  $$$$$$ | $$      | $$$$$$$$| $$ $$ $$| $$  | $$
+    //   | $$   \____  $$| $$      | $$__  $$| $$  $$$$| $$  | $$
+    //   | $$   /$$  \ $$| $$      | $$  | $$| $$\  $$$| $$  | $$
+    //  /$$$$$$|  $$$$$$/| $$$$$$$$| $$  | $$| $$ \  $$| $$$$$$$/
+    // |______/ \______/ |________/|__/  |__/|__/  \__/|_______/
+
+    public Island getIsland() {
+        return Manager.getIslandManager().getIsland(island);
+    }
+
+    public String getIslandUUID() {
+        return island;
+    }
+
+    // /$$   /$$  /$$$$$$  /$$$$$$$$ /$$$$$$
+    // | $$  | $$ /$$__  $$|__  $$__//$$__  $$
+    // | $$  | $$| $$  \ $$   | $$  | $$  \__/
+    // | $$$$$$$$| $$$$$$$$   | $$  |  $$$$$$
+    // | $$__  $$| $$__  $$   | $$   \____  $$
+    // | $$  | $$| $$  | $$   | $$   /$$  \ $$
+    // | $$  | $$| $$  | $$   | $$  |  $$$$$$/
+    // |__/  |__/|__/  |__/   |__/   \______/
+
+
+    public void setHat(Hats hat, ItemStack itemStack) {
+        this.player.getInventory().setHelmet(itemStack);
+        this.hat = hat;
+    }
+
+    public Hats getHat() {
+        return hat;
+    }
+
+    public void setHat(Hats hat) {
+        if (hat == null) {
+            this.player.getInventory().setHelmet(null);
+            this.hat = null;
+            return;
+        }
+
+        this.hat = hat;
+    }
+
+    public boolean hasHat() {
+        return hat != null;
     }
 }

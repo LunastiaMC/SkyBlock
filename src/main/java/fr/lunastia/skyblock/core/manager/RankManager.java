@@ -2,7 +2,7 @@ package fr.lunastia.skyblock.core.manager;
 
 import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.session.Rank;
-import fr.lunastia.skyblock.core.utils.ColorUtils;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -12,14 +12,13 @@ import java.util.HashMap;
 
 public class RankManager {
 
-    private ConfigurationSection file;
-    private HashMap<Integer, Rank> ranks;
+    private final HashMap<Integer, Rank> ranks;
 
     public RankManager() {
         ranks = new HashMap<>();
 
         final YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(Core.getInstance().getDataFolder(), "ranks.yml"));
-        file = config.getConfigurationSection("ranks");
+        ConfigurationSection file = config.getConfigurationSection("ranks");
 
         assert file != null;
         for (String rankId : file.getKeys(false)) {

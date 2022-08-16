@@ -2,17 +2,19 @@ package fr.lunastia.skyblock.core.gui;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
-public interface GUIBuilder {
+public interface GUI {
     String getName();
 
     int getSize();
 
-    void getContents(Player player, Inventory inventory);
+    void getContents(Player player, Inventory inventory) throws SQLException;
 
     void onClick(Player player, Inventory inventory, ItemStack itemStack, int slot, ClickType clickType) throws SQLException;
 
@@ -21,4 +23,10 @@ public interface GUIBuilder {
     void onOpen(Player player, Inventory inventory);
 
     boolean clickCancelled();
+
+    // To merge
+
+    InventoryType getInventoryType();
+
+    void setArgument(HashMap<Integer, String> argument);
 }
