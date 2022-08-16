@@ -19,14 +19,13 @@ public record Rank(int id, String name, String coloredName, String nametagName, 
         }
     }
 
-    public void applyPermissions(Player player) {
-        PermissionAttachment attachment = player.addAttachment(Core.getInstance());
+    public void applyPermissions(Session session) {
+        PermissionAttachment attachment = session.getPlayer().addAttachment(Core.getInstance());
         for (String permission : permissions) {
             attachment.setPermission(permission, true);
         }
 
-        Session session = Manager.getSessionManager().getSession(player);
-        NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(session.getRank().nametagName()) + "§7");
-        player.setPlayerListName(ColorUtils.colorize(session.getRank().nametagName()) + player.getName());
+        NametagEdit.getApi().setPrefix(session.getPlayer(), ColorUtils.colorize(session.getRank().nametagName()) + "§7");
+        session.getPlayer().setPlayerListName(ColorUtils.colorize(session.getRank().nametagName()) + session.getPlayer().getName());
     }
 }

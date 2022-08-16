@@ -1,6 +1,5 @@
 package fr.lunastia.skyblock.core.session;
 
-import com.nametagedit.plugin.NametagEdit;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import fr.lunastia.skyblock.core.utils.colors.Colors;
@@ -28,7 +27,7 @@ public class Session {
         this.player = player;
         this.rank = Manager.getRankManager().getRank(rs.getInt("rank"));
         this.money = rs.getLong("money");
-        this.rank.applyPermissions(player);
+        this.rank.applyPermissions(this);
         this.permissions = rs.getString("permissions").split(";");
         Rank.applyPermissions(player, rs.getString("permissions").split(";"));
         setFreezed(rs.getBoolean("freezed"), rs.getBoolean("freezed"));
@@ -36,16 +35,13 @@ public class Session {
 
         Hats hat = Hats.fromUUID(rs.getString("hat"));
         if (hat != null) setHat(hat, hat.getItemStack());
-
-        NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
-        player.setPlayerListName(ColorUtils.colorize(this.getRank().nametagName()) + player.getName());
     }
 
-    public Session(Player player, Integer rank, Long money, String[] permissions, boolean isFreezed, boolean isVanished, Hats hat, String island) {
+    public Session(Player player, Integer rank, Long money, String[] permissions) {
         this.player = player;
         this.rank = Manager.getRankManager().getRank(rank);
         this.money = money;
-        this.rank.applyPermissions(player);
+        this.rank.applyPermissions(this);
         this.permissions = permissions;
         Rank.applyPermissions(player, permissions);
         setFreezed(isFreezed, isFreezed);
@@ -79,7 +75,7 @@ public class Session {
 
     public void setRank(Rank rank) {
         this.rank = rank;
-        rank.applyPermissions(player);
+        rank.applyPermissions(this);
     }
 
     public String getPermissions() {
@@ -141,8 +137,9 @@ public class Session {
         }
 
         isFreezed = false;
-        if (messages)
+        if (messages) {
             ColorUtils.sendMessage(this.getPlayer(), "Vous vous pouvez à nouveau vous dégourdir les pieds.", Colors.PREFIX);
+        }
         this.getPlayer().setFreezeTicks(1);
     }
 
@@ -159,7 +156,9 @@ public class Session {
         }
 
         isVanished = false;
-        if (messages) ColorUtils.sendMessage(player, "Vous venez de vous révéler !", Colors.PREFIX);
+        if (messages) {
+            ColorUtils.sendMessage(player, "Vous venez de vous révéler !", Colors.PREFIX);
+        }
         this.getPlayer().getActivePotionEffects().forEach(potionEffect -> this.getPlayer().removePotionEffect(potionEffect.getType()));
     }
 
