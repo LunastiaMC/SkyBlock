@@ -3,9 +3,6 @@ package fr.lunastia.skyblock.core.manager;
 import fr.lunastia.skyblock.core.session.Session;
 import org.bukkit.entity.Player;
 
-import java.lang.reflect.Type;
-import java.sql.*;
-import java.util.ArrayList;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.UUID;
@@ -49,16 +46,10 @@ public class SessionManager {
             statement.setString(3, session.getPermissions());
             statement.setBoolean(4, session.isFreezed());
             statement.setBoolean(5, session.isVanished());
-            if (session.hasHat()) {
-                statement.setString(6, session.getHat().getUniqueId().toString());
-            } else {
-                statement.setNull(6, Types.NULL);
-            }
-            if (session.getIslandUUID() != null) {
-                statement.setString(7, session.getIslandUUID());
-            } else {
-                statement.setNull(7, Types.NULL);
-            }
+            if (session.hasHat()) statement.setString(6, session.getHat().getUniqueId().toString());
+            else statement.setNull(6, Types.NULL);
+            if (session.getIslandUUID() != null) statement.setString(7, session.getIslandUUID());
+            else statement.setNull(7, Types.NULL);
             statement.setString(8, player.getUniqueId().toString());
             statement.executeUpdate();
         } catch (SQLException e) {

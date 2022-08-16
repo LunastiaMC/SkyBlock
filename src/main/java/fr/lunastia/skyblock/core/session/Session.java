@@ -37,9 +37,7 @@ public class Session {
         Hats hat = Hats.fromUUID(rs.getString("hat"));
         if (hat != null) setHat(hat, hat.getItemStack());
 
-        if (rs.getString("island") != null) {
-            Manager.getIslandManager().loadIsland(rs.getString("island"));
-        }
+        if (rs.getString("island") != null) Manager.getIslandManager().loadIsland(rs.getString("island"));
 
         this.island = rs.getString("island");
         NametagEdit.getApi().setPrefix(player, ColorUtils.colorize(this.getRank().nametagName()) + "§7");
