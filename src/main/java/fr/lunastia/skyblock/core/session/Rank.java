@@ -1,6 +1,9 @@
 package fr.lunastia.skyblock.core.session;
 
+import com.nametagedit.plugin.NametagEdit;
 import fr.lunastia.skyblock.core.Core;
+import fr.lunastia.skyblock.core.manager.Manager;
+import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
 
@@ -16,10 +19,13 @@ public record Rank(int id, String name, String coloredName, String nametagName, 
         }
     }
 
-    public void applyPermissions(Player player) {
-        PermissionAttachment attachment = player.addAttachment(Core.getInstance());
+    public void applyPermissions(Session session) {
+        PermissionAttachment attachment = session.getPlayer().addAttachment(Core.getInstance());
         for (String permission : permissions) {
             attachment.setPermission(permission, true);
         }
+
+        NametagEdit.getApi().setPrefix(session.getPlayer(), ColorUtils.colorize(session.getRank().nametagName()) + "§7");
+        session.getPlayer().setPlayerListName(ColorUtils.colorize(session.getRank().nametagName()) + session.getPlayer().getName());
     }
 }

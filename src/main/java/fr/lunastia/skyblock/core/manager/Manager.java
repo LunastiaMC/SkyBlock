@@ -20,6 +20,7 @@ public class Manager {
     private static GUIManager guiManager;
     private static RepairUtils repairUtils;
     private static HeadDatabaseAPI headDatabase;
+    private static IslandManager islandManager;
     private static ModerationManager moderationManager;
 
     public Manager() {
@@ -48,6 +49,10 @@ public class Manager {
 
     public static HeadDatabaseAPI getHeadDatabaseAPI() {
         return headDatabase;
+    }
+
+    public static IslandManager getIslandManager() {
+        return islandManager;
     }
 
     public static ModerationManager getModerationManager() {
