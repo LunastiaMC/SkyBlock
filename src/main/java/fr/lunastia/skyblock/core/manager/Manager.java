@@ -69,6 +69,14 @@ public class Manager {
         headDatabase = new HeadDatabaseAPI();
         moderationManager = new ModerationManager();
 
+        loadCommandes();
+
+        // Chargement des évènements
+        Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());
+        Core.getInstance().getServer().getPluginManager().registerEvents(new FreezeListeners(), Core.getInstance());
+    }
+
+    public void loadCommandes() {
         // Suppression des commandes de base
         CommandAPI.unregister("clear", true);
         CommandAPI.unregister("gamemode", true);
@@ -78,32 +86,36 @@ public class Manager {
         CommandAPI.unregister("pardon", true);
         CommandAPI.unregister("pardon-ip", true);
 
-        // Chargement des commandes
+        // Hautes commandes
         CommandAPI.registerCommand(RankCommand.class);
-        CommandAPI.registerCommand(MoneyCommand.class);
-        CommandAPI.registerCommand(PayCommand.class);
         CommandAPI.registerCommand(AnnounceCommand.class);
-        CommandAPI.registerCommand(ReportCommand.class);
         CommandAPI.registerCommand(ClearCommand.class);
-        CommandAPI.registerCommand(EnderInventoryCommand.class);
-        CommandAPI.registerCommand(HealCommand.class);
-        CommandAPI.registerCommand(FeedCommand.class);
-        CommandAPI.registerCommand(FlyCommand.class);
-        CommandAPI.registerCommand(HatCommand.class);
         CommandAPI.registerCommand(GameModeCommand.class);
-        CommandAPI.registerCommand(CraftCommand.class);
-        CommandAPI.registerCommand(VanishCommand.class);
-        CommandAPI.registerCommand(InventoryOpenCommand.class);
-        CommandAPI.registerCommand(RepairCommand.class);
-        CommandAPI.registerCommand(FreezeCommand.class);
-        CommandAPI.registerCommand(TrashCommand.class);
+
+        // Modération
         CommandAPI.registerCommand(KickCommand.class);
         CommandAPI.registerCommand(BanCommand.class);
         CommandAPI.registerCommand(LogsCommand.class);
-        CommandAPI.registerCommand(IslandCommand.class);
+        CommandAPI.registerCommand(VanishCommand.class);
+        CommandAPI.registerCommand(FreezeCommand.class);
+        CommandAPI.registerCommand(InventoryOpenCommand.class);
 
-        // Chargement des évènements
-        Core.getInstance().getServer().getPluginManager().registerEvents(new PlayerListeners(), Core.getInstance());
-        Core.getInstance().getServer().getPluginManager().registerEvents(new FreezeListeners(), Core.getInstance());
+        // Economy
+        CommandAPI.registerCommand(MoneyCommand.class);
+        CommandAPI.registerCommand(PayCommand.class);
+
+        // Grades
+        CommandAPI.registerCommand(HealCommand.class);
+        CommandAPI.registerCommand(FeedCommand.class);
+        CommandAPI.registerCommand(TrashCommand.class);
+        CommandAPI.registerCommand(HatCommand.class);
+        CommandAPI.registerCommand(RepairCommand.class);
+        CommandAPI.registerCommand(EnderInventoryCommand.class);
+        CommandAPI.registerCommand(FlyCommand.class);
+        CommandAPI.registerCommand(CraftCommand.class);
+
+        // Autres
+        CommandAPI.registerCommand(ReportCommand.class);
+        CommandAPI.registerCommand(IslandCommand.class);
     }
 }
