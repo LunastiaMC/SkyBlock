@@ -173,6 +173,10 @@ public class Session {
         return Manager.getIslandManager().getIsland(island);
     }
 
+    public boolean hasIsland() {
+        return island != null;
+    }
+
     public String getIslandUUID() {
         return island;
     }
