@@ -25,7 +25,7 @@ public class SessionManager {
             final Session session = new Session(player, resultSet);
             this.sessions.put(player.getUniqueId().toString(), session);
         } else {
-            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (uuid, rank, money, permissions, freezed, vanished) VALUES (?,?,?,?,?,?)");
+            final PreparedStatement statementCreation = connection.prepareStatement("INSERT INTO sessions (`uuid`, `rank`, `money`, `permissions`, `freezed`, `vanished`) VALUES (?,?,?,?,?,?)");
             statementCreation.setString(1, player.getUniqueId().toString());
             statementCreation.setInt(2, Manager.getRankManager().getDefaultRank().id());
             statementCreation.setLong(3, 0);
@@ -45,7 +45,7 @@ public class SessionManager {
         Session session = this.sessions.get(player.getUniqueId().toString());
 
         try {
-            final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET rank = ?, money = ?, permissions = ?, freezed = ?, vanished = ?, hat = ?, island = ? WHERE uuid = ?");
+            final PreparedStatement statement = connection.prepareStatement("UPDATE sessions SET `rank` = ?, `money` = ?, `permissions` = ?, `freezed` = ?, `vanished` = ?, `hat` = ?, `island` = ? WHERE uuid = ?");
             statement.setInt(1, session.getRank().id());
             statement.setLong(2, session.getMoney());
             statement.setString(3, session.getPermissions());
