@@ -3,7 +3,7 @@ package fr.lunastia.skyblock.core.gui.island;
 import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.database.DatabaseConnection;
 import fr.lunastia.skyblock.core.gui.GUI;
-import fr.lunastia.skyblock.core.island.types.ForestSleep;
+import fr.lunastia.skyblock.core.island.types.SleepingForest;
 import fr.lunastia.skyblock.core.manager.Manager;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
@@ -67,7 +67,7 @@ public class IslandCreationGUI implements GUI {
             inventory.setItem(8, getDifficulty());
         } else {
             final DatabaseConnection database = Manager.getDatabaseManager().getDatabase();
-            Manager.getIslandManager().createIsland(UUID.randomUUID(), ForestSleep.class);
+            Manager.getIslandManager().createIsland(UUID.randomUUID(), SleepingForest.class);
         }
     }
 
