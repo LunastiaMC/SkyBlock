@@ -1,7 +1,9 @@
 package fr.lunastia.skyblock.core.gui.island;
 
 import fr.lunastia.skyblock.core.gui.GUI;
+import fr.lunastia.skyblock.core.island.types.Islands;
 import fr.lunastia.skyblock.core.manager.Manager;
+import fr.lunastia.skyblock.core.session.Island;
 import fr.lunastia.skyblock.core.utils.ItemUtils;
 import fr.lunastia.skyblock.core.utils.colors.ColorUtils;
 import org.bukkit.entity.Player;
@@ -29,10 +31,12 @@ public class IslandCreationGUI implements GUI {
 
     @Override
     public void getContents(Player player, Inventory inventory) throws SQLException {
-        inventory.setItem(0, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("53343"), "&#73da3cF&#70db41o&#6cdc46r&#69dd4cê&#65dd51t &#62de56d&#5fdf5bo&#5be060r&#58e165m&#54e26ba&#51e270n&#4de375t&#4ae47ae"));
-        inventory.setItem(1, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("52966"), "&#da4040P&#db4343r&#db4646o&#dc4848f&#dc4b4bo&#dd4e4en&#de5151d&#de5353e&#df5656u&#df5959r &#e05c5ca&#e05e5eb&#e16161y&#e26464s&#e26767s&#e36969a&#e36c6cl&#e46f6fe"));
-        inventory.setItem(2, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("51906"), "&#af5848M&#b15949a&#b35a4ar&#b55b4ba&#b75c4ci&#ba5d4cq&#bc5e4du&#be5f4ea&#c0604fg&#c26250e&#c46351s &#c66452v&#c86553i&#cb6653v&#cd6754a&#cf6855n&#d16956t&#d36a57s"));
-        inventory.setItem(3, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead("12822"), "&#7455afD&#7555b0i&#7655b1m&#7754b2e&#7954b4n&#7a54b5s&#7b54b6i&#7c54b7o&#7d54b8n &#7e53b9s&#7f53bai&#8053bbn&#8253bdi&#8353bes&#8452bft&#8552c0r&#8652c1e"));
+        int i = 0;
+        for (Island island : Islands.getIslands()) {
+            inventory.setItem(i, ItemUtils.customizedItem(Manager.getHeadDatabaseAPI().getItemHead(String.valueOf(island.getDisplayName())), "ccc"));
+            i++;
+        }
+
         inventory.setItem(8, getDifficulty());
     }
 
