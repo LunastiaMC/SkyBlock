@@ -3,18 +3,25 @@ package fr.lunastia.skyblock.core.island.types;
 import fr.lunastia.skyblock.core.session.Island;
 
 public enum Islands {
-    SLEEPING_FOREST(SleepingForest.class),
-    ABYSSAL_DEPTH(Island.class),
-    LIVING_SWAMPS(Island.class),
-    SINISTER_DIMENSION(Island.class);
+    SLEEPING_FOREST(SleepingForest.class, 53343),
+    ABYSSAL_DEPTH(AbyssalDepth.class, 52966),
+    LIVING_SWAMPS(LivingSwamps.class, 51906),
+    SINISTER_DIMENSION(SinisterDimension.class, 12822);
 
-    private final Class<? extends Island> instance;
+    public final Class<? extends Island> island;
+    private final Integer headId;
 
-    Islands(Class<? extends Island> clazz) {
-        this.instance = clazz;
+    Islands(Class<? extends Island> clazz, Integer headId) {
+        this.island = clazz;
+        this.headId = headId;
+
     }
 
-    public Class<? extends Island> getInstance() {
-        return instance;
+    public Class<? extends Island> getIsland() {
+        return island;
+    }
+
+    public Integer getHeadId() {
+        return headId;
     }
 }
