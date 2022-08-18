@@ -29,9 +29,9 @@ public enum Hats {
     private final UUID uuid;
     private final String displayName;
     private final String permission;
+    private final boolean active;
     private Integer head = null;
     private String identifier = null;
-    private final boolean active;
 
     Hats(UUID uuid, String minecraftIdentifier, String displayName, String permission, boolean active) {
         this.uuid = uuid;

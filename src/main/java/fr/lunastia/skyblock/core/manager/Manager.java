@@ -1,7 +1,6 @@
 package fr.lunastia.skyblock.core.manager;
 
 import dev.jorel.commandapi.CommandAPI;
-import dev.jorel.commandapi.annotations.Command;
 import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.commands.admin.RankCommand;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;

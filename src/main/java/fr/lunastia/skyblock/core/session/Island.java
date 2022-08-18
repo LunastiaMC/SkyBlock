@@ -6,9 +6,9 @@ import java.util.UUID;
 
 public abstract class Island {
     private final UUID uuid;
+    private final MultiverseWorld world;
     private String displayName;
     private String name;
-    private final MultiverseWorld world;
 
     public Island(UUID uuid) {
         this.uuid = uuid;
