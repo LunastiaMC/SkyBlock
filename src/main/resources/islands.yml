@@ -1,0 +1,21 @@
+islands:
+  0:
+    name: "Forêt dormante"
+    display_name: "&#73da3cF&#70db41o&#6cdc46r&#69dd4cê&#65dd51t &#62de56d&#5fdf5bo&#5be060r&#58e165m&#54e26ba&#51e270n&#4de375t&#4ae47ae"
+    headId: 53343
+    lore: []
+  1:
+    name: "Profondeur abyssale"
+    display_name: "&#da4040P&#db4343r&#db4646o&#dc4848f&#dc4b4bo&#dd4e4en&#de5151d&#de5353e&#df5656u&#df5959r &#e05c5ca&#e05e5eb&#e16161y&#e26464s&#e26767s&#e36969a&#e36c6cl&#e46f6fe"
+    headId: 52966
+    lore: []
+  2:
+    name: "Marécages vivants"
+    display_name: "&#af5848M&#b15949a&#b35a4ar&#b55b4ba&#b75c4ci&#ba5d4cq&#bc5e4du&#be5f4ea&#c0604fg&#c26250e&#c46351s &#c66452v&#c86553i&#cb6653v&#cd6754a&#cf6855n&#d16956t&#d36a57s"
+    headId: 51906
+    lore: []
+  3:
+    name: "Dimension sinistre"
+    display_name: "&#7455afD&#7555b0i&#7655b1m&#7754b2e&#7954b4n&#7a54b5s&#7b54b6i&#7c54b7o&#7d54b8n &#7e53b9s&#7f53bai&#8053bbn&#8253bdi&#8353bes&#8452bft&#8552c0r&#8652c1e"
+    headId: 12822
+    lore: []
