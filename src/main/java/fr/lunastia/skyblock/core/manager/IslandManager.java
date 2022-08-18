@@ -1,11 +1,9 @@
 package fr.lunastia.skyblock.core.manager;
 
-import fr.lunastia.skyblock.core.island.types.Islands;
 import fr.lunastia.skyblock.core.session.Island;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.UUID;
@@ -17,8 +15,12 @@ public class IslandManager {
         this.islands = new HashMap<>();
     }
 
-    public void loadIsland(String uuid, Islands type) throws SQLException {
+    public void loadIsland(String uuid) throws SQLException {
+        // TODO: Load island
+    }
 
+    public void createIsland(UUID uuid, Class<? extends Island> islandClass) {
+        // TODO: Create island
     }
 
     public void saveIsland(Island island) throws SQLException {
