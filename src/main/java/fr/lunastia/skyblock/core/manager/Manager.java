@@ -1,10 +1,12 @@
 package fr.lunastia.skyblock.core.manager;
 
 import dev.jorel.commandapi.CommandAPI;
+import dev.jorel.commandapi.annotations.Command;
 import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.commands.admin.RankCommand;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
+import fr.lunastia.skyblock.core.commands.island.IslandCommand;
 import fr.lunastia.skyblock.core.commands.moderation.*;
 import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.database.DatabaseManager;
@@ -114,5 +116,6 @@ public class Manager {
 
         // Autres
         CommandAPI.registerCommand(ReportCommand.class);
+        CommandAPI.registerCommand(IslandCommand.class);
     }
 }
