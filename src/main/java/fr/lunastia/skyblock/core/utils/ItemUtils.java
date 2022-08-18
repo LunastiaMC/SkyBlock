@@ -45,6 +45,14 @@ public class ItemUtils {
         return item;
     }
 
+    public static ItemStack customizedItem(ItemStack item, String name) {
+        ItemMeta meta = item.getItemMeta();
+        assert meta != null;
+        meta.setDisplayName(ChatColor.RESET + ColorUtils.colorize(ChatColor.translateAlternateColorCodes('&', name)));
+        item.setItemMeta(meta);
+        return item;
+    }
+
     public static int countInventory(Inventory inventory) {
         int count = 0;
         for (int i = 0; i < inventory.getSize(); i++) {

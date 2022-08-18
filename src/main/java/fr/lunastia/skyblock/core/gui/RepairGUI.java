@@ -43,6 +43,7 @@ public class RepairGUI implements GUI {
 
                 if (itemMeta instanceof Damageable) {
                     itemStack.setItemMeta(itemMeta);
+                    ((Damageable) itemMeta).setDamage(0);
 
                     ArrayList<String> lore = new ArrayList<>();
                     repairCost.put(i, Manager.getRepairUtils().getPriceByItem(itemStack, i));

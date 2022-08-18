@@ -4,7 +4,6 @@ import fr.lunastia.skyblock.core.session.Island;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.UUID;
@@ -17,7 +16,11 @@ public class IslandManager {
     }
 
     public void loadIsland(String uuid) throws SQLException {
-        
+        // TODO: Load island
+    }
+
+    public void createIsland(UUID uuid, Class<? extends Island> islandClass) {
+        // TODO: Create island
     }
 
     public void saveIsland(Island island) throws SQLException {
@@ -25,7 +28,7 @@ public class IslandManager {
 
         try {
             final PreparedStatement statement = connection.prepareStatement("UPDATE island SET uuid = ? WHERE uuid = ?");
-            statement.setString(1, island.getUuid());
+            statement.setString(1, island.getUuid().toString());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
