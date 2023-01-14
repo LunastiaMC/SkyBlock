@@ -2,6 +2,7 @@ package fr.lunastia.skyblock.core.manager;
 
 import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.gui.*;
+import fr.lunastia.skyblock.core.gui.island.IslandCreationGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,6 +28,7 @@ public class GUIManager implements Listener {
         this.addMenu(new RepairGUI());
         this.addMenu(new KitGUI());
         this.addMenu(new LogsGUI());
+        this.addMenu(new IslandCreationGUI());
 
         Bukkit.getPluginManager().registerEvents(this, Core.getInstance());
     }

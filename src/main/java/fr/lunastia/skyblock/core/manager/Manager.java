@@ -5,6 +5,7 @@ import fr.lunastia.skyblock.core.Core;
 import fr.lunastia.skyblock.core.commands.admin.RankCommand;
 import fr.lunastia.skyblock.core.commands.economy.MoneyCommand;
 import fr.lunastia.skyblock.core.commands.economy.PayCommand;
+import fr.lunastia.skyblock.core.commands.island.IslandCommand;
 import fr.lunastia.skyblock.core.commands.moderation.*;
 import fr.lunastia.skyblock.core.commands.utils.*;
 import fr.lunastia.skyblock.core.database.DatabaseManager;
@@ -12,6 +13,7 @@ import fr.lunastia.skyblock.core.listeners.FreezeListeners;
 import fr.lunastia.skyblock.core.listeners.PlayerListeners;
 import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
+import java.util.HashMap;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -23,7 +25,7 @@ public class Manager {
     private static GUIManager guiManager;
     private static RepairUtils repairUtils;
     private static KitManager kitManager;
-
+    private static WarpManager warpManager;
     private static HeadDatabaseAPI headDatabase;
     private static IslandManager islandManager;
     private static ModerationManager moderationManager;
@@ -52,8 +54,12 @@ public class Manager {
         return repairUtils;
     }
 
+    public static WarpManager getWarpManager() {
+        return warpManager;
+    }
+
     public static HeadDatabaseAPI getHeadDatabaseAPI() {
-        return headDatabase;
+        return headDatabaseAPI;
     }
 
     public static KitManager getKitManager() {
@@ -74,7 +80,8 @@ public class Manager {
         rankManager = new RankManager();
         guiManager = new GUIManager();
         kitManager = new KitManager();
-        headDatabase = new HeadDatabaseAPI();
+        warpManager = new WarpManager();
+        HeadDatabaseAPI headDatabase = new HeadDatabaseAPI();
         moderationManager = new ModerationManager();
 
         loadCommandes();
@@ -131,5 +138,6 @@ public class Manager {
         // Autres
         CommandAPI.registerCommand(ReportCommand.class);
         CommandAPI.registerCommand(KitCommand.class);
+        CommandAPI.registerCommand(IslandCommand.class);
     }
 }

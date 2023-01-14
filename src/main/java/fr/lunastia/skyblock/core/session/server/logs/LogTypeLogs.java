@@ -9,8 +9,8 @@ import java.util.Date;
 public class LogTypeLogs implements Log {
     private final EnumLogs type;
     private final Player player;
-    private String openedPlayer;
     private final String startAt;
+    private String openedPlayer;
 
     public LogTypeLogs(EnumLogs type, Player player, String openedPlayer) {
         this.type = type;
@@ -24,6 +24,6 @@ public class LogTypeLogs implements Log {
     }
 
     public void send() {
-        Log.super.sendLogs(type, player, startAt,openedPlayer,true);
+        Log.super.sendLogs(type, player, startAt, openedPlayer, true);
     }
 }
