@@ -15,14 +15,17 @@ import fr.lunastia.skyblock.core.utils.repair.RepairUtils;
 import me.arcaniax.hdb.api.HeadDatabaseAPI;
 import java.util.HashMap;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 public class Manager {
     private static SessionManager sessionManager;
     private static RankManager rankManager;
     private static DatabaseManager databaseManager;
     private static GUIManager guiManager;
     private static RepairUtils repairUtils;
+    private static KitManager kitManager;
     private static WarpManager warpManager;
-    private static HeadDatabaseAPI headDatabaseAPI;
     private static HeadDatabaseAPI headDatabase;
     private static IslandManager islandManager;
     private static ModerationManager moderationManager;
@@ -59,6 +62,10 @@ public class Manager {
         return headDatabaseAPI;
     }
 
+    public static KitManager getKitManager() {
+        return kitManager;
+    }
+    
     public static IslandManager getIslandManager() {
         return islandManager;
     }
@@ -67,11 +74,12 @@ public class Manager {
         return moderationManager;
     }
 
-    public void init() {
+    public void init() throws SQLException, IOException {
         sessionManager = new SessionManager();
         databaseManager = new DatabaseManager();
         rankManager = new RankManager();
         guiManager = new GUIManager();
+        kitManager = new KitManager();
         warpManager = new WarpManager();
         HeadDatabaseAPI headDatabase = new HeadDatabaseAPI();
         moderationManager = new ModerationManager();
@@ -98,6 +106,12 @@ public class Manager {
         CommandAPI.registerCommand(AnnounceCommand.class);
         CommandAPI.registerCommand(ClearCommand.class);
         CommandAPI.registerCommand(GameModeCommand.class);
+        CommandAPI.registerCommand(CraftCommand.class);
+        CommandAPI.registerCommand(VanishCommand.class);
+        CommandAPI.registerCommand(InventoryOpenCommand.class);
+        CommandAPI.registerCommand(RepairCommand.class);
+        CommandAPI.registerCommand(FreezeCommand.class);
+        CommandAPI.registerCommand(TrashCommand.class);
 
         // Modération
         CommandAPI.registerCommand(KickCommand.class);
@@ -123,6 +137,7 @@ public class Manager {
 
         // Autres
         CommandAPI.registerCommand(ReportCommand.class);
+        CommandAPI.registerCommand(KitCommand.class);
         CommandAPI.registerCommand(IslandCommand.class);
     }
 }

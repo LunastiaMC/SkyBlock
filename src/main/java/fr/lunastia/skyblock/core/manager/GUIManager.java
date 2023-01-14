@@ -26,6 +26,7 @@ public class GUIManager implements Listener {
         this.addMenu(new HatListGUI());
         this.addMenu(new TrashGUI());
         this.addMenu(new RepairGUI());
+        this.addMenu(new KitGUI());
         this.addMenu(new LogsGUI());
         this.addMenu(new IslandCreationGUI());
 
