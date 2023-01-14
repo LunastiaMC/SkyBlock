@@ -23,6 +23,7 @@ public class Core extends JavaPlugin {
         // Fichiers de configuration
         this.saveResource("config.yml", false);
         this.saveResource("ranks.yml", true);
+        this.saveResource("warps.yml", false);
         this.saveResource("islands.yml", true);
 
         this.hat = new File(this.getDataFolder(), "hats.yml");
