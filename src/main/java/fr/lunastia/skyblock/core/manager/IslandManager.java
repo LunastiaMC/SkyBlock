@@ -19,7 +19,7 @@ public class IslandManager {
         // TODO: Load island
     }
 
-    public void createIsland(UUID uuid, Class<? extends Island> islandClass) {
+    public void createIsland(UUID uuid, Class<?> islandClass) {
         // TODO: Create island
     }
 
@@ -41,5 +41,14 @@ public class IslandManager {
 
     public Island getIsland(String uuid) {
         return islands.get(uuid);
+    }
+
+    public static Island instantiateIsland(Class<?> islandClass, UUID uuid) {
+        try {
+            return (Island) islandClass.getConstructor(UUID.class).newInstance(uuid);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

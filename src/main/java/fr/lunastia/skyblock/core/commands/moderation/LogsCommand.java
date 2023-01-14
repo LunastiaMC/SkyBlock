@@ -59,7 +59,7 @@ public class LogsCommand {
             args.put(2, "true");
             Manager.getGUIManager().open(player, LogsGUI.class, args);
 
-            LogTypeLogs log = new LogTypeLogs(EnumLogs.LOGS_OPEN, player,null);
+            LogTypeLogs log = new LogTypeLogs(EnumLogs.LOGS_OPEN, player, null);
             log.send();
         } catch (SQLException e) {
             throw new RuntimeException(e);

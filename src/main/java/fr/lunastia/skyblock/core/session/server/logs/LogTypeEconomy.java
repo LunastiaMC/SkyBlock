@@ -9,13 +9,13 @@ import java.util.Date;
 public class LogTypeEconomy implements Log {
     private final EnumLogs type;
     private final Player target;
-    private Player moderator;
     private final Integer oldBalance;
     private final Integer newBalance;
     private final Integer amount;
+    private final String startAt;
+    private Player moderator;
     private EnumLogs transactionType;
     private String transactionTarget;
-    private final String startAt;
 
     public LogTypeEconomy(EnumLogs type, Player target, Integer oldBalance, Integer newBalance, Integer amount) {
         this.type = type;
